@@ -86,3 +86,16 @@ _None yet._
 - **We are right if:** at least 50 % (5 out of 10 testers) finish at least one challenge.
 - **Why the change:** decided by the team on 2026-10-20. The share rate (v1, ≥ 40 %) is kept as a secondary metric in /stats. The course grades decisions on evidence, so log whether v2 was set before or after seeing test results.
 - 2026-10-20 (later): threshold lowered by the team from 50 % to **40 %** (4 out of 10 testers). At that moment the measured rate was 26 % (5 of 19 tagged testers).
+
+## 2026-10-20 (evening): round 2 changes, from the first test logs
+| Feedback from testers | Change |
+|---|---|
+| Not always told the right answer and why | Every answer: right/wrong + right answer + why + source |
+| Obscure facts, guess-the-candidate felt like a lottery | 12 new "Qui propose ça ?" on well-known candidates (3 per side), 16 Vrai ou Faux, 9 quiz, all re-verified (content/content-notes.md) |
+| Difficulty didn't match | Difficulty 1–3 on every question; Progressif / Facile / Moyen / Difficile |
+| Onboarding too direct about politics | Every step skippable, tutorial added, left–right position moved to the profile |
+| Hard to understand how to play with friends | 3-step explanation in hub, share sheet, friend landing |
+| Non-French speakers couldn't try it | Full English version (FR/EN switch) |
+| International students can't vote but want to learn | International mode (who can vote, why it matters, student elections) |
+| Nothing removed for now | Team decision |
+- Next Test Card (team): at least 40% of users complete a challenge when they open the web app.
