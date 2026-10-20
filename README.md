@@ -89,3 +89,10 @@ lib/server/db.ts     Supabase (service key, server only)
 content/*.json       all editable content
 supabase/schema.sql  tables + RLS
 ```
+
+## Working as a team
+
+- The repository is connected to Vercel: **every push to `main` redeploys https://presidentielle-2027-theta.vercel.app automatically** (about 1 minute). Check the result in the Vercel dashboard or on the commit's status on GitHub.
+- Run `npm run build` before pushing: if the build fails locally, the deploy fails too and the live site keeps the previous version.
+- To try a change without touching the live site, push to another branch (`git checkout -b my-change`): Vercel creates a separate preview link for it.
+- Secrets (`SUPABASE_SERVICE_ROLE_KEY`, `STATS_PASSWORD`) live in Vercel and in each person's `.env.local`. Never commit them.
