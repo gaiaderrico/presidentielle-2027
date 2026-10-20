@@ -13,6 +13,7 @@ type Stats = {
     tagged: { finished: number; players: number; rate: number | null };
   };
   shareRate: { finishedAndShared: number; finished: number; rate: number | null };
+  inlineChallenge: { reached: number; started: number; finished: number };
   friends: { opened: number; finished: number; perCode: Record<string, { opened: number; finished: number }> };
   challengesChosen: Record<string, number>;
   modesChosen: Record<string, number>;
@@ -180,6 +181,13 @@ export function StatsClient() {
             Tous les joueurs (testeurs + amis + visiteurs) : {stats.completionRate.finished} sur {stats.completionRate.players} ({pct(stats.completionRate.rate)}).
           </p>
         )}
+      </Card>
+      <Card className="flex flex-col gap-1">
+        <p className="text-sm font-semibold">Défi rapide dans le fil (après 3 cartes)</p>
+        <p>
+          <strong>{stats.inlineChallenge.reached}</strong> joueurs ont lu au moins 3 cartes · <strong>{stats.inlineChallenge.started}</strong> ont commencé le défi rapide ·{" "}
+          <strong>{stats.inlineChallenge.finished}</strong> l&apos;ont terminé ({pct(stats.inlineChallenge.reached ? stats.inlineChallenge.finished / stats.inlineChallenge.reached : null)})
+        </p>
       </Card>
       <Card className="flex flex-wrap items-baseline justify-between gap-2">
         <p className="text-sm font-semibold">Taux de partage (ancien Test Card, ≥ 40 %)</p>

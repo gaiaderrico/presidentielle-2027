@@ -55,6 +55,11 @@ export async function POST(req: Request) {
   }
 
   const starts = events.filter((e) => e.event === "challenge_start" && p(e, "origin") !== "feed");
+  const inlineStarts = sessionsWith(events.filter((e) => p(e, "origin") === "feed-inline"), "challenge_start");
+  const inlineFinishes = sessionsWith(events.filter((e) => p(e, "origin") === "feed-inline"), "challenge_finish");
+  const reachedThreeCards = [...new Set(events.filter((e) => e.event === "feed_card_view" && e.session_id).map((e) => e.session_id as string))].filter(
+    (sid) => events.filter((e) => e.event === "feed_card_view" && e.session_id === sid).length >= 3,
+  );
   const shares = events.filter((e) => e.event === "share_click");
 
   const answers = events.filter((e) => e.event === "answer");
@@ -90,7 +95,9 @@ export async function POST(req: Request) {
       firstSeen: list[0].created_at,
       cardsViewed: list.filter((e) => e.event === "feed_card_view").length,
       skippedFeed: list.some((e) => e.event === "feed_skip"),
-      challenges: finishes.map((e) => `${p(e, "challengeType")}${p(e, "origin") === "feed" ? " (après feed)" : ""} [${p(e, "mode")}]`).join(", "),
+      challenges: finishes
+        .map((e) => `${p(e, "challengeType")}${p(e, "origin") === "feed" ? " (après feed)" : p(e, "origin") === "feed-inline" ? " (défi rapide dans le fil)" : ""} [${p(e, "mode")}]`)
+        .join(", "),
       scores: finishes.map((e) => (p(e, "score") === null ? "prono" : String(p(e, "score")))).join(", "),
       voix,
       level: levelsReached.at(-1) ?? "Hameau",
@@ -123,6 +130,7 @@ export async function POST(req: Request) {
       rate: allSessions.size ? finishedSessions.size / allSessions.size : null,
       tagged: { finished: finishedTagged, players: taggedSessions.size, rate: taggedSessions.size ? finishedTagged / taggedSessions.size : null },
     },
+    inlineChallenge: { reached: reachedThreeCards.length, started: inlineStarts.size, finished: inlineFinishes.size },
     shareRate: { finishedAndShared, finished: finishedSessions.size, rate: finishedSessions.size ? finishedAndShared / finishedSessions.size : null },
     friends: { opened: new Set(friendLandings.map((e) => e.session_id)).size, finished: new Set(friendFinishes.map((e) => e.session_id)).size, perCode },
     challengesChosen: countBy(starts, (e) => String(p(e, "challengeType"))),

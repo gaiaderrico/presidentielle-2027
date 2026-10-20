@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { IconClose, IconDown, IconInfo, IconUp } from "@/components/Icons";
+import { InlineChallenge } from "@/components/InlineChallenge";
 import { Button, ButtonLink } from "@/components/ui";
 import { campLabels, topicOf, topics, type BlocCamp, type Camp, type FeedCard } from "@/lib/content";
 import { buildPool, campRotation, formatDate, pickNext } from "@/lib/feed";
@@ -11,7 +12,8 @@ import { readSession, writeSession } from "@/lib/storage";
 import { track } from "@/lib/track";
 import { VOIX, addVoix } from "@/lib/voix";
 
-const QUIZ_BREAK_AFTER = 8;
+// The short challenge ("Défi rapide") comes right after this many cards, inside the feed.
+const CHALLENGE_AFTER = 3;
 
 // Neutral icons for camps (no party colours).
 function CampIcon({ camp }: { camp: Camp }) {
@@ -23,7 +25,7 @@ function CampIcon({ camp }: { camp: Camp }) {
   return <svg {...common}><circle cx="8" cy="8" r="6" /><path d="M8 7v4M8 5v.01" /></svg>;
 }
 
-type Section = { kind: "card"; card: FeedCard; n: number } | { kind: "break" } | { kind: "end" };
+type Section = { kind: "card"; card: FeedCard; n: number } | { kind: "challenge"; readCards: FeedCard[] } | { kind: "end" };
 
 export function FeedClient() {
   const profile = useProfile();
@@ -86,7 +88,10 @@ function Feed() {
       const card = pool.find((c) => c.id === id);
       if (!card) return;
       out.push({ kind: "card", card, n: i + 1 });
-      if (i + 1 === QUIZ_BREAK_AFTER && pool.length > QUIZ_BREAK_AFTER) out.push({ kind: "break" });
+      if (i + 1 === CHALLENGE_AFTER && pool.length > CHALLENGE_AFTER) {
+        const readCards = order.slice(0, CHALLENGE_AFTER).map((x) => pool.find((c) => c.id === x)).filter((c): c is FeedCard => !!c);
+        out.push({ kind: "challenge", readCards });
+      }
     });
     if (order.length === pool.length && order.length) out.push({ kind: "end" });
     return out;
@@ -204,19 +209,7 @@ function Feed() {
           <section key={s.kind === "card" ? s.card.id : s.kind} data-pos={pos} className="no-scrollbar flex h-full snap-start snap-always flex-col overflow-y-auto pb-6 pl-4 pr-[4.25rem] pt-12">
             <div className="my-auto">
             {s.kind === "card" && <CardView card={s.card} reaction={reactions[s.card.id]} onReact={(r) => react(s.card, r)} first={pos === 0} />}
-            {s.kind === "break" && (
-              <div className="pop flex flex-col gap-4 rounded-[2rem] bg-ink p-6 text-paper shadow-lg">
-                <p className="text-4xl" aria-hidden>
-                  🧠
-                </p>
-                <h2 className="font-display text-3xl font-extrabold leading-tight">Tu as lu {QUIZ_BREAK_AFTER} actus. Tu as tout retenu ?</h2>
-                <p className="opacity-90">3 questions sur ce que tu viens de lire : +{VOIX.miniQuizCorrect} voix par bonne réponse.</p>
-                <ButtonLink href="/quiz">Tester ce que j&apos;ai retenu</ButtonLink>
-                <button onClick={() => goTo(pos + 1)} className="min-h-11 font-semibold underline underline-offset-4 opacity-90">
-                  Continuer à lire ↓
-                </button>
-              </div>
-            )}
+            {s.kind === "challenge" && <InlineChallenge readCards={s.readCards} onContinue={() => goTo(pos + 1)} />}
             {s.kind === "end" && (
               <div className="pop flex flex-col gap-4 rounded-[2rem] bg-ink p-6 text-paper shadow-lg">
                 <p className="text-4xl" aria-hidden>
