@@ -75,7 +75,7 @@ _None yet._
 | Fixed Glucksmann source (Public Sénat, 11 Oct) and Tondelier wording (members vote 10–13 Dec) | Found by verification |
 
 ## 2026-10-20: deployed
-- Public app: https://presidentielle-2027-theta.vercel.app (Vercel, production)
+- Public app: https://polis-2027.vercel.app (Vercel, production)
 - Database: Supabase project zsqnhpvkbykyxxpfvpyc (West EU), schema from `supabase/schema.sql`, RLS on, no anon policy
 - Env vars set on Vercel (production) and in `presidentielle-2027/.env.local` (git-ignored). Stats page: /stats (password shared with the team only)
 - End-to-end test passed (challenge → friend reply → +50 bonus, team match, events, stats); test rows deleted
