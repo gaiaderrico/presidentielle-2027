@@ -7,6 +7,7 @@ import { setLang, useContent, useLang, useT } from "@/lib/i18n";
 import { levelIndexFor } from "@/lib/levels";
 import { useVoix, type GainDetail } from "@/lib/voix";
 import { IconBack } from "./Icons";
+import { Logo } from "./Logo";
 
 const ROOTS = ["/", "/feed", "/defis", "/ma-ville", "/profil", "/bienvenue"];
 
@@ -50,13 +51,10 @@ export function TopBar() {
           >
             <IconBack />
           </button>
-        ) : (
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink font-display text-sm font-extrabold text-paper" aria-hidden>
-            27
-          </span>
-        )}
-        <Link href={path === "/" ? "/" : "/feed"} className="min-w-0 truncate font-display text-[15px] font-bold leading-tight">
-          {c.site.appName}
+        ) : null}
+        <Link href={path === "/" ? "/" : "/feed"} className="flex min-w-0 items-center gap-2" aria-label="polis">
+          <Logo className="h-7" />
+          <span className="hidden truncate text-xs font-semibold text-muted min-[400px]:inline">{t("Présidentielle 2027", "French election 2027")}</span>
         </Link>
         <span className="flex-1" />
         <button

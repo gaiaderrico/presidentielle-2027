@@ -48,7 +48,11 @@
       "why": "The proposal concerns how the justice system treats young people under 18.",
       "quiz": {
         "question": "What age does Bruno Retailleau propose for the criminal responsibility of minors?",
-        "options": ["13", "16", "15"],
+        "options": [
+          "13",
+          "16",
+          "15"
+        ],
         "explanation": "He proposes a constitutional revision to set it at 15."
       }
     },
@@ -59,7 +63,11 @@
       "why": "Secondary school pupils and students were part of the marches, which focused on the cost of living.",
       "quiz": {
         "question": "According to the Interior Ministry, how many people protested on 17 October?",
-        "options": ["110,000", "550,000", "800,000"],
+        "options": [
+          "110,000",
+          "550,000",
+          "800,000"
+        ],
         "explanation": "800,000 is the organisers' figure; 110,000 is the official figure for Paris only."
       }
     },
@@ -67,13 +75,26 @@
       "title": "Budget: the PS motion to reject is defeated",
       "text": "On 13 October, MPs voted down, by 236 votes to 149, the preliminary motion to reject the 2027 budget tabled by the Parti socialiste (PS). The left supported it; the centre bloc and the Rassemblement national (RN) voted against. So the debate on the bill began.",
       "sides": [
-        { "label": "PS (Estelle Mercier)", "text": "accuses the government of an \"absolute taboo: asking the richest to contribute\"." },
-        { "label": "RN (Sophie-Laurence Roy)", "text": "accuses the PS of offering the government an opposition that \"refuses to discuss\"." },
-        { "label": "Government (David Amiel)", "text": "defends a \"rescue budget\"." }
+        {
+          "label": "PS (Estelle Mercier)",
+          "text": "accuses the government of an \"absolute taboo: asking the richest to contribute\"."
+        },
+        {
+          "label": "RN (Sophie-Laurence Roy)",
+          "text": "accuses the PS of offering the government an opposition that \"refuses to discuss\"."
+        },
+        {
+          "label": "Government (David Amiel)",
+          "text": "defends a \"rescue budget\"."
+        }
       ],
       "quiz": {
         "question": "Which group tabled this motion to reject the budget?",
-        "options": ["The socialist group", "The Rassemblement national", "Horizons"],
+        "options": [
+          "The socialist group",
+          "The Rassemblement national",
+          "Horizons"
+        ],
         "explanation": "The motion came from the socialist MPs; it was rejected by 236 votes to 149."
       }
     },
@@ -82,7 +103,11 @@
       "text": "On 13 October, the Rassemblement national (RN) MPs, a group chaired by Marine Le Pen, decided to vote against the PS motion to reject the 2027 budget. \"Discussing the budget is the basis of Parliament,\" said Jean-Philippe Tanguy when announcing this choice.",
       "quiz": {
         "question": "What reason does Jean-Philippe Tanguy give for the RN's vote?",
-        "options": ["The RN supports the government's budget", "The RN wants a referendum", "The RN wants the budget to be debated"],
+        "options": [
+          "The RN supports the government's budget",
+          "The RN wants a referendum",
+          "The RN wants the budget to be debated"
+        ],
         "explanation": "He said: \"We want to have this debate\" and \"Discussing the budget is the basis of Parliament\"."
       }
     },
@@ -91,7 +116,11 @@
       "text": "Horizons, Édouard Philippe's party, proposes to cancel €10 billion of planned tax rises, offset by the same amount of savings. Among its ideas: reversing the suspension of the pension reform and not replacing one civil servant in three.",
       "quiz": {
         "question": "How much in tax rises does Horizons want to cancel?",
-        "options": ["€1 billion", "€10 billion", "€54 billion"],
+        "options": [
+          "€1 billion",
+          "€10 billion",
+          "€54 billion"
+        ],
         "explanation": "Horizons wants to cancel €10 billion of tax rises, offset by €10 billion of savings."
       }
     },
@@ -100,7 +129,11 @@
       "text": "On 11 October, Raphaël Glucksmann (Place publique) won the social democratic primary with 66.17% of the votes, ahead of Olivier Faure (Parti socialiste, PS, 14.46%). He becomes the candidate of the PS, Place publique and the GRS. He said: \"There will be no deal with LFI\" (La France insoumise).",
       "quiz": {
         "question": "Who came second in this primary?",
-        "options": ["Ségolène Royal", "Jérôme Guedj", "Olivier Faure"],
+        "options": [
+          "Ségolène Royal",
+          "Jérôme Guedj",
+          "Olivier Faure"
+        ],
         "explanation": "Olivier Faure, first secretary of the PS, got 14.46%."
       }
     },
@@ -110,7 +143,11 @@
       "why": "Parcoursup is the national platform for admission to higher education after the bac (the secondary school final exam).",
       "quiz": {
         "question": "At what age does Jean-Luc Mélenchon propose to give the right to vote?",
-        "options": ["16", "17", "18"],
+        "options": [
+          "16",
+          "17",
+          "18"
+        ],
         "explanation": "He proposed lowering the voting age to 16 (it is 18 today)."
       }
     },
@@ -118,11 +155,18 @@
       "title": "Attal presents a \"pact for young people\"",
       "text": "In Lyon on 10 October, Gabriel Attal (Renaissance) proposed keeping Parcoursup (the higher education admissions platform) but reforming it, with less continuous assessment and more final exams. He also wants fewer pupils per class and a convention of 150 young people aged 16 to 25 chosen by lot.",
       "sides": [
-        { "label": "LFI (Jean-Luc Mélenchon)", "text": "replied on X, denouncing Attal's \"appalling duplicity\"." }
+        {
+          "label": "LFI (Jean-Luc Mélenchon)",
+          "text": "replied on X, denouncing Attal's \"appalling duplicity\"."
+        }
       ],
       "quiz": {
         "question": "What does Gabriel Attal propose for Parcoursup?",
-        "options": ["Abolish it", "Replace it with a lottery", "Keep it but reform it"],
+        "options": [
+          "Abolish it",
+          "Replace it with a lottery",
+          "Keep it but reform it"
+        ],
         "explanation": "He wants to keep it, with less continuous assessment and more support."
       }
     },
@@ -133,7 +177,11 @@
       "why": "The legal 35-hour working week sets the point from which overtime hours are counted.",
       "quiz": {
         "question": "What does Gilles Platret propose on working time?",
-        "options": ["Move to 32 hours", "Abolish the 35-hour week", "Keep the 35-hour week"],
+        "options": [
+          "Move to 32 hours",
+          "Abolish the 35-hour week",
+          "Keep the 35-hour week"
+        ],
         "explanation": "He proposes abolishing the legal 35-hour working week."
       }
     },
@@ -144,7 +192,11 @@
       "why": "Parcoursup (the higher education admissions platform) affects the secondary school pupils and students who apply for a course every year.",
       "quiz": {
         "question": "What is the position of Minister Philippe Baptiste?",
-        "options": ["Change Parcoursup without abolishing it", "Abolish Parcoursup", "Change nothing"],
+        "options": [
+          "Change Parcoursup without abolishing it",
+          "Abolish Parcoursup",
+          "Change nothing"
+        ],
         "explanation": "He opposes abolishing it but says the tool must change."
       }
     },
@@ -153,7 +205,11 @@
       "text": "On 2 October, Laurent Wauquiez, leader of the Les Républicains (LR) MPs, asked that people who cause damage during secondary school protests pay for the repairs: \"you break it, you pay\". This principle has been in the law since 2019, but préfectures (the State's local offices) do not use it, according to the government.",
       "quiz": {
         "question": "Since when has the \"you break it, you pay\" principle been in the law?",
-        "options": ["2005", "2026", "2019"],
+        "options": [
+          "2005",
+          "2026",
+          "2019"
+        ],
         "explanation": "It has been in force since 2019, but in practice the préfectures do not apply it."
       }
     },
@@ -164,7 +220,11 @@
       "why": "Many students who rent receive the APL; these measures are still being debated in Parliament.",
       "quiz": {
         "question": "What does the draft budget plan for the APL in 2027?",
-        "options": ["A 10% rise", "No increase", "Abolishing them for all students"],
+        "options": [
+          "A 10% rise",
+          "No increase",
+          "Abolishing them for all students"
+        ],
         "explanation": "The APL would not be raised next year; only well-off households would have to choose between the APL and the demi-part."
       }
     },
@@ -174,7 +234,11 @@
       "why": "The contribution period would apply to people starting their working life today.",
       "quiz": {
         "question": "What contribution period does Édouard Philippe propose?",
-        "options": ["40 years", "43 years", "45 years"],
+        "options": [
+          "40 years",
+          "43 years",
+          "45 years"
+        ],
         "explanation": "He proposes 45 years of contributions and a legal age of 65, reached in less than ten years."
       }
     },
@@ -184,7 +248,11 @@
       "why": "The Senate votes on laws, including the budget, together with the Assemblée nationale (National Assembly).",
       "quiz": {
         "question": "What is the minimum number of senators needed to form a group in the Senate?",
-        "options": ["10", "3", "50"],
+        "options": [
+          "10",
+          "3",
+          "50"
+        ],
         "explanation": "The threshold is ten members of parliament; the RN and its allies passed it."
       }
     },
@@ -193,7 +261,11 @@
       "text": "On 24 September, in Paris Match, Olivier Becht, MP for the Haut-Rhin and former Minister Delegate for Foreign Trade, announced his candidacy. He calls himself \"in the extreme centre\" and presents a plan called \"Le Projet France, Refonder ou Périr\" (\"The France Project: Rebuild or Perish\").",
       "quiz": {
         "question": "Which ministerial post did Olivier Becht hold?",
-        "options": ["Interior Minister", "Minister Delegate for Foreign Trade", "Education Minister"],
+        "options": [
+          "Interior Minister",
+          "Minister Delegate for Foreign Trade",
+          "Education Minister"
+        ],
         "explanation": "He was Minister Delegate for Foreign Trade from 2022 to January 2024."
       }
     },
@@ -201,9 +273,18 @@
       "title": "Macron does not rule out cutting fuel taxes",
       "text": "Asked on France 2 and TF1 on 24 September, Emmanuel Macron did not rule out cutting fuel taxes if prices keep rising, while saying it is \"not the most virtuous decision\", because these taxes fund State spending.",
       "sides": [
-        { "label": "RN (Sébastien Chenu)", "text": "\"Emmanuel Macron is out of touch when he says he doesn't want to cut fuel taxes\"." },
-        { "label": "LR (François-Xavier Bellamy)", "text": "\"there are levers for action, we are not condemned to doing nothing\"." },
-        { "label": "LFI (Éric Coquerel)", "text": "\"the head of State is showing himself to be powerless\"." }
+        {
+          "label": "RN (Sébastien Chenu)",
+          "text": "\"Emmanuel Macron is out of touch when he says he doesn't want to cut fuel taxes\"."
+        },
+        {
+          "label": "LR (François-Xavier Bellamy)",
+          "text": "\"there are levers for action, we are not condemned to doing nothing\"."
+        },
+        {
+          "label": "LFI (Éric Coquerel)",
+          "text": "\"the head of State is showing himself to be powerless\"."
+        }
       ]
     },
     "ecologistes-vote-decembre": {
@@ -211,7 +292,11 @@
       "text": "On 21 September, the federal council of Les Écologistes (the Greens) adopted, with 69.44%, a motion that drops the plan for a primary. Marine Tondelier remains a candidate until the members' vote (10-13 December), when they will choose between a Green candidacy and supporting another left-wing candidate.",
       "quiz": {
         "question": "What will Green party members decide from 10 to 13 December?",
-        "options": ["The date of their congress", "Whether they keep their candidate or support another left-wing candidate", "The name of their Prime Minister"],
+        "options": [
+          "The date of their congress",
+          "Whether they keep their candidate or support another left-wing candidate",
+          "The name of their Prime Minister"
+        ],
         "explanation": "They will choose between a candidacy from their party and supporting a candidate from another left-wing force."
       }
     },
@@ -222,7 +307,11 @@
       "why": "The price of a meal at the university restaurant has gone from €3.30 to €1 for all students.",
       "quiz": {
         "question": "Since when has the €1 meal been open to all students?",
-        "options": ["4 May 2026", "September 2025", "1 January 2027"],
+        "options": [
+          "4 May 2026",
+          "September 2025",
+          "1 January 2027"
+        ],
         "explanation": "Before 4 May 2026, it was reserved for grant holders and students in financial hardship."
       }
     },
@@ -231,7 +320,11 @@
       "text": "More than 112,000 members of the Rassemblement national (RN) are invited to vote online until 22 October to elect the party president, ahead of a congress in Orléans at the end of October. Jordan Bardella is the only candidate; members can also cast a blank vote, and they elect 100 members of the national council.",
       "quiz": {
         "question": "Until when can RN members vote?",
-        "options": ["5 November", "22 October", "18 April"],
+        "options": [
+          "5 November",
+          "22 October",
+          "18 April"
+        ],
         "explanation": "The online vote is open until 22 October inclusive."
       }
     },
@@ -240,7 +333,11 @@
       "text": "On 17 September on BFMTV, Éric Zemmour, president of Reconquête, confirmed that he will be a candidate in the 2027 presidential election. He came fourth in the first round in 2022, with 7.07% of the votes. He announced that he will campaign with Sarah Knafo.",
       "quiz": {
         "question": "What score did Éric Zemmour get in the 1st round in 2022?",
-        "options": ["21.95%", "2.28%", "7.07%"],
+        "options": [
+          "21.95%",
+          "2.28%",
+          "7.07%"
+        ],
         "explanation": "He got 7.07% and came fourth."
       }
     },
@@ -251,7 +348,11 @@
       "why": "The budget sets the funding for universities, student grants and housing benefits.",
       "quiz": {
         "question": "What public deficit is the government aiming for in 2027?",
-        "options": ["3% of GDP", "5% of GDP", "6.5% of GDP"],
+        "options": [
+          "3% of GDP",
+          "5% of GDP",
+          "6.5% of GDP"
+        ],
         "explanation": "The target is 5% of GDP; without savings, the deficit would be close to 6.5%."
       }
     },
@@ -264,7 +365,11 @@
       "text": "At the Fête de l'Humanité on 12 September, Fabien Roussel (Parti communiste français, PCF) called for \"lower taxes on petrol\" and higher wages and pensions. He proposed a \"sanction nationalisation\" of TotalEnergies and called on people to \"invade the roundabouts\".",
       "quiz": {
         "question": "Which company does Fabien Roussel propose to nationalise?",
-        "options": ["Renault", "EDF", "TotalEnergies"],
+        "options": [
+          "Renault",
+          "EDF",
+          "TotalEnergies"
+        ],
         "explanation": "He proposed a \"sanction nationalisation\" of TotalEnergies."
       }
     },
@@ -274,7 +379,11 @@
       "text": "To stand, a candidate must gather at least 500 parrainages (official sponsorships from elected officials) from at least 30 départements or overseas territories, with no more than 50 per territory. An elected official can sponsor only one candidate. The official collection period is due to end on 12 March 2027.",
       "quiz": {
         "question": "What is the minimum number of parrainages from elected officials needed to be a candidate?",
-        "options": ["50", "500", "30"],
+        "options": [
+          "50",
+          "500",
+          "30"
+        ],
         "explanation": "You need 500 parrainages, from at least 30 départements or overseas territories."
       }
     }
@@ -282,47 +391,83 @@
   "quiz": {
     "q-duree-mandat": {
       "question": "For how long is the President of the Republic elected?",
-      "options": ["4 years", "5 years", "7 years"],
+      "options": [
+        "4 years",
+        "5 years",
+        "7 years"
+      ],
       "explanation": "The president is elected for five years by direct universal suffrage, and no one can serve more than two consecutive terms."
     },
     "q-second-tour": {
       "question": "Who can stand in the second round of the presidential election?",
-      "options": ["All candidates with more than 12.5% of the votes", "The top three candidates", "The top two candidates"],
+      "options": [
+        "All candidates with more than 12.5% of the votes",
+        "The top three candidates",
+        "The top two candidates"
+      ],
       "explanation": "Only the two candidates who came top in the 1st round (after any withdrawals) can stand in the second round."
     },
     "q-premier-ministre": {
       "question": "Who appoints the Prime Minister?",
-      "options": ["The President of the Republic", "The Assemblée nationale", "The Senate"],
+      "options": [
+        "The President of the Republic",
+        "The Assemblée nationale",
+        "The Senate"
+      ],
       "explanation": "The President of the Republic appoints the Prime Minister (Article 8 of the Constitution)."
     },
     "q-inscription": {
       "question": "Until when can you register on the electoral roll for the presidential election?",
-      "options": ["The day before the vote", "12 March 2027", "1 January 2027"],
+      "options": [
+        "The day before the vote",
+        "12 March 2027",
+        "1 January 2027"
+      ],
       "explanation": "You must be registered by Friday 12 March 2027 at the latest, online or at the town hall. It is the procuration (proxy vote) that can be arranged up to the day before."
     },
     "q-parrainages": {
       "question": "What is the minimum number of parrainages (sponsorships from elected officials) needed to be a candidate?",
-      "options": ["100", "500", "1,000"],
+      "options": [
+        "100",
+        "500",
+        "1,000"
+      ],
       "explanation": "You need at least 500 signatures from elected officials, from at least 30 different départements or overseas territories."
     },
     "q-primaire": {
       "question": "Who won the social democratic left's primary?",
-      "options": ["Olivier Faure", "Raphaël Glucksmann", "Ségolène Royal"],
+      "options": [
+        "Olivier Faure",
+        "Raphaël Glucksmann",
+        "Ségolène Royal"
+      ],
       "explanation": "Raphaël Glucksmann won in the 1st round, on 11 October 2026, with 66.17% of the votes (14.46% for Olivier Faure)."
     },
     "q-age-candidat": {
       "question": "What is the minimum age to be a candidate in the presidential election?",
-      "options": ["18", "23", "35"],
+      "options": [
+        "18",
+        "23",
+        "35"
+      ],
       "explanation": "You must be at least 18. Until an organic law in 2011, you had to be 23."
     },
     "q-proclamation": {
       "question": "Who announces the official results of the presidential election?",
-      "options": ["The Interior Ministry", "The Conseil constitutionnel (Constitutional Council)", "The Assemblée nationale"],
+      "options": [
+        "The Interior Ministry",
+        "The Conseil constitutionnel (Constitutional Council)",
+        "The Assemblée nationale"
+      ],
       "explanation": "The Conseil constitutionnel announces the official results; for the second round, by 12 May 2027 at the latest."
     },
     "q-delai-tours": {
       "question": "How much time is there between the two rounds of the presidential election?",
-      "options": ["One week", "Two weeks", "One month"],
+      "options": [
+        "One week",
+        "Two weeks",
+        "One month"
+      ],
       "explanation": "The second round takes place on the fourteenth day after the first: 2 May 2027, two weeks after 18 April."
     }
   },
@@ -471,17 +616,27 @@
   "pronostics": {
     "p-candidats": {
       "question": "How many candidates will get their 500 parrainages (sponsorships from elected officials)?",
-      "options": ["Fewer than 10", "10 to 12", "More than 12"],
+      "options": [
+        "Fewer than 10",
+        "10 to 12",
+        "More than 12"
+      ],
       "context": "In 2022, there were 12 candidates."
     },
     "p-participation": {
       "question": "Turnout in the 1st round will be…",
-      "options": ["Higher than in 2022", "Lower than in 2022"],
+      "options": [
+        "Higher than in 2022",
+        "Lower than in 2022"
+      ],
       "context": "In 2022, about 74% of registered voters voted in the 1st round."
     },
     "p-abstention-jeunes": {
       "question": "Abstention among 18-24 year olds in the 1st round will be…",
-      "options": ["Higher than in 2022 (41%)", "Lower"],
+      "options": [
+        "Higher than in 2022 (41%)",
+        "Lower"
+      ],
       "context": "In 2022, about 41% of 18-24 year olds did not vote in the 1st round."
     }
   },
@@ -560,18 +715,42 @@
     }
   },
   "topics": {
-    "election": { "label": "Presidential election" },
-    "logement": { "label": "Housing" },
-    "pouvoir-achat": { "label": "Cost of living" },
-    "emploi": { "label": "Jobs" },
-    "etudes": { "label": "Studies and grants" },
-    "climat": { "label": "Climate" },
-    "sante": { "label": "Health" },
-    "securite": { "label": "Security" },
-    "immigration": { "label": "Immigration" },
-    "europe": { "label": "Europe" },
-    "budget": { "label": "Budget and taxes" },
-    "institutions": { "label": "Institutions" }
+    "election": {
+      "label": "Presidential election"
+    },
+    "logement": {
+      "label": "Housing"
+    },
+    "pouvoir-achat": {
+      "label": "Cost of living"
+    },
+    "emploi": {
+      "label": "Jobs"
+    },
+    "etudes": {
+      "label": "Studies and grants"
+    },
+    "climat": {
+      "label": "Climate"
+    },
+    "sante": {
+      "label": "Health"
+    },
+    "securite": {
+      "label": "Security"
+    },
+    "immigration": {
+      "label": "Immigration"
+    },
+    "europe": {
+      "label": "Europe"
+    },
+    "budget": {
+      "label": "Budget and taxes"
+    },
+    "institutions": {
+      "label": "Institutions"
+    }
   },
   "camps": {
     "neutre": "Neutral fact",
@@ -581,13 +760,49 @@
     "extreme-droite": "Far right"
   },
   "levels": [
-    { "min": 0, "name": "Hamlet", "withArticle": "a Hamlet", "opened": "A few houses and some trees." },
-    { "min": 100, "name": "Village", "withArticle": "a Village", "opened": "The town hall has just opened." },
-    { "min": 250, "name": "Small town", "withArticle": "a Small town", "opened": "A school has just opened." },
-    { "min": 500, "name": "Town", "withArticle": "a Town", "opened": "A library and a park have just opened.", "badge": "500 voix, like the 500 parrainages (official sponsorships) a candidate needs: you could stand for president!" },
-    { "min": 1000, "name": "City", "withArticle": "a City", "opened": "The tram arrives and the city fills with trees." },
-    { "min": 1500, "name": "Metropolis", "withArticle": "a Metropolis", "opened": "A stadium has just opened." },
-    { "min": 2500, "name": "Capital", "withArticle": "a Capital", "opened": "The Assembly moves into your city." }
+    {
+      "min": 0,
+      "name": "Hamlet",
+      "withArticle": "a Hamlet",
+      "opened": "A few houses and some trees."
+    },
+    {
+      "min": 100,
+      "name": "Village",
+      "withArticle": "a Village",
+      "opened": "The town hall has just opened."
+    },
+    {
+      "min": 250,
+      "name": "Small town",
+      "withArticle": "a Small town",
+      "opened": "A school has just opened."
+    },
+    {
+      "min": 500,
+      "name": "Town",
+      "withArticle": "a Town",
+      "opened": "A library and a park have just opened.",
+      "badge": "500 voix, like the 500 parrainages (official sponsorships) a candidate needs: you could stand for president!"
+    },
+    {
+      "min": 1000,
+      "name": "City",
+      "withArticle": "a City",
+      "opened": "The tram arrives and the city fills with trees."
+    },
+    {
+      "min": 1500,
+      "name": "Metropolis",
+      "withArticle": "a Metropolis",
+      "opened": "A stadium has just opened."
+    },
+    {
+      "min": 2500,
+      "name": "Capital",
+      "withArticle": "a Capital",
+      "opened": "The Assembly moves into your city."
+    }
   ],
   "defis": {
     "hub": [
@@ -596,7 +811,11 @@
         "title": "True or False",
         "description": "8 statements about the campaign. Sort the true from the false.",
         "duration": "2 min",
-        "modes": ["solo", "friend", "team"],
+        "modes": [
+          "solo",
+          "friend",
+          "team"
+        ],
         "emoji": "✅"
       },
       {
@@ -604,7 +823,11 @@
         "title": "Who proposes this?",
         "description": "One proposal, you guess the candidate.",
         "duration": "1 min",
-        "modes": ["solo", "friend", "team"],
+        "modes": [
+          "solo",
+          "friend",
+          "team"
+        ],
         "emoji": "🕵️"
       },
       {
@@ -612,7 +835,11 @@
         "title": "Defend the other side",
         "description": "Find the best argument of the side you don't support.",
         "duration": "2 min",
-        "modes": ["solo", "friend", "team"],
+        "modes": [
+          "solo",
+          "friend",
+          "team"
+        ],
         "emoji": "🔄"
       },
       {
@@ -620,7 +847,10 @@
         "title": "Predictions",
         "description": "Make your predictions, we compare after the vote.",
         "duration": "1 min",
-        "modes": ["solo", "friend"],
+        "modes": [
+          "solo",
+          "friend"
+        ],
         "emoji": "🔮"
       },
       {
@@ -647,31 +877,58 @@
     }
   },
   "site": {
-    "appName": "2027 French Election: the game",
+    "appName": "polis",
     "projectEnd": "end of the student project (June 2027)"
   },
   "onboarding": {
     "followsNews": {
       "question": "Do you follow the news?",
       "options": [
-        { "id": "jamais", "label": "Almost never", "points": 0 },
-        { "id": "parfois", "label": "From time to time", "points": 1 },
-        { "id": "souvent", "label": "Often", "points": 2 }
+        {
+          "id": "jamais",
+          "label": "Almost never",
+          "points": 0
+        },
+        {
+          "id": "parfois",
+          "label": "From time to time",
+          "points": 1
+        },
+        {
+          "id": "souvent",
+          "label": "Often",
+          "points": 2
+        }
       ]
     },
     "voted": {
       "question": "Have you ever voted?",
       "options": [
-        { "id": "oui", "label": "Yes" },
-        { "id": "non", "label": "Not yet" }
+        {
+          "id": "oui",
+          "label": "Yes"
+        },
+        {
+          "id": "non",
+          "label": "Not yet"
+        }
       ]
     },
     "registered": {
       "question": "Are you on the electoral roll?",
       "options": [
-        { "id": "oui", "label": "Yes" },
-        { "id": "non", "label": "No" },
-        { "id": "nsp", "label": "I don't know" }
+        {
+          "id": "oui",
+          "label": "Yes"
+        },
+        {
+          "id": "non",
+          "label": "No"
+        },
+        {
+          "id": "nsp",
+          "label": "I don't know"
+        }
       ],
       "help": "To vote in the presidential election, you must be registered by Friday 12 March 2027 at the latest.",
       "checkUrl": "https://www.service-public.fr/particuliers/vosdroits/services-en-ligne-et-formulaires/ISE"
@@ -680,21 +937,33 @@
       {
         "id": "k-mandat",
         "question": "The President of the Republic is elected for…",
-        "options": ["4 years", "5 years", "7 years"],
+        "options": [
+          "4 years",
+          "5 years",
+          "7 years"
+        ],
         "answer": 1,
         "explanation": "Since 2002, the presidential term has lasted 5 years (the quinquennat)."
       },
       {
         "id": "k-lois",
         "question": "Who votes on laws in France?",
-        "options": ["The president alone", "Parliament (Assemblée nationale and Senate)", "The Conseil constitutionnel (Constitutional Council)"],
+        "options": [
+          "The president alone",
+          "Parliament (Assemblée nationale and Senate)",
+          "The Conseil constitutionnel (Constitutional Council)"
+        ],
         "answer": 1,
         "explanation": "Laws are voted by Parliament: the Assemblée nationale (National Assembly) and the Senate."
       },
       {
         "id": "k-deputes",
         "question": "How many députés (MPs) are there in the Assemblée nationale?",
-        "options": ["348", "577", "1,000"],
+        "options": [
+          "348",
+          "577",
+          "1,000"
+        ],
         "answer": 1,
         "explanation": "There are 577 députés. 348 is the number of senators."
       }
@@ -720,10 +989,22 @@
     "voter": {
       "question": "Can you vote in the French presidential election?",
       "options": [
-        { "id": "fr", "label": "Yes, I'm French" },
-        { "id": "eu", "label": "I'm an EU citizen" },
-        { "id": "non-eu", "label": "No, I'm from a non-EU country" },
-        { "id": "nsp", "label": "I don't know" }
+        {
+          "id": "fr",
+          "label": "Yes, I'm French"
+        },
+        {
+          "id": "eu",
+          "label": "I'm an EU citizen"
+        },
+        {
+          "id": "non-eu",
+          "label": "No, I'm from a non-EU country"
+        },
+        {
+          "id": "nsp",
+          "label": "I don't know"
+        }
       ],
       "help": {
         "eu": "You don't vote in the presidential election, but you can vote in municipal and European elections in France.",

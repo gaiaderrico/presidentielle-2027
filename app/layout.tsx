@@ -12,8 +12,9 @@ const display = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["l
 const body = DM_Sans({ variable: "--font-dmsans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Présidentielle 2027 : le jeu",
-  description: "Comprends la campagne en 5 minutes, fais grandir ta ville et défie tes potes. Neutre, gratuit, sans inscription.",
+  title: "polis · Présidentielle 2027",
+  description: "polis : comprends la présidentielle 2027 en 5 minutes, fais grandir ta ville et défie tes potes. Neutre, gratuit, sans inscription. Aussi en anglais.",
+  applicationName: "polis",
 };
 
 export const viewport: Viewport = {

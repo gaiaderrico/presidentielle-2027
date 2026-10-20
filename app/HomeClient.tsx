@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { City } from "@/components/City";
+import { Logo } from "@/components/Logo";
 import { Button, Card, Page } from "@/components/ui";
 import { fetchChallenge } from "@/lib/api";
 import { daysUntilFirstRound } from "@/lib/feed";
@@ -49,6 +50,7 @@ function Landing() {
   return (
     <Page className="!gap-6 !pt-4">
       <section className="relative overflow-hidden rounded-[2rem] bg-ink p-6 pb-0 text-paper shadow-lg">
+        <Logo onDark className="mb-5 h-10" />
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-accent px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-accent-ink">{days === null ? "J-…" : t(`J-${days}`, `D-${days}`)}</span>
           <span className="text-sm font-semibold opacity-80">{t("avant le 1er tour, le 18 avril 2027", "until the 1st round, 18 April 2027")}</span>
