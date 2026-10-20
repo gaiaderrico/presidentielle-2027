@@ -24,7 +24,8 @@ type Stats = {
   quizAvg: number | null;
   voix: { avg: number; levels: Record<string, number>; cityViewRate: number | null };
   emails: number;
-  profile: { completed: number; levels: Record<string, number>; registered: Record<string, number>; interests: Record<string, number> };
+  profile: { completed: number; levels: Record<string, number>; registered: Record<string, number>; voter: Record<string, number>; testSkipped: number; interests: Record<string, number> };
+  levelsChosen: Record<string, number>;
   city: { buildingOpens: Record<string, number> };
   sessions: {
     sessionId: string;
@@ -241,6 +242,8 @@ export function StatsClient() {
           <Bars data={stats.challengesChosen} label={typeName} />
           <h3 className="mt-2 font-semibold">Modes</h3>
           <Bars data={stats.modesChosen} />
+          <h3 className="mt-2 font-semibold">Niveau choisi</h3>
+          <Bars data={stats.levelsChosen} />
         </Card>
         <Card className="flex flex-col gap-2">
           <h2 className="font-display text-lg font-bold">Défis partagés</h2>
@@ -261,6 +264,9 @@ export function StatsClient() {
           <h2 className="font-display text-lg font-bold">Profils ({stats.profile.completed})</h2>
           <h3 className="font-semibold">Niveau</h3>
           <Bars data={stats.profile.levels} />
+          <h3 className="mt-2 font-semibold">Peut voter à la présidentielle (fr = oui, eu / non-eu / nsp = mode international)</h3>
+          <Bars data={stats.profile.voter} />
+          <p className="text-sm">Test de niveau passé (skippé) : {stats.profile.testSkipped}</p>
           <h3 className="mt-2 font-semibold">Inscrit·e sur les listes</h3>
           <Bars data={stats.profile.registered} />
           <h3 className="mt-2 font-semibold">Sujets choisis</h3>

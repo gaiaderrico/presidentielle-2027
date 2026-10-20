@@ -75,7 +75,7 @@ _None yet._
 | Fixed Glucksmann source (Public Sénat, 11 Oct) and Tondelier wording (members vote 10–13 Dec) | Found by verification |
 
 ## 2026-10-20: deployed
-- Public app: https://presidentielle-2027-theta.vercel.app (Vercel, production)
+- Public app: https://polis-2027.vercel.app (Vercel, production)
 - Database: Supabase project zsqnhpvkbykyxxpfvpyc (West EU), schema from `supabase/schema.sql`, RLS on, no anon policy
 - Env vars set on Vercel (production) and in `presidentielle-2027/.env.local` (git-ignored). Stats page: /stats (password shared with the team only)
 - End-to-end test passed (challenge → friend reply → +50 bonus, team match, events, stats); test rows deleted
@@ -87,12 +87,25 @@ _None yet._
 - **Why the change:** decided by the team on 2026-10-20. The share rate (v1, ≥ 40 %) is kept as a secondary metric in /stats. The course grades decisions on evidence, so log whether v2 was set before or after seeing test results.
 - 2026-10-20 (later): threshold lowered by the team from 50 % to **40 %** (4 out of 10 testers). At that moment the measured rate was 26 % (5 of 19 tagged testers).
 
+## 2026-10-20 (evening): round 2 changes, from the first test logs
+| Feedback from testers | Change |
+|---|---|
+| Not always told the right answer and why | Every answer: right/wrong + right answer + why + source |
+| Obscure facts, guess-the-candidate felt like a lottery | 12 new "Qui propose ça ?" on well-known candidates (3 per side), 16 Vrai ou Faux, 9 quiz, all re-verified (content/content-notes.md) |
+| Difficulty didn't match | Difficulty 1–3 on every question; Progressif / Facile / Moyen / Difficile |
+| Onboarding too direct about politics | Every step skippable, tutorial added, left–right position moved to the profile |
+| Hard to understand how to play with friends | 3-step explanation in hub, share sheet, friend landing |
+| Non-French speakers couldn't try it | Full English version (FR/EN switch) |
+| International students can't vote but want to learn | International mode (who can vote, why it matters, student elections) |
+| Nothing removed for now | Team decision |
+- Next Test Card (team): at least 40% of users complete a challenge when they open the web app.
+
 ## 2026-10-20: game feel and city polish (design / game-design skills)
 | Decision | Why |
 |---|---|
 | Answer feedback: vibration, a shake on a wrong answer, a bounce on a right one, a moving progress bar | "Juice": feedback makes each answer feel like it counts (game-design-core). Aims at the primary metric, finishing a challenge |
-| Streak: from the 3rd right answer in a row, +5 voix per answer and a "🔥 Série ×N" badge | A short reward loop inside a challenge. Small bonus, so the level thresholds stay the same |
-| Fixed: a wrong answer in the mini-quiz now shows in red (it stayed white before) | Found while testing: `bg-card` was overriding `bg-bad-soft` |
+| Streak: from the 3rd right answer in a row, +5 voix per answer, a "🔥 ×N" badge and a line in the feedback panel (uses the round-2 streak counter) | A short reward loop inside a challenge. Small bonus, so the level thresholds stay the same |
+| Fixed: a wrong answer in the mini-quiz and in Défends l'autre camp now shows in red (it stayed white) | Found while testing: `bg-card` was overriding `bg-bad-soft` |
 | City decor generated from a seed (session id): clouds, birds, stars, trees on the hill. One more tree every 40 voix | Each player's city is their own and stays identical on every visit; progress is visible between two levels (procedural generation) |
 | Sky follows the time of day (day / dusk / night) | A small surprise for players who come back (open-world "micro-discoveries") |
 | Only the next building to unlock is highlighted (orange animated outline) + a "Prochaine découverte" card | One clear landmark to aim for instead of every locked building looking the same (open-world wayfinding) |

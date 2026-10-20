@@ -7,16 +7,17 @@ import { IconClose, IconLock } from "@/components/Icons";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Sheet } from "@/components/Sheet";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
-import { cityBuildings, levels, site, type CityBuilding } from "@/lib/content";
-import { levelFor, levelIndexFor, nextLevel } from "@/lib/levels";
+import type { CityBuilding } from "@/lib/content";
 import { haptic } from "@/lib/feedback";
+import { useContent, useT } from "@/lib/i18n";
+import { levelIndexFor } from "@/lib/levels";
 import { hashSeed } from "@/lib/rng";
 import { getSessionId, siteUrl } from "@/lib/session";
 import { track } from "@/lib/track";
 import { useVoix } from "@/lib/voix";
 
 // Renders the city SVG to a PNG file (for the native share sheet with an image).
-async function cityPng(svg: SVGSVGElement, title: string): Promise<File | null> {
+async function cityPng(svg: SVGSVGElement, title: string, appName: string): Promise<File | null> {
   try {
     const clone = svg.cloneNode(true) as SVGSVGElement;
     clone.querySelectorAll("[role=button]").forEach((n) => n.remove());
@@ -37,7 +38,7 @@ async function cityPng(svg: SVGSVGElement, title: string): Promise<File | null> 
     ctx.fillText(title, 60, 650);
     ctx.font = "28px sans-serif";
     ctx.fillStyle = "#5e6a7d";
-    ctx.fillText(site.appName, 60, 695);
+    ctx.fillText(appName, 60, 695);
     const blob: Blob | null = await new Promise((r) => canvas.toBlob(r, "image/png"));
     return blob ? new File([blob], "ma-ville.png", { type: "image/png" }) : null;
   } catch {
@@ -47,6 +48,8 @@ async function cityPng(svg: SVGSVGElement, title: string): Promise<File | null> 
 
 export function CityClient() {
   const { total, history } = useVoix();
+  const c = useContent();
+  const t = useT();
   const [mounted, setMounted] = useState(false);
   const [sharing, setSharing] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
@@ -66,24 +69,27 @@ export function CityClient() {
 
   if (!mounted) return <main className="flex-1" />;
 
-  const level = levelFor(total);
   const levelIdx = levelIndexFor(total);
-  const next = nextLevel(total);
+  const level = c.levels[levelIdx];
+  const next = c.levels[levelIdx + 1] ?? null;
   const progress = next ? (total - level.min) / (next.min - level.min) : 1;
-  const message = `Ma ville est ${level.withArticle} avec ${total} voix sur ${site.appName}. Fais grandir la tienne 👉 ${siteUrl()}`;
-  const building = cityBuildings.find((b) => b.id === selected) ?? null;
-  const upcoming = next ? cityBuildings.filter((b) => b.level === levelIdx + 1) : [];
+  const message = t(
+    `Ma ville est ${level.withArticle} avec ${total} voix sur ${c.site.appName}. Fais grandir la tienne 👉 ${siteUrl()}`,
+    `My city is ${level.withArticle} with ${total} voix on ${c.site.appName}. Grow yours 👉 ${siteUrl()}`,
+  );
+  const building = c.cityBuildings.find((b) => b.id === selected) ?? null;
+  const upcoming = next ? c.cityBuildings.filter((b) => b.level === levelIdx + 1) : [];
 
   const open = (id: string) => {
     haptic("tap");
     setSelected(id);
-    const b = cityBuildings.find((x) => x.id === id);
+    const b = c.cityBuildings.find((x) => x.id === id);
     track("city_building_open", { building: id, unlocked: b ? b.level <= levelIdx : false });
   };
 
   const shareCity = async () => {
     if (svgRef.current && typeof navigator.share === "function") {
-      const file = await cityPng(svgRef.current, `Ma ville : ${level.name} · ${total} voix`);
+      const file = await cityPng(svgRef.current, `${t("Ma ville :", "My city:")} ${level.name} · ${total} voix`, c.site.appName);
       if (file && navigator.canShare?.({ files: [file] })) {
         track("city_share", { method: "image" });
         try {
@@ -101,7 +107,7 @@ export function CityClient() {
     <Page>
       <div className="flex items-end justify-between gap-3">
         <div>
-          <p className="text-sm font-bold uppercase tracking-wider text-accent">Ma ville</p>
+          <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Ma ville", "My city")}</p>
           <h1 className="font-display text-4xl font-extrabold leading-none">{level.name}</h1>
         </div>
         <p className="font-display text-2xl font-bold tabular-nums">{total} voix</p>
@@ -110,10 +116,20 @@ export function CityClient() {
       <div className="-mx-4">
         <div className="no-scrollbar overflow-x-auto px-4">
           <div className="w-[170%] max-w-[54rem] sm:w-full">
-            <City voix={total} svgRef={svgRef} label={`Ta ville : ${level.name}, ${total} voix`} interactive selected={selected} onSelect={open} seed={seed} time={time} className="shadow-sm" />
+            <City
+              voix={total}
+              svgRef={svgRef}
+              label={`${t("Ta ville :", "Your city:")} ${level.name}, ${total} voix`}
+              interactive
+              selected={selected}
+              onSelect={open}
+              seed={seed}
+              time={time}
+              className="shadow-sm"
+            />
           </div>
         </div>
-        <p className="mt-2 px-4 text-center text-sm font-semibold text-muted">👆 Touche un bâtiment pour l&apos;explorer · ↔ fais glisser pour te balader</p>
+        <p className="mt-2 px-4 text-center text-sm font-semibold text-muted">👆 {t("Touche un bâtiment pour l'explorer · ↔ fais glisser pour te balader", "Tap a building to explore it · ↔ swipe to look around")}</p>
       </div>
 
       {level.badge && <p className="rounded-2xl bg-accent-soft px-4 py-3 font-semibold">{level.badge}</p>}
@@ -122,7 +138,7 @@ export function CityClient() {
         <div className="h-3 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progress * 100)}>
           <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${progress * 100}%` }} />
         </div>
-        <p className="text-sm font-semibold">{next ? `Encore ${next.min - total} voix pour devenir ${next.withArticle}` : "Niveau maximum : ta ville est une Capitale !"}</p>
+        <p className="text-sm font-semibold">{next ? t(`Encore ${next.min - total} voix pour devenir ${next.withArticle}`, `${next.min - total} more voix to become ${next.withArticle}`) : t("Niveau maximum : ta ville est une Capitale !", "Top level: your city is a Capital!")}</p>
       </div>
 
       {upcoming.length > 0 && (
@@ -134,17 +150,17 @@ export function CityClient() {
             {upcoming[0].emoji}
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-xs font-bold uppercase tracking-wider text-accent">Prochaine découverte</span>
-            <span className="block truncate font-semibold">{upcoming.map((b) => b.name).join(" et ")}</span>
+            <span className="block text-xs font-bold uppercase tracking-wider text-accent">{t("Prochaine découverte", "Next discovery")}</span>
+            <span className="block truncate font-semibold">{upcoming.map((b) => b.name).join(t(" et ", " and "))}</span>
           </span>
           <span className="shrink-0 text-sm font-bold tabular-nums text-muted">{next!.min - total} voix</span>
         </button>
       )}
 
-      <section className="flex flex-col gap-3" aria-label="Les bâtiments de ta ville">
-        <h2 className="font-display text-xl font-bold">Les bâtiments</h2>
+      <section className="flex flex-col gap-3" aria-label={t("Les bâtiments de ta ville", "The buildings in your city")}>
+        <h2 className="font-display text-xl font-bold">{t("Les bâtiments", "Buildings")}</h2>
         <ul className="grid grid-cols-2 gap-2">
-          {cityBuildings.map((b) => {
+          {c.cityBuildings.map((b) => {
             const built = b.level <= levelIdx;
             return (
               <li key={b.id}>
@@ -157,7 +173,7 @@ export function CityClient() {
                   </span>
                   <span className="min-w-0">
                     <span className="block truncate text-sm font-bold">{b.name}</span>
-                    <span className="block text-xs text-muted">{built ? "Construit · à explorer" : `À ${levels[b.level].min} voix`}</span>
+                    <span className="block text-xs text-muted">{built ? t("Construit · à explorer", "Built · explore it") : t(`À ${c.levels[b.level].min} voix`, `At ${c.levels[b.level].min} voix`)}</span>
                   </span>
                 </button>
               </li>
@@ -167,14 +183,14 @@ export function CityClient() {
       </section>
 
       <div className="grid grid-cols-2 gap-3">
-        <ButtonLink href="/defis">Gagner des voix</ButtonLink>
+        <ButtonLink href="/defis">{t("Gagner des voix", "Earn voix")}</ButtonLink>
         <Button variant="secondary" onClick={shareCity}>
-          Montrer ma ville
+          {t("Montrer ma ville", "Show my city")}
         </Button>
       </div>
 
       <Card>
-        <h2 className="font-display text-lg font-bold">Dernières voix gagnées</h2>
+        <h2 className="font-display text-lg font-bold">{t("Dernières voix gagnées", "Latest voix earned")}</h2>
         {history.length ? (
           <ul className="mt-2 flex flex-col divide-y divide-line">
             {history.slice(0, 10).map((h, i) => (
@@ -186,23 +202,25 @@ export function CityClient() {
           </ul>
         ) : (
           <p className="mt-2 text-sm text-muted">
-            Pas encore de voix.{" "}
+            {t("Pas encore de voix.", "No voix yet.")}{" "}
             <Link href="/feed" className="font-semibold underline underline-offset-4">
-              Lis une actu
+              {t("Lis une actu", "Read a story")}
             </Link>{" "}
-            pour poser ta première pierre.
+            {t("pour poser ta première pierre.", "to lay your first stone.")}
           </p>
         )}
       </Card>
 
       {building && <BuildingSheet b={building} built={building.level <= levelIdx} total={total} onClose={() => setSelected(null)} />}
-      <ShareSheet open={sharing} onClose={() => setSharing(false)} message={message} url={siteUrl()} challengeType="city" code={null} title="Montrer ma ville" />
+      <ShareSheet open={sharing} onClose={() => setSharing(false)} message={message} url={siteUrl()} challengeType="city" code={null} title={t("Montrer ma ville", "Show my city")} />
     </Page>
   );
 }
 
 function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: boolean; total: number; onClose: () => void }) {
-  const unlock = levels[b.level];
+  const c = useContent();
+  const t = useT();
+  const unlock = c.levels[b.level];
   return (
     <Sheet onClose={onClose} labelledBy="building-title">
         <div className="flex items-start justify-between gap-3">
@@ -211,13 +229,13 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
               {b.emoji}
             </span>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-muted">{built ? "Dans ta ville" : "À débloquer"}</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-muted">{built ? t("Dans ta ville", "In your city") : t("À débloquer", "Locked")}</p>
               <h2 id="building-title" className="font-display text-2xl font-bold leading-tight">
                 {b.title}
               </h2>
             </div>
           </div>
-          <button onClick={onClose} className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line" aria-label="Fermer">
+          <button onClick={onClose} className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line" aria-label={t("Fermer", "Close")}>
             <IconClose width={18} height={18} />
           </button>
         </div>
@@ -225,7 +243,7 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
         {built ? (
           <div className="mt-5 flex flex-col gap-4">
             <div>
-              <p className="mb-2 text-sm font-bold">Qui décide ?</p>
+              <p className="mb-2 text-sm font-bold">{t("Qui décide ?", "Who decides?")}</p>
               <ul className="flex flex-col gap-2">
                 {b.facts.map((f) => (
                   <li key={f} className="rounded-2xl bg-paper px-4 py-3 text-[15px] leading-snug">
@@ -235,7 +253,7 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
               </ul>
             </div>
             <p className="rounded-2xl border-2 border-accent bg-accent-soft px-4 py-3 text-[15px]">
-              <strong>Pour toi :</strong> {b.forYou}
+              <strong>{t("Pour toi :", "For you:")}</strong> {b.forYou}
             </p>
             <a href={b.source.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-accent underline underline-offset-4">
               Source : {b.source.label} ↗
@@ -246,10 +264,11 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
             <p className="flex items-center gap-2 rounded-2xl bg-paper px-4 py-3">
               <IconLock width={20} height={20} className="shrink-0 text-muted" />
               <span>
-                Se débloque quand ta ville devient <strong>{unlock.withArticle}</strong> ({unlock.min} voix). Encore <strong>{Math.max(0, unlock.min - total)} voix</strong>.
+                {t("Se débloque quand ta ville devient", "Unlocks when your city becomes")} <strong>{unlock.withArticle}</strong> ({unlock.min} voix). {t("Encore", "Still")}{" "}
+                <strong>{Math.max(0, unlock.min - total)} voix</strong>.
               </span>
             </p>
-            <ButtonLink href="/defis">Gagner des voix</ButtonLink>
+            <ButtonLink href="/defis">{t("Gagner des voix", "Earn voix")}</ButtonLink>
           </div>
         )}
     </Sheet>

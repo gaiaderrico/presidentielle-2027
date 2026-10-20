@@ -66,6 +66,15 @@ Everything players read lives in `content/*.json`. Edit, commit, and Vercel rede
 - Feed rule (`lib/feed.ts`): camps take turns (gauche, centre, droite, extrême droite) with a neutral card after every 2; the player's topics first inside each camp; 👍 on a camp → the next cards come from the camps with the fewest 👍; if the player gave a position, the camps farthest from it come first. Nothing is ever hidden: every camp is always shown.
 - **The political position never leaves the phone**: it is not in any event, and the server strips `position`, `ideas`, `leaning`, `opinion`, `side`, `pour`, `contre` from every event.
 
+## Round 2 changes (after the first tests)
+
+- **Answers always explained**: after every answer (all challenges), the player sees right/wrong, the right answer, why, and the source, then taps "Question suivante".
+- **Difficulty**: every question has `difficulty` 1 (easy), 2 (medium) or 3 (hard). In the challenges page the player picks Progressif (default: starts easy, +1 level after 2 right answers in a row, −1 after a mistake), Facile, Moyen or Difficile. Logic in `lib/difficulty.ts`. A friend's link replays exactly the same questions (`item_ids` in `challenges`); team matches use the same questions for everybody (easiest first).
+- **Onboarding** (`/bienvenue`): name, "can you vote in France?", habits, optional level test, topics, a 3-screen tutorial, result. Every step can be skipped ("Passer" / "Tout passer"). The left–right position moved to the profile (optional, stays on the phone).
+- **International mode**: players who can't vote at the presidential election (EU / non-EU / not sure) get the "qui peut voter / pourquoi ça te concerne / élections étudiantes" cards (`audience: "intl"` in `feed.json`) and no registration reminders.
+- **English version**: FR/EN switch in the top bar and in the profile; default = browser language. UI strings are written inline as `t("français", "English")` (`lib/i18n.ts`); content translations live in `content/en/overlay.json`, matched by id (anything missing falls back to French).
+- **Multiplayer**: a "Joue avec un ami" block explains the 3 steps in the challenges page, the share sheet and the friend's landing page.
+
 ## Privacy choices
 
 - The Pour / Contre answer in "Défends l'autre camp" stays in the component state: never stored, never sent. The server also strips `opinion`, `side`, `position`, `pour` and `contre` keys from any event.
@@ -92,7 +101,7 @@ supabase/schema.sql  tables + RLS
 
 ## Working as a team
 
-- The repository is connected to Vercel: **every push to `main` redeploys https://presidentielle-2027-theta.vercel.app automatically** (about 1 minute). Check the result in the Vercel dashboard or on the commit's status on GitHub.
+- The repository is connected to Vercel: **every push to `main` redeploys https://polis-2027.vercel.app automatically** (about 1 minute). Check the result in the Vercel dashboard or on the commit's status on GitHub.
 - Run `npm run build` before pushing: if the build fails locally, the deploy fails too and the live site keeps the previous version.
 - To try a change without touching the live site, push to another branch (`git checkout -b my-change`): Vercel creates a separate preview link for it.
 - Secrets (`SUPABASE_SERVICE_ROLE_KEY`, `STATS_PASSWORD`) live in Vercel and in each person's `.env.local`. Never commit them.

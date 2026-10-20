@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { site } from "@/lib/content";
-import { levelFor } from "@/lib/levels";
+import { setLang, useContent, useLang, useT } from "@/lib/i18n";
+import { levelIndexFor } from "@/lib/levels";
 import { useVoix, type GainDetail } from "@/lib/voix";
 import { IconBack } from "./Icons";
+import { Logo } from "./Logo";
 
 const ROOTS = ["/", "/feed", "/defis", "/ma-ville", "/profil", "/bienvenue"];
 
@@ -19,6 +20,9 @@ function parentOf(path: string): string {
 
 export function TopBar() {
   const { total } = useVoix();
+  const c = useContent();
+  const lang = useLang();
+  const t = useT();
   const path = usePathname();
   const router = useRouter();
   const [gains, setGains] = useState<{ id: number; amount: number }[]>([]);
@@ -43,28 +47,33 @@ export function TopBar() {
           <button
             onClick={() => router.push(parentOf(path))}
             className="-ml-1 grid h-11 w-11 shrink-0 place-items-center rounded-full text-ink transition hover:bg-line/60"
-            aria-label="Retour"
+            aria-label={t("Retour", "Back")}
           >
             <IconBack />
           </button>
-        ) : (
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink font-display text-sm font-extrabold text-paper" aria-hidden>
-            27
-          </span>
-        )}
-        <Link href={path === "/" ? "/" : "/feed"} className="min-w-0 truncate font-display text-[15px] font-bold leading-tight">
-          {site.appName}
+        ) : null}
+        <Link href={path === "/" ? "/" : "/feed"} className="flex min-w-0 items-center gap-2" aria-label="polis">
+          <Logo className="h-7" />
+          <span className="hidden truncate text-xs font-semibold text-muted min-[400px]:inline">{t("Présidentielle 2027", "French election 2027")}</span>
         </Link>
         <span className="flex-1" />
+        <button
+          onClick={() => setLang(lang === "fr" ? "en" : "fr")}
+          className="grid h-11 min-w-11 shrink-0 place-items-center rounded-full border border-line bg-card px-2 text-xs font-extrabold tracking-wider"
+          aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
+          title={lang === "fr" ? "English" : "Français"}
+        >
+          {lang === "fr" ? "EN" : "FR"}
+        </button>
         <Link
           href="/ma-ville"
           className="relative inline-flex min-h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border border-line bg-card py-1 pl-1.5 pr-3 text-sm font-bold tabular-nums shadow-sm"
-          aria-label={`Ma ville : ${levelFor(total).name}, ${total} voix`}
+          aria-label={`${t("Ma ville :", "My city:")} ${c.levels[levelIndexFor(total)].name}, ${total} voix`}
         >
           <span className="grid h-8 w-8 place-items-center rounded-full bg-accent-soft text-base" aria-hidden>
             🏘️
           </span>
-          <span key={total} className={gains.length ? "bump" : ""}>
+          <span key={total} className={`whitespace-nowrap ${gains.length ? "bump" : ""}`}>
             {total} voix
           </span>
           {gains.map((g) => (

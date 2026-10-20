@@ -1,0 +1,1033 @@
+{
+  "feed": {
+    "dates": {
+      "title": "The dates",
+      "text": "The 1st round is on Sunday 18 April 2027, the 2nd round on Sunday 2 May."
+    },
+    "inscription": {
+      "title": "Register in time",
+      "text": "To vote, you must be on the electoral roll by Friday 12 March 2027 at the latest. A procuration (proxy vote), however, can be arranged up to the day before."
+    },
+    "parrainages": {
+      "title": "The 500 parrainages",
+      "text": "To stand as a candidate, you need parrainages (official sponsorships) from 500 elected officials, from at least 30 different départements (French administrative areas)."
+    },
+    "majorite": {
+      "title": "How you win",
+      "text": "A candidate is elected in the 1st round if they get more than half of the votes. If not, only the top two go through to the 2nd round."
+    },
+    "melenchon": {
+      "title": "Mélenchon, 4th bid",
+      "text": "Jean-Luc Mélenchon is running for the 4th time, after 2012, 2017 and 2022."
+    },
+    "attal": {
+      "title": "Attal, candidate of Macron's party",
+      "text": "Gabriel Attal took over Emmanuel Macron's party while distancing himself from him, and he is a candidate."
+    },
+    "retailleau": {
+      "title": "Retailleau for LR",
+      "text": "Bruno Retailleau, president of Les Républicains (LR), is his party's candidate."
+    },
+    "qui-peut-voter": {
+      "title": "Who can vote in France?",
+      "text": "For the presidential and legislative (parliamentary) elections, you must have French nationality. EU citizens who live in France can vote in municipal and European elections. Other foreign nationals do not vote in political elections."
+    },
+    "presidentielle-te-concerne": {
+      "title": "Even if you can't vote, it affects you",
+      "text": "The president and their government decide policy on visas and residence permits. Since 2019, universities can also charge higher tuition fees to non-EU students."
+    },
+    "elections-etudiantes": {
+      "title": "You can vote… in student elections",
+      "text": "Elections to your university's councils and to the CROUS (student services) are open to all enrolled students, whatever their nationality."
+    }
+  },
+  "actu": {
+    "retailleau-rearmer-etat": {
+      "title": "Retailleau wants to \"rearm the State\" after 17 October",
+      "text": "On 18 October, Bruno Retailleau (Les Républicains, LR) accused La France insoumise (LFI) MPs of having \"armed violence with their slogans\". He proposes a revision of the Constitution to set the age of criminal responsibility for minors at 15 and to introduce minimum sentences.",
+      "why": "The proposal concerns how the justice system treats young people under 18.",
+      "quiz": {
+        "question": "What age does Bruno Retailleau propose for the criminal responsibility of minors?",
+        "options": [
+          "13",
+          "16",
+          "15"
+        ],
+        "explanation": "He proposes a constitutional revision to set it at 15."
+      }
+    },
+    "mobilisation-17-octobre": {
+      "actor": "Social protest",
+      "title": "17 October: 550,000 protesters against the cost of living",
+      "text": "On 17 October, about 550,000 people protested across France according to the Interior Ministry (800,000 according to the organisers) against the \"high cost of living\". Secondary school pupils, students, former gilets jaunes (yellow vests) and trade unions marched; violence and about 400 arrests were reported.",
+      "why": "Secondary school pupils and students were part of the marches, which focused on the cost of living.",
+      "quiz": {
+        "question": "According to the Interior Ministry, how many people protested on 17 October?",
+        "options": [
+          "110,000",
+          "550,000",
+          "800,000"
+        ],
+        "explanation": "800,000 is the organisers' figure; 110,000 is the official figure for Paris only."
+      }
+    },
+    "ps-motion-rejet-budget": {
+      "title": "Budget: the PS motion to reject is defeated",
+      "text": "On 13 October, MPs voted down, by 236 votes to 149, the preliminary motion to reject the 2027 budget tabled by the Parti socialiste (PS). The left supported it; the centre bloc and the Rassemblement national (RN) voted against. So the debate on the bill began.",
+      "sides": [
+        {
+          "label": "PS (Estelle Mercier)",
+          "text": "accuses the government of an \"absolute taboo: asking the richest to contribute\"."
+        },
+        {
+          "label": "RN (Sophie-Laurence Roy)",
+          "text": "accuses the PS of offering the government an opposition that \"refuses to discuss\"."
+        },
+        {
+          "label": "Government (David Amiel)",
+          "text": "defends a \"rescue budget\"."
+        }
+      ],
+      "quiz": {
+        "question": "Which group tabled this motion to reject the budget?",
+        "options": [
+          "The socialist group",
+          "The Rassemblement national",
+          "Horizons"
+        ],
+        "explanation": "The motion came from the socialist MPs; it was rejected by 236 votes to 149."
+      }
+    },
+    "rn-contre-motion-rejet": {
+      "title": "Budget: the RN refuses to reject the bill outright",
+      "text": "On 13 October, the Rassemblement national (RN) MPs, a group chaired by Marine Le Pen, decided to vote against the PS motion to reject the 2027 budget. \"Discussing the budget is the basis of Parliament,\" said Jean-Philippe Tanguy when announcing this choice.",
+      "quiz": {
+        "question": "What reason does Jean-Philippe Tanguy give for the RN's vote?",
+        "options": [
+          "The RN supports the government's budget",
+          "The RN wants a referendum",
+          "The RN wants the budget to be debated"
+        ],
+        "explanation": "He said: \"We want to have this debate\" and \"Discussing the budget is the basis of Parliament\"."
+      }
+    },
+    "horizons-budget-alternatif": {
+      "title": "Horizons proposes an \"alternative budget\"",
+      "text": "Horizons, Édouard Philippe's party, proposes to cancel €10 billion of planned tax rises, offset by the same amount of savings. Among its ideas: reversing the suspension of the pension reform and not replacing one civil servant in three.",
+      "quiz": {
+        "question": "How much in tax rises does Horizons want to cancel?",
+        "options": [
+          "€1 billion",
+          "€10 billion",
+          "€54 billion"
+        ],
+        "explanation": "Horizons wants to cancel €10 billion of tax rises, offset by €10 billion of savings."
+      }
+    },
+    "glucksmann-primaire": {
+      "title": "Glucksmann wins the primary in the 1st round",
+      "text": "On 11 October, Raphaël Glucksmann (Place publique) won the social democratic primary with 66.17% of the votes, ahead of Olivier Faure (Parti socialiste, PS, 14.46%). He becomes the candidate of the PS, Place publique and the GRS. He said: \"There will be no deal with LFI\" (La France insoumise).",
+      "quiz": {
+        "question": "Who came second in this primary?",
+        "options": [
+          "Ségolène Royal",
+          "Jérôme Guedj",
+          "Olivier Faure"
+        ],
+        "explanation": "Olivier Faure, first secretary of the PS, got 14.46%."
+      }
+    },
+    "melenchon-parcoursup": {
+      "title": "In Clermont, Mélenchon wants to abolish Parcoursup",
+      "text": "At a rally at the Zénith in Clermont-Ferrand on 11 October, Jean-Luc Mélenchon (La France insoumise, LFI) said that \"Parcoursup must be abolished\" and declared himself opposed to selection at university. He also proposed lowering the voting age to 16.",
+      "why": "Parcoursup is the national platform for admission to higher education after the bac (the secondary school final exam).",
+      "quiz": {
+        "question": "At what age does Jean-Luc Mélenchon propose to give the right to vote?",
+        "options": [
+          "16",
+          "17",
+          "18"
+        ],
+        "explanation": "He proposed lowering the voting age to 16 (it is 18 today)."
+      }
+    },
+    "attal-pacte-jeunesse": {
+      "title": "Attal presents a \"pact for young people\"",
+      "text": "In Lyon on 10 October, Gabriel Attal (Renaissance) proposed keeping Parcoursup (the higher education admissions platform) but reforming it, with less continuous assessment and more final exams. He also wants fewer pupils per class and a convention of 150 young people aged 16 to 25 chosen by lot.",
+      "sides": [
+        {
+          "label": "LFI (Jean-Luc Mélenchon)",
+          "text": "replied on X, denouncing Attal's \"appalling duplicity\"."
+        }
+      ],
+      "quiz": {
+        "question": "What does Gabriel Attal propose for Parcoursup?",
+        "options": [
+          "Abolish it",
+          "Replace it with a lottery",
+          "Keep it but reform it"
+        ],
+        "explanation": "He wants to keep it, with less continuous assessment and more support."
+      }
+    },
+    "platret-candidat": {
+      "actor": "Gilles Platret (independent right)",
+      "title": "Gilles Platret declares his candidacy",
+      "text": "On 8 October, Gilles Platret, mayor of Chalon-sur-Saône (independent right, formerly LR), made his candidacy official at a public meeting in his town. He proposes abolishing the 35-hour week and restoring national borders. He still has to gather 500 parrainages (official sponsorships from elected officials).",
+      "why": "The legal 35-hour working week sets the point from which overtime hours are counted.",
+      "quiz": {
+        "question": "What does Gilles Platret propose on working time?",
+        "options": [
+          "Move to 32 hours",
+          "Abolish the 35-hour week",
+          "Keep the 35-hour week"
+        ],
+        "explanation": "He proposes abolishing the legal 35-hour working week."
+      }
+    },
+    "parcoursup-reforme-gouvernement": {
+      "actor": "Government",
+      "title": "Parcoursup: the government opens the way to reform",
+      "text": "Faced with protests by secondary school pupils, Prime Minister Sébastien Lecornu said on 7 October that he wants to \"make Parcoursup more transparent and understandable\". The Higher Education Minister, Philippe Baptiste, rejects abolishing it but thinks the tool must change.",
+      "why": "Parcoursup (the higher education admissions platform) affects the secondary school pupils and students who apply for a course every year.",
+      "quiz": {
+        "question": "What is the position of Minister Philippe Baptiste?",
+        "options": [
+          "Change Parcoursup without abolishing it",
+          "Abolish Parcoursup",
+          "Change nothing"
+        ],
+        "explanation": "He opposes abolishing it but says the tool must change."
+      }
+    },
+    "wauquiez-casseur-payeur": {
+      "title": "Wauquiez wants vandals to pay",
+      "text": "On 2 October, Laurent Wauquiez, leader of the Les Républicains (LR) MPs, asked that people who cause damage during secondary school protests pay for the repairs: \"you break it, you pay\". This principle has been in the law since 2019, but préfectures (the State's local offices) do not use it, according to the government.",
+      "quiz": {
+        "question": "Since when has the \"you break it, you pay\" principle been in the law?",
+        "options": [
+          "2005",
+          "2026",
+          "2019"
+        ],
+        "explanation": "It has been in force since 2019, but in practice the préfectures do not apply it."
+      }
+    },
+    "budget-2027-education-apl": {
+      "actor": "2027 draft budget",
+      "title": "2027 budget: APL frozen, more money for schools",
+      "text": "The 2027 draft budget plans €65.53 billion for school education (64.43 in 2026) and €500 million more for higher education. The APL (housing benefit) would not be raised, and well-off households would have to choose between their student child's APL and the extra tax allowance (demi-part fiscale).",
+      "why": "Many students who rent receive the APL; these measures are still being debated in Parliament.",
+      "quiz": {
+        "question": "What does the draft budget plan for the APL in 2027?",
+        "options": [
+          "A 10% rise",
+          "No increase",
+          "Abolishing them for all students"
+        ],
+        "explanation": "The APL would not be raised next year; only well-off households would have to choose between the APL and the demi-part."
+      }
+    },
+    "philippe-retraites-65-ans": {
+      "title": "Philippe proposes retirement at 65",
+      "text": "On 29 September, Édouard Philippe (Horizons) presented his plan: relaunch the 2023 reform, then within less than ten years raise the legal retirement age to 65 and the contribution period to 45 years. He wants to add a funded (capitalisation) component to the pay-as-you-go system.",
+      "why": "The contribution period would apply to people starting their working life today.",
+      "quiz": {
+        "question": "What contribution period does Édouard Philippe propose?",
+        "options": [
+          "40 years",
+          "43 years",
+          "45 years"
+        ],
+        "explanation": "He proposes 45 years of contributions and a legal age of 65, reached in less than ten years."
+      }
+    },
+    "rn-groupe-senat": {
+      "title": "Senate elections: the RN can form a group in the Senate",
+      "text": "In the Senate elections of 27 September, the Rassemblement national (RN) and its allies got 12 new senators elected, when they had only 3. They pass the threshold of 10 members needed to form a group, a first for them in the history of the Senate.",
+      "why": "The Senate votes on laws, including the budget, together with the Assemblée nationale (National Assembly).",
+      "quiz": {
+        "question": "What is the minimum number of senators needed to form a group in the Senate?",
+        "options": [
+          "10",
+          "3",
+          "50"
+        ],
+        "explanation": "The threshold is ten members of parliament; the RN and its allies passed it."
+      }
+    },
+    "becht-extreme-centre": {
+      "title": "Olivier Becht, candidate of the \"extreme centre\"",
+      "text": "On 24 September, in Paris Match, Olivier Becht, MP for the Haut-Rhin and former Minister Delegate for Foreign Trade, announced his candidacy. He calls himself \"in the extreme centre\" and presents a plan called \"Le Projet France, Refonder ou Périr\" (\"The France Project: Rebuild or Perish\").",
+      "quiz": {
+        "question": "Which ministerial post did Olivier Becht hold?",
+        "options": [
+          "Interior Minister",
+          "Minister Delegate for Foreign Trade",
+          "Education Minister"
+        ],
+        "explanation": "He was Minister Delegate for Foreign Trade from 2022 to January 2024."
+      }
+    },
+    "macron-taxes-carburants": {
+      "title": "Macron does not rule out cutting fuel taxes",
+      "text": "Asked on France 2 and TF1 on 24 September, Emmanuel Macron did not rule out cutting fuel taxes if prices keep rising, while saying it is \"not the most virtuous decision\", because these taxes fund State spending.",
+      "sides": [
+        {
+          "label": "RN (Sébastien Chenu)",
+          "text": "\"Emmanuel Macron is out of touch when he says he doesn't want to cut fuel taxes\"."
+        },
+        {
+          "label": "LR (François-Xavier Bellamy)",
+          "text": "\"there are levers for action, we are not condemned to doing nothing\"."
+        },
+        {
+          "label": "LFI (Éric Coquerel)",
+          "text": "\"the head of State is showing himself to be powerless\"."
+        }
+      ]
+    },
+    "ecologistes-vote-decembre": {
+      "title": "Les Écologistes: Tondelier is a candidate, final choice in December",
+      "text": "On 21 September, the federal council of Les Écologistes (the Greens) adopted, with 69.44%, a motion that drops the plan for a primary. Marine Tondelier remains a candidate until the members' vote (10-13 December), when they will choose between a Green candidacy and supporting another left-wing candidate.",
+      "quiz": {
+        "question": "What will Green party members decide from 10 to 13 December?",
+        "options": [
+          "The date of their congress",
+          "Whether they keep their candidate or support another left-wing candidate",
+          "The name of their Prime Minister"
+        ],
+        "explanation": "They will choose between a candidacy from their party and supporting a candidate from another left-wing force."
+      }
+    },
+    "repas-1-euro-budget": {
+      "actor": "Government",
+      "title": "€1 meals: €143 million planned in the 2027 budget",
+      "text": "Since 4 May 2026, all students can eat at the university restaurant for €1, with no means test. The government plans €143 million for this scheme in 2027 and warns that it could not be guaranteed for everyone unless the budget is adopted.",
+      "why": "The price of a meal at the university restaurant has gone from €3.30 to €1 for all students.",
+      "quiz": {
+        "question": "Since when has the €1 meal been open to all students?",
+        "options": [
+          "4 May 2026",
+          "September 2025",
+          "1 January 2027"
+        ],
+        "explanation": "Before 4 May 2026, it was reserved for grant holders and students in financial hardship."
+      }
+    },
+    "rn-bardella-seul-candidat": {
+      "title": "RN: Bardella is the only candidate for re-election",
+      "text": "More than 112,000 members of the Rassemblement national (RN) are invited to vote online until 22 October to elect the party president, ahead of a congress in Orléans at the end of October. Jordan Bardella is the only candidate; members can also cast a blank vote, and they elect 100 members of the national council.",
+      "quiz": {
+        "question": "Until when can RN members vote?",
+        "options": [
+          "5 November",
+          "22 October",
+          "18 April"
+        ],
+        "explanation": "The online vote is open until 22 October inclusive."
+      }
+    },
+    "zemmour-candidat": {
+      "title": "Éric Zemmour confirms his candidacy",
+      "text": "On 17 September on BFMTV, Éric Zemmour, president of Reconquête, confirmed that he will be a candidate in the 2027 presidential election. He came fourth in the first round in 2022, with 7.07% of the votes. He announced that he will campaign with Sarah Knafo.",
+      "quiz": {
+        "question": "What score did Éric Zemmour get in the 1st round in 2022?",
+        "options": [
+          "21.95%",
+          "2.28%",
+          "7.07%"
+        ],
+        "explanation": "He got 7.07% and came fourth."
+      }
+    },
+    "budget-2027-effort-54-milliards": {
+      "actor": "Government",
+      "title": "2027 budget: a €54 billion effort announced",
+      "text": "On 17 September, Prime Minister Sébastien Lecornu presented a budget effort of about €54 billion for 2027. The goal: a public deficit of 5% of GDP (4.8% excluding new military spending). The point d'indice (the base for civil servants' pay) would be frozen.",
+      "why": "The budget sets the funding for universities, student grants and housing benefits.",
+      "quiz": {
+        "question": "What public deficit is the government aiming for in 2027?",
+        "options": [
+          "3% of GDP",
+          "5% of GDP",
+          "6.5% of GDP"
+        ],
+        "explanation": "The target is 5% of GDP; without savings, the deficit would be close to 6.5%."
+      }
+    },
+    "retailleau-refuse-rassemblement": {
+      "title": "Retailleau rejects an alliance with Philippe",
+      "text": "On 16 September on franceinfo, Bruno Retailleau (Les Républicains, LR) rejected the idea of uniting the right and the centre for 2027. His difference with Édouard Philippe is \"not just one of degree, but of nature\", he said: \"This presidential election will not be won in the centre\"."
+    },
+    "roussel-taxes-essence": {
+      "title": "Roussel calls for lower taxes on petrol",
+      "text": "At the Fête de l'Humanité on 12 September, Fabien Roussel (Parti communiste français, PCF) called for \"lower taxes on petrol\" and higher wages and pensions. He proposed a \"sanction nationalisation\" of TotalEnergies and called on people to \"invade the roundabouts\".",
+      "quiz": {
+        "question": "Which company does Fabien Roussel propose to nationalise?",
+        "options": [
+          "Renault",
+          "EDF",
+          "TotalEnergies"
+        ],
+        "explanation": "He proposed a \"sanction nationalisation\" of TotalEnergies."
+      }
+    },
+    "parrainages-500": {
+      "actor": "Election rules",
+      "title": "Presidential election: the 500 parrainages rule",
+      "text": "To stand, a candidate must gather at least 500 parrainages (official sponsorships from elected officials) from at least 30 départements or overseas territories, with no more than 50 per territory. An elected official can sponsor only one candidate. The official collection period is due to end on 12 March 2027.",
+      "quiz": {
+        "question": "What is the minimum number of parrainages from elected officials needed to be a candidate?",
+        "options": [
+          "50",
+          "500",
+          "30"
+        ],
+        "explanation": "You need 500 parrainages, from at least 30 départements or overseas territories."
+      }
+    }
+  },
+  "quiz": {
+    "q-duree-mandat": {
+      "question": "For how long is the President of the Republic elected?",
+      "options": [
+        "4 years",
+        "5 years",
+        "7 years"
+      ],
+      "explanation": "The president is elected for five years by direct universal suffrage, and no one can serve more than two consecutive terms."
+    },
+    "q-second-tour": {
+      "question": "Who can stand in the second round of the presidential election?",
+      "options": [
+        "All candidates with more than 12.5% of the votes",
+        "The top three candidates",
+        "The top two candidates"
+      ],
+      "explanation": "Only the two candidates who came top in the 1st round (after any withdrawals) can stand in the second round."
+    },
+    "q-premier-ministre": {
+      "question": "Who appoints the Prime Minister?",
+      "options": [
+        "The President of the Republic",
+        "The Assemblée nationale",
+        "The Senate"
+      ],
+      "explanation": "The President of the Republic appoints the Prime Minister (Article 8 of the Constitution)."
+    },
+    "q-inscription": {
+      "question": "Until when can you register on the electoral roll for the presidential election?",
+      "options": [
+        "The day before the vote",
+        "12 March 2027",
+        "1 January 2027"
+      ],
+      "explanation": "You must be registered by Friday 12 March 2027 at the latest, online or at the town hall. It is the procuration (proxy vote) that can be arranged up to the day before."
+    },
+    "q-parrainages": {
+      "question": "What is the minimum number of parrainages (sponsorships from elected officials) needed to be a candidate?",
+      "options": [
+        "100",
+        "500",
+        "1,000"
+      ],
+      "explanation": "You need at least 500 signatures from elected officials, from at least 30 different départements or overseas territories."
+    },
+    "q-primaire": {
+      "question": "Who won the social democratic left's primary?",
+      "options": [
+        "Olivier Faure",
+        "Raphaël Glucksmann",
+        "Ségolène Royal"
+      ],
+      "explanation": "Raphaël Glucksmann won in the 1st round, on 11 October 2026, with 66.17% of the votes (14.46% for Olivier Faure)."
+    },
+    "q-age-candidat": {
+      "question": "What is the minimum age to be a candidate in the presidential election?",
+      "options": [
+        "18",
+        "23",
+        "35"
+      ],
+      "explanation": "You must be at least 18. Until an organic law in 2011, you had to be 23."
+    },
+    "q-proclamation": {
+      "question": "Who announces the official results of the presidential election?",
+      "options": [
+        "The Interior Ministry",
+        "The Conseil constitutionnel (Constitutional Council)",
+        "The Assemblée nationale"
+      ],
+      "explanation": "The Conseil constitutionnel announces the official results; for the second round, by 12 May 2027 at the latest."
+    },
+    "q-delai-tours": {
+      "question": "How much time is there between the two rounds of the presidential election?",
+      "options": [
+        "One week",
+        "Two weeks",
+        "One month"
+      ],
+      "explanation": "The second round takes place on the fourteenth day after the first: 2 May 2027, two weeks after 18 April."
+    }
+  },
+  "vrai-faux": {
+    "vf-dates": {
+      "statement": "The 1st round of the presidential election will be held on Sunday 18 April 2027.",
+      "explanation": "The 1st round is set for Sunday 18 April and the 2nd round for Sunday 2 May 2027."
+    },
+    "vf-inscription": {
+      "statement": "You can register on the electoral roll up to the day before the vote.",
+      "explanation": "You must be registered by Friday 12 March 2027 at the latest, the 6th Friday before the vote. It is the procuration (proxy vote) that can be arranged up to the day before."
+    },
+    "vf-majorite": {
+      "statement": "A candidate who gets more than 50% of the valid votes in the 1st round is elected without a second round.",
+      "explanation": "The president is elected by an absolute majority of the valid votes. If no one gets it, the top two candidates face each other in the second round."
+    },
+    "vf-macron-mandat": {
+      "statement": "Emmanuel Macron can run again in 2027.",
+      "explanation": "Since 2008, the Constitution says that \"no one may serve more than two consecutive terms\". Emmanuel Macron is finishing his 2nd term: he cannot be a candidate in 2027."
+    },
+    "vf-melenchon": {
+      "statement": "Jean-Luc Mélenchon is running in the presidential election for the first time.",
+      "explanation": "It is his 4th bid, after 2012, 2017 and 2022 (21.95% in the 1st round in 2022)."
+    },
+    "vf-attal": {
+      "statement": "Gabriel Attal is the candidate of Les Républicains (LR).",
+      "explanation": "Gabriel Attal is the candidate for Renaissance, which he has led since December 2024. The LR candidate is Bruno Retailleau, chosen by party members in April 2026."
+    },
+    "vf-parrainages": {
+      "statement": "To be a candidate, you need at least 500 signatures from elected officials from at least 30 départements or overseas territories.",
+      "explanation": "These are the \"parrainages\" (official sponsorships). They must reach the Conseil constitutionnel (Constitutional Council) by 6 pm on 12 March 2027 at the latest, and an elected official can sponsor only one candidate."
+    },
+    "vf-glucksmann": {
+      "statement": "Raphaël Glucksmann won the social democratic left's primary with about 66% of the votes.",
+      "explanation": "He won in the 1st round, on 11 October 2026, with 66.17% of the votes, far ahead of Olivier Faure (14.46%)."
+    },
+    "vf-dissolution-senat": {
+      "statement": "The President of the Republic can dissolve the Senate.",
+      "explanation": "The president can dissolve the Assemblée nationale (National Assembly), after consulting the Prime Minister and the presidents of both chambers, but not the Senate."
+    },
+    "vf-parlement-loi": {
+      "statement": "In France, it is Parliament, not the President of the Republic, that votes on laws.",
+      "explanation": "Article 24 of the Constitution says: \"Parliament shall pass statutes.\" Parliament is made up of the Assemblée nationale and the Senate."
+    },
+    "vf-repas-1-euro": {
+      "statement": "The €1 meal at the university restaurant is only for students with a grant.",
+      "explanation": "Since 4 May 2026, it has been open to all students, with no means test. Before, it was reserved for grant holders and students in financial hardship."
+    },
+    "vf-le-pen-candidate": {
+      "statement": "After her conviction on appeal on 7 July 2026, Marine Le Pen confirmed that she would be a candidate in 2027.",
+      "explanation": "Among other penalties, the appeal court gave her 15 months of ineligibility with immediate effect, which makes her candidacy \"theoretically possible\". She confirmed it the same day."
+    },
+    "vf-abstention": {
+      "statement": "In 2022, more than 6 in 10 young people aged 18-24 did not vote in the 1st round of the presidential election.",
+      "explanation": "According to Ipsos/Sopra Steria, about 42% of 18-24 year olds abstained, which is 4 in 10. Abstention among all registered voters was 26.31%."
+    },
+    "vf-interim": {
+      "statement": "If the president leaves office before the end of their term, the Prime Minister replaces them until the next election.",
+      "explanation": "It is the President of the Senate who acts as interim president. Among other limits, they cannot dissolve the Assemblée nationale or call a referendum."
+    },
+    "vf-procuration-commune": {
+      "statement": "You can give a procuration (proxy vote) to someone registered in a different commune (municipality) from yours.",
+      "explanation": "You can choose any voter; they will vote for you at your polling station, not theirs."
+    },
+    "vf-retailleau-1er-mai": {
+      "statement": "Bruno Retailleau criticised the choice of 2 May 2027, the day after 1 May (Labour Day), for the second round.",
+      "explanation": "On 1 July 2026, he said he was \"angry\" about dates that were \"not neutral\", fearing the political impact of the 1 May marches."
+    }
+  },
+  "qui-propose": {
+    "qp-melenchon-parcoursup": {
+      "prompt": "\"Parcoursup must be abolished\"",
+      "explanation": "It was Jean-Luc Mélenchon (La France insoumise, LFI), at his rally at the Zénith in Clermont-Ferrand on 11 October 2026. Parcoursup is the higher education admissions platform."
+    },
+    "qp-glucksmann-lfi": {
+      "prompt": "\"If I win, there will never again be a deal with Jean-Luc Mélenchon\"",
+      "explanation": "It was Raphaël Glucksmann (Place publique), announcing his candidacy on the TF1 evening news on 23 August 2026."
+    },
+    "qp-roussel-total": {
+      "prompt": "A \"sanction nationalisation\" of TotalEnergies and \"lower taxes on petrol\"",
+      "explanation": "It was Fabien Roussel, candidate of the Parti communiste français (PCF), at the Fête de l'Humanité on 12 September 2026."
+    },
+    "qp-philippe-retraites": {
+      "prompt": "Move, within less than ten years, to a legal retirement age of 65 and 45 years of contributions",
+      "explanation": "It was Édouard Philippe (Horizons), who presented this pension reform plan on 29 September 2026."
+    },
+    "qp-attal-controle-continu": {
+      "prompt": "Change Parcoursup and reduce \"the pressure of continuous assessment\" in favour of more final exams",
+      "explanation": "It was Gabriel Attal (Renaissance), at his rally in Lyon on 10 October 2026."
+    },
+    "qp-attal-convention": {
+      "prompt": "Choose 150 young people aged 16 to 25 by lot to take part in \"a convention on our proposals\"",
+      "explanation": "It was Gabriel Attal (Renaissance), in his plan for young people presented in Lyon on 10 October 2026."
+    },
+    "qp-retailleau-majorite-penale": {
+      "prompt": "Revise the Constitution so that \"the age of criminal responsibility for minors is 15\" and introduce minimum sentences",
+      "explanation": "It was Bruno Retailleau, president and candidate of Les Républicains (LR), on France Inter and France 2 on 18 October 2026."
+    },
+    "qp-wauquiez-casseur-payeur": {
+      "prompt": "\"You break it, you pay\": make people who cause damage during secondary school protests pay",
+      "explanation": "It was Laurent Wauquiez, leader of the LR MPs, on 2 October 2026; this principle has been in the law since 2019."
+    },
+    "qp-retailleau-centre": {
+      "prompt": "\"This presidential election will not be won in the centre\"",
+      "explanation": "It was Bruno Retailleau (LR), on franceinfo on 16 September 2026, rejecting an alliance with Édouard Philippe."
+    },
+    "qp-lepen-logement": {
+      "prompt": "Give \"priority access to social housing to French people\" and repeal the loi SRU (the law requiring towns to have a share of social housing)",
+      "explanation": "It was Marine Le Pen (Rassemblement national, RN), in her back-to-school speech in Hénin-Beaumont on 13 September 2026."
+    },
+    "qp-zemmour-chomage": {
+      "prompt": "Expel a foreign national, \"even one legally resident\", after one year of unemployment",
+      "explanation": "It was Éric Zemmour (Reconquête), on BFMTV on 17 September 2026, confirming his candidacy."
+    },
+    "qp-lepen-contre-budget": {
+      "prompt": "A counter-budget with \"€140 billion of savings by 2032\"",
+      "explanation": "It was Marine Le Pen (RN), who presented her party's counter-budget on 6 October 2026; about 20% of these savings would come from immigration."
+    }
+  },
+  "autre-camp": {
+    "resultMessage": "Understanding the other side's arguments does not mean agreeing with them. It makes debate possible.",
+    "items": {
+      "ac-35h": {
+        "topic": "Abolish the 35-hour week",
+        "pour": "Working more would mean producing more and raising wages.",
+        "contre": "The 35-hour week helps share out work and protects personal life.",
+        "offTopic": "The 35-hour week was voted in 2022.",
+        "offTopicCorrection": "False: the 35-hour week comes from the Aubry laws of 1998 and 2000."
+      },
+      "ac-smic": {
+        "topic": "Raise the SMIC (national minimum wage) sharply",
+        "pour": "It directly helps the purchasing power of the lowest-paid workers.",
+        "contre": "It raises labour costs and can slow hiring in small businesses.",
+        "offTopic": "The SMIC is set by each company.",
+        "offTopicCorrection": "False: the SMIC is set nationally by the State."
+      },
+      "ac-tva": {
+        "topic": "Cut TVA (VAT, sales tax) on essential goods",
+        "pour": "Prices go down straight away at the till for everyone.",
+        "contre": "It costs the State a lot and shops do not always lower their prices.",
+        "offTopic": "TVA does not apply to food.",
+        "offTopicCorrection": "False: food is subject to TVA, usually at the reduced rate of 5.5%."
+      }
+    }
+  },
+  "pronostics": {
+    "p-candidats": {
+      "question": "How many candidates will get their 500 parrainages (sponsorships from elected officials)?",
+      "options": [
+        "Fewer than 10",
+        "10 to 12",
+        "More than 12"
+      ],
+      "context": "In 2022, there were 12 candidates."
+    },
+    "p-participation": {
+      "question": "Turnout in the 1st round will be…",
+      "options": [
+        "Higher than in 2022",
+        "Lower than in 2022"
+      ],
+      "context": "In 2022, about 74% of registered voters voted in the 1st round."
+    },
+    "p-abstention-jeunes": {
+      "question": "Abstention among 18-24 year olds in the 1st round will be…",
+      "options": [
+        "Higher than in 2022 (41%)",
+        "Lower"
+      ],
+      "context": "In 2022, about 41% of 18-24 year olds did not vote in the 1st round."
+    }
+  },
+  "city": {
+    "maisons": {
+      "name": "The houses",
+      "title": "Housing",
+      "facts": [
+        "The commune (municipality) issues building permits and sets planning rules.",
+        "The State sets the rules for renting and housing benefits, such as the APL (housing benefit), paid by the CAF (family benefits office)."
+      ],
+      "forYou": "If you rent a home, you may be able to get the APL: run a simulation on the CAF website."
+    },
+    "mairie": {
+      "name": "The town hall",
+      "title": "The town hall",
+      "facts": [
+        "The municipal council is elected for 6 years, then it elects the mayor. The last municipal elections were held in March 2026.",
+        "The town hall handles civil registration (births, marriages, deaths), nursery and primary schools, planning and the electoral roll."
+      ],
+      "forYou": "You register on the electoral roll at the town hall, or online at service-public.fr. Deadline for the presidential election: Friday 12 March 2027."
+    },
+    "ecole": {
+      "name": "The school",
+      "title": "Who runs schools?",
+      "facts": [
+        "Nursery and primary school buildings are the responsibility of the commune, collèges (lower secondary schools) of the département, and lycées (upper secondary schools) of the région.",
+        "Curricula and teachers depend on the State (Éducation nationale, the national education system). Universities and student grants are also the State's responsibility."
+      ],
+      "forYou": "Means-tested grants (bourses sur critères sociaux) are applied for every year through the dossier social étudiant (student social file), on messervices.etudiant.gouv.fr."
+    },
+    "bibliotheque": {
+      "name": "The library",
+      "title": "The library",
+      "facts": [
+        "Most public libraries are run by communes or intercommunalités (groups of municipalities).",
+        "Their budget is voted by the municipal or community council."
+      ],
+      "forYou": "Ask your town's library: many offer reduced rates for students."
+    },
+    "parc": {
+      "name": "The park",
+      "title": "Green spaces",
+      "facts": [
+        "Public parks and gardens are usually run by the commune.",
+        "The 2021 Climate and Resilience Law sets a goal of \"zero net land take\" (zéro artificialisation nette) by 2050."
+      ],
+      "forYou": "Building housing or keeping natural spaces: this is one of the choices local elected officials make."
+    },
+    "tram": {
+      "name": "The tram",
+      "title": "Transport",
+      "facts": [
+        "Urban transport is organised by a mobility authority, often the intercommunalité (group of municipalities).",
+        "Régions organise the TER (regional trains). In Île-de-France, it is Île-de-France Mobilités, chaired by the president of the région."
+      ],
+      "forYou": "The price of your transport pass is decided locally, not by the President of the Republic."
+    },
+    "stade": {
+      "name": "The stadium",
+      "title": "Sport",
+      "facts": [
+        "Sports facilities are most often built and run by communes and intercommunalités.",
+        "The Ministry of Sport sets national sports policy."
+      ],
+      "forYou": "Sports halls, swimming pools, pitches: their opening hours and prices are often decided locally."
+    },
+    "assemblee": {
+      "name": "The Assembly",
+      "title": "The Assemblée nationale (National Assembly)",
+      "facts": [
+        "577 députés (MPs) are elected for 5 years by direct universal suffrage.",
+        "Together with the Senate, the Assembly votes on laws and the budget. It scrutinises the government and can bring it down with a motion de censure (no-confidence motion)."
+      ],
+      "forYou": "The president is elected in 2027, but needs a majority in the Assembly to get their plans voted through."
+    }
+  },
+  "topics": {
+    "election": {
+      "label": "Presidential election"
+    },
+    "logement": {
+      "label": "Housing"
+    },
+    "pouvoir-achat": {
+      "label": "Cost of living"
+    },
+    "emploi": {
+      "label": "Jobs"
+    },
+    "etudes": {
+      "label": "Studies and grants"
+    },
+    "climat": {
+      "label": "Climate"
+    },
+    "sante": {
+      "label": "Health"
+    },
+    "securite": {
+      "label": "Security"
+    },
+    "immigration": {
+      "label": "Immigration"
+    },
+    "europe": {
+      "label": "Europe"
+    },
+    "budget": {
+      "label": "Budget and taxes"
+    },
+    "institutions": {
+      "label": "Institutions"
+    }
+  },
+  "camps": {
+    "neutre": "Neutral fact",
+    "gauche": "Left",
+    "centre": "Centre",
+    "droite": "Right",
+    "extreme-droite": "Far right"
+  },
+  "levels": [
+    {
+      "min": 0,
+      "name": "Hamlet",
+      "withArticle": "a Hamlet",
+      "opened": "A few houses and some trees."
+    },
+    {
+      "min": 100,
+      "name": "Village",
+      "withArticle": "a Village",
+      "opened": "The town hall has just opened."
+    },
+    {
+      "min": 250,
+      "name": "Small town",
+      "withArticle": "a Small town",
+      "opened": "A school has just opened."
+    },
+    {
+      "min": 500,
+      "name": "Town",
+      "withArticle": "a Town",
+      "opened": "A library and a park have just opened.",
+      "badge": "500 voix, like the 500 parrainages (official sponsorships) a candidate needs: you could stand for president!"
+    },
+    {
+      "min": 1000,
+      "name": "City",
+      "withArticle": "a City",
+      "opened": "The tram arrives and the city fills with trees."
+    },
+    {
+      "min": 1500,
+      "name": "Metropolis",
+      "withArticle": "a Metropolis",
+      "opened": "A stadium has just opened."
+    },
+    {
+      "min": 2500,
+      "name": "Capital",
+      "withArticle": "a Capital",
+      "opened": "The Assembly moves into your city."
+    }
+  ],
+  "defis": {
+    "hub": [
+      {
+        "type": "vrai-faux",
+        "title": "True or False",
+        "description": "8 statements about the campaign. Sort the true from the false.",
+        "duration": "2 min",
+        "modes": [
+          "solo",
+          "friend",
+          "team"
+        ],
+        "emoji": "✅"
+      },
+      {
+        "type": "qui-propose",
+        "title": "Who proposes this?",
+        "description": "One proposal, you guess the candidate.",
+        "duration": "1 min",
+        "modes": [
+          "solo",
+          "friend",
+          "team"
+        ],
+        "emoji": "🕵️"
+      },
+      {
+        "type": "autre-camp",
+        "title": "Defend the other side",
+        "description": "Find the best argument of the side you don't support.",
+        "duration": "2 min",
+        "modes": [
+          "solo",
+          "friend",
+          "team"
+        ],
+        "emoji": "🔄"
+      },
+      {
+        "type": "pronostics",
+        "title": "Predictions",
+        "description": "Make your predictions, we compare after the vote.",
+        "duration": "1 min",
+        "modes": [
+          "solo",
+          "friend"
+        ],
+        "emoji": "🔮"
+      },
+      {
+        "type": "equipes",
+        "title": "Team vs team",
+        "description": "Your group against another group.",
+        "duration": "3 min",
+        "modes": [],
+        "emoji": "🤝"
+      }
+    ],
+    "names": {
+      "quiz": "Mini-quiz",
+      "vrai-faux": "True or False",
+      "qui-propose": "Who proposes this?",
+      "autre-camp": "Defend the other side",
+      "pronostics": "Predictions"
+    },
+    "resultLines": {
+      "perfect": "Unbeatable. Nobody can fool you.",
+      "high": "Very solid. Your friends will struggle.",
+      "mid": "Not bad, but a few traps caught you out.",
+      "low": "The campaign is full of traps. Maybe your friends will do worse?"
+    }
+  },
+  "site": {
+    "appName": "polis",
+    "projectEnd": "end of the student project (June 2027)"
+  },
+  "onboarding": {
+    "followsNews": {
+      "question": "Do you follow the news?",
+      "options": [
+        {
+          "id": "jamais",
+          "label": "Almost never",
+          "points": 0
+        },
+        {
+          "id": "parfois",
+          "label": "From time to time",
+          "points": 1
+        },
+        {
+          "id": "souvent",
+          "label": "Often",
+          "points": 2
+        }
+      ]
+    },
+    "voted": {
+      "question": "Have you ever voted?",
+      "options": [
+        {
+          "id": "oui",
+          "label": "Yes"
+        },
+        {
+          "id": "non",
+          "label": "Not yet"
+        }
+      ]
+    },
+    "registered": {
+      "question": "Are you on the electoral roll?",
+      "options": [
+        {
+          "id": "oui",
+          "label": "Yes"
+        },
+        {
+          "id": "non",
+          "label": "No"
+        },
+        {
+          "id": "nsp",
+          "label": "I don't know"
+        }
+      ],
+      "help": "To vote in the presidential election, you must be registered by Friday 12 March 2027 at the latest.",
+      "checkUrl": "https://www.service-public.fr/particuliers/vosdroits/services-en-ligne-et-formulaires/ISE"
+    },
+    "knowledge": [
+      {
+        "id": "k-mandat",
+        "question": "The President of the Republic is elected for…",
+        "options": [
+          "4 years",
+          "5 years",
+          "7 years"
+        ],
+        "answer": 1,
+        "explanation": "Since 2002, the presidential term has lasted 5 years (the quinquennat)."
+      },
+      {
+        "id": "k-lois",
+        "question": "Who votes on laws in France?",
+        "options": [
+          "The president alone",
+          "Parliament (Assemblée nationale and Senate)",
+          "The Conseil constitutionnel (Constitutional Council)"
+        ],
+        "answer": 1,
+        "explanation": "Laws are voted by Parliament: the Assemblée nationale (National Assembly) and the Senate."
+      },
+      {
+        "id": "k-deputes",
+        "question": "How many députés (MPs) are there in the Assemblée nationale?",
+        "options": [
+          "348",
+          "577",
+          "1,000"
+        ],
+        "answer": 1,
+        "explanation": "There are 577 députés. 348 is the number of senators."
+      }
+    ],
+    "levels": {
+      "debutant": {
+        "label": "Beginner",
+        "text": "We start with the basics, then the campaign news, explained simply."
+      },
+      "intermediaire": {
+        "label": "Intermediate",
+        "text": "A reminder of the key rules, then news from all sides."
+      },
+      "avance": {
+        "label": "Advanced",
+        "text": "Straight to the campaign news, from all sides."
+      }
+    },
+    "ideas": {
+      "question": "Your position (optional)",
+      "privacy": "It stays only on your phone. We only use it to show you the other sides' ideas more often. We will never tell you who to vote for."
+    },
+    "voter": {
+      "question": "Can you vote in the French presidential election?",
+      "options": [
+        {
+          "id": "fr",
+          "label": "Yes, I'm French"
+        },
+        {
+          "id": "eu",
+          "label": "I'm an EU citizen"
+        },
+        {
+          "id": "non-eu",
+          "label": "No, I'm from a non-EU country"
+        },
+        {
+          "id": "nsp",
+          "label": "I don't know"
+        }
+      ],
+      "help": {
+        "eu": "You don't vote in the presidential election, but you can vote in municipal and European elections in France.",
+        "non-eu": "You don't vote in political elections in France, but the presidential election can change your life here: visas, studies, jobs. We adapt your feed.",
+        "nsp": "No problem: we explain who can vote in your feed."
+      }
+    },
+    "tutorial": [
+      {
+        "emoji": "📰",
+        "title": "Read the news",
+        "text": "Short, sourced cards from all sides. Swipe up or use the arrows."
+      },
+      {
+        "emoji": "⚡",
+        "title": "Play",
+        "text": "After 3 cards, a quick challenge. Every right answer earns you voix (the game's points), and we always explain the right answer."
+      },
+      {
+        "emoji": "🏙️",
+        "title": "Grow your town and challenge your friends",
+        "text": "Your voix build your town. Send a challenge to a friend: they play the same questions and you compare."
+      }
+    ]
+  }
+}

@@ -1,13 +1,19 @@
-import { BLOCS, baseCards, newsCards, type BlocCamp, type FeedCard } from "./content";
-import type { Profile } from "./profile";
+import { BLOCS, type BlocCamp, type Content, type FeedCard } from "./content";
+import { isInternational, type Profile } from "./profile";
 
 /** Cards available for this profile: some basics depending on the level, then all the news. */
-export function buildPool(p: Profile): FeedCard[] {
-  let baseIds: string[] = p.level === "debutant" ? baseCards.map((c) => c.id) : p.level === "intermediaire" ? ["dates", "inscription"] : [];
-  // Not (sure to be) registered: the registration card always comes first.
-  if (p.registered !== "oui") baseIds = ["inscription", ...baseIds.filter((id) => id !== "inscription")];
-  const bases = baseIds.map((id) => baseCards.find((c) => c.id === id)).filter((c): c is FeedCard => !!c);
-  return [...bases, ...newsCards];
+export function buildPool(p: Profile, c: Content): FeedCard[] {
+  const intl = isInternational(p);
+  const canVote = p.voter === "fr" || p.voter === null;
+  const visible = c.baseCards.filter((b) => !b.audience || (b.audience === "intl" ? intl : canVote));
+  const general = visible.filter((b) => !b.audience).map((b) => b.id);
+  let baseIds: string[] = p.level === "debutant" ? general : p.level === "intermediaire" ? general.filter((id) => id === "dates") : [];
+  // International mode: "who can vote" and why it still matters come first.
+  if (intl) baseIds = [...visible.filter((b) => b.audience === "intl").map((b) => b.id), ...baseIds];
+  // Can vote but not (sure to be) registered: the registration card comes first.
+  else if (canVote && p.registered !== "oui") baseIds = ["inscription", ...baseIds.filter((id) => id !== "inscription")];
+  const bases = baseIds.map((id) => visible.find((b) => b.id === id)).filter((b): b is FeedCard => !!b);
+  return [...bases, ...c.newsCards];
 }
 
 /** Order of camps to visit: the ones farthest from the player's own position first ("autre point de vue"). */
@@ -78,16 +84,19 @@ export function pickNext(pool: FeedCard[], order: string[], ctx: RuleContext): F
   return campCards.filter((c) => c.camp === camp).sort(sort)[0];
 }
 
-const MONTHS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
-export function formatDate(iso?: string): string | null {
+const MONTHS = {
+  fr: ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+  en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+};
+export function formatDate(iso: string | undefined, lang: "fr" | "en" = "fr"): string | null {
   if (!iso) return null;
   const d = new Date(iso + "T12:00:00");
   if (Number.isNaN(d.getTime())) return null;
   const days = Math.round((Date.now() - d.getTime()) / 86_400_000);
-  const label = `${d.getDate()} ${MONTHS[d.getMonth()]}`;
-  if (days <= 0) return "Aujourd'hui";
-  if (days === 1) return "Hier";
-  if (days < 7) return `Il y a ${days} jours · ${label}`;
+  const label = lang === "en" ? `${MONTHS.en[d.getMonth()]} ${d.getDate()}` : `${d.getDate()} ${MONTHS.fr[d.getMonth()]}`;
+  if (days <= 0) return lang === "en" ? "Today" : "Aujourd'hui";
+  if (days === 1) return lang === "en" ? "Yesterday" : "Hier";
+  if (days < 7) return lang === "en" ? `${days} days ago · ${label}` : `Il y a ${days} jours · ${label}`;
   return label;
 }
 

@@ -15,7 +15,8 @@
         "question": "Quel âge Bruno Retailleau propose-t-il pour la majorité pénale des mineurs ?",
         "options": ["13 ans", "16 ans", "15 ans"],
         "answer": 2,
-        "explanation": "Il propose une révision constitutionnelle pour la fixer à 15 ans."
+        "explanation": "Il propose une révision constitutionnelle pour la fixer à 15 ans.",
+        "difficulty": 2
       }
     },
     {
@@ -32,7 +33,8 @@
         "question": "Selon le ministère de l'Intérieur, combien de personnes ont manifesté le 17 octobre ?",
         "options": ["110 000", "550 000", "800 000"],
         "answer": 1,
-        "explanation": "800 000 est le chiffre des organisateurs ; 110 000 est le chiffre officiel pour Paris seulement."
+        "explanation": "800 000 est le chiffre des organisateurs ; 110 000 est le chiffre officiel pour Paris seulement.",
+        "difficulty": 2
       }
     },
     {
@@ -53,7 +55,8 @@
         "question": "Quel groupe avait déposé cette motion de rejet du budget ?",
         "options": ["Le groupe socialiste", "Le Rassemblement national", "Horizons"],
         "answer": 0,
-        "explanation": "La motion venait des députés socialistes ; elle a été rejetée par 236 voix contre 149."
+        "explanation": "La motion venait des députés socialistes ; elle a été rejetée par 236 voix contre 149.",
+        "difficulty": 2
       }
     },
     {
@@ -69,7 +72,8 @@
         "question": "Quelle raison Jean-Philippe Tanguy donne-t-il au vote du RN ?",
         "options": ["Le RN soutient le budget du gouvernement", "Le RN demande un référendum", "Le RN veut que le budget soit débattu"],
         "answer": 2,
-        "explanation": "Il a dit : « On veut avoir ce débat » et « Discuter le budget, c'est la base du Parlement »."
+        "explanation": "Il a dit : « On veut avoir ce débat » et « Discuter le budget, c'est la base du Parlement ».",
+        "difficulty": 2
       }
     },
     {
@@ -85,7 +89,8 @@
         "question": "Combien de hausses d'impôts Horizons veut-il annuler ?",
         "options": ["1 milliard d'euros", "10 milliards d'euros", "54 milliards d'euros"],
         "answer": 1,
-        "explanation": "Horizons veut annuler 10 milliards de hausses d'impôts, compensées par 10 milliards d'économies."
+        "explanation": "Horizons veut annuler 10 milliards de hausses d'impôts, compensées par 10 milliards d'économies.",
+        "difficulty": 3
       }
     },
     {
@@ -101,7 +106,8 @@
         "question": "Qui est arrivé deuxième de cette primaire ?",
         "options": ["Ségolène Royal", "Jérôme Guedj", "Olivier Faure"],
         "answer": 2,
-        "explanation": "Olivier Faure, premier secrétaire du PS, a obtenu 14,46 %."
+        "explanation": "Olivier Faure, premier secrétaire du PS, a obtenu 14,46 %.",
+        "difficulty": 2
       }
     },
     {
@@ -118,7 +124,8 @@
         "question": "À quel âge Jean-Luc Mélenchon propose-t-il d'ouvrir le droit de vote ?",
         "options": ["16 ans", "17 ans", "18 ans"],
         "answer": 0,
-        "explanation": "Il a proposé d'abaisser le droit de vote à 16 ans (il est aujourd'hui à 18 ans)."
+        "explanation": "Il a proposé d'abaisser le droit de vote à 16 ans (il est aujourd'hui à 18 ans).",
+        "difficulty": 1
       }
     },
     {
@@ -137,7 +144,8 @@
         "question": "Que propose Gabriel Attal pour Parcoursup ?",
         "options": ["Le supprimer", "Le remplacer par un tirage au sort", "Le garder en le réformant"],
         "answer": 2,
-        "explanation": "Il veut le conserver, avec moins de contrôle continu et plus d'accompagnement."
+        "explanation": "Il veut le conserver, avec moins de contrôle continu et plus d'accompagnement.",
+        "difficulty": 2
       }
     },
     {
@@ -154,7 +162,8 @@
         "question": "Que propose Gilles Platret sur le temps de travail ?",
         "options": ["Passer à 32 heures", "Abroger les 35 heures", "Garder les 35 heures"],
         "answer": 1,
-        "explanation": "Il propose l'abrogation de la durée légale de 35 heures."
+        "explanation": "Il propose l'abrogation de la durée légale de 35 heures.",
+        "difficulty": 1
       }
     },
     {
@@ -171,7 +180,8 @@
         "question": "Quelle est la position du ministre Philippe Baptiste ?",
         "options": ["Faire évoluer Parcoursup sans le supprimer", "Supprimer Parcoursup", "Ne rien changer"],
         "answer": 0,
-        "explanation": "Il s'oppose à la suppression mais dit que l'outil doit évoluer."
+        "explanation": "Il s'oppose à la suppression mais dit que l'outil doit évoluer.",
+        "difficulty": 1
       }
     },
     {
@@ -187,7 +197,8 @@
         "question": "Depuis quand le principe « casseur payeur » existe-t-il dans la loi ?",
         "options": ["2005", "2026", "2019"],
         "answer": 2,
-        "explanation": "Il est en vigueur depuis 2019, mais il n'est en pratique pas appliqué par les préfectures."
+        "explanation": "Il est en vigueur depuis 2019, mais il n'est en pratique pas appliqué par les préfectures.",
+        "difficulty": 3
       }
     },
     {
@@ -204,7 +215,8 @@
         "question": "Que prévoit le projet de budget pour les APL en 2027 ?",
         "options": ["Une hausse de 10 %", "Pas de revalorisation", "Leur suppression pour tous les étudiants"],
         "answer": 1,
-        "explanation": "Les APL ne seraient pas revalorisées l'an prochain ; seuls les foyers aisés devraient choisir entre APL et demi-part."
+        "explanation": "Les APL ne seraient pas revalorisées l'an prochain ; seuls les foyers aisés devraient choisir entre APL et demi-part.",
+        "difficulty": 2
       }
     },
     {
@@ -221,7 +233,8 @@
         "question": "Quelle durée de cotisation propose Édouard Philippe ?",
         "options": ["40 ans", "43 ans", "45 ans"],
         "answer": 2,
-        "explanation": "Il propose 45 années de cotisation et un âge légal de 65 ans, atteints en moins de dix ans."
+        "explanation": "Il propose 45 années de cotisation et un âge légal de 65 ans, atteints en moins de dix ans.",
+        "difficulty": 2
       }
     },
     {
@@ -238,7 +251,8 @@
         "question": "Combien de sénateurs faut-il au minimum pour former un groupe au Sénat ?",
         "options": ["10", "3", "50"],
         "answer": 0,
-        "explanation": "Le seuil est de dix parlementaires ; le RN et ses alliés l'ont dépassé."
+        "explanation": "Le seuil est de dix parlementaires ; le RN et ses alliés l'ont dépassé.",
+        "difficulty": 3
       }
     },
     {
@@ -254,7 +268,8 @@
         "question": "Quel poste ministériel Olivier Becht a-t-il occupé ?",
         "options": ["Ministre de l'Intérieur", "Ministre délégué au Commerce extérieur", "Ministre de l'Éducation"],
         "answer": 1,
-        "explanation": "Il a été ministre délégué au Commerce extérieur de 2022 à janvier 2024."
+        "explanation": "Il a été ministre délégué au Commerce extérieur de 2022 à janvier 2024.",
+        "difficulty": 3
       }
     },
     {
@@ -285,7 +300,8 @@
         "question": "Que décideront les adhérents écologistes du 10 au 13 décembre ?",
         "options": ["La date de leur congrès", "S'ils gardent leur candidate ou soutiennent un autre candidat de gauche", "Le nom de leur Premier ministre"],
         "answer": 1,
-        "explanation": "Ils choisiront entre une candidature du parti et le soutien à un candidat d'une autre force de gauche."
+        "explanation": "Ils choisiront entre une candidature du parti et le soutien à un candidat d'une autre force de gauche.",
+        "difficulty": 2
       }
     },
     {
@@ -302,7 +318,8 @@
         "question": "Depuis quand le repas à 1 € est-il ouvert à tous les étudiants ?",
         "options": ["4 mai 2026", "Septembre 2025", "1er janvier 2027"],
         "answer": 0,
-        "explanation": "Avant le 4 mai 2026, il était réservé aux boursiers et aux étudiants précaires."
+        "explanation": "Avant le 4 mai 2026, il était réservé aux boursiers et aux étudiants précaires.",
+        "difficulty": 2
       }
     },
     {
@@ -318,7 +335,8 @@
         "question": "Jusqu'à quand les adhérents du RN peuvent-ils voter ?",
         "options": ["5 novembre", "22 octobre", "18 avril"],
         "answer": 1,
-        "explanation": "Le vote en ligne est ouvert jusqu'au 22 octobre inclus."
+        "explanation": "Le vote en ligne est ouvert jusqu'au 22 octobre inclus.",
+        "difficulty": 3
       }
     },
     {
@@ -334,7 +352,8 @@
         "question": "Quel score Éric Zemmour avait-il obtenu au 1er tour en 2022 ?",
         "options": ["21,95 %", "2,28 %", "7,07 %"],
         "answer": 2,
-        "explanation": "Il avait obtenu 7,07 % et était arrivé quatrième."
+        "explanation": "Il avait obtenu 7,07 % et était arrivé quatrième.",
+        "difficulty": 3
       }
     },
     {
@@ -351,7 +370,8 @@
         "question": "Quel déficit public le gouvernement vise-t-il pour 2027 ?",
         "options": ["3 % du PIB", "5 % du PIB", "6,5 % du PIB"],
         "answer": 1,
-        "explanation": "La cible est 5 % du PIB ; sans économies, le déficit approcherait 6,5 %."
+        "explanation": "La cible est 5 % du PIB ; sans économies, le déficit approcherait 6,5 %.",
+        "difficulty": 3
       }
     },
     {
@@ -377,7 +397,8 @@
         "question": "Quelle entreprise Fabien Roussel propose-t-il de nationaliser ?",
         "options": ["Renault", "EDF", "TotalEnergies"],
         "answer": 2,
-        "explanation": "Il a proposé une « nationalisation sanction » de TotalEnergies."
+        "explanation": "Il a proposé une « nationalisation sanction » de TotalEnergies.",
+        "difficulty": 2
       }
     },
     {
@@ -393,7 +414,8 @@
         "question": "Combien de parrainages d'élus faut-il au minimum pour être candidat ?",
         "options": ["50", "500", "30"],
         "answer": 1,
-        "explanation": "Il faut 500 parrainages, venant d'au moins 30 départements ou collectivités d'outre-mer."
+        "explanation": "Il faut 500 parrainages, venant d'au moins 30 départements ou collectivités d'outre-mer.",
+        "difficulty": 1
       }
     }
   ]

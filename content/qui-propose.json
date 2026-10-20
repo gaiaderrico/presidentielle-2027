@@ -1,69 +1,148 @@
 {
-  "todo": "Ajouter 4 items tirés des programmes des principaux candidats dès leur publication (équilibre gauche / centre / droite).",
   "items": [
     {
-      "id": "qp-platret",
-      "prompt": "« Abroger les 35 heures, rétablir les frontières et interdire le voile dans l'espace public »",
-      "options": [
-        "Gilles Platret",
-        "Olivier Becht",
-        "Antoine Mikolajczak",
-        "Marine Tondelier"
-      ],
-      "answer": 0,
-      "explanation": "C'est Gilles Platret, maire divers droite de Chalon-sur-Saône.",
+      "id": "qp-melenchon-parcoursup",
+      "prompt": "« Parcoursup doit être aboli »",
+      "options": ["Gabriel Attal", "Bruno Retailleau", "Jean-Luc Mélenchon", "Édouard Philippe"],
+      "answer": 2,
+      "explanation": "C'est Jean-Luc Mélenchon (LFI), lors de son meeting au Zénith de Clermont-Ferrand le 11 octobre 2026.",
+      "source": {
+        "label": "AFP via Sud Radio",
+        "url": "https://www.sudradio.fr/societe/a-clermont-ferrand-melenchon-fait-salle-comble-pour-denoncer-lignominie-parcoursup"
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "qp-glucksmann-lfi",
+      "prompt": "« Si je gagne, il n'y aura plus jamais d'accord avec Jean-Luc Mélenchon »",
+      "options": ["Fabien Roussel", "Raphaël Glucksmann", "Gabriel Attal", "Bruno Retailleau"],
+      "answer": 1,
+      "explanation": "C'est Raphaël Glucksmann (Place publique), en annonçant sa candidature au journal de TF1 le 23 août 2026.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/presidentielle-2027-raphael-glucksmann-officialise-sa-candidature-et-participera-a-la"
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "qp-roussel-total",
+      "prompt": "Une « nationalisation sanction » de TotalEnergies et « la baisse des taxes sur l'essence »",
+      "options": ["Marine Le Pen", "Jean-Luc Mélenchon", "Raphaël Glucksmann", "Fabien Roussel"],
+      "answer": 3,
+      "explanation": "C'est Fabien Roussel, candidat du PCF, à la Fête de l'Humanité le 12 septembre 2026.",
       "source": {
         "label": "franceinfo",
-        "url": "https://www.franceinfo.fr/elections/presidentielle/portraits-qui-sont-les-candidats-declares-a-l-election-presidentielle-de-2027_8208032.html"
-      }
+        "url": "https://www.franceinfo.fr/elections/presidentielle/direct-presidentielle-2027-fete-de-l-humanite-fete-de-la-rose-campus-des-jeunes-republicains-la-rentree-politique-bat-son-plein_8189465.html"
+      },
+      "difficulty": 2
     },
     {
-      "id": "qp-becht",
-      "prompt": "Incarner « l'extrême centre »",
-      "options": [
-        "Olivier Becht",
-        "Gilles Platret",
-        "Marine Tondelier",
-        "Antoine Mikolajczak"
-      ],
+      "id": "qp-philippe-retraites",
+      "prompt": "Passer en moins de dix ans à un âge légal de départ à la retraite de 65 ans et à 45 ans de cotisation",
+      "options": ["Édouard Philippe", "Marine Le Pen", "Jean-Luc Mélenchon", "Bruno Retailleau"],
       "answer": 0,
-      "explanation": "C'est Olivier Becht, député et ancien ministre.",
+      "explanation": "C'est Édouard Philippe (Horizons), qui a présenté ce projet de réforme des retraites le 29 septembre 2026.",
+      "source": {
+        "label": "franceinfo (avec AFP)",
+        "url": "https://www.franceinfo.fr/elections/presidentielle/age-de-depart-a-65-ans-45-annuites-de-cotisation-edouard-philippe-candidat-horizons-a-la-presidentielle-devoile-son-projet-de-reforme-des-retraites_8214737.html"
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "qp-attal-controle-continu",
+      "prompt": "Faire évoluer Parcoursup et réduire « la pression du contrôle continu » au profit de davantage d'épreuves terminales",
+      "options": ["Jean-Luc Mélenchon", "Gabriel Attal", "Éric Zemmour", "Raphaël Glucksmann"],
+      "answer": 1,
+      "explanation": "C'est Gabriel Attal (Renaissance), lors de son meeting de Lyon le 10 octobre 2026.",
+      "source": {
+        "label": "AFP via La Gazette France",
+        "url": "https://www.lagazettefrance.fr/article/presidentielle-attal-melenchon-pour-les-candidats-l-atout-ou-le-peril-jeune"
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "qp-attal-convention",
+      "prompt": "Tirer au sort 150 jeunes de 16 à 25 ans pour participer à « une convention sur nos propositions »",
+      "options": ["Marine Le Pen", "Jean-Luc Mélenchon", "Bruno Retailleau", "Gabriel Attal"],
+      "answer": 3,
+      "explanation": "C'est Gabriel Attal (Renaissance), dans son projet pour la jeunesse présenté à Lyon le 10 octobre 2026.",
+      "source": {
+        "label": "AFP via La Gazette France",
+        "url": "https://www.lagazettefrance.fr/article/presidentielle-attal-melenchon-pour-les-candidats-l-atout-ou-le-peril-jeune"
+      },
+      "difficulty": 3
+    },
+    {
+      "id": "qp-retailleau-majorite-penale",
+      "prompt": "Réviser la Constitution pour que « la majorité pénale des mineurs soit à 15 ans » et instaurer des peines minimales",
+      "options": ["Marine Le Pen", "Bruno Retailleau", "Édouard Philippe", "Jean-Luc Mélenchon"],
+      "answer": 1,
+      "explanation": "C'est Bruno Retailleau, président et candidat de LR, sur France Inter et France 2 le 18 octobre 2026.",
       "source": {
         "label": "franceinfo",
-        "url": "https://www.franceinfo.fr/elections/presidentielle/portraits-qui-sont-les-candidats-declares-a-l-election-presidentielle-de-2027_8208032.html"
-      }
+        "url": "https://www.franceinfo.fr/societe/mobilisation-du-17-octobre/les-elus-lfi-ont-arme-la-violence-avec-leurs-mots-d-ordre-accuse-le-president-de-lr-bruno-retailleau_8242834.html"
+      },
+      "difficulty": 2
     },
     {
-      "id": "qp-mikolajczak",
-      "prompt": "Trois priorités : « décider collectivement », « produire en France », « vivre en bonne santé »",
-      "options": [
-        "Antoine Mikolajczak",
-        "Olivier Becht",
-        "Gilles Platret",
-        "Marine Tondelier"
-      ],
+      "id": "qp-wauquiez-casseur-payeur",
+      "prompt": "« Tu casses, tu paies » : faire payer les auteurs de dégâts commis en marge des mobilisations lycéennes",
+      "options": ["Laurent Wauquiez", "Éric Zemmour", "Édouard Philippe", "Fabien Roussel"],
       "answer": 0,
-      "explanation": "C'est Antoine Mikolajczak, candidat du mouvement Équinoxe.",
+      "explanation": "C'est Laurent Wauquiez, chef des députés LR, le 2 octobre 2026 ; ce principe existe dans la loi depuis 2019.",
       "source": {
-        "label": "ici.fr",
-        "url": "https://www.ici.fr/infos/politique/presidentielle-2027-qui-sont-les-candidats-declares-1598133"
-      }
+        "label": "franceinfo",
+        "url": "https://www.franceinfo.fr/societe/education/blocage-des-lycees/appliquer-la-loi-du-casseur-payeur-pour-les-degats-en-marge-des-mobilisations-lyceennes-comme-le-veut-laurent-wauquiez-est-il-si-simple_8219986.html"
+      },
+      "difficulty": 2
     },
     {
-      "id": "qp-tondelier",
-      "prompt": "Candidate des Écologistes, en attendant le vote des adhérents du 10 au 13 décembre 2026",
-      "options": [
-        "Marine Tondelier",
-        "Raphaël Glucksmann",
-        "Jean-Luc Mélenchon",
-        "Olivier Becht"
-      ],
+      "id": "qp-retailleau-centre",
+      "prompt": "« Cette élection présidentielle ne se gagnera pas au centre »",
+      "options": ["Marine Le Pen", "Éric Zemmour", "Laurent Wauquiez", "Bruno Retailleau"],
+      "answer": 3,
+      "explanation": "C'est Bruno Retailleau (LR), sur franceinfo le 16 septembre 2026, en refusant un rassemblement avec Édouard Philippe.",
+      "source": {
+        "label": "franceinfo",
+        "url": "https://www.franceinfo.fr/politique/bruno-retailleau/une-difference-de-nature-avec-edouard-philippe-bruno-retailleau-rejette-l-idee-d-un-rassemblement-de-la-droite-pour-l-election-presidentielle_8195303.html"
+      },
+      "difficulty": 3
+    },
+    {
+      "id": "qp-lepen-logement",
+      "prompt": "Donner « la priorité d'accès au logement social aux Français » et abroger la loi SRU",
+      "options": ["Éric Zemmour", "Marine Le Pen", "Bruno Retailleau", "Gabriel Attal"],
+      "answer": 1,
+      "explanation": "C'est Marine Le Pen (RN), dans son discours de rentrée à Hénin-Beaumont le 13 septembre 2026.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/reserver-les-logements-hlm-aux-francais-la-proposition-de-marine-le-pen-provoque-une"
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "qp-zemmour-chomage",
+      "prompt": "Expulser un étranger, « même en situation régulière », après un an de chômage",
+      "options": ["Éric Zemmour", "Marine Le Pen", "Bruno Retailleau", "Jordan Bardella"],
       "answer": 0,
-      "explanation": "Marine Tondelier est la candidate des Écologistes. Les adhérents voteront en décembre pour confirmer une candidature autonome ou soutenir un autre candidat de gauche.",
+      "explanation": "C'est Éric Zemmour (Reconquête), sur BFMTV le 17 septembre 2026, en confirmant sa candidature.",
       "source": {
         "label": "Public Sénat",
-        "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-les-ecologistes-reportent-lheure-du-choix-a-decembre-marine-tondelier-toujours-en-lice"
-      }
+        "url": "https://www.publicsenat.fr/actualites/politique/eric-zemmour-officialise-sa-candidature-a-la-presidentielle-2027"
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "qp-lepen-contre-budget",
+      "prompt": "Un contre-budget avec « 140 milliards d'euros d'économies d'ici 2032 »",
+      "options": ["Édouard Philippe", "Bruno Retailleau", "Marine Le Pen", "Gabriel Attal"],
+      "answer": 2,
+      "explanation": "C'est Marine Le Pen (RN), qui a présenté le contre-budget de son parti le 6 octobre 2026 ; environ 20 % de ces économies viendraient de l'immigration.",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f"
+      },
+      "difficulty": 3
     }
   ]
 }

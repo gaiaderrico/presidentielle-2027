@@ -3,67 +3,122 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button, Page } from "@/components/ui";
-import { defis, type ChallengeType, type Mode } from "@/lib/content";
+import type { ChallengeType, Mode } from "@/lib/content";
+import { LEVEL_CHOICES, isLevelChoice, levelChoiceLabel, type LevelChoice } from "@/lib/difficulty";
+import { useContent, useT } from "@/lib/i18n";
+import { readJSON, writeJSON } from "@/lib/storage";
 import { track } from "@/lib/track";
+import { VOIX } from "@/lib/voix";
 
-type HubCard = (typeof defis.hub)[number];
-
-const MODE_LABEL: Record<Mode, { title: string; hint: string }> = {
-  solo: { title: "Solo", hint: "Tu joues pour toi." },
-  friend: { title: "Défier un·e ami·e", hint: "Tu joues, puis tu envoies ton score." },
-  team: { title: "En équipe", hint: "Crée un match entre deux groupes." },
-};
+type HubCard = ReturnType<typeof useContent>["defis"]["hub"][number];
 
 export function HubClient() {
   const router = useRouter();
+  const c = useContent();
+  const t = useT();
   const [picked, setPicked] = useState<HubCard | null>(null);
+  const [level, setLevel] = useState<LevelChoice>("progressif");
+  const [friendFirst, setFriendFirst] = useState(false);
   const tracked = useRef(false);
 
   useEffect(() => {
+    const saved = readJSON<string | null>("p27.levelChoice", null);
+    if (isLevelChoice(saved)) setLevel(saved);
     if (tracked.current) return;
     tracked.current = true;
     track("hub_view");
   }, []);
 
-  const open = (card: HubCard) => {
-    if (card.type === "equipes") router.push("/equipes");
-    else setPicked(card);
+  const chooseLevel = (l: LevelChoice) => {
+    setLevel(l);
+    writeJSON("p27.levelChoice", l);
   };
 
-  const choose = (mode: Mode) => {
-    if (!picked || picked.type === "equipes") return;
-    const type = picked.type as ChallengeType;
+  const go = (type: ChallengeType, mode: Mode) => {
     if (mode === "team") router.push(`/equipes?type=${type}`);
-    else router.push(`/defis/${type}?mode=${mode}`);
+    else router.push(`/defis/${type}?mode=${mode}&niveau=${level}`);
+  };
+
+  const open = (card: HubCard) => {
+    if (card.type === "equipes") return router.push("/equipes");
+    if (friendFirst && card.modes.includes("friend")) return go(card.type as ChallengeType, "friend");
+    setPicked(card);
+  };
+
+  const levelHint: Record<LevelChoice, string> = {
+    progressif: t("Commence facile, devient plus dur quand tu réponds bien.", "Starts easy, gets harder when you get it right."),
+    facile: t("Les bases, pour se lancer.", "The basics, to get started."),
+    moyen: t("Pour qui suit un peu l'actu.", "For people who follow the news a bit."),
+    difficile: t("Pour les expert·e·s de la campagne.", "For campaign experts."),
   };
 
   return (
     <Page>
       <div>
-        <p className="text-sm font-bold uppercase tracking-wider text-accent">Défis</p>
-        <h1 className="font-display text-4xl font-extrabold leading-none">À toi de jouer</h1>
-        <p className="mt-2 text-muted">Chaque bonne réponse rapporte des voix pour ta ville. Défie tes potes pour en gagner plus.</p>
+        <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Défis", "Challenges")}</p>
+        <h1 className="font-display text-4xl font-extrabold leading-none">{t("À toi de jouer", "Your turn")}</h1>
       </div>
-      <ul className="flex flex-col gap-3">
-        {defis.hub.map((card) => (
-          <li key={card.type}>
-            <button onClick={() => open(card)} className="flex w-full items-center gap-4 rounded-3xl border border-line bg-card p-4 text-left shadow-sm transition active:scale-[0.99]">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden>
-                {card.emoji}
-              </span>
-              <span className="flex min-w-0 flex-col gap-0.5">
-                <span className="flex items-baseline justify-between gap-3">
-                  <span className="font-display text-xl font-bold">{card.title}</span>
-                  <span className="shrink-0 rounded-full bg-paper px-2.5 py-0.5 text-xs font-bold text-muted">{card.duration}</span>
-                </span>
-                <span className="text-[15px] leading-snug text-muted">{card.description}</span>
-              </span>
+
+      {/* Multiplayer, explained in 3 steps */}
+      <section className={`flex flex-col gap-3 rounded-[2rem] p-5 ${friendFirst ? "bg-accent text-accent-ink" : "bg-ink text-paper"}`}>
+        <p className="font-display text-2xl font-extrabold">👫 {t("Joue avec un ami", "Play with a friend")}</p>
+        <ol className="flex flex-col gap-1.5 text-[15px]">
+          <li>1. {t("Choisis un défi ci-dessous et joue-le.", "Pick a challenge below and play it.")}</li>
+          <li>2. {t("Envoie ton lien (WhatsApp, copier…).", "Send your link (WhatsApp, copy…).")}</li>
+          <li>3. {t("Ton ami joue les mêmes questions, sans inscription. Vous comparez vos scores.", "Your friend plays the same questions, no sign-up. You compare scores.")}</li>
+        </ol>
+        <p className="text-sm opacity-90">
+          +{VOIX.share} {t("voix quand tu envoies", "voix when you send")}, +{VOIX.friendPlayed} {t("quand ton ami joue", "when your friend plays")}.
+        </p>
+        <button
+          onClick={() => setFriendFirst((v) => !v)}
+          aria-pressed={friendFirst}
+          className={`min-h-12 rounded-2xl px-4 font-semibold ${friendFirst ? "bg-paper text-ink" : "bg-accent text-accent-ink"}`}
+        >
+          {friendFirst ? t("✓ Mode ami activé : choisis ton défi ↓", "✓ Friend mode on: pick your challenge ↓") : t("Défier un ami", "Challenge a friend")}
+        </button>
+      </section>
+
+      {/* Difficulty */}
+      <section className="flex flex-col gap-2" aria-label={t("Niveau des questions", "Question level")}>
+        <p className="font-semibold">{t("Niveau des questions", "Question level")}</p>
+        <div className="grid grid-cols-4 gap-1 rounded-2xl border border-line bg-card p-1">
+          {LEVEL_CHOICES.map((l) => (
+            <button
+              key={l}
+              onClick={() => chooseLevel(l)}
+              aria-pressed={level === l}
+              className={`min-h-10 rounded-xl px-1 text-sm font-semibold transition ${level === l ? "bg-ink text-paper" : "text-muted"}`}
+            >
+              {levelChoiceLabel(l, t)}
             </button>
-          </li>
-        ))}
+          ))}
+        </div>
+        <p className="text-sm text-muted">{levelHint[level]}</p>
+      </section>
+
+      <ul className="flex flex-col gap-3">
+        {c.defis.hub
+          .filter((card) => !friendFirst || card.modes.includes("friend"))
+          .map((card) => (
+            <li key={card.type}>
+              <button onClick={() => open(card)} className="flex w-full items-center gap-4 rounded-3xl border border-line bg-card p-4 text-left shadow-sm transition active:scale-[0.99]">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden>
+                  {card.emoji}
+                </span>
+                <span className="flex min-w-0 flex-col gap-0.5">
+                  <span className="flex items-baseline justify-between gap-3">
+                    <span className="font-display text-xl font-bold">{card.title}</span>
+                    <span className="shrink-0 rounded-full bg-paper px-2.5 py-0.5 text-xs font-bold text-muted">{card.duration}</span>
+                  </span>
+                  <span className="text-[15px] leading-snug text-muted">{card.description}</span>
+                </span>
+              </button>
+            </li>
+          ))}
       </ul>
 
-      {picked && (
+      {picked && picked.type !== "equipes" && (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50" onClick={() => setPicked(null)}>
           <div
             className="pop w-full max-w-md rounded-t-3xl bg-card p-5"
@@ -75,17 +130,27 @@ export function HubClient() {
           >
             <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-line" aria-hidden />
             <h2 id="mode-title" className="font-display text-xl font-bold">
-              {picked.title} : comment tu joues ?
+              {picked.emoji} {picked.title}
             </h2>
+            <p className="mt-1 text-sm text-muted">
+              {t("Niveau :", "Level:")} {levelChoiceLabel(level, t)}
+            </p>
             <div className="mt-4 flex flex-col gap-3">
-              {picked.modes.map((m) => (
-                <button key={m} onClick={() => choose(m)} className="flex min-h-14 flex-col items-start rounded-2xl border-2 border-line px-4 py-3 text-left">
-                  <span className="font-semibold">{MODE_LABEL[m].title}</span>
-                  <span className="text-sm text-muted">{MODE_LABEL[m].hint}</span>
-                </button>
-              ))}
+              {picked.modes.includes("solo") && (
+                <Button onClick={() => go(picked.type as ChallengeType, "solo")}>{t("Jouer seul·e", "Play alone")}</Button>
+              )}
+              {picked.modes.includes("friend") && (
+                <Button variant="secondary" onClick={() => go(picked.type as ChallengeType, "friend")}>
+                  👫 {t("Jouer puis défier un ami", "Play, then challenge a friend")}
+                </Button>
+              )}
+              {picked.modes.includes("team") && (
+                <Button variant="secondary" onClick={() => go(picked.type as ChallengeType, "team")}>
+                  🤝 {t("Match en équipe (en groupe)", "Team match (in a group)")}
+                </Button>
+              )}
               <Button variant="ghost" onClick={() => setPicked(null)}>
-                Annuler
+                {t("Annuler", "Cancel")}
               </Button>
             </div>
           </div>

@@ -26,7 +26,7 @@ export function Card({ children, className = "" }: { children: ReactNode; classN
 export function SourceLink({ label, url }: { label: string; url: string }) {
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center text-sm font-semibold text-accent underline underline-offset-4">
-      Source : {label} ↗
+      Source{" "}: {label} ↗
     </a>
   );
 }

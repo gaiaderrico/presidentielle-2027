@@ -6,8 +6,8 @@ import { City } from "@/components/City";
 import { hashSeed } from "@/lib/rng";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import { fetchMatch, joinMatch, type MatchSummary, type TeamSummary } from "@/lib/api";
-import { defis } from "@/lib/content";
-import { levelFor } from "@/lib/levels";
+import { useContent, useT } from "@/lib/i18n";
+import { levelIndexFor } from "@/lib/levels";
 import { getFirstName, setFirstName, siteUrl } from "@/lib/session";
 import { readJSON, writeJSON } from "@/lib/storage";
 import { track } from "@/lib/track";
@@ -21,6 +21,9 @@ export function MatchClient() {
   const params = useSearchParams();
   const team = params.get("team");
   const router = useRouter();
+  const c = useContent();
+  const tr = useT();
+  const defis = c.defis;
 
   const [match, setMatch] = useState<MatchSummary | null | undefined>(undefined);
   const [joined, setJoined] = useState<{ team: "a" | "b"; pid: string } | null>(null);
@@ -44,7 +47,7 @@ export function MatchClient() {
     const mine = match.teams[joined.team];
     const other = match.teams[joined.team === "a" ? "b" : "a"];
     if (mine.finished >= 2 && other.finished >= 2 && mine.avgScore !== null && other.avgScore !== null && mine.avgScore > other.avgScore) {
-      addVoix(VOIX.teamWin, `Ton équipe gagne le match ${match.code}`, `match-win:${match.code}`);
+      addVoix(VOIX.teamWin, `${tr("Ton équipe gagne le match", "Your team wins the match")} ${match.code}`, `match-win:${match.code}`);
     }
   }, [match, joined]);
 
@@ -54,10 +57,10 @@ export function MatchClient() {
     return (
       <Page>
         <Card>
-          <h1 className="font-display text-2xl font-bold">Match introuvable</h1>
-          <p className="mt-1 text-muted">Vérifie le lien reçu, ou crée un nouveau match.</p>
+          <h1 className="font-display text-2xl font-bold">{tr("Match introuvable", "Match not found")}</h1>
+          <p className="mt-1 text-muted">{tr("Vérifie le lien reçu, ou crée un nouveau match.", "Check the link you received, or create a new match.")}</p>
         </Card>
-        <ButtonLink href="/equipes">Créer un match</ButtonLink>
+        <ButtonLink href="/equipes">{tr("Créer un match", "Create a match")}</ButtonLink>
       </Page>
     );
   }
@@ -72,7 +75,7 @@ export function MatchClient() {
     const res = await joinMatch(code, team, name.trim());
     if (!res?.pid) {
       setJoining(false);
-      setError("Impossible de rejoindre le match. Vérifie ta connexion et réessaie.");
+      setError(tr("Impossible de rejoindre le match. Vérifie ta connexion et réessaie.", "Couldn't join the match. Check your connection and try again."));
       return;
     }
     const all = readJSON<Joined>("p27.matches", {});
@@ -86,20 +89,20 @@ export function MatchClient() {
     return (
       <Page>
         <Card className="flex flex-col gap-2 border-2 border-accent">
-          <p className="text-sm font-semibold text-muted">Équipe contre équipe · {defis.names[match.challengeType]}</p>
-          <h1 className="font-display text-3xl font-extrabold leading-tight">Tu joues pour l&apos;équipe {t.name}</h1>
+          <p className="text-sm font-semibold text-muted">{tr("Équipe contre équipe", "Team vs team")} · {defis.names[match.challengeType]}</p>
+          <h1 className="font-display text-3xl font-extrabold leading-tight">{tr("Tu joues pour l'équipe", "You play for team")} {t.name}</h1>
           <p className="text-muted">
-            Contre {match.teams[team === "a" ? "b" : "a"].name}. Le score de l&apos;équipe est la moyenne de ses joueurs.
+            {tr("Contre", "Against")} {match.teams[team === "a" ? "b" : "a"].name}. {tr("Le score de l'équipe est la moyenne de ses joueurs.", "The team score is the average of its players.")}
           </p>
         </Card>
         <form onSubmit={join} className="flex flex-col gap-3">
           <label htmlFor="matchName" className="text-sm font-semibold">
-            Ton prénom
+            {tr("Ton prénom", "Your first name")}
           </label>
           <input id="matchName" maxLength={20} value={name} onChange={(e) => setName(e.target.value)} className="min-h-12 rounded-2xl border-2 border-line bg-card px-4 text-base" autoComplete="given-name" />
           {error && <p className="text-bad">{error}</p>}
           <Button type="submit" disabled={!name.trim() || joining}>
-            {joining ? "Connexion…" : "Jouer pour mon équipe"}
+            {joining ? tr("Connexion…", "Joining…") : tr("Jouer pour mon équipe", "Play for my team")}
           </Button>
         </form>
       </Page>
@@ -116,13 +119,13 @@ export function MatchClient() {
         <h1 className="font-display text-3xl font-extrabold leading-tight">
           {a.name} <span className="text-muted">vs</span> {b.name}
         </h1>
-        <p className="mt-1 text-sm text-muted">Mise à jour toutes les 10 secondes.</p>
+        <p className="mt-1 text-sm text-muted">{tr("Mise à jour toutes les 10 secondes.", "Updates every 10 seconds.")}</p>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <TeamPanel team={a} leading={leader === "a"} mine={joined?.team === "a"} />
         <TeamPanel team={b} leading={leader === "b"} mine={joined?.team === "b"} />
       </div>
-      <p className="rounded-2xl bg-accent-soft px-4 py-3 font-semibold">Il manque des joueurs ? Envoie le lien de ton équipe !</p>
+      <p className="rounded-2xl bg-accent-soft px-4 py-3 font-semibold">{tr("Il manque des joueurs ? Envoie le lien de ton équipe !", "Missing players? Send your team's link!")}</p>
       <div className="grid gap-2 text-sm">
         {(["a", "b"] as const).map((t) => (
           <p key={t} className="break-all rounded-xl bg-card p-3 font-mono">
@@ -132,7 +135,7 @@ export function MatchClient() {
       </div>
       {joined && (
         <ButtonLink href="/defis" variant="secondary">
-          Essayer un autre défi
+          {tr("Essayer un autre défi", "Try another challenge")}
         </ButtonLink>
       )}
     </Page>
@@ -140,21 +143,23 @@ export function MatchClient() {
 }
 
 function TeamPanel({ team, leading, mine }: { team: TeamSummary; leading: boolean; mine: boolean }) {
+  const c = useContent();
+  const tr = useT();
   return (
     <Card className={`flex min-w-0 flex-col gap-2 !p-3 ${leading ? "border-2 border-accent" : ""}`}>
       <p className="truncate font-display font-bold">
         {team.name}
-        {mine && <span className="ml-1 text-xs font-semibold text-accent">(toi)</span>}
+        {mine && <span className="ml-1 text-xs font-semibold text-accent">{tr("(toi)", "(you)")}</span>}
       </p>
-      <City voix={team.voix} label={`Ville de l'équipe ${team.name}`} className="!rounded-xl" seed={hashSeed(team.name)} />
+      <City voix={team.voix} label={`${tr("Ville de l'équipe", "City of team")} ${team.name}`} className="!rounded-xl" seed={hashSeed(team.name)} />
       <p className="font-display text-3xl font-extrabold tabular-nums">
         {team.avgScore ?? "–"}
         {team.total && <span className="text-base text-muted">/{team.total}</span>}
       </p>
       <p className="text-xs text-muted">
-        {team.finished} / {team.players} joueur{team.players > 1 ? "s" : ""} ont fini · {team.voix} voix · {levelFor(team.voix).name}
+        {team.finished} / {team.players} {tr("ont fini", "finished")} · {team.voix} voix · {c.levels[levelIndexFor(team.voix)].name}
       </p>
-      {leading && <p className="text-xs font-bold text-accent">En tête</p>}
+      {leading && <p className="text-xs font-bold text-accent">{tr("En tête", "Leading")}</p>}
     </Card>
   );
 }
