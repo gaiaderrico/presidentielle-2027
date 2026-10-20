@@ -2,30 +2,32 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useT } from "@/lib/i18n";
 import { IconCity, IconNews, IconTrophy, IconUser } from "./Icons";
 
 const TABS = [
-  { href: "/feed", label: "Actu", Icon: IconNews },
-  { href: "/defis", label: "Défis", Icon: IconTrophy },
-  { href: "/ma-ville", label: "Ma ville", Icon: IconCity },
-  { href: "/profil", label: "Profil", Icon: IconUser },
+  { href: "/feed", fr: "Actu", en: "News", Icon: IconNews },
+  { href: "/defis", fr: "Défis", en: "Challenges", Icon: IconTrophy },
+  { href: "/ma-ville", fr: "Ma ville", en: "My city", Icon: IconCity },
+  { href: "/profil", fr: "Profil", en: "Profile", Icon: IconUser },
 ];
 
 const HIDDEN = ["/", "/bienvenue", "/stats"];
 
 export function BottomNav() {
   const path = usePathname();
+  const t = useT();
   if (HIDDEN.includes(path)) return null;
   return (
     <>
       <div className="h-[calc(4.25rem+env(safe-area-inset-bottom,0px))]" aria-hidden />
       <nav
-        aria-label="Navigation principale"
+        aria-label={t("Navigation principale", "Main navigation")}
         className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-card/95 backdrop-blur"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
         <ul className="mx-auto grid h-17 max-w-md grid-cols-4">
-          {TABS.map(({ href, label, Icon }) => {
+          {TABS.map(({ href, fr, en, Icon }) => {
             const active = path === href || (href !== "/feed" && path.startsWith(href + "/")) || (href === "/feed" && path === "/quiz");
             return (
               <li key={href}>
@@ -37,7 +39,7 @@ export function BottomNav() {
                   <span className={`grid h-8 w-14 place-items-center rounded-full transition ${active ? "bg-accent-soft" : ""}`}>
                     <Icon width={22} height={22} />
                   </span>
-                  {label}
+                  {t(fr, en)}
                 </Link>
               </li>
             );

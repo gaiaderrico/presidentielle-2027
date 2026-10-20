@@ -3,33 +3,30 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
 import { createChallenge, finishMatch, savePredictions } from "@/lib/api";
-import {
-  autreCamp,
-  defis,
-  pronoItems,
-  quiProposeItems,
-  quizItems,
-  vraiFauxItems,
-  type AutreCampItem,
-  type ChallengeType,
-  type McqItem,
-  type Mode,
-} from "@/lib/content";
+import type { AutreCampItem, ChallengeType, Difficulty, McqItem, Mode, PronoItem, Source, VraiFauxItem } from "@/lib/content";
+import { QUESTION_COUNT, diffOf, difficultyLabel, nextTarget, pickClosest, startTarget, staticSequence, type LevelChoice } from "@/lib/difficulty";
+import { useContent, useT } from "@/lib/i18n";
+import { getProfile } from "@/lib/profile";
 import { saveLastResult, type LastResult, type RefChallenge, type ResultItem } from "@/lib/results";
 import { getFirstName, getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
 import { VOIX, addVoix, rememberCode } from "@/lib/voix";
-import { Button, Card } from "./ui";
+import { Button, Card, SourceLink } from "./ui";
+
+type AnyItem = McqItem | VraiFauxItem | AutreCampItem | PronoItem;
 
 type Props = {
   type: ChallengeType;
   mode: Mode;
-  context?: "challenge" | "feed"; // "feed" = the mini-quiz right after the feed (+5 voix per correct answer)
+  context?: "challenge" | "feed"; // "feed" = the mini-quiz after the feed (+5 voix per correct answer)
   refChallenge?: RefChallenge | null;
   match?: { code: string; team: "a" | "b"; pid: string } | null;
   onDone?: (r: LastResult) => void;
   /** Custom mini-quiz questions (e.g. from the news cards the player read). */
   items?: McqItem[] | null;
+  /** Exact questions to play, in order (a friend's challenge). */
+  fixedIds?: string[] | null;
+  level?: LevelChoice;
 };
 
 function shuffle<T>(arr: T[], seed: string): T[] {
@@ -44,99 +41,119 @@ function shuffle<T>(arr: T[], seed: string): T[] {
   return out;
 }
 
-const FLASH_MS = 800;
-
-export function ChallengePlayer({ type, mode, context = "challenge", refChallenge = null, match = null, onDone, items = null }: Props) {
-  const quiz = items && items.length ? items : quizItems;
+export function ChallengePlayer({ type, mode, context = "challenge", refChallenge = null, match = null, onDone, items = null, fixedIds = null, level = "progressif" }: Props) {
   const router = useRouter();
-  const total = useMemo(() => {
+  const c = useContent();
+  const t = useT();
+  const name = context === "feed" ? t("Mini-quiz", "Mini-quiz") : c.defis.names[type];
+
+  const pool: AnyItem[] = useMemo(() => {
     switch (type) {
       case "quiz":
-        return quiz.length;
+        return items && items.length ? items : c.allQuizItems;
       case "vrai-faux":
-        return vraiFauxItems.length;
+        return c.vraiFauxItems;
       case "qui-propose":
-        return quiProposeItems.length;
+        return c.quiProposeItems;
       case "autre-camp":
-        return autreCamp.items.length;
+        return c.autreCamp.items;
       case "pronostics":
-        return pronoItems.length;
+        return c.pronoItems;
     }
-  }, [type, quiz]);
+  }, [type, items, c]);
 
+  // Fixed sequence: friend's challenge, team match (same questions for everybody), custom quiz, or predictions.
+  const fixed: AnyItem[] | null = useMemo(() => {
+    if (fixedIds && fixedIds.length) {
+      const list = fixedIds.map((id) => pool.find((i) => i.id === id)).filter((i): i is AnyItem => !!i);
+      if (list.length) return list;
+    }
+    if (type === "pronostics" || (items && items.length)) return pool;
+    if (mode === "team") return staticSequence(pool as McqItem[], QUESTION_COUNT[type]);
+    return null;
+  }, [fixedIds, pool, type, items, mode]);
+
+  const total = fixed ? fixed.length : Math.min(QUESTION_COUNT[type], pool.length);
+  const perCorrect = context === "feed" ? VOIX.miniQuizCorrect : VOIX.challengeCorrect;
+
+  const [target, setTarget] = useState<Difficulty>(() => startTarget(level, getProfile().level));
+  const [streak, setStreak] = useState(0);
+  const [seq, setSeq] = useState<string[]>(() => {
+    if (fixed) return fixed.map((i) => i.id);
+    const first = pickClosest(pool as McqItem[], [], startTarget(level, getProfile().level));
+    return first ? [first.id] : [];
+  });
   const [idx, setIdx] = useState(0);
   const [results, setResults] = useState<ResultItem[]>([]);
   const [predictions, setPredictions] = useState<{ questionId: string; answer: string }[]>([]);
-  const [flash, setFlash] = useState<null | boolean>(null);
+  const [answered, setAnswered] = useState<ResultItem | null>(null);
   const [finishing, setFinishing] = useState(false);
   const started = useRef(false);
 
   useEffect(() => {
     if (started.current) return;
     started.current = true;
-    track("challenge_start", { challengeType: type, mode, refCode: refChallenge?.code ?? null, origin: context });
-  }, [type, mode, refChallenge, context]);
+    track("challenge_start", { challengeType: type, mode, refCode: refChallenge?.code ?? null, origin: context, level });
+  }, [type, mode, refChallenge, context, level]);
 
-  const perCorrect = context === "feed" ? VOIX.miniQuizCorrect : VOIX.challengeCorrect;
+  const item = pool.find((i) => i.id === seq[idx]) ?? null;
 
-  const record = (item: ResultItem, advanceAfterFlash: boolean) => {
-    track("answer", { challengeType: type, itemId: item.id, correct: item.correct });
-    if (item.correct) addVoix(perCorrect, context === "feed" ? "Bonne réponse au mini-quiz" : `Bonne réponse · ${defis.names[type]}`);
-    const next = [...results, item];
-    setResults(next);
-    if (advanceAfterFlash) {
-      setFlash(item.correct);
-      setTimeout(() => {
-        setFlash(null);
-        advance(next);
-      }, FLASH_MS);
-    }
-    return next;
+  const record = (r: ResultItem, difficulty: Difficulty) => {
+    track("answer", { challengeType: type, itemId: r.id, correct: r.correct, difficulty });
+    if (r.correct) addVoix(perCorrect, context === "feed" ? t("Bonne réponse au mini-quiz", "Right answer · mini-quiz") : `${t("Bonne réponse", "Right answer")} · ${name}`);
+    const newStreak = r.correct ? streak + 1 : 0;
+    setStreak(newStreak);
+    setTarget((tg) => nextTarget(level, tg, r.correct, newStreak));
+    setResults((list) => [...list, r]);
+    setAnswered(r);
   };
 
-  const advance = (next: ResultItem[], preds = predictions) => {
-    if (idx + 1 < total) setIdx(idx + 1);
-    else finish(next, preds);
+  const next = (finalResults = results, preds = predictions) => {
+    setAnswered(null);
+    if (idx + 1 >= total) return finish(finalResults, preds);
+    if (!fixed && seq.length <= idx + 1) {
+      const n = pickClosest(pool as McqItem[], seq, target);
+      if (!n) return finish(finalResults, preds);
+      setSeq((s) => [...s, n.id]);
+    }
+    setIdx(idx + 1);
   };
 
   const finish = async (final: ResultItem[], preds: { questionId: string; answer: string }[]) => {
     setFinishing(true);
     const isProno = type === "pronostics";
     const score = isProno ? 0 : final.filter((r) => r.correct).length;
-    // Voix for correct answers were already added one by one; recompute them here (state may lag behind).
     let gained = isProno ? 0 : score * perCorrect;
-    if (isProno) {
-      gained += addVoix(VOIX.predictions, "Pronostics faits", "pronostics");
-    } else if (context === "challenge") {
-      gained += addVoix(VOIX.challengeFinish, `Défi terminé · ${defis.names[type]}`);
-    }
+    if (isProno) gained += addVoix(VOIX.predictions, t("Pronostics faits", "Predictions made"), "pronostics");
+    else if (context === "challenge") gained += addVoix(VOIX.challengeFinish, `${t("Défi terminé", "Challenge done")} · ${name}`);
     if (isProno) await savePredictions(getSessionId(), preds);
+    const playedIds = isProno ? preds.map((p) => p.questionId) : final.map((r) => r.id);
     const code = await createChallenge({
       sessionId: getSessionId(),
       challengeType: type,
       firstName: getFirstName(),
       score: isProno ? null : score,
-      total: isProno ? null : total,
+      total: isProno ? null : final.length,
       refCode: refChallenge?.code ?? null,
-      itemIds: type === "quiz" && items && items.length ? quiz.map((q) => q.id) : null,
+      itemIds: playedIds,
     });
     rememberCode(code);
-    track("challenge_finish", { challengeType: type, mode, score: isProno ? null : score, challengeCode: code, refCode: refChallenge?.code ?? null, origin: context });
+    track("challenge_finish", { challengeType: type, mode, score: isProno ? null : score, challengeCode: code, refCode: refChallenge?.code ?? null, origin: context, level });
     if (context === "feed") track("quiz_finish", { score });
     if (refChallenge) track("friend_finish", { refCode: refChallenge.code, score: isProno ? null : score });
     if (match) {
-      await finishMatch(match.code, match.pid, score, total, gained);
+      await finishMatch(match.code, match.pid, score, final.length, gained);
       track("team_finish", { matchCode: match.code, team: match.team, challengeType: type });
     }
     const result: LastResult = {
       type,
       mode,
       score,
-      total: isProno ? 0 : total,
+      total: isProno ? 0 : final.length,
       voixEarned: gained,
       code,
       items: isProno
-        ? preds.map((p) => ({ id: p.questionId, question: pronoItems.find((i) => i.id === p.questionId)?.question ?? "", correctLabel: "", playerLabel: p.answer, correct: true, explanation: "" }))
+        ? preds.map((p) => ({ id: p.questionId, question: c.pronoItems.find((i) => i.id === p.questionId)?.question ?? "", correctLabel: "", playerLabel: p.answer, correct: true, explanation: "" }))
         : final,
       ref: refChallenge,
       match: match ? { code: match.code, team: match.team } : null,
@@ -148,20 +165,30 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     else router.push(`/defis/${type}/resultat`);
   };
 
-  if (finishing) {
+  if (finishing || !item) {
     return (
       <Card className="text-center">
-        <p className="font-display text-xl font-bold">Calcul du score…</p>
+        <p className="font-display text-xl font-bold">{t("Calcul du score…", "Counting your score…")}</p>
       </Card>
     );
   }
 
+  const isLast = idx + 1 >= total;
+  const d = diffOf(item as McqItem);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3 text-sm font-semibold text-muted">
-        <span>{context === "feed" ? "Mini-quiz" : defis.names[type]}</span>
-        <span className="tabular-nums">
-          {Math.min(idx + 1, total)} / {total}
+        <span>{name}</span>
+        <span className="flex items-center gap-2">
+          {type !== "pronostics" && type !== "autre-camp" && (
+            <span className={`rounded-full px-2 py-0.5 text-xs font-bold ${d === 1 ? "bg-ok-soft text-ok" : d === 3 ? "bg-bad-soft text-bad" : "bg-accent-soft text-accent"}`}>
+              {difficultyLabel(d, t)}
+            </span>
+          )}
+          <span className="tabular-nums">
+            {idx + 1} / {total}
+          </span>
         </span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-line" aria-hidden>
@@ -169,145 +196,117 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
       </div>
       {refChallenge && refChallenge.score !== null && (
         <p className="rounded-2xl bg-accent-soft px-4 py-2 text-sm font-semibold">
-          Score à battre : {refChallenge.score}/{refChallenge.total} ({refChallenge.firstName || "ton ami·e"})
+          {t("Score à battre :", "Score to beat:")} {refChallenge.score}/{refChallenge.total} ({refChallenge.firstName || t("ton ami·e", "your friend")})
         </p>
       )}
 
       {(type === "quiz" || type === "qui-propose") && (
-        <Mcq
-          key={idx}
-          item={type === "quiz" ? quiz[idx] : quiProposeItems[idx]}
-          explainNow={type === "quiz"}
-          shuffled={type === "qui-propose"}
-          isLast={idx + 1 === total}
-          onAnswer={(r, fromFlash) => record(r, fromFlash)}
-          onNext={() => advance(results)}
-        />
+        <Mcq key={item.id} item={item as McqItem} shuffled={type === "qui-propose"} label={type === "qui-propose" ? t("Qui propose ça ?", "Who proposes this?") : null} disabled={!!answered} onAnswer={(r) => record(r, d)} />
       )}
-      {type === "vrai-faux" && <VraiFaux key={idx} index={idx} onAnswer={(r) => record(r, true)} />}
-      {type === "autre-camp" && <AutreCamp key={idx} item={autreCamp.items[idx]} onAnswer={(r) => record(r, true)} />}
+      {type === "vrai-faux" && <VraiFaux key={item.id} item={item as VraiFauxItem} disabled={!!answered} onAnswer={(r) => record(r, d)} />}
+      {type === "autre-camp" && <AutreCamp key={item.id} item={item as AutreCampItem} disabled={!!answered} onAnswer={(r) => record(r, d)} />}
       {type === "pronostics" && (
         <Prono
-          key={idx}
-          index={idx}
-          isLast={idx + 1 === total}
+          key={item.id}
+          item={item as PronoItem}
+          isLast={isLast}
           onAnswer={(answer) => {
-            const preds = [...predictions, { questionId: pronoItems[idx].id, answer }];
+            const preds = [...predictions, { questionId: item.id, answer }];
             setPredictions(preds);
-            advance(results, preds);
+            next(results, preds);
           }}
         />
       )}
 
-      {flash !== null && (
-        <div className="pointer-events-none fixed inset-0 z-30 flex items-center justify-center" aria-live="assertive">
-          <span className={`pop rounded-3xl px-8 py-5 font-display text-3xl font-bold shadow-lg ${flash ? "bg-ok text-white" : "bg-bad text-white"}`}>
-            {flash ? "Bien vu !" : "Raté !"}
-          </span>
-        </div>
+      {answered && (
+        <Feedback
+          result={answered}
+          source={(item as McqItem).source}
+          isLast={isLast}
+          onNext={() => next([...results.filter((r) => r.id !== answered.id), answered])}
+        />
       )}
+    </div>
+  );
+}
+
+/* ---------- Feedback after every answer: right or wrong, the right answer, why, and the source ---------- */
+function Feedback({ result, source, isLast, onNext }: { result: ResultItem; source?: Source; isLast: boolean; onNext: () => void }) {
+  const t = useT();
+  return (
+    <div className={`pop flex flex-col gap-3 rounded-3xl border-2 p-4 ${result.correct ? "border-ok bg-ok-soft" : "border-bad bg-bad-soft"}`} role="status" aria-live="polite">
+      <p className="font-display text-xl font-bold">{result.correct ? t("✓ Bien vu !", "✓ Well done!") : t("✗ Raté", "✗ Not quite")}</p>
+      {!result.correct && (
+        <p>
+          {t("La bonne réponse :", "The right answer:")} <strong>{result.correctLabel}</strong>
+        </p>
+      )}
+      <p className="text-[15px] leading-snug">
+        <strong>{t("Pourquoi :", "Why:")} </strong>
+        {result.explanation}
+      </p>
+      {source && <SourceLink {...source} />}
+      <Button onClick={onNext} autoFocus>
+        {isLast ? t("Voir mon score", "See my score") : t("Question suivante", "Next question")}
+      </Button>
     </div>
   );
 }
 
 /* ---------- Multiple choice (Mini-quiz, Qui propose ça ?) ---------- */
-function Mcq({
-  item,
-  explainNow,
-  shuffled,
-  isLast,
-  onAnswer,
-  onNext,
-}: {
-  item: McqItem;
-  explainNow: boolean;
-  shuffled: boolean;
-  isLast: boolean;
-  onAnswer: (r: ResultItem, flash: boolean) => void;
-  onNext: () => void;
-}) {
+function Mcq({ item, shuffled, label, disabled, onAnswer }: { item: McqItem; shuffled: boolean; label: string | null; disabled: boolean; onAnswer: (r: ResultItem) => void }) {
   const [picked, setPicked] = useState<number | null>(null);
   const options = useMemo(() => {
-    const list = item.options.map((label, i) => ({ label, i }));
+    const list = item.options.map((text, i) => ({ text, i }));
     return shuffled ? shuffle(list, item.id) : list;
   }, [item, shuffled]);
   const question = item.question ?? item.prompt ?? "";
 
   const pick = (i: number) => {
-    if (picked !== null) return;
+    if (picked !== null || disabled) return;
     setPicked(i);
-    onAnswer(
-      {
-        id: item.id,
-        question,
-        correctLabel: item.options[item.answer],
-        playerLabel: item.options[i],
-        correct: i === item.answer,
-        explanation: item.explanation,
-        source: item.source,
-      },
-      !explainNow,
-    );
+    onAnswer({ id: item.id, question, correctLabel: item.options[item.answer], playerLabel: item.options[i], correct: i === item.answer, explanation: item.explanation, source: item.source });
   };
 
   return (
     <div className="flex flex-col gap-4">
       <Card>
-        {!item.question && <p className="mb-2 text-sm font-semibold text-muted">Qui propose ça ?</p>}
+        {label && <p className="mb-2 text-sm font-semibold text-muted">{label}</p>}
         <h2 className="font-display text-2xl font-bold leading-snug">{question}</h2>
       </Card>
       <div className="flex flex-col gap-3">
-        {options.map(({ label, i }) => {
-          const state = picked === null || !explainNow ? "" : i === item.answer ? "border-ok bg-ok-soft" : i === picked ? "border-bad bg-bad-soft" : "opacity-60";
+        {options.map(({ text, i }) => {
+          const state = picked === null ? "" : i === item.answer ? "border-ok bg-ok-soft" : i === picked ? "border-bad bg-bad-soft" : "opacity-60";
           return (
-            <button
-              key={i}
-              onClick={() => pick(i)}
-              disabled={picked !== null}
-              className={`min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium transition ${state}`}
-            >
-              {label}
+            <button key={i} onClick={() => pick(i)} disabled={picked !== null} className={`min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium transition ${state}`}>
+              {text}
+              {picked !== null && i === item.answer && <span className="ml-2 font-bold text-ok">✓</span>}
             </button>
           );
         })}
       </div>
-      {explainNow && picked !== null && (
-        <div className="pop flex flex-col gap-3">
-          <p className={`rounded-2xl px-4 py-3 ${picked === item.answer ? "bg-ok-soft" : "bg-bad-soft"}`} role="status">
-            <strong>{picked === item.answer ? "Bonne réponse ! " : "Raté. "}</strong>
-            {item.explanation}
-          </p>
-          <Button onClick={onNext}>{isLast ? "Voir mon score" : "Question suivante"}</Button>
-        </div>
-      )}
     </div>
   );
 }
 
 /* ---------- Vrai ou Faux: swipe right = Vrai, left = Faux ---------- */
-function VraiFaux({ index, onAnswer }: { index: number; onAnswer: (r: ResultItem) => void }) {
-  const item = vraiFauxItems[index];
+function VraiFaux({ item, disabled, onAnswer }: { item: VraiFauxItem; disabled: boolean; onAnswer: (r: ResultItem) => void }) {
+  const t = useT();
   const [dx, setDx] = useState(0);
-  const [done, setDone] = useState(false);
+  const [choice, setChoice] = useState<boolean | null>(null);
   const startX = useRef<number | null>(null);
+  const yes = t("Vrai", "True");
+  const no = t("Faux", "False");
 
   const answer = (vrai: boolean) => {
-    if (done) return;
-    setDone(true);
-    setDx(vrai ? 400 : -400);
-    onAnswer({
-      id: item.id,
-      question: item.statement,
-      correctLabel: item.answer ? "Vrai" : "Faux",
-      playerLabel: vrai ? "Vrai" : "Faux",
-      correct: vrai === item.answer,
-      explanation: item.explanation,
-      source: item.source,
-    });
+    if (choice !== null || disabled) return;
+    setChoice(vrai);
+    setDx(0);
+    onAnswer({ id: item.id, question: item.statement, correctLabel: item.answer ? yes : no, playerLabel: vrai ? yes : no, correct: vrai === item.answer, explanation: item.explanation, source: item.source });
   };
 
   const down = (e: PointerEvent) => {
-    if (done) return;
+    if (choice !== null) return;
     startX.current = e.clientX;
     (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
   };
@@ -322,43 +321,53 @@ function VraiFaux({ index, onAnswer }: { index: number; onAnswer: (r: ResultItem
     else setDx(0);
   };
 
-  const hint = dx > 40 ? "Vrai" : dx < -40 ? "Faux" : null;
+  const hint = choice === null ? (dx > 40 ? yes : dx < -40 ? no : null) : null;
+  const done = choice !== null;
+  const ok = done && choice === item.answer;
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative h-72 touch-pan-y select-none">
+      <div className="relative min-h-56 touch-pan-y select-none">
         <div
           onPointerDown={down}
           onPointerMove={move}
           onPointerUp={up}
           onPointerCancel={up}
-          className="absolute inset-0 flex cursor-grab flex-col justify-center rounded-3xl border-2 border-line bg-card p-6 shadow-sm"
+          className={`flex min-h-56 flex-col justify-center rounded-3xl border-2 bg-card p-6 shadow-sm ${done ? (ok ? "border-ok" : "border-bad") : "cursor-grab border-line"}`}
           style={{ transform: `translateX(${dx}px) rotate(${dx / 18}deg)`, transition: startX.current === null ? "transform 0.3s ease" : "none" }}
         >
           {hint && (
-            <span className={`absolute top-4 rounded-xl border-2 px-3 py-1 font-display text-lg font-bold ${hint === "Vrai" ? "right-4 border-ok text-ok" : "left-4 border-bad text-bad"}`}>
-              {hint}
-            </span>
+            <span className={`absolute top-4 rounded-xl border-2 px-3 py-1 font-display text-lg font-bold ${hint === yes ? "right-4 border-ok text-ok" : "left-4 border-bad text-bad"}`}>{hint}</span>
           )}
           <p className="font-display text-2xl font-bold leading-snug">{item.statement}</p>
+          {done && (
+            <p className={`mt-3 font-bold ${ok ? "text-ok" : "text-bad"}`}>
+              {t("C'est", "It's")} {item.answer ? yes : no}
+            </p>
+          )}
         </div>
       </div>
-      <p className="text-center text-sm text-muted">Glisse à droite pour Vrai, à gauche pour Faux</p>
-      <div className="grid grid-cols-2 gap-3">
-        <Button variant="secondary" onClick={() => answer(false)} disabled={done} className="!border-bad !text-bad">
-          ← Faux
-        </Button>
-        <Button variant="secondary" onClick={() => answer(true)} disabled={done} className="!border-ok !text-ok">
-          Vrai →
-        </Button>
-      </div>
+      {!done && (
+        <>
+          <p className="text-center text-sm text-muted">{t("Glisse à droite pour Vrai, à gauche pour Faux", "Swipe right for True, left for False")}</p>
+          <div className="grid grid-cols-2 gap-3">
+            <Button variant="secondary" onClick={() => answer(false)} className="!border-bad !text-bad">
+              ← {no}
+            </Button>
+            <Button variant="secondary" onClick={() => answer(true)} className="!border-ok !text-ok">
+              {yes} →
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
 
 /* ---------- Défends l'autre camp ---------- */
 // The Pour / Contre answer lives only in this component's state: never stored, never sent.
-function AutreCamp({ item, onAnswer }: { item: AutreCampItem; onAnswer: (r: ResultItem) => void }) {
+function AutreCamp({ item, disabled, onAnswer }: { item: AutreCampItem; disabled: boolean; onAnswer: (r: ResultItem) => void }) {
+  const t = useT();
   const [side, setSide] = useState<"pour" | "contre" | null>(null);
   const [picked, setPicked] = useState<string | null>(null);
 
@@ -381,22 +390,22 @@ function AutreCamp({ item, onAnswer }: { item: AutreCampItem; onAnswer: (r: Resu
     );
   }, [item, side]);
 
-  const sideLabel = side === "pour" ? "Pour" : "Contre";
+  const sideLabel = side === "pour" ? t("Pour", "For") : t("Contre", "Against");
 
   const pick = (o: { text: string; kind: "good" | "other" | "off" }) => {
-    if (picked) return;
+    if (picked || disabled || !side) return;
     setPicked(o.text);
     onAnswer({
       id: item.id,
-      question: `${item.topic} : meilleur argument du camp ${sideLabel}`,
-      correctLabel: item[side!],
+      question: `${item.topic} : ${t("meilleur argument du camp", "best argument for")} ${sideLabel}`,
+      correctLabel: item[side],
       playerLabel: o.text,
       correct: o.kind === "good",
       explanation:
         o.kind === "good"
-          ? `C'est bien un argument du camp ${sideLabel}.`
+          ? t(`C'est bien un argument du camp ${sideLabel}.`, `That is indeed an argument for "${sideLabel}".`)
           : o.kind === "other"
-            ? "Cet argument défend l'autre camp."
+            ? t("Cet argument défend l'autre camp.", "This argument defends the other side.")
             : item.offTopicCorrection,
       source: item.source,
     });
@@ -405,35 +414,33 @@ function AutreCamp({ item, onAnswer }: { item: AutreCampItem; onAnswer: (r: Resu
   return (
     <div className="flex flex-col gap-4">
       <Card>
-        <p className="mb-2 text-sm font-semibold text-muted">Le sujet</p>
+        <p className="mb-2 text-sm font-semibold text-muted">{t("Le sujet", "The topic")}</p>
         <h2 className="font-display text-2xl font-bold leading-snug">{item.topic}</h2>
       </Card>
       {!side ? (
         <>
-          <p className="font-semibold">Sur ce sujet, tu es plutôt…</p>
-          <p className="-mt-2 text-sm text-muted">Ta réponse reste sur ton téléphone. Elle n&apos;est jamais enregistrée.</p>
+          <p className="font-semibold">{t("Sur ce sujet, tu es plutôt…", "On this topic, you are rather…")}</p>
+          <p className="-mt-2 text-sm text-muted">{t("Ta réponse reste sur ton téléphone. Elle n'est jamais enregistrée.", "Your answer stays on your phone. It is never saved.")}</p>
           <div className="grid grid-cols-3 gap-2">
-            <Button variant="secondary" onClick={() => choose("pour")}>Pour</Button>
-            <Button variant="secondary" onClick={() => choose("contre")}>Contre</Button>
-            <Button variant="secondary" onClick={() => choose("nsp")} className="text-sm">Je ne sais pas</Button>
+            <Button variant="secondary" onClick={() => choose("pour")}>{t("Pour", "For")}</Button>
+            <Button variant="secondary" onClick={() => choose("contre")}>{t("Contre", "Against")}</Button>
+            <Button variant="secondary" onClick={() => choose("nsp")} className="text-sm">{t("Je ne sais pas", "Not sure")}</Button>
           </div>
         </>
       ) : (
         <>
           <p className="font-semibold">
-            Trouve le meilleur argument pour le camp <span className="text-accent">{sideLabel}</span>
+            {t("Trouve le meilleur argument pour le camp", "Find the best argument for")} <span className="text-accent">{sideLabel}</span>
           </p>
           <div className="flex flex-col gap-3">
-            {options.map((o) => (
-              <button
-                key={o.text}
-                onClick={() => pick(o)}
-                disabled={!!picked}
-                className="min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium"
-              >
-                « {o.text} »
-              </button>
-            ))}
+            {options.map((o) => {
+              const state = !picked ? "" : o.kind === "good" ? "border-ok bg-ok-soft" : o.text === picked ? "border-bad bg-bad-soft" : "opacity-60";
+              return (
+                <button key={o.text} onClick={() => pick(o)} disabled={!!picked} className={`min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium ${state}`}>
+                  « {o.text} »
+                </button>
+              );
+            })}
           </div>
         </>
       )}
@@ -442,8 +449,8 @@ function AutreCamp({ item, onAnswer }: { item: AutreCampItem; onAnswer: (r: Resu
 }
 
 /* ---------- Pronostics ---------- */
-function Prono({ index, isLast, onAnswer }: { index: number; isLast: boolean; onAnswer: (answer: string) => void }) {
-  const item = pronoItems[index];
+function Prono({ item, isLast, onAnswer }: { item: PronoItem; isLast: boolean; onAnswer: (answer: string) => void }) {
+  const t = useT();
   return (
     <div className="flex flex-col gap-4">
       <Card>
@@ -457,7 +464,7 @@ function Prono({ index, isLast, onAnswer }: { index: number; isLast: boolean; on
           </button>
         ))}
       </div>
-      {isLast && <p className="text-center text-sm text-muted">Dernière question : tes pronos seront enregistrés.</p>}
+      {isLast && <p className="text-center text-sm text-muted">{t("Dernière question : tes pronos seront enregistrés.", "Last question: your predictions will be saved.")}</p>}
     </div>
   );
 }

@@ -11,6 +11,8 @@ export type Profile = {
   firstName: string;
   followsNews: "jamais" | "parfois" | "souvent" | null;
   voted: "oui" | "non" | null;
+  /** Can vote at the French presidential election: "fr" = yes; "eu" / "non-eu" / "nsp" = international mode. */
+  voter: "fr" | "eu" | "non-eu" | "nsp" | null;
   registered: "oui" | "non" | "nsp" | null;
   knowledge: number; // 0-3 right answers to the level test
   level: LevelId;
@@ -24,6 +26,7 @@ export const EMPTY_PROFILE: Profile = {
   firstName: "",
   followsNews: null,
   voted: null,
+  voter: null,
   registered: null,
   knowledge: 0,
   level: "debutant",
@@ -61,6 +64,11 @@ export function computeLevel(knowledge: number, followsNews: Profile["followsNew
   if (points >= 4) return "avance";
   if (points >= 2) return "intermediaire";
   return "debutant";
+}
+
+/** International mode: the player can't (or isn't sure they can) vote at the presidential election. */
+export function isInternational(p: Profile) {
+  return p.voter === "eu" || p.voter === "non-eu" || p.voter === "nsp";
 }
 
 export function useProfile(): Profile {

@@ -4,81 +4,177 @@
       "id": "vf-dates",
       "statement": "Le 1er tour de la présidentielle aura lieu le dimanche 18 avril 2027.",
       "answer": true,
-      "explanation": "Le 1er tour est le 18 avril et le 2nd tour le 2 mai 2027.",
+      "explanation": "Le 1er tour est fixé au dimanche 18 avril et le 2nd tour au dimanche 2 mai 2027.",
       "source": {
         "label": "LCP",
         "url": "https://lcp.fr/actualites/presidentielle-2027-les-dates-du-premier-et-du-second-tour-fixees-438582"
-      }
+      },
+      "difficulty": 1
     },
     {
       "id": "vf-inscription",
       "statement": "Tu peux t'inscrire sur les listes électorales jusqu'à la veille du vote.",
       "answer": false,
-      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027. C'est la procuration qu'on peut faire jusqu'à la veille.",
+      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027, le 6e vendredi avant le scrutin. C'est la procuration qu'on peut faire jusqu'à la veille.",
       "source": {
-        "label": "info.gouv.fr",
-        "url": "https://www.info.gouv.fr/public/index.php/actualite/tout-ce-qu-il-faut-savoir-sur-l-election-presidentielle"
-      }
+        "label": "Toute l'Europe",
+        "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-calendrier-dates-inscription-candidats-vote/"
+      },
+      "difficulty": 1
     },
     {
-      "id": "vf-parrainages",
-      "statement": "Pour être candidat, il faut 500 signatures d'élus venant d'au moins 30 départements.",
+      "id": "vf-majorite",
+      "statement": "Un candidat qui obtient plus de 50 % des suffrages exprimés au 1er tour est élu sans second tour.",
       "answer": true,
-      "explanation": "Ce sont les « parrainages ».",
+      "explanation": "Le président est élu à la majorité absolue des suffrages exprimés. Sinon, les deux candidats arrivés en tête s'affrontent au second tour.",
       "source": {
-        "label": "info.gouv.fr",
-        "url": "https://www.info.gouv.fr/actualite/presidentielle-2027-date-a-retenir-et-informations-cles"
-      }
+        "label": "Constitution, art. 7 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 1
     },
     {
-      "id": "vf-glucksmann",
-      "statement": "Raphaël Glucksmann a remporté la primaire de la gauche sociale-démocrate avec environ 66 % des voix.",
-      "answer": true,
-      "explanation": "Il a gagné dès le 1er tour le 11 octobre 2026.",
+      "id": "vf-macron-mandat",
+      "statement": "Emmanuel Macron peut se représenter en 2027.",
+      "answer": false,
+      "explanation": "Depuis 2008, la Constitution dit que « nul ne peut exercer plus de deux mandats consécutifs ». Emmanuel Macron achève son 2e mandat : il ne peut pas être candidat en 2027.",
       "source": {
-        "label": "Public Sénat",
-        "url": "https://www.publicsenat.fr/actualites/politique/primaire-de-la-gauche-raphael-glucksmann-plie-le-match-et-remporte-le-scrutin-des-le-premier-tour-avec-66"
-      }
+        "label": "Sud Radio",
+        "url": "https://www.sudradio.fr/sud-radio/macron-absent-en-2027-vers-un-troisieme-duel-contre-le-pen-en-2032"
+      },
+      "difficulty": 1
     },
     {
       "id": "vf-melenchon",
       "statement": "Jean-Luc Mélenchon se présente pour la première fois à la présidentielle.",
       "answer": false,
-      "explanation": "C'est sa 4e candidature, après 2012, 2017 et 2022.",
+      "explanation": "C'est sa 4e candidature, après 2012, 2017 et 2022 (21,95 % au 1er tour en 2022).",
       "source": {
         "label": "Public Sénat",
         "url": "https://www.publicsenat.fr/actualites/politique/election-presidentielle-2027-qui-sont-les-candidats-declares-ou-presque"
-      }
+      },
+      "difficulty": 1
     },
     {
       "id": "vf-attal",
       "statement": "Gabriel Attal est le candidat des Républicains.",
       "answer": false,
-      "explanation": "Il a repris le parti d'Emmanuel Macron ; le candidat LR est Bruno Retailleau.",
-      "source": {
-        "label": "ici.fr",
-        "url": "https://www.ici.fr/infos/politique/presidentielle-2027-qui-sont-les-candidats-declares-1598133"
-      }
-    },
-    {
-      "id": "vf-35h",
-      "statement": "Un candidat déclaré veut supprimer les 35 heures.",
-      "answer": true,
-      "explanation": "Gilles Platret veut abroger les 35 heures.",
+      "explanation": "Gabriel Attal est candidat pour Renaissance, qu'il préside depuis décembre 2024. Le candidat LR est Bruno Retailleau, désigné par les adhérents en avril 2026.",
       "source": {
         "label": "franceinfo",
         "url": "https://www.franceinfo.fr/elections/presidentielle/portraits-qui-sont-les-candidats-declares-a-l-election-presidentielle-de-2027_8208032.html"
-      }
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "vf-parrainages",
+      "statement": "Pour être candidat, il faut au moins 500 signatures d'élus venant d'au moins 30 départements ou collectivités d'outre-mer.",
+      "answer": true,
+      "explanation": "Ce sont les « parrainages ». Ils doivent parvenir au Conseil constitutionnel au plus tard le 12 mars 2027 à 18 h, et un élu ne peut parrainer qu'un seul candidat.",
+      "source": {
+        "label": "Toute l'Europe",
+        "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-calendrier-dates-inscription-candidats-vote/"
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "vf-glucksmann",
+      "statement": "Raphaël Glucksmann a remporté la primaire de la gauche sociale-démocrate avec environ 66 % des voix.",
+      "answer": true,
+      "explanation": "Il a gagné dès le 1er tour, le 11 octobre 2026, avec 66,17 % des voix, loin devant Olivier Faure (14,46 %).",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/primaire-de-la-gauche-raphael-glucksmann-plie-le-match-et-remporte-le-scrutin-des-le-premier-tour-avec-66"
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "vf-dissolution-senat",
+      "statement": "Le président de la République peut dissoudre le Sénat.",
+      "answer": false,
+      "explanation": "Le président peut dissoudre l'Assemblée nationale, après avoir consulté le Premier ministre et les présidents des deux assemblées, mais pas le Sénat.",
+      "source": {
+        "label": "Constitution, art. 12 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "vf-parlement-loi",
+      "statement": "En France, c'est le Parlement, et non le président de la République, qui vote la loi.",
+      "answer": true,
+      "explanation": "L'article 24 de la Constitution dit : « Le Parlement vote la loi. » Le Parlement est formé de l'Assemblée nationale et du Sénat.",
+      "source": {
+        "label": "Constitution, art. 24 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "vf-repas-1-euro",
+      "statement": "Le repas à 1 € au restaurant universitaire est réservé aux étudiant·e·s boursier·e·s.",
+      "answer": false,
+      "explanation": "Depuis le 4 mai 2026, il est ouvert à tous les étudiants, sans condition de ressources. Avant, il était réservé aux boursiers et aux étudiants précaires.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/universite-pas-de-repas-a-1-euro-pour-tous-si-le-budget-2027-n-est-pas-adopte-previent"
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "vf-le-pen-candidate",
+      "statement": "Après sa condamnation en appel le 7 juillet 2026, Marine Le Pen a confirmé qu'elle serait candidate en 2027.",
+      "answer": true,
+      "explanation": "La cour d'appel l'a notamment condamnée à 15 mois d'inéligibilité ferme, ce qui rend sa candidature « théoriquement possible ». Elle l'a confirmée le jour même.",
+      "source": {
+        "label": "Europe 1",
+        "url": "https://www.europe1.fr/politique/en-direct-proces-en-appel-des-assistants-parlementaires-du-fn-marine-le-pen-arrive-au-palais-de-justice-pour-lannonce-de-la-decision-967578"
+      },
+      "difficulty": 2
     },
     {
       "id": "vf-abstention",
       "statement": "En 2022, plus de 6 jeunes de 18-24 ans sur 10 n'ont pas voté au 1er tour de la présidentielle.",
       "answer": false,
-      "explanation": "Ils étaient environ 4 sur 10 (41 %), contre 22 à 27 % pour le reste de la population.",
+      "explanation": "Selon Ipsos/Sopra Steria, environ 42 % des 18-24 ans se sont abstenus, soit 4 sur 10. L'abstention de l'ensemble des inscrits était de 26,31 %.",
       "source": {
-        "label": "DH",
-        "url": "https://www.dhnet.be/actu/monde/2022/06/13/la-gauche-peut-lemporter-sils-reviennent-aux-urnes-ces-francais-pourraient-aider-la-nupes-a-gagner-les-legislatives-YLF7VLXVZ5FRHAPK7YGOZGGOLI/"
-      }
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/presidentielle-une-abstention-elevee-sans-atteindre-le-record-de-2002-109247"
+      },
+      "difficulty": 3
+    },
+    {
+      "id": "vf-interim",
+      "statement": "Si le président quitte ses fonctions avant la fin de son mandat, c'est le Premier ministre qui le remplace jusqu'à l'élection suivante.",
+      "answer": false,
+      "explanation": "C'est le président du Sénat qui assure l'intérim. Il ne peut pas, notamment, dissoudre l'Assemblée ni organiser un référendum.",
+      "source": {
+        "label": "Constitution, art. 7 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 3
+    },
+    {
+      "id": "vf-procuration-commune",
+      "statement": "Tu peux donner procuration à une personne inscrite dans une autre commune que la tienne.",
+      "answer": true,
+      "explanation": "Tu peux choisir n'importe quel électeur ; il votera à ta place dans ton bureau de vote, pas dans le sien.",
+      "source": {
+        "label": "service-public.fr",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1604"
+      },
+      "difficulty": 3
+    },
+    {
+      "id": "vf-retailleau-1er-mai",
+      "statement": "Bruno Retailleau a critiqué le choix du 2 mai 2027, lendemain du 1er-Mai, pour le second tour.",
+      "answer": true,
+      "explanation": "Le 1er juillet 2026, il s'est dit « en colère » contre des dates « pas neutres », craignant l'écho politique des cortèges du 1er-Mai.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/manifestations-syndicales-ou-reserve-electorale-le-casse-tete-du-1er-mai-2027-veille-de"
+      },
+      "difficulty": 3
     }
   ]
 }

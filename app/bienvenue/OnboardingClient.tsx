@@ -4,13 +4,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { IconBack } from "@/components/Icons";
 import { Button } from "@/components/ui";
-import onboarding from "@/content/onboarding.json";
-import { topics } from "@/lib/content";
-import { EMPTY_PROFILE, computeLevel, getProfile, saveProfile, type Profile } from "@/lib/profile";
+import { useContent, useT } from "@/lib/i18n";
+import { EMPTY_PROFILE, computeLevel, getProfile, isInternational, saveProfile, type LevelId, type Profile } from "@/lib/profile";
 import { track } from "@/lib/track";
 import { addVoix } from "@/lib/voix";
 
-const STEPS = 6;
+const STEPS = 6; // 0 name · 1 you · 2 level test · 3 topics · 4 tutorial · 5 result
 
 function Choice({ selected, onClick, children }: { selected: boolean; onClick: () => void; children: ReactNode }) {
   return (
@@ -40,101 +39,113 @@ function Group<T extends string>({ question, options, value, onChange }: { quest
   );
 }
 
+const LEVEL_FROM_HABIT: Record<string, LevelId> = { jamais: "debutant", parfois: "intermediaire", souvent: "avance" };
+
 export function OnboardingClient() {
   const router = useRouter();
+  const c = useContent();
+  const t = useT();
+  const ob = c.onboarding;
   const [step, setStep] = useState(0);
   const [p, setP] = useState<Profile>(EMPTY_PROFILE);
-  const [answers, setAnswers] = useState<(number | null)[]>(onboarding.knowledge.map(() => null));
+  const [answers, setAnswers] = useState<(number | null)[]>(ob.knowledge.map(() => null));
   const [checked, setChecked] = useState(false);
-  const [ideasTouched, setIdeasTouched] = useState(false);
+  const [slide, setSlide] = useState(0);
 
-  useEffect(() => {
-    const current = getProfile();
-    setP({ ...current, firstName: current.firstName || "" });
-    if (current.position !== null) setIdeasTouched(true);
-  }, []);
+  useEffect(() => setP(getProfile()), []);
 
   const set = (patch: Partial<Profile>) => setP((x) => ({ ...x, ...patch }));
   const back = () => (step === 0 ? router.push("/") : setStep(step - 1));
   const next = () => setStep((s) => Math.min(STEPS - 1, s + 1));
 
-  const knowledge = answers.filter((a, i) => a === onboarding.knowledge[i].answer).length;
-  const level = computeLevel(knowledge, p.followsNews);
+  const knowledge = answers.filter((a, i) => a === ob.knowledge[i].answer).length;
+  // Test skipped: the level comes from how often they follow the news.
+  const level: LevelId = checked ? computeLevel(knowledge, p.followsNews) : (LEVEL_FROM_HABIT[p.followsNews ?? ""] ?? "debutant");
+  const intl = isInternational(p);
 
   const finish = () => {
-    const final: Profile = { ...p, knowledge, level, done: true };
+    const final: Profile = { ...p, knowledge: checked ? knowledge : 0, level, done: true };
     saveProfile(final);
-    // The position (political ideas) is deliberately NOT sent.
+    // The political position is never asked here, and never sent.
     track("onboarding_finish", {
       level,
-      knowledge,
+      knowledge: checked ? knowledge : null,
+      testSkipped: !checked,
       followsNews: final.followsNews,
-      voted: final.voted,
+      voter: final.voter,
       registered: final.registered,
       interests: final.interests,
     });
-    addVoix(20, "Profil complété", "profil");
+    addVoix(20, t("Profil complété", "Profile completed"), "profil");
     router.push("/feed");
   };
+
+  const skip = (label?: string, onClick: () => void = next) => (
+    <button type="button" onClick={onClick} className="min-h-11 text-center font-semibold text-muted underline underline-offset-4">
+      {label ?? t("Passer", "Skip")}
+    </button>
+  );
 
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-4 pb-10 pt-3">
       <div className="flex items-center gap-3">
-        <button onClick={back} className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line bg-card" aria-label="Étape précédente">
+        <button onClick={back} className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line bg-card" aria-label={t("Étape précédente", "Previous step")}>
           <IconBack />
         </button>
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin={1} aria-valuemax={STEPS} aria-valuenow={step + 1}>
           <div className="h-full rounded-full bg-accent transition-all duration-500" style={{ width: `${((step + 1) / STEPS) * 100}%` }} />
         </div>
-        <span className="w-10 text-right text-sm font-semibold tabular-nums text-muted">
-          {step + 1}/{STEPS}
-        </span>
+        {step < STEPS - 1 && (
+          <button onClick={() => setStep(STEPS - 1)} className="shrink-0 text-sm font-semibold text-muted underline underline-offset-4">
+            {t("Tout passer", "Skip all")}
+          </button>
+        )}
       </div>
 
       {step === 0 && (
         <section className="pop flex flex-col gap-5">
           <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-accent">Faisons connaissance</p>
-            <h1 className="mt-1 font-display text-3xl font-extrabold leading-tight">Salut ! Comment tu t&apos;appelles ?</h1>
-            <p className="mt-2 text-muted">Quelques questions rapides pour adapter les actus à ton niveau et à ce qui t&apos;intéresse. Moins d&apos;une minute.</p>
+            <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Bienvenue", "Welcome")} 👋</p>
+            <h1 className="mt-1 font-display text-3xl font-extrabold leading-tight">{t("Comment tu t'appelles ?", "What's your name?")}</h1>
+            <p className="mt-2 text-muted">{t("4 petites questions pour adapter l'app à toi. Tu peux tout passer.", "4 quick questions to adapt the app to you. You can skip everything.")}</p>
           </div>
           <label htmlFor="ob-name" className="sr-only">
-            Ton prénom
+            {t("Ton prénom", "Your first name")}
           </label>
           <input
             id="ob-name"
             maxLength={20}
             autoComplete="given-name"
-            placeholder="Ton prénom (facultatif)"
+            placeholder={t("Ton prénom (facultatif)", "Your first name (optional)")}
             value={p.firstName}
             onChange={(e) => set({ firstName: e.target.value })}
             className="min-h-14 rounded-2xl border-2 border-line bg-card px-4 text-lg"
           />
-          <p className="-mt-3 text-sm text-muted">Il sert seulement à montrer à tes amis qui les défie.</p>
-          <Button onClick={next}>Continuer</Button>
+          <p className="-mt-3 text-sm text-muted">{t("Il sert seulement à montrer à tes amis qui les défie.", "It's only used to show your friends who challenged them.")}</p>
+          <Button onClick={next}>{t("Continuer", "Continue")}</Button>
         </section>
       )}
 
       {step === 1 && (
         <section className="pop flex flex-col gap-6">
-          <h1 className="font-display text-3xl font-extrabold leading-tight">Toi et la politique</h1>
-          <Group question={onboarding.followsNews.question} options={onboarding.followsNews.options} value={p.followsNews} onChange={(v) => set({ followsNews: v })} />
-          <Group question={onboarding.voted.question} options={onboarding.voted.options} value={p.voted} onChange={(v) => set({ voted: v })} />
-          <Group question={onboarding.registered.question} options={onboarding.registered.options} value={p.registered} onChange={(v) => set({ registered: v })} />
-          {p.registered && p.registered !== "oui" && <p className="rounded-2xl bg-accent-soft px-4 py-3 text-sm font-semibold">{onboarding.registered.help}</p>}
-          <Button onClick={next} disabled={!p.followsNews || !p.voted || !p.registered}>
-            Continuer
-          </Button>
+          <h1 className="font-display text-3xl font-extrabold leading-tight">{t("Toi", "About you")}</h1>
+          <Group question={ob.voter.question} options={ob.voter.options} value={p.voter} onChange={(v) => set({ voter: v })} />
+          {p.voter && p.voter !== "fr" && <p className="-mt-3 rounded-2xl bg-accent-soft px-4 py-3 text-sm font-semibold">{ob.voter.help[p.voter]}</p>}
+          {p.voter === "fr" && <Group question={ob.registered.question} options={ob.registered.options} value={p.registered} onChange={(v) => set({ registered: v })} />}
+          {p.voter === "fr" && p.registered && p.registered !== "oui" && <p className="-mt-3 rounded-2xl bg-accent-soft px-4 py-3 text-sm font-semibold">{ob.registered.help}</p>}
+          <Group question={ob.followsNews.question} options={ob.followsNews.options} value={p.followsNews} onChange={(v) => set({ followsNews: v })} />
+          <Button onClick={next}>{t("Continuer", "Continue")}</Button>
+          {skip()}
         </section>
       )}
 
       {step === 2 && (
         <section className="pop flex flex-col gap-5">
           <div>
-            <h1 className="font-display text-3xl font-extrabold leading-tight">Petit test de niveau</h1>
-            <p className="mt-1 text-muted">3 questions, sans pression. Ça sert juste à choisir par où commencer.</p>
+            <h1 className="font-display text-3xl font-extrabold leading-tight">{t("Petit test, sans pression", "Quick test, no pressure")}</h1>
+            <p className="mt-1 text-muted">{t("3 questions pour choisir des défis à ton niveau. Ce n'est pas noté.", "3 questions to pick challenges at your level. It isn't graded.")}</p>
           </div>
-          {onboarding.knowledge.map((q, qi) => (
+          {ob.knowledge.map((q, qi) => (
             <fieldset key={q.id} className="flex flex-col gap-2">
               <legend className="mb-2 font-display text-lg font-bold">{q.question}</legend>
               <div className="flex flex-col gap-2">
@@ -159,15 +170,18 @@ export function OnboardingClient() {
             </fieldset>
           ))}
           {!checked ? (
-            <Button onClick={() => setChecked(true)} disabled={answers.some((a) => a === null)}>
-              Voir mes réponses
-            </Button>
+            <>
+              <Button onClick={() => setChecked(true)} disabled={answers.some((a) => a === null)}>
+                {t("Voir mes réponses", "See my answers")}
+              </Button>
+              {skip(t("Passer le test", "Skip the test"))}
+            </>
           ) : (
             <>
               <p className="rounded-2xl bg-card px-4 py-3 text-center font-display text-xl font-bold">
-                {knowledge}/3 bonnes réponses
+                {knowledge}/3 {t("bonnes réponses", "right answers")}
               </p>
-              <Button onClick={next}>Continuer</Button>
+              <Button onClick={next}>{t("Continuer", "Continue")}</Button>
             </>
           )}
         </section>
@@ -176,108 +190,81 @@ export function OnboardingClient() {
       {step === 3 && (
         <section className="pop flex flex-col gap-5">
           <div>
-            <h1 className="font-display text-3xl font-extrabold leading-tight">Qu&apos;est-ce qui t&apos;intéresse ?</h1>
-            <p className="mt-1 text-muted">Choisis autant de sujets que tu veux. Ils passent en premier dans ton fil, mais tu verras quand même tous les bords.</p>
+            <h1 className="font-display text-3xl font-extrabold leading-tight">{t("Qu'est-ce qui t'intéresse ?", "What are you interested in?")}</h1>
+            <p className="mt-1 text-muted">{t("Ces sujets passent en premier dans ton fil. Tu verras quand même tous les bords.", "These topics come first in your feed. You'll still see every side.")}</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {topics.map((t) => {
-              const on = p.interests.includes(t.id);
-              return (
-                <Choice key={t.id} selected={on} onClick={() => setP((x) => ({ ...x, interests: x.interests.includes(t.id) ? x.interests.filter((i) => i !== t.id) : [...x.interests, t.id] }))}>
-                  <span aria-hidden>{t.emoji}</span> {t.label}
-                </Choice>
-              );
-            })}
+            {c.topics.map((tp) => (
+              <Choice
+                key={tp.id}
+                selected={p.interests.includes(tp.id)}
+                onClick={() => setP((x) => ({ ...x, interests: x.interests.includes(tp.id) ? x.interests.filter((i) => i !== tp.id) : [...x.interests, tp.id] }))}
+              >
+                <span aria-hidden>{tp.emoji}</span> {tp.label}
+              </Choice>
+            ))}
           </div>
-          <Button onClick={next}>{p.interests.length ? "Continuer" : "Tout m'intéresse"}</Button>
+          <Button onClick={next}>{p.interests.length ? t("Continuer", "Continue") : t("Tout m'intéresse", "Everything interests me")}</Button>
         </section>
       )}
 
       {step === 4 && (
         <section className="pop flex flex-col gap-5">
-          <div>
-            <h1 className="font-display text-3xl font-extrabold leading-tight">{onboarding.ideas.question}</h1>
-            <p className="mt-2 rounded-2xl border border-line bg-card px-4 py-3 text-sm">🔒 {onboarding.ideas.privacy}</p>
+          <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Comment ça marche", "How it works")}</p>
+          <div key={slide} className="pop flex min-h-72 flex-col justify-center gap-3 rounded-[2rem] bg-ink p-6 text-paper">
+            <p className="text-6xl" aria-hidden>
+              {ob.tutorial[slide].emoji}
+            </p>
+            <h1 className="font-display text-3xl font-extrabold leading-tight">{ob.tutorial[slide].title}</h1>
+            <p className="text-[17px] leading-relaxed opacity-90">{ob.tutorial[slide].text}</p>
           </div>
-          <div className="flex flex-col gap-3 rounded-3xl border border-line bg-card p-5">
-            <label htmlFor="ob-position" className="sr-only">
-              Ta position, de 0 (gauche) à 10 (droite)
-            </label>
-            <input
-              id="ob-position"
-              type="range"
-              min={0}
-              max={10}
-              step={1}
-              value={p.position ?? 5}
-              onChange={(e) => {
-                setIdeasTouched(true);
-                set({ position: Number(e.target.value) });
-              }}
-              className={`w-full accent-[var(--accent)] ${ideasTouched ? "" : "opacity-50"}`}
-            />
-            <div className="flex justify-between text-sm font-semibold text-muted">
-              <span>Gauche</span>
-              <span>Centre</span>
-              <span>Droite</span>
-            </div>
-            {!ideasTouched && <p className="text-center text-sm text-muted">Fais glisser le curseur, ou choisis une option ci-dessous.</p>}
+          <div className="flex justify-center gap-2" aria-hidden>
+            {ob.tutorial.map((_, i) => (
+              <span key={i} className={`h-2 rounded-full transition-all ${i === slide ? "w-8 bg-accent" : "w-2 bg-line"}`} />
+            ))}
           </div>
-          <Button onClick={next} disabled={!ideasTouched}>
-            Continuer
-          </Button>
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              variant="secondary"
-              onClick={() => {
-                set({ position: null });
-                setIdeasTouched(false);
-                next();
-              }}
-            >
-              Je ne sais pas encore
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => {
-                set({ position: null });
-                setIdeasTouched(false);
-                next();
-              }}
-            >
-              Je préfère ne pas répondre
-            </Button>
-          </div>
+          {slide < ob.tutorial.length - 1 ? <Button onClick={() => setSlide(slide + 1)}>{t("Suivant", "Next")}</Button> : <Button onClick={next}>{t("J'ai compris", "Got it")}</Button>}
+          {skip()}
         </section>
       )}
 
       {step === 5 && (
         <section className="pop flex flex-col gap-5">
           <div className="rounded-3xl bg-ink p-6 text-paper">
-            <p className="text-sm font-bold uppercase tracking-wider text-accent">Ton niveau</p>
-            <p className="mt-1 font-display text-4xl font-extrabold">{onboarding.levels[level].label}</p>
-            <p className="mt-2 opacity-90">{onboarding.levels[level].text}</p>
+            <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Ton niveau de départ", "Your starting level")}</p>
+            <p className="mt-1 font-display text-4xl font-extrabold">{ob.levels[level].label}</p>
+            <p className="mt-2 opacity-90">{ob.levels[level].text}</p>
+            <p className="mt-2 text-sm opacity-75">{t("Tu peux changer le niveau des défis à tout moment.", "You can change the challenge level at any time.")}</p>
           </div>
           <ul className="flex flex-col gap-3">
             <li className="rounded-2xl border border-line bg-card px-4 py-3">
-              <strong>Ton fil :</strong> des actus de la gauche, du centre, de la droite et de l&apos;extrême droite, plus des infos neutres, en alternance.
-              {p.position !== null && " On commence par les camps les plus éloignés de toi."}
+              <strong>{t("Ton fil :", "Your feed:")}</strong>{" "}
+              {t(
+                "des actus de la gauche, du centre, de la droite et de l'extrême droite, plus des infos neutres, en alternance.",
+                "news from the left, the centre, the right and the far right, plus neutral facts, taking turns.",
+              )}
             </li>
-            {p.interests.length > 0 && (
+            {intl && (
               <li className="rounded-2xl border border-line bg-card px-4 py-3">
-                <strong>Tes sujets en premier :</strong> {p.interests.map((id) => topics.find((t) => t.id === id)?.label).join(", ")}
+                🌍 <strong>{t("Mode international :", "International mode:")}</strong>{" "}
+                {t("on commence par qui peut voter en France et pourquoi la présidentielle te concerne quand même.", "we start with who can vote in France and why the election still matters to you.")}
               </li>
             )}
-            {p.registered !== "oui" && (
+            {p.interests.length > 0 && (
+              <li className="rounded-2xl border border-line bg-card px-4 py-3">
+                <strong>{t("Tes sujets en premier :", "Your topics first:")}</strong> {p.interests.map((id) => c.topicOf(id).label).join(", ")}
+              </li>
+            )}
+            {p.voter === "fr" && p.registered !== "oui" && (
               <li className="rounded-2xl border-2 border-accent bg-accent-soft px-4 py-3">
-                <strong>À faire avant le 12 mars 2027 :</strong> vérifier ton inscription sur les listes électorales.{" "}
-                <a href={onboarding.registered.checkUrl} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-4">
-                  Vérifier sur service-public.fr ↗
+                <strong>{t("À faire avant le 12 mars 2027 :", "To do before 12 March 2027:")}</strong> {t("vérifier ton inscription sur les listes électorales.", "check that you're on the electoral roll.")}{" "}
+                <a href={ob.registered.checkUrl} target="_blank" rel="noopener noreferrer" className="font-semibold underline underline-offset-4">
+                  service-public.fr ↗
                 </a>
               </li>
             )}
           </ul>
-          <Button onClick={finish}>Voir mes actus (+20 voix)</Button>
+          <Button onClick={finish}>{t("Voir mes actus (+20 voix)", "See my news (+20 voix)")}</Button>
         </section>
       )}
     </main>

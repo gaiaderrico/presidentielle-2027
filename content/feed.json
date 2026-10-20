@@ -23,7 +23,8 @@
       "source": {
         "label": "info.gouv.fr",
         "url": "https://www.info.gouv.fr/public/index.php/actualite/tout-ce-qu-il-faut-savoir-sur-l-election-presidentielle"
-      }
+      },
+      "audience": "voter"
     },
     {
       "id": "parrainages",
@@ -86,6 +87,45 @@
       "source": {
         "label": "ici.fr",
         "url": "https://www.ici.fr/infos/politique/presidentielle-2027-qui-sont-les-candidats-declares-1598133"
+      }
+    },
+    {
+      "id": "qui-peut-voter",
+      "kind": "bases",
+      "audience": "intl",
+      "camp": "neutre",
+      "topic": "institutions",
+      "title": "Qui peut voter en France ?",
+      "text": "Pour la présidentielle et les législatives, il faut être de nationalité française. Les citoyen·ne·s de l’UE qui vivent en France peuvent voter aux municipales et aux européennes. Les autres étranger·e·s ne votent pas aux élections politiques.",
+      "source": {
+        "label": "service-public.fr",
+        "url": "https://www.service-public.fr"
+      }
+    },
+    {
+      "id": "presidentielle-te-concerne",
+      "kind": "bases",
+      "audience": "intl",
+      "camp": "neutre",
+      "topic": "etudes",
+      "title": "Même sans voter, elle te concerne",
+      "text": "Le président et son gouvernement décident de la politique des visas et des titres de séjour. Depuis 2019, les universités peuvent aussi demander des frais d’inscription plus élevés aux étudiant·e·s non européen·ne·s.",
+      "source": {
+        "label": "Campus France",
+        "url": "https://www.campusfrance.org"
+      }
+    },
+    {
+      "id": "elections-etudiantes",
+      "kind": "bases",
+      "audience": "intl",
+      "camp": "neutre",
+      "topic": "etudes",
+      "title": "Tu peux voter… aux élections étudiantes",
+      "text": "Les élections des conseils de ton université et du CROUS sont ouvertes aux étudiant·e·s inscrit·e·s, quelle que soit leur nationalité.",
+      "source": {
+        "label": "etudiant.gouv.fr",
+        "url": "https://www.etudiant.gouv.fr"
       }
     }
   ]

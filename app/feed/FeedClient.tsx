@@ -5,8 +5,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { IconClose, IconDown, IconInfo, IconUp } from "@/components/Icons";
 import { InlineChallenge } from "@/components/InlineChallenge";
 import { Button, ButtonLink } from "@/components/ui";
-import { campLabels, topicOf, topics, type BlocCamp, type Camp, type FeedCard } from "@/lib/content";
+import type { BlocCamp, Camp, FeedCard } from "@/lib/content";
 import { buildPool, campRotation, formatDate, pickNext } from "@/lib/feed";
+import { useContent, useT } from "@/lib/i18n";
 import { useProfile } from "@/lib/profile";
 import { readSession, writeSession } from "@/lib/storage";
 import { track } from "@/lib/track";
@@ -29,6 +30,7 @@ type Section = { kind: "card"; card: FeedCard; n: number } | { kind: "challenge"
 
 export function FeedClient() {
   const profile = useProfile();
+  const t = useT();
   const [mounted, setMounted] = useState(false);
   const [skipProfile, setSkipProfile] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -38,13 +40,13 @@ export function FeedClient() {
     return (
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-4 px-4 py-8">
         <div className="rounded-[2rem] bg-ink p-6 text-paper">
-          <p className="text-sm font-bold uppercase tracking-wider text-accent">Ton fil d&apos;actu</p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold leading-tight">Une minute pour l&apos;adapter à toi ?</h1>
-          <p className="mt-2 opacity-90">Ton niveau et tes sujets, pour des actus utiles. Tu verras toujours tous les bords.</p>
+          <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Ton fil d'actu", "Your news feed")}</p>
+          <h1 className="mt-2 font-display text-3xl font-extrabold leading-tight">{t("Une minute pour l'adapter à toi ?", "One minute to make it yours?")}</h1>
+          <p className="mt-2 opacity-90">{t("Ton niveau et tes sujets, pour des actus utiles. Tu verras toujours tous les bords.", "Your level and topics, for useful news. You will always see every side.")}</p>
         </div>
-        <ButtonLink href="/bienvenue">Faire mon profil</ButtonLink>
+        <ButtonLink href="/bienvenue">{t("Faire mon profil", "Set up my profile")}</ButtonLink>
         <Button variant="secondary" onClick={() => setSkipProfile(true)}>
-          Continuer sans profil
+          {t("Continuer sans profil", "Continue without a profile")}
         </Button>
       </main>
     );
@@ -54,7 +56,9 @@ export function FeedClient() {
 
 function Feed() {
   const profile = useProfile();
-  const pool = useMemo(() => buildPool(profile), [profile]);
+  const c = useContent();
+  const t = useT();
+  const pool = useMemo(() => buildPool(profile, c), [profile, c]);
   const [reactions, setReactions] = useState<Record<string, "up" | "down">>({});
   const [order, setOrder] = useState<string[]>([]);
   const [current, setCurrent] = useState(0);
@@ -119,8 +123,8 @@ function Feed() {
     const all = readSession<string[]>("p27.seenCards", []);
     writeSession("p27.seenCards", [...all.filter((x) => x !== card.id), card.id]);
     track("feed_card_view", { cardId: card.id, camp: card.camp, topic: card.topic });
-    addVoix(VOIX.feedCard, "Carte lue", `feed:${card.id}`);
-  }, []);
+    addVoix(VOIX.feedCard, t("Carte lue", "Card read"), `feed:${card.id}`);
+  }, [t]);
 
   useEffect(() => {
     const root = scroller.current;
@@ -175,7 +179,7 @@ function Feed() {
           <span className="text-xs font-bold tabular-nums text-muted" aria-live="polite">
             {currentCardNumber}/{total}
           </span>
-          <button onClick={() => setShowInfo(true)} className="grid h-9 w-9 place-items-center rounded-full border border-line bg-card text-muted" aria-label="Pourquoi ces actus ?">
+          <button onClick={() => setShowInfo(true)} className="grid h-9 w-9 place-items-center rounded-full border border-line bg-card text-muted" aria-label={t("Pourquoi ces actus ?", "Why these news?")}>
             <IconInfo width={18} height={18} />
           </button>
         </div>
@@ -187,7 +191,7 @@ function Feed() {
           onClick={() => goTo(Math.max(current - 1, 0))}
           disabled={current === 0}
           className="grid h-12 w-12 place-items-center rounded-full border border-line bg-card/95 shadow-md transition disabled:opacity-30"
-          aria-label="Carte précédente"
+          aria-label={t("Carte précédente", "Previous card")}
         >
           <IconUp />
         </button>
@@ -195,7 +199,7 @@ function Feed() {
           onClick={() => goTo(Math.min(current + 1, sections.length - 1))}
           disabled={atEnd}
           className="grid h-12 w-12 place-items-center rounded-full bg-accent text-accent-ink shadow-md transition disabled:opacity-30"
-          aria-label="Carte suivante"
+          aria-label={t("Carte suivante", "Next card")}
         >
           <IconDown />
         </button>
@@ -215,11 +219,11 @@ function Feed() {
                 <p className="text-4xl" aria-hidden>
                   🎉
                 </p>
-                <h2 className="font-display text-3xl font-extrabold leading-tight">Tu es à jour sur la campagne !</h2>
-                <p className="opacity-90">De nouvelles actus arrivent régulièrement jusqu&apos;au 18 avril.</p>
-                <ButtonLink href="/quiz">Tester ce que j&apos;ai retenu</ButtonLink>
+                <h2 className="font-display text-3xl font-extrabold leading-tight">{t("Tu es à jour sur la campagne !", "You're up to date on the campaign!")}</h2>
+                <p className="opacity-90">{t("De nouvelles actus arrivent régulièrement jusqu'au 18 avril.", "New stories keep coming until 18 April.")}</p>
+                <ButtonLink href="/quiz">{t("Tester ce que j'ai retenu", "Test what I remember")}</ButtonLink>
                 <Link href="/defis" className="inline-flex min-h-12 items-center justify-center rounded-2xl border-2 border-paper/30 font-semibold">
-                  Voir les défis
+                  {t("Voir les défis", "See the challenges")}
                 </Link>
               </div>
             )}
@@ -234,8 +238,10 @@ function Feed() {
 }
 
 function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction?: "up" | "down"; onReact: (r: "up" | "down") => void; first: boolean }) {
-  const topic = topicOf(card.topic);
-  const date = formatDate(card.date);
+  const c = useContent();
+  const t = useT();
+  const topic = c.topicOf(card.topic);
+  const date = formatDate(card.date, c.lang);
   return (
     <div className="flex flex-col gap-3">
       <article className="flex flex-col overflow-hidden rounded-[2rem] border border-line bg-card shadow-sm">
@@ -244,7 +250,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
             <span className="text-lg" aria-hidden>
               {card.kind === "bases" ? "📘" : topic.emoji}
             </span>
-            {card.kind === "bases" ? "Les bases" : topic.label}
+            {card.kind === "bases" ? t("Les bases", "The basics") : topic.label}
           </span>
           {date && <span className="font-semibold text-muted">{date}</span>}
         </div>
@@ -252,7 +258,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
           {card.kind === "actu" && (
             <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-muted">
               <CampIcon camp={card.camp} />
-              {campLabels[card.camp]}
+              {c.campLabels[card.camp]}
               {card.actor && <span className="normal-case tracking-normal"> · {card.actor}</span>}
             </span>
           )}
@@ -260,13 +266,13 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
           <p className="text-[17px] leading-relaxed">{card.text}</p>
           {card.why && (
             <p className="rounded-2xl bg-paper px-4 py-3 text-[15px]">
-              <strong>Pour toi :</strong> {card.why}
+              <strong>{t("Pour toi :", "For you:")}</strong> {card.why}
             </p>
           )}
           {card.sides && (
             <details className="group rounded-2xl bg-paper px-4 py-3">
               <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-2 text-sm font-bold">
-                Ce que dit chaque camp ({card.sides.length})
+                {t("Ce que dit chaque camp", "What each side says")} ({card.sides.length})
                 <span className="transition group-open:rotate-180" aria-hidden>
                   ▾
                 </span>
@@ -293,7 +299,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
             aria-pressed={reaction === r}
             className={`min-h-12 rounded-2xl border-2 font-semibold transition ${reaction === r ? "border-accent bg-accent-soft text-accent" : "border-line bg-card"}`}
           >
-            {r === "up" ? "👍 Intéressant" : "👎 Bof"}
+            {r === "up" ? t("👍 Intéressant", "👍 Interesting") : t("👎 Bof", "👎 Meh")}
           </button>
         ))}
       </div>
@@ -302,7 +308,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
           <span className="animate-bounce" aria-hidden>
             ↓
           </span>
-          Fais glisser vers le haut, ou touche la flèche orange
+          {t("Fais glisser vers le haut, ou touche la flèche orange", "Swipe up, or tap the orange arrow")}
         </p>
       )}
     </div>
@@ -310,6 +316,8 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
 }
 
 function InfoSheet({ onClose, interests, position }: { onClose: () => void; interests: string[]; position: number | null }) {
+  const c = useContent();
+  const t = useT();
   const rotation = campRotation(position);
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50" onClick={onClose}>
@@ -323,21 +331,29 @@ function InfoSheet({ onClose, interests, position }: { onClose: () => void; inte
       >
         <div className="flex items-start justify-between gap-3">
           <h2 id="why-title" className="font-display text-2xl font-bold">
-            Pourquoi ces actus ?
+            {t("Pourquoi ces actus ?", "Why these news?")}
           </h2>
-          <button onClick={onClose} className="grid h-10 w-10 place-items-center rounded-full border border-line" aria-label="Fermer">
+          <button onClick={onClose} className="grid h-10 w-10 place-items-center rounded-full border border-line" aria-label={t("Fermer", "Close")}>
             <IconClose width={18} height={18} />
           </button>
         </div>
         <ul className="mt-4 flex flex-col gap-3 text-[15px]">
-          <li>🔁 On alterne les actus de la gauche, du centre, de la droite et de l&apos;extrême droite, avec des infos neutres entre les deux.</li>
-          <li>👍 Si tu aimes surtout un camp, on te montre davantage les autres : c&apos;est le principe « autre point de vue ».</li>
-          {interests.length > 0 && <li>⭐ Tes sujets passent en premier dans chaque camp : {interests.map((id) => topics.find((t) => t.id === id)?.label).join(", ")}.</li>}
-          {position !== null && <li>🧭 Tu as indiqué ta position (gardée sur ton téléphone) : on commence par {campLabels[rotation[0]].toLowerCase()}.</li>}
-          <li>✅ Chaque carte a une source. On ne te dira jamais pour qui voter.</li>
+          <li>🔁 {t("On alterne les actus de la gauche, du centre, de la droite et de l'extrême droite, avec des infos neutres entre les deux.", "We alternate news from the left, the centre, the right and the far right, with neutral facts in between.")}</li>
+          <li>👍 {t("Si tu aimes surtout un camp, on te montre davantage les autres : c'est le principe « autre point de vue ».", "If you mostly like one side, we show you more of the others: that's the \"other point of view\" rule.")}</li>
+          {interests.length > 0 && (
+            <li>
+              ⭐ {t("Tes sujets passent en premier dans chaque camp :", "Your topics come first within each side:")} {interests.map((id) => c.topicOf(id).label).join(", ")}.
+            </li>
+          )}
+          {position !== null && (
+            <li>
+              🧭 {t("Tu as indiqué ta position (gardée sur ton téléphone) : on commence par", "You set your position (kept on your phone): we start with")} {c.campLabels[rotation[0]].toLowerCase()}.
+            </li>
+          )}
+          <li>✅ {t("Chaque carte a une source. On ne te dira jamais pour qui voter.", "Every card has a source. We will never tell you who to vote for.")}</li>
         </ul>
         <Link href="/profil" className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-2xl border-2 border-line font-semibold">
-          Modifier mes sujets
+          {t("Modifier mes sujets", "Edit my topics")}
         </Link>
       </div>
     </div>

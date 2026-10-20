@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { site } from "@/lib/content";
-import { levelFor } from "@/lib/levels";
+import { setLang, useContent, useLang, useT } from "@/lib/i18n";
+import { levelIndexFor } from "@/lib/levels";
 import { useVoix, type GainDetail } from "@/lib/voix";
 import { IconBack } from "./Icons";
 
@@ -19,6 +19,9 @@ function parentOf(path: string): string {
 
 export function TopBar() {
   const { total } = useVoix();
+  const c = useContent();
+  const lang = useLang();
+  const t = useT();
   const path = usePathname();
   const router = useRouter();
   const [gains, setGains] = useState<{ id: number; amount: number }[]>([]);
@@ -43,7 +46,7 @@ export function TopBar() {
           <button
             onClick={() => router.push(parentOf(path))}
             className="-ml-1 grid h-11 w-11 shrink-0 place-items-center rounded-full text-ink transition hover:bg-line/60"
-            aria-label="Retour"
+            aria-label={t("Retour", "Back")}
           >
             <IconBack />
           </button>
@@ -53,18 +56,26 @@ export function TopBar() {
           </span>
         )}
         <Link href={path === "/" ? "/" : "/feed"} className="min-w-0 truncate font-display text-[15px] font-bold leading-tight">
-          {site.appName}
+          {c.site.appName}
         </Link>
         <span className="flex-1" />
+        <button
+          onClick={() => setLang(lang === "fr" ? "en" : "fr")}
+          className="grid h-11 min-w-11 shrink-0 place-items-center rounded-full border border-line bg-card px-2 text-xs font-extrabold tracking-wider"
+          aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
+          title={lang === "fr" ? "English" : "Français"}
+        >
+          {lang === "fr" ? "EN" : "FR"}
+        </button>
         <Link
           href="/ma-ville"
           className="relative inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line bg-card py-1 pl-1.5 pr-3 text-sm font-bold tabular-nums shadow-sm"
-          aria-label={`Ma ville : ${levelFor(total).name}, ${total} voix`}
+          aria-label={`${t("Ma ville :", "My city:")} ${c.levels[levelIndexFor(total)].name}, ${total} voix`}
         >
           <span className="grid h-8 w-8 place-items-center rounded-full bg-accent-soft text-base" aria-hidden>
             🏘️
           </span>
-          <span>{total} voix</span>
+          <span className="whitespace-nowrap">{total} voix</span>
           {gains.map((g) => (
             <span key={g.id} className="float-up pointer-events-none absolute -bottom-1 right-2 whitespace-nowrap text-sm font-bold text-accent" aria-hidden>
               +{g.amount} voix

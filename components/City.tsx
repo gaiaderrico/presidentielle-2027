@@ -1,5 +1,7 @@
+"use client";
+
 import type { ReactNode, Ref } from "react";
-import { cityBuildings } from "@/lib/content";
+import { useContent, useT } from "@/lib/i18n";
 import { levelIndexFor } from "@/lib/levels";
 
 // Fixed illustration palette (the scene keeps its own daylight in dark mode, and exports cleanly as a PNG).
@@ -175,6 +177,8 @@ type CityProps = {
 };
 
 export function City({ voix, label, svgRef, className = "", interactive = false, selected = null, onSelect }: CityProps) {
+  const c = useContent();
+  const t = useT();
   const level = levelIndexFor(voix);
   const visible = layers.map((_, i) => i).filter((i) => i <= level);
   const back = visible.filter((i) => BACK.includes(i));
@@ -184,7 +188,7 @@ export function City({ voix, label, svgRef, className = "", interactive = false,
       ref={svgRef}
       viewBox="0 0 360 200"
       role="img"
-      aria-label={label ?? "Ta ville"}
+      aria-label={label ?? t("Ta ville", "Your city")}
       className={`block h-auto w-full max-w-full rounded-3xl ${className}`}
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -202,7 +206,7 @@ export function City({ voix, label, svgRef, className = "", interactive = false,
       <rect y={186} width="360" height={12} fill={P.road} />
       {front.map((i) => layers[i](i * 90))}
       {interactive &&
-        [...cityBuildings]
+        [...c.cityBuildings]
           .sort((a, b) => (BACK.includes(b.level) ? 1 : 0) - (BACK.includes(a.level) ? 1 : 0))
           .map((b) => {
             const built = b.level <= level;
@@ -213,7 +217,7 @@ export function City({ voix, label, svgRef, className = "", interactive = false,
                 key={b.id}
                 role="button"
                 tabIndex={0}
-                aria-label={`${b.name}${built ? "" : " (à débloquer)"}`}
+                aria-label={`${b.name}${built ? "" : t(" (à débloquer)", " (locked)")}`}
                 onClick={() => onSelect?.(b.id)}
                 onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onSelect?.(b.id))}
                 style={{ cursor: "pointer", outline: "none" }}

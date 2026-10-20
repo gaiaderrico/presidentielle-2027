@@ -55,6 +55,7 @@ export async function POST(req: Request) {
   }
 
   const starts = events.filter((e) => e.event === "challenge_start" && p(e, "origin") !== "feed");
+  const levelsChosen = countBy(starts, (e) => String(p(e, "level") ?? "progressif"));
   const inlineStarts = sessionsWith(events.filter((e) => p(e, "origin") === "feed-inline"), "challenge_start");
   const inlineFinishes = sessionsWith(events.filter((e) => p(e, "origin") === "feed-inline"), "challenge_finish");
   const reachedThreeCards = [...new Set(events.filter((e) => e.event === "feed_card_view" && e.session_id).map((e) => e.session_id as string))].filter(
@@ -135,6 +136,7 @@ export async function POST(req: Request) {
     friends: { opened: new Set(friendLandings.map((e) => e.session_id)).size, finished: new Set(friendFinishes.map((e) => e.session_id)).size, perCode },
     challengesChosen: countBy(starts, (e) => String(p(e, "challengeType"))),
     modesChosen: countBy(starts, (e) => String(p(e, "mode"))),
+    levelsChosen,
     sharedPerType: countBy(shares, (e) => String(p(e, "challengeType"))),
     shareMethods: countBy(shares, (e) => String(p(e, "method"))),
     items: itemStats,
@@ -155,6 +157,8 @@ export async function POST(req: Request) {
       completed: onboard.length,
       levels: countBy(onboard, (e) => String(p(e, "level"))),
       registered: countBy(onboard, (e) => String(p(e, "registered"))),
+      voter: countBy(onboard, (e) => String(p(e, "voter"))),
+      testSkipped: onboard.filter((e) => p(e, "testSkipped") === true).length,
       interests: interestCounts,
     },
     city: { buildingOpens: countBy(buildingOpens, (e) => String(p(e, "building"))) },

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { ChallengeType } from "@/lib/content";
+import { useT } from "@/lib/i18n";
 import { track } from "@/lib/track";
 import { VOIX, addVoix } from "@/lib/voix";
 import { Button } from "./ui";
@@ -16,7 +17,8 @@ type Props = {
   title?: string;
 };
 
-export function ShareSheet({ open, onClose, message, url, challengeType, code, title = "Défie un·e ami·e" }: Props) {
+export function ShareSheet({ open, onClose, message, url, challengeType, code, title }: Props) {
+  const t = useT();
   const [copied, setCopied] = useState(false);
   const [canShare, setCanShare] = useState(false);
 
@@ -81,13 +83,20 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
       >
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-line" aria-hidden />
         <h2 id="share-title" className="font-display text-xl font-bold">
-          {title}
+          {title ?? t("Défie un·e ami·e", "Challenge a friend")}
         </h2>
+        {challengeType !== "city" && (
+          <ol className="mt-3 flex flex-col gap-1 text-[15px] text-muted">
+            <li>1. {t("Envoie ce message à un ami.", "Send this message to a friend.")}</li>
+            <li>2. {t("Il ouvre le lien et joue les mêmes questions, sans inscription.", "They open the link and play the same questions, no sign-up.")}</li>
+            <li>3. {t(`Vous comparez vos scores, et tu gagnes +${VOIX.friendPlayed} voix quand il a joué.`, `You compare scores, and you get +${VOIX.friendPlayed} voix once they've played.`)}</li>
+          </ol>
+        )}
         <p id="share-text" className="mt-3 rounded-2xl bg-paper p-4 text-[15px] leading-snug">
           {message}
         </p>
         <div className="mt-4 flex flex-col gap-3">
-          {canShare && <Button onClick={webShare}>Partager</Button>}
+          {canShare && <Button onClick={webShare}>{t("Partager", "Share")}</Button>}
           <a
             href={`https://wa.me/?text=${encodeURIComponent(message)}`}
             target="_blank"
@@ -98,10 +107,10 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
             WhatsApp
           </a>
           <Button variant="secondary" onClick={copy} aria-live="polite">
-            {copied ? "Lien copié !" : "Copier le lien"}
+            {copied ? t("Lien copié !", "Link copied!") : t("Copier le lien", "Copy link")}
           </Button>
           <button onClick={onClose} className="min-h-11 text-muted underline-offset-4 hover:underline">
-            Fermer
+            {t("Fermer", "Close")}
           </button>
         </div>
         <p className="sr-only">{url}</p>

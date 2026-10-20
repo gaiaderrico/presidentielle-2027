@@ -1,49 +1,112 @@
 {
   "items": [
     {
-      "id": "q-inscription",
-      "question": "Jusqu'à quand peut-on s'inscrire sur les listes électorales ?",
-      "options": [
-        "La veille du vote",
-        "Le 12 mars 2027",
-        "Le 1er janvier 2027"
-      ],
+      "id": "q-duree-mandat",
+      "question": "Pour combien de temps le président de la République est-il élu ?",
+      "options": ["4 ans", "5 ans", "7 ans"],
       "answer": 1,
-      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027. C'est la procuration qu'on peut faire jusqu'à la veille.",
+      "explanation": "Il est élu pour cinq ans au suffrage universel direct, et personne ne peut faire plus de deux mandats consécutifs.",
       "source": {
-        "label": "info.gouv.fr",
-        "url": "https://www.info.gouv.fr/public/index.php/actualite/tout-ce-qu-il-faut-savoir-sur-l-election-presidentielle"
-      }
+        "label": "Constitution, art. 6 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "q-second-tour",
+      "question": "Qui peut se présenter au second tour de la présidentielle ?",
+      "options": ["Tous les candidats ayant plus de 12,5 % des voix", "Les trois candidats arrivés en tête", "Les deux candidats arrivés en tête"],
+      "answer": 2,
+      "explanation": "Seuls les deux candidats arrivés en tête au 1er tour (après d'éventuels retraits) peuvent se présenter au second tour.",
+      "source": {
+        "label": "Constitution, art. 7 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "q-premier-ministre",
+      "question": "Qui nomme le Premier ministre ?",
+      "options": ["Le président de la République", "L'Assemblée nationale", "Le Sénat"],
+      "answer": 0,
+      "explanation": "Le président de la République nomme le Premier ministre (article 8 de la Constitution).",
+      "source": {
+        "label": "Constitution, art. 8 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 1
+    },
+    {
+      "id": "q-inscription",
+      "question": "Jusqu'à quand peut-on s'inscrire sur les listes électorales pour la présidentielle ?",
+      "options": ["La veille du vote", "Le 12 mars 2027", "Le 1er janvier 2027"],
+      "answer": 1,
+      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027, en ligne comme en mairie. C'est la procuration qu'on peut faire jusqu'à la veille.",
+      "source": {
+        "label": "Toute l'Europe",
+        "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-calendrier-dates-inscription-candidats-vote/"
+      },
+      "difficulty": 2
     },
     {
       "id": "q-parrainages",
-      "question": "Combien de parrainages faut-il pour être candidat ?",
-      "options": [
-        "100",
-        "500",
-        "1 000"
-      ],
+      "question": "Combien de parrainages d'élus faut-il au minimum pour être candidat ?",
+      "options": ["100", "500", "1 000"],
       "answer": 1,
-      "explanation": "Il faut 500 signatures d'élus, venant d'au moins 30 départements différents.",
+      "explanation": "Il faut au moins 500 signatures d'élus, venant d'au moins 30 départements ou collectivités d'outre-mer différents.",
       "source": {
-        "label": "info.gouv.fr",
-        "url": "https://www.info.gouv.fr/actualite/presidentielle-2027-date-a-retenir-et-informations-cles"
-      }
+        "label": "Toute l'Europe",
+        "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-calendrier-dates-inscription-candidats-vote/"
+      },
+      "difficulty": 2
     },
     {
       "id": "q-primaire",
       "question": "Qui a remporté la primaire de la gauche sociale-démocrate ?",
-      "options": [
-        "Olivier Faure",
-        "Raphaël Glucksmann",
-        "Marine Tondelier"
-      ],
+      "options": ["Olivier Faure", "Raphaël Glucksmann", "Ségolène Royal"],
       "answer": 1,
-      "explanation": "Raphaël Glucksmann l’a emporté dès le 1er tour, le 11 octobre 2026, avec environ 66 % des voix (14,5 % pour Olivier Faure).",
+      "explanation": "Raphaël Glucksmann l'a emporté dès le 1er tour, le 11 octobre 2026, avec 66,17 % des voix (14,46 % pour Olivier Faure).",
       "source": {
         "label": "Public Sénat",
         "url": "https://www.publicsenat.fr/actualites/politique/primaire-de-la-gauche-raphael-glucksmann-plie-le-match-et-remporte-le-scrutin-des-le-premier-tour-avec-66"
-      }
+      },
+      "difficulty": 2
+    },
+    {
+      "id": "q-age-candidat",
+      "question": "Quel âge faut-il avoir au minimum pour être candidat à la présidentielle ?",
+      "options": ["18 ans", "23 ans", "35 ans"],
+      "answer": 0,
+      "explanation": "Il faut avoir au moins 18 ans. Jusqu'à une loi organique de 2011, il fallait avoir 23 ans.",
+      "source": {
+        "label": "Conseil constitutionnel",
+        "url": "https://www.conseil-constitutionnel.fr/nouveaux-cahiers-du-conseil-constitutionnel/les-parrainages-a-l-election-presidentielle"
+      },
+      "difficulty": 3
+    },
+    {
+      "id": "q-proclamation",
+      "question": "Qui proclame les résultats officiels de l'élection présidentielle ?",
+      "options": ["Le ministère de l'Intérieur", "Le Conseil constitutionnel", "L'Assemblée nationale"],
+      "answer": 1,
+      "explanation": "Le Conseil constitutionnel proclame les résultats officiels ; pour le second tour, au plus tard le 12 mai 2027.",
+      "source": {
+        "label": "Toute l'Europe",
+        "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-calendrier-dates-inscription-candidats-vote/"
+      },
+      "difficulty": 3
+    },
+    {
+      "id": "q-delai-tours",
+      "question": "Combien de temps sépare les deux tours de la présidentielle ?",
+      "options": ["Une semaine", "Deux semaines", "Un mois"],
+      "answer": 1,
+      "explanation": "Le second tour a lieu le quatorzième jour après le premier : le 2 mai 2027, deux semaines après le 18 avril.",
+      "source": {
+        "label": "Constitution, art. 7 (Conseil constitutionnel)",
+        "url": "https://www.conseil-constitutionnel.fr/le-bloc-de-constitutionnalite/texte-integral-de-la-constitution-du-4-octobre-1958-en-vigueur"
+      },
+      "difficulty": 3
     }
   ]
 }
