@@ -1,9 +1,8 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import { levels } from "./content";
 import { levelFor, levelIndexFor, nextLevel } from "./levels";
-import { readJSON, writeJSON } from "./storage";
+import { createPersistedStore } from "./store";
 import { track } from "./track";
 
 export const VOIX = {
@@ -11,6 +10,8 @@ export const VOIX = {
   miniQuizCorrect: 5,
   challengeCorrect: 10,
   challengeFinish: 20,
+  streak: 5, // each right answer from the 3rd in a row
+
   share: 30,
   friendPlayed: 50,
   predictions: 10,
@@ -26,22 +27,10 @@ export type VoixState = {
   credited: Record<string, number>; // friend plays already credited per code
 };
 
-const KEY = "p27.voix";
 const EMPTY: VoixState = { total: 0, history: [], awarded: {}, myCodes: [], credited: {} };
-
-let state: VoixState | null = null;
-const listeners = new Set<() => void>();
-
-function load(): VoixState {
-  if (!state) state = { ...EMPTY, ...readJSON<VoixState>(KEY, EMPTY) };
-  return state;
-}
-
-function save(next: VoixState) {
-  state = next;
-  writeJSON(KEY, next);
-  listeners.forEach((l) => l());
-}
+const store = createPersistedStore<VoixState>("p27.voix", EMPTY);
+const load = store.get;
+const save = store.set;
 
 export { levelFor, nextLevel };
 
@@ -102,11 +91,4 @@ export function creditFriendPlays(counts: Record<string, number>) {
   for (let i = 0; i < newPlays; i++) addVoix(VOIX.friendPlayed, "Un·e ami·e a joué ton défi");
 }
 
-function subscribe(cb: () => void) {
-  listeners.add(cb);
-  return () => listeners.delete(cb);
-}
-
-export function useVoix(): VoixState {
-  return useSyncExternalStore(subscribe, load, () => EMPTY);
-}
+export const useVoix = store.use;

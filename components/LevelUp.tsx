@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { levels } from "@/lib/content";
+import { haptic } from "@/lib/feedback";
+import { hashSeed } from "@/lib/rng";
+import { getSessionId } from "@/lib/session";
 import { useVoix, type LevelUpDetail } from "@/lib/voix";
-import { City } from "./City";
+import { City, timeOfDay } from "./City";
 import { Button } from "./ui";
 
 export function LevelUp() {
@@ -12,7 +15,10 @@ export function LevelUp() {
   const { total } = useVoix();
 
   useEffect(() => {
-    const on = (e: Event) => setIndex((e as CustomEvent<LevelUpDetail>).detail.index);
+    const on = (e: Event) => {
+      haptic("levelUp");
+      setIndex((e as CustomEvent<LevelUpDetail>).detail.index);
+    };
     window.addEventListener("voix:levelup", on);
     return () => window.removeEventListener("voix:levelup", on);
   }, []);
@@ -22,7 +28,7 @@ export function LevelUp() {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/50 p-4 sm:items-center" role="dialog" aria-modal="true" aria-labelledby="levelup-title">
       <div className="pop w-full max-w-md rounded-3xl bg-card p-5 shadow-xl">
-        <City voix={Math.max(total, level.min)} label={`Ta ville est maintenant ${level.withArticle}`} />
+        <City voix={Math.max(total, level.min)} label={`Ta ville est maintenant ${level.withArticle}`} seed={hashSeed(getSessionId())} time={timeOfDay()} />
         <h2 id="levelup-title" className="mt-4 font-display text-2xl font-bold">
           Ta ville devient {level.withArticle} !
         </h2>

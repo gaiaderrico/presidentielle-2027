@@ -86,3 +86,16 @@ _None yet._
 - **We are right if:** at least 50 % (5 out of 10 testers) finish at least one challenge.
 - **Why the change:** decided by the team on 2026-10-20. The share rate (v1, ≥ 40 %) is kept as a secondary metric in /stats. The course grades decisions on evidence, so log whether v2 was set before or after seeing test results.
 - 2026-10-20 (later): threshold lowered by the team from 50 % to **40 %** (4 out of 10 testers). At that moment the measured rate was 26 % (5 of 19 tagged testers).
+
+## 2026-10-20: game feel and city polish (design / game-design skills)
+| Decision | Why |
+|---|---|
+| Answer feedback: vibration, a shake on a wrong answer, a bounce on a right one, a moving progress bar | "Juice": feedback makes each answer feel like it counts (game-design-core). Aims at the primary metric, finishing a challenge |
+| Streak: from the 3rd right answer in a row, +5 voix per answer and a "🔥 Série ×N" badge | A short reward loop inside a challenge. Small bonus, so the level thresholds stay the same |
+| Fixed: a wrong answer in the mini-quiz now shows in red (it stayed white before) | Found while testing: `bg-card` was overriding `bg-bad-soft` |
+| City decor generated from a seed (session id): clouds, birds, stars, trees on the hill. One more tree every 40 voix | Each player's city is their own and stays identical on every visit; progress is visible between two levels (procedural generation) |
+| Sky follows the time of day (day / dusk / night) | A small surprise for players who come back (open-world "micro-discoveries") |
+| Only the next building to unlock is highlighted (orange animated outline) + a "Prochaine découverte" card | One clear landmark to aim for instead of every locked building looking the same (open-world wayfinding) |
+| Bottom sheets: slide up, grabber, drag down or Escape to close; thinner borders, translucent bars | Native iOS feel (apple-ui-designer) |
+| `voix` and `profile` share one typed persisted store (`lib/store.ts`) | One data flow for all local state (Zustand-style pattern, no new dependency) |
+| Not done: a daily streak / daily goal | Feature creep: it does not help the round-1 test (finish one challenge) |

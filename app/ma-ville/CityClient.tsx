@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { City } from "@/components/City";
+import { City, timeOfDay, type TimeOfDay } from "@/components/City";
 import { IconClose, IconLock } from "@/components/Icons";
 import { ShareSheet } from "@/components/ShareSheet";
+import { Sheet } from "@/components/Sheet";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import { cityBuildings, levels, site, type CityBuilding } from "@/lib/content";
 import { levelFor, levelIndexFor, nextLevel } from "@/lib/levels";
-import { siteUrl } from "@/lib/session";
+import { haptic } from "@/lib/feedback";
+import { hashSeed } from "@/lib/rng";
+import { getSessionId, siteUrl } from "@/lib/session";
 import { track } from "@/lib/track";
 import { useVoix } from "@/lib/voix";
 
@@ -47,11 +50,15 @@ export function CityClient() {
   const [mounted, setMounted] = useState(false);
   const [sharing, setSharing] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [seed, setSeed] = useState(2027);
+  const [time, setTime] = useState<TimeOfDay>("day");
   const svgRef = useRef<SVGSVGElement>(null);
   const tracked = useRef(false);
 
   useEffect(() => {
     setMounted(true);
+    setSeed(hashSeed(getSessionId()));
+    setTime(timeOfDay());
     if (tracked.current) return;
     tracked.current = true;
     track("city_view");
@@ -65,8 +72,10 @@ export function CityClient() {
   const progress = next ? (total - level.min) / (next.min - level.min) : 1;
   const message = `Ma ville est ${level.withArticle} avec ${total} voix sur ${site.appName}. Fais grandir la tienne 👉 ${siteUrl()}`;
   const building = cityBuildings.find((b) => b.id === selected) ?? null;
+  const upcoming = next ? cityBuildings.filter((b) => b.level === levelIdx + 1) : [];
 
   const open = (id: string) => {
+    haptic("tap");
     setSelected(id);
     const b = cityBuildings.find((x) => x.id === id);
     track("city_building_open", { building: id, unlocked: b ? b.level <= levelIdx : false });
@@ -101,7 +110,7 @@ export function CityClient() {
       <div className="-mx-4">
         <div className="no-scrollbar overflow-x-auto px-4">
           <div className="w-[170%] max-w-[54rem] sm:w-full">
-            <City voix={total} svgRef={svgRef} label={`Ta ville : ${level.name}, ${total} voix`} interactive selected={selected} onSelect={open} className="shadow-sm" />
+            <City voix={total} svgRef={svgRef} label={`Ta ville : ${level.name}, ${total} voix`} interactive selected={selected} onSelect={open} seed={seed} time={time} className="shadow-sm" />
           </div>
         </div>
         <p className="mt-2 px-4 text-center text-sm font-semibold text-muted">👆 Touche un bâtiment pour l&apos;explorer · ↔ fais glisser pour te balader</p>
@@ -115,6 +124,22 @@ export function CityClient() {
         </div>
         <p className="text-sm font-semibold">{next ? `Encore ${next.min - total} voix pour devenir ${next.withArticle}` : "Niveau maximum : ta ville est une Capitale !"}</p>
       </div>
+
+      {upcoming.length > 0 && (
+        <button
+          onClick={() => open(upcoming[0].id)}
+          className="flex items-center gap-3 rounded-2xl bg-card p-3 text-left shadow-[0_1px_3px_rgba(27,42,65,0.08)] ring-1 ring-line/70 transition active:scale-[0.99]"
+        >
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-soft text-2xl" aria-hidden>
+            {upcoming[0].emoji}
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-xs font-bold uppercase tracking-wider text-accent">Prochaine découverte</span>
+            <span className="block truncate font-semibold">{upcoming.map((b) => b.name).join(" et ")}</span>
+          </span>
+          <span className="shrink-0 text-sm font-bold tabular-nums text-muted">{next!.min - total} voix</span>
+        </button>
+      )}
 
       <section className="flex flex-col gap-3" aria-label="Les bâtiments de ta ville">
         <h2 className="font-display text-xl font-bold">Les bâtiments</h2>
@@ -179,15 +204,7 @@ export function CityClient() {
 function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: boolean; total: number; onClose: () => void }) {
   const unlock = levels[b.level];
   return (
-    <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/40" onClick={onClose}>
-      <div
-        className="pop max-h-[85dvh] w-full max-w-md overflow-y-auto rounded-t-[2rem] bg-card p-6"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="building-title"
-        onClick={(e) => e.stopPropagation()}
-        style={{ paddingBottom: "calc(2rem + env(safe-area-inset-bottom, 0px))" }}
-      >
+    <Sheet onClose={onClose} labelledBy="building-title">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
             <span className={`grid h-14 w-14 place-items-center rounded-2xl text-3xl ${built ? "bg-accent-soft" : "bg-line grayscale"}`} aria-hidden>
@@ -235,7 +252,6 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
             <ButtonLink href="/defis">Gagner des voix</ButtonLink>
           </div>
         )}
-      </div>
-    </div>
+    </Sheet>
   );
 }

@@ -10,7 +10,8 @@ import { defis, site } from "@/lib/content";
 import { daysUntilFirstRound } from "@/lib/feed";
 import { useProfile } from "@/lib/profile";
 import type { RefChallenge } from "@/lib/results";
-import { getFirstName, setFirstName } from "@/lib/session";
+import { hashSeed } from "@/lib/rng";
+import { getFirstName, getSessionId, setFirstName } from "@/lib/session";
 import { track } from "@/lib/track";
 import { useVoix } from "@/lib/voix";
 
@@ -59,7 +60,7 @@ function Landing() {
         </h1>
         <p className="mt-3 max-w-[22rem] text-[17px] leading-snug opacity-90">Comprends la campagne, fais grandir ta ville et défie tes potes.</p>
         <div className="mt-5 -mx-6">
-          <City voix={total} label="Ta ville" className="!rounded-none" />
+          <City voix={total} label="Ta ville" className="!rounded-none" seed={mounted ? hashSeed(getSessionId()) : undefined} />
         </div>
       </section>
 

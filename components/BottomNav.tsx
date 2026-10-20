@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { haptic } from "@/lib/feedback";
 import { IconCity, IconNews, IconTrophy, IconUser } from "./Icons";
 
 const TABS = [
@@ -21,7 +22,7 @@ export function BottomNav() {
       <div className="h-[calc(4.25rem+env(safe-area-inset-bottom,0px))]" aria-hidden />
       <nav
         aria-label="Navigation principale"
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-card/95 backdrop-blur"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-line/60 bg-card/80 backdrop-blur-xl backdrop-saturate-150"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
         <ul className="mx-auto grid h-17 max-w-md grid-cols-4">
@@ -31,6 +32,7 @@ export function BottomNav() {
               <li key={href}>
                 <Link
                   href={href}
+                  onClick={() => haptic("tap")}
                   aria-current={active ? "page" : undefined}
                   className={`flex h-full flex-col items-center justify-center gap-1 text-xs font-semibold transition ${active ? "text-accent" : "text-muted"}`}
                 >

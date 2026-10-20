@@ -4,8 +4,8 @@ import type { ComponentProps, ReactNode } from "react";
 const base =
   "inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl px-5 py-3 text-base font-semibold transition active:scale-[0.98] disabled:opacity-40 disabled:active:scale-100";
 const variants = {
-  primary: "bg-accent text-accent-ink shadow-sm",
-  secondary: "border-2 border-line bg-card text-ink",
+  primary: "bg-accent text-accent-ink shadow-sm active:opacity-90",
+  secondary: "border border-line bg-card text-ink shadow-[0_1px_2px_rgba(27,42,65,0.06)]",
   ghost: "text-muted underline-offset-4 hover:underline",
 };
 
@@ -20,7 +20,7 @@ export function ButtonLink({ variant = "primary", className = "", ...props }: Co
 }
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`rounded-3xl border border-line bg-card p-5 ${className}`}>{children}</div>;
+  return <div className={`rounded-3xl border border-line/70 bg-card p-5 shadow-[0_1px_3px_rgba(27,42,65,0.06)] ${className}`}>{children}</div>;
 }
 
 export function SourceLink({ label, url }: { label: string; url: string }) {

@@ -1,8 +1,8 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import onboarding from "@/content/onboarding.json";
-import { readJSON, writeJSON } from "./storage";
+import { writeJSON } from "./storage";
+import { createPersistedStore } from "./store";
 
 export type LevelId = "debutant" | "intermediaire" | "avance";
 
@@ -31,24 +31,13 @@ export const EMPTY_PROFILE: Profile = {
   position: null,
 };
 
-const KEY = "p27.profile";
-let cache: Profile | null = null;
-const listeners = new Set<() => void>();
+const store = createPersistedStore<Profile>("p27.profile", EMPTY_PROFILE);
 
-function load(): Profile {
-  if (!cache) cache = { ...EMPTY_PROFILE, ...readJSON<Partial<Profile>>(KEY, {}) };
-  return cache;
-}
-
-export function getProfile(): Profile {
-  return load();
-}
+export const getProfile = store.get;
 
 export function saveProfile(p: Profile) {
-  cache = p;
-  writeJSON(KEY, p);
   writeJSON("p27.firstName", p.firstName.trim().slice(0, 20));
-  listeners.forEach((l) => l());
+  store.set(p);
 }
 
 export function resetProfile() {
@@ -63,13 +52,4 @@ export function computeLevel(knowledge: number, followsNews: Profile["followsNew
   return "debutant";
 }
 
-export function useProfile(): Profile {
-  return useSyncExternalStore(
-    (cb) => {
-      listeners.add(cb);
-      return () => listeners.delete(cb);
-    },
-    load,
-    () => EMPTY_PROFILE,
-  );
-}
+export const useProfile = store.use;

@@ -15,6 +15,7 @@ import {
   type McqItem,
   type Mode,
 } from "@/lib/content";
+import { haptic } from "@/lib/feedback";
 import { saveLastResult, type LastResult, type RefChallenge, type ResultItem } from "@/lib/results";
 import { getFirstName, getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
@@ -45,6 +46,14 @@ function shuffle<T>(arr: T[], seed: string): T[] {
 }
 
 const FLASH_MS = 800;
+const STREAK_FROM = 3;
+
+/** Number of right answers in a row at the end of the list. */
+function trailingStreak(list: ResultItem[]) {
+  let n = 0;
+  for (let i = list.length - 1; i >= 0 && list[i].correct; i--) n++;
+  return n;
+}
 
 export function ChallengePlayer({ type, mode, context = "challenge", refChallenge = null, match = null, onDone, items = null }: Props) {
   const quiz = items && items.length ? items : quizItems;
@@ -67,7 +76,8 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
   const [idx, setIdx] = useState(0);
   const [results, setResults] = useState<ResultItem[]>([]);
   const [predictions, setPredictions] = useState<{ questionId: string; answer: string }[]>([]);
-  const [flash, setFlash] = useState<null | boolean>(null);
+  const [flash, setFlash] = useState<null | { correct: boolean; streak: number }>(null);
+  const streakBonus = useRef(0);
   const [finishing, setFinishing] = useState(false);
   const started = useRef(false);
 
@@ -83,9 +93,12 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     track("answer", { challengeType: type, itemId: item.id, correct: item.correct });
     if (item.correct) addVoix(perCorrect, context === "feed" ? "Bonne réponse au mini-quiz" : `Bonne réponse · ${defis.names[type]}`);
     const next = [...results, item];
+    const streak = trailingStreak(next);
+    if (streak >= STREAK_FROM) streakBonus.current += addVoix(VOIX.streak, `Série de ${streak} bonnes réponses`);
+    haptic(item.correct ? "success" : "fail");
     setResults(next);
     if (advanceAfterFlash) {
-      setFlash(item.correct);
+      setFlash({ correct: item.correct, streak });
       setTimeout(() => {
         setFlash(null);
         advance(next);
@@ -104,7 +117,7 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     const isProno = type === "pronostics";
     const score = isProno ? 0 : final.filter((r) => r.correct).length;
     // Voix for correct answers were already added one by one; recompute them here (state may lag behind).
-    let gained = isProno ? 0 : score * perCorrect;
+    let gained = isProno ? 0 : score * perCorrect + streakBonus.current;
     if (isProno) {
       gained += addVoix(VOIX.predictions, "Pronostics faits", "pronostics");
     } else if (context === "challenge") {
@@ -148,6 +161,8 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     else router.push(`/defis/${type}/resultat`);
   };
 
+  const streak = trailingStreak(results);
+
   if (finishing) {
     return (
       <Card className="text-center">
@@ -160,12 +175,17 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3 text-sm font-semibold text-muted">
         <span>{context === "feed" ? "Mini-quiz" : defis.names[type]}</span>
-        <span className="tabular-nums">
+        {streak >= 2 && (
+          <span key={streak} className="bump rounded-full bg-accent-soft px-2.5 py-0.5 text-xs font-extrabold text-accent" aria-live="polite">
+            🔥 Série ×{streak}
+          </span>
+        )}
+        <span className="ml-auto tabular-nums">
           {Math.min(idx + 1, total)} / {total}
         </span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-line" aria-hidden>
-        <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${(idx / total) * 100}%` }} />
+        <div className="h-full rounded-full bg-accent transition-all duration-500 ease-out" style={{ width: `${(Math.max(idx, results.length) / total) * 100}%` }} />
       </div>
       {refChallenge && refChallenge.score !== null && (
         <p className="rounded-2xl bg-accent-soft px-4 py-2 text-sm font-semibold">
@@ -201,8 +221,13 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
 
       {flash !== null && (
         <div className="pointer-events-none fixed inset-0 z-30 flex items-center justify-center" aria-live="assertive">
-          <span className={`pop rounded-3xl px-8 py-5 font-display text-3xl font-bold shadow-lg ${flash ? "bg-ok text-white" : "bg-bad text-white"}`}>
-            {flash ? "Bien vu !" : "Raté !"}
+          <span className={`pop flex flex-col items-center rounded-3xl px-8 py-5 text-center shadow-lg ${flash.correct ? "bg-ok text-white" : "bg-bad text-white"}`}>
+            <span className="font-display text-3xl font-bold">{flash.correct ? "Bien vu !" : "Raté !"}</span>
+            {flash.correct && flash.streak >= STREAK_FROM && (
+              <span className="mt-1 text-sm font-bold opacity-90">
+                🔥 Série ×{flash.streak} · +{VOIX.streak} voix bonus
+              </span>
+            )}
           </span>
         </div>
       )}
@@ -258,13 +283,26 @@ function Mcq({
       </Card>
       <div className="flex flex-col gap-3">
         {options.map(({ label, i }) => {
-          const state = picked === null || !explainNow ? "" : i === item.answer ? "border-ok bg-ok-soft" : i === picked ? "border-bad bg-bad-soft" : "opacity-60";
+          // Colour classes are exclusive (border-line/bg-card would otherwise win over the red/green ones).
+          const idle = "border-line bg-card";
+          const state =
+            picked === null
+              ? idle
+              : !explainNow
+                ? i === picked
+                  ? "border-accent bg-card"
+                  : `${idle} opacity-60`
+                : i === item.answer
+                  ? `border-ok bg-ok-soft ${i === picked ? "bump" : ""}`
+                  : i === picked
+                    ? "shake border-bad bg-bad-soft"
+                    : `${idle} opacity-60`;
           return (
             <button
               key={i}
               onClick={() => pick(i)}
               disabled={picked !== null}
-              className={`min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium transition ${state}`}
+              className={`min-h-14 rounded-2xl border-2 px-4 py-3 text-left text-[17px] font-medium transition active:scale-[0.99] ${state}`}
             >
               {label}
             </button>

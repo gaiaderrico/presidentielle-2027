@@ -3,6 +3,7 @@
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { City } from "@/components/City";
+import { hashSeed } from "@/lib/rng";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import { fetchMatch, joinMatch, type MatchSummary, type TeamSummary } from "@/lib/api";
 import { defis } from "@/lib/content";
@@ -145,7 +146,7 @@ function TeamPanel({ team, leading, mine }: { team: TeamSummary; leading: boolea
         {team.name}
         {mine && <span className="ml-1 text-xs font-semibold text-accent">(toi)</span>}
       </p>
-      <City voix={team.voix} label={`Ville de l'équipe ${team.name}`} className="!rounded-xl" />
+      <City voix={team.voix} label={`Ville de l'équipe ${team.name}`} className="!rounded-xl" seed={hashSeed(team.name)} />
       <p className="font-display text-3xl font-extrabold tabular-nums">
         {team.avgScore ?? "–"}
         {team.total && <span className="text-base text-muted">/{team.total}</span>}
