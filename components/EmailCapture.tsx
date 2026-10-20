@@ -61,7 +61,7 @@ export function EmailCapture() {
           placeholder={t("ton@email.fr", "you@email.com")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="min-h-12 rounded-2xl border-2 border-line bg-paper px-4 text-base"
+          className="min-h-12 rounded-[12px] border-0 bg-fill px-4 text-base"
         />
         <label className="flex items-start gap-3 text-sm">
           <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-[var(--accent)]" required />

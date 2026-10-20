@@ -41,12 +41,12 @@ export function TopBar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-paper/90 backdrop-blur" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
+    <header className="sticky top-0 z-30 border-b border-line/70 bg-paper/75 backdrop-blur-xl backdrop-saturate-[1.8]" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
       <div className="mx-auto flex h-14 max-w-md items-center gap-2 px-3">
         {showBack ? (
           <button
             onClick={() => router.push(parentOf(path))}
-            className="-ml-1 grid h-11 w-11 shrink-0 place-items-center rounded-full text-ink transition hover:bg-line/60"
+            className="-ml-2 grid h-11 w-11 shrink-0 place-items-center rounded-full text-accent transition active:opacity-50"
             aria-label={t("Retour", "Back")}
           >
             <IconBack />
@@ -59,7 +59,7 @@ export function TopBar() {
         <span className="flex-1" />
         <button
           onClick={() => setLang(lang === "fr" ? "en" : "fr")}
-          className="grid h-11 min-w-11 shrink-0 place-items-center rounded-full border border-line bg-card px-2 text-xs font-extrabold tracking-wider"
+          className="grid h-8 min-w-11 shrink-0 place-items-center rounded-full bg-fill px-2.5 text-[13px] font-semibold text-ink transition active:opacity-60"
           aria-label={lang === "fr" ? "Switch to English" : "Passer en français"}
           title={lang === "fr" ? "English" : "Français"}
         >
@@ -67,13 +67,15 @@ export function TopBar() {
         </button>
         <Link
           href="/ma-ville"
-          className="relative inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line bg-card py-1 pl-1.5 pr-3 text-sm font-bold tabular-nums shadow-sm"
+          className="relative inline-flex h-8 shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-accent-soft py-1 pl-2 pr-3 text-[15px] font-semibold tabular-nums text-accent transition active:opacity-60"
           aria-label={`${t("Ma ville :", "My city:")} ${c.levels[levelIndexFor(total)].name}, ${total} voix`}
         >
-          <span className="grid h-8 w-8 place-items-center rounded-full bg-accent-soft text-base" aria-hidden>
+          <span className="text-sm" aria-hidden>
             🏘️
           </span>
-          <span className="whitespace-nowrap">{total} voix</span>
+          <span key={total} className={`whitespace-nowrap ${gains.length ? "bump" : ""}`}>
+            {total} voix
+          </span>
           {gains.map((g) => (
             <span key={g.id} className="float-up pointer-events-none absolute -bottom-1 right-2 whitespace-nowrap text-sm font-bold text-accent" aria-hidden>
               +{g.amount} voix

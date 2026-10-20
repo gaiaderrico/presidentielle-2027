@@ -99,3 +99,17 @@ _None yet._
 | International students can't vote but want to learn | International mode (who can vote, why it matters, student elections) |
 | Nothing removed for now | Team decision |
 - Next Test Card (team): at least 40% of users complete a challenge when they open the web app.
+
+## 2026-10-20: game feel and city polish (design / game-design skills)
+| Decision | Why |
+|---|---|
+| Answer feedback: vibration, a shake on a wrong answer, a bounce on a right one, a moving progress bar | "Juice": feedback makes each answer feel like it counts (game-design-core). Aims at the primary metric, finishing a challenge |
+| Streak: from the 3rd right answer in a row, +5 voix per answer, a "🔥 ×N" badge and a line in the feedback panel (uses the round-2 streak counter) | A short reward loop inside a challenge. Small bonus, so the level thresholds stay the same |
+| Fixed: a wrong answer in the mini-quiz and in Défends l'autre camp now shows in red (it stayed white) | Found while testing: `bg-card` was overriding `bg-bad-soft` |
+| City decor generated from a seed (session id): clouds, birds, stars, trees on the hill. One more tree every 40 voix | Each player's city is their own and stays identical on every visit; progress is visible between two levels (procedural generation) |
+| Sky follows the time of day (day / dusk / night) | A small surprise for players who come back (open-world "micro-discoveries") |
+| Only the next building to unlock is highlighted (orange animated outline) + a "Prochaine découverte" card | One clear landmark to aim for instead of every locked building looking the same (open-world wayfinding) |
+| Bottom sheets: slide up, grabber, drag down or Escape to close; thinner borders, translucent bars | Native iOS feel (apple-ui-designer) |
+| Full iOS-style redesign: system font (SF Pro on iPhone), grouped grey background with white cards and no borders, near-black text, iOS buttons (50pt, grey-fill secondary), segmented controls, grey text fields, tab bar without pill, red delete action, dark mode in true black | The first pass was too subtle to notice. apple-ui-designer: native over custom, hierarchy by size and weight, accent used sparingly. Also removes the 2 Google Fonts downloads |
+| `voix` and `profile` share one typed persisted store (`lib/store.ts`) | One data flow for all local state (Zustand-style pattern, no new dependency) |
+| Not done: a daily streak / daily goal | Feature creep: it does not help the round-1 test (finish one challenge) |

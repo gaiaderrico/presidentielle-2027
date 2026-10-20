@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
+// iOS buttons: 50pt tall, 14pt corners, 17pt semibold. Primary = filled accent, secondary = grey fill with accent text.
 const base =
-  "inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl px-5 py-3 text-base font-semibold transition active:scale-[0.98] disabled:opacity-40 disabled:active:scale-100";
+  "inline-flex min-h-[50px] w-full items-center justify-center gap-2 rounded-[14px] px-5 py-3 text-[17px] font-semibold transition active:opacity-70 disabled:opacity-40";
 const variants = {
-  primary: "bg-accent text-accent-ink shadow-sm",
-  secondary: "border-2 border-line bg-card text-ink",
-  ghost: "text-muted underline-offset-4 hover:underline",
+  primary: "bg-accent text-accent-ink",
+  secondary: "border border-transparent bg-fill text-accent",
+  ghost: "text-accent",
 };
 
 type Variant = keyof typeof variants;
@@ -20,12 +21,12 @@ export function ButtonLink({ variant = "primary", className = "", ...props }: Co
 }
 
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`rounded-3xl border border-line bg-card p-5 ${className}`}>{children}</div>;
+  return <div className={`rounded-[22px] bg-card p-5 ${className}`}>{children}</div>;
 }
 
 export function SourceLink({ label, url }: { label: string; url: string }) {
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center text-sm font-semibold text-accent underline underline-offset-4">
+    <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 items-center text-sm font-medium text-accent">
       Source{" "}: {label} ↗
     </a>
   );

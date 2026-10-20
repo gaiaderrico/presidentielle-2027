@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
 import { createChallenge, finishMatch, savePredictions } from "@/lib/api";
 import type { AutreCampItem, ChallengeType, Difficulty, McqItem, Mode, PronoItem, Source, VraiFauxItem } from "@/lib/content";
+import { haptic } from "@/lib/feedback";
 import { QUESTION_COUNT, diffOf, difficultyLabel, nextTarget, pickClosest, startTarget, staticSequence, type LevelChoice } from "@/lib/difficulty";
 import { useContent, useT } from "@/lib/i18n";
 import { getProfile } from "@/lib/profile";
@@ -40,6 +41,8 @@ function shuffle<T>(arr: T[], seed: string): T[] {
   }
   return out;
 }
+
+const STREAK_FROM = 3;
 
 export function ChallengePlayer({ type, mode, context = "challenge", refChallenge = null, match = null, onDone, items = null, fixedIds = null, level = "progressif" }: Props) {
   const router = useRouter();
@@ -87,6 +90,7 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
   const [results, setResults] = useState<ResultItem[]>([]);
   const [predictions, setPredictions] = useState<{ questionId: string; answer: string }[]>([]);
   const [answered, setAnswered] = useState<ResultItem | null>(null);
+  const streakBonus = useRef(0);
   const [finishing, setFinishing] = useState(false);
   const started = useRef(false);
 
@@ -102,6 +106,8 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     track("answer", { challengeType: type, itemId: r.id, correct: r.correct, difficulty });
     if (r.correct) addVoix(perCorrect, context === "feed" ? t("Bonne réponse au mini-quiz", "Right answer · mini-quiz") : `${t("Bonne réponse", "Right answer")} · ${name}`);
     const newStreak = r.correct ? streak + 1 : 0;
+    if (newStreak >= STREAK_FROM) streakBonus.current += addVoix(VOIX.streak, t(`Série de ${newStreak} bonnes réponses`, `${newStreak} right answers in a row`));
+    haptic(r.correct ? "success" : "fail");
     setStreak(newStreak);
     setTarget((tg) => nextTarget(level, tg, r.correct, newStreak));
     setResults((list) => [...list, r]);
@@ -123,7 +129,8 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     setFinishing(true);
     const isProno = type === "pronostics";
     const score = isProno ? 0 : final.filter((r) => r.correct).length;
-    let gained = isProno ? 0 : score * perCorrect;
+    // Voix for right answers and streaks were already added one by one; count them again here for the result screen.
+    let gained = isProno ? 0 : score * perCorrect + streakBonus.current;
     if (isProno) gained += addVoix(VOIX.predictions, t("Pronostics faits", "Predictions made"), "pronostics");
     else if (context === "challenge") gained += addVoix(VOIX.challengeFinish, `${t("Défi terminé", "Challenge done")} · ${name}`);
     if (isProno) await savePredictions(getSessionId(), preds);
@@ -181,6 +188,11 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
       <div className="flex items-center justify-between gap-3 text-sm font-semibold text-muted">
         <span>{name}</span>
         <span className="flex items-center gap-2">
+          {streak >= 2 && (
+            <span key={streak} className="bump rounded-full bg-accent-soft px-2 py-0.5 text-xs font-extrabold text-accent">
+              🔥 ×{streak}
+            </span>
+          )}
           {type !== "pronostics" && type !== "autre-camp" && (
             <span className={`rounded-full px-2 py-0.5 text-xs font-bold ${d === 1 ? "bg-ok-soft text-ok" : d === 3 ? "bg-bad-soft text-bad" : "bg-accent-soft text-accent"}`}>
               {difficultyLabel(d, t)}
@@ -192,7 +204,7 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
         </span>
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-line" aria-hidden>
-        <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${(idx / total) * 100}%` }} />
+        <div className="h-full rounded-full bg-accent transition-all duration-500 ease-out" style={{ width: `${((idx + (answered ? 1 : 0)) / total) * 100}%` }} />
       </div>
       {refChallenge && refChallenge.score !== null && (
         <p className="rounded-2xl bg-accent-soft px-4 py-2 text-sm font-semibold">
@@ -221,6 +233,7 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
       {answered && (
         <Feedback
           result={answered}
+          streak={streak}
           source={(item as McqItem).source}
           isLast={isLast}
           onNext={() => next([...results.filter((r) => r.id !== answered.id), answered])}
@@ -231,11 +244,16 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
 }
 
 /* ---------- Feedback after every answer: right or wrong, the right answer, why, and the source ---------- */
-function Feedback({ result, source, isLast, onNext }: { result: ResultItem; source?: Source; isLast: boolean; onNext: () => void }) {
+function Feedback({ result, streak, source, isLast, onNext }: { result: ResultItem; streak: number; source?: Source; isLast: boolean; onNext: () => void }) {
   const t = useT();
   return (
     <div className={`pop flex flex-col gap-3 rounded-3xl border-2 p-4 ${result.correct ? "border-ok bg-ok-soft" : "border-bad bg-bad-soft"}`} role="status" aria-live="polite">
       <p className="font-display text-xl font-bold">{result.correct ? t("✓ Bien vu !", "✓ Well done!") : t("✗ Raté", "✗ Not quite")}</p>
+      {result.correct && streak >= STREAK_FROM && (
+        <p className="bump -mt-2 text-sm font-bold text-accent">
+          🔥 {t(`Série ×${streak} · +${VOIX.streak} voix bonus`, `Streak ×${streak} · +${VOIX.streak} bonus voix`)}
+        </p>
+      )}
       {!result.correct && (
         <p>
           {t("La bonne réponse :", "The right answer:")} <strong>{result.correctLabel}</strong>
@@ -276,9 +294,17 @@ function Mcq({ item, shuffled, label, disabled, onAnswer }: { item: McqItem; shu
       </Card>
       <div className="flex flex-col gap-3">
         {options.map(({ text, i }) => {
-          const state = picked === null ? "" : i === item.answer ? "border-ok bg-ok-soft" : i === picked ? "border-bad bg-bad-soft" : "opacity-60";
+          // Colour classes are exclusive: border-line/bg-card would otherwise win over the red/green ones.
+          const state =
+            picked === null
+              ? "border-transparent bg-card"
+              : i === item.answer
+                ? `border-ok bg-ok-soft ${i === picked ? "bump" : ""}`
+                : i === picked
+                  ? "shake border-bad bg-bad-soft"
+                  : "border-transparent bg-card opacity-60";
           return (
-            <button key={i} onClick={() => pick(i)} disabled={picked !== null} className={`min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium transition ${state}`}>
+            <button key={i} onClick={() => pick(i)} disabled={picked !== null} className={`min-h-14 rounded-[14px] border-2 px-4 py-3 text-left text-[17px] font-medium transition active:scale-[0.99] ${state}`}>
               {text}
               {picked !== null && i === item.answer && <span className="ml-2 font-bold text-ok">✓</span>}
             </button>
@@ -333,7 +359,7 @@ function VraiFaux({ item, disabled, onAnswer }: { item: VraiFauxItem; disabled: 
           onPointerMove={move}
           onPointerUp={up}
           onPointerCancel={up}
-          className={`flex min-h-56 flex-col justify-center rounded-3xl border-2 bg-card p-6 shadow-sm ${done ? (ok ? "border-ok" : "border-bad") : "cursor-grab border-line"}`}
+          className={`flex min-h-56 flex-col justify-center rounded-3xl border-2 bg-card p-6 shadow-sm ${done ? (ok ? "border-ok" : "border-bad") : "cursor-grab border-transparent shadow-[0_8px_30px_rgba(0,0,0,0.08)]"}`}
           style={{ transform: `translateX(${dx}px) rotate(${dx / 18}deg)`, transition: startX.current === null ? "transform 0.3s ease" : "none" }}
         >
           {hint && (
@@ -351,10 +377,10 @@ function VraiFaux({ item, disabled, onAnswer }: { item: VraiFauxItem; disabled: 
         <>
           <p className="text-center text-sm text-muted">{t("Glisse à droite pour Vrai, à gauche pour Faux", "Swipe right for True, left for False")}</p>
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="secondary" onClick={() => answer(false)} className="!border-bad !text-bad">
+            <Button variant="secondary" onClick={() => answer(false)} className="!bg-bad-soft !text-bad">
               ← {no}
             </Button>
-            <Button variant="secondary" onClick={() => answer(true)} className="!border-ok !text-ok">
+            <Button variant="secondary" onClick={() => answer(true)} className="!bg-ok-soft !text-ok">
               {yes} →
             </Button>
           </div>
@@ -434,9 +460,15 @@ function AutreCamp({ item, disabled, onAnswer }: { item: AutreCampItem; disabled
           </p>
           <div className="flex flex-col gap-3">
             {options.map((o) => {
-              const state = !picked ? "" : o.kind === "good" ? "border-ok bg-ok-soft" : o.text === picked ? "border-bad bg-bad-soft" : "opacity-60";
+              const state = !picked
+                ? "border-transparent bg-card"
+                : o.kind === "good"
+                  ? `border-ok bg-ok-soft ${o.text === picked ? "bump" : ""}`
+                  : o.text === picked
+                    ? "shake border-bad bg-bad-soft"
+                    : "border-transparent bg-card opacity-60";
               return (
-                <button key={o.text} onClick={() => pick(o)} disabled={!!picked} className={`min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium ${state}`}>
+                <button key={o.text} onClick={() => pick(o)} disabled={!!picked} className={`min-h-14 rounded-[14px] border-2 px-4 py-3 text-left text-[17px] font-medium transition ${state}`}>
                   « {o.text} »
                 </button>
               );
@@ -459,7 +491,7 @@ function Prono({ item, isLast, onAnswer }: { item: PronoItem; isLast: boolean; o
       </Card>
       <div className="flex flex-col gap-3">
         {item.options.map((o) => (
-          <button key={o} onClick={() => onAnswer(o)} className="min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium">
+          <button key={o} onClick={() => onAnswer(o)} className="min-h-14 rounded-[12px] border-0 bg-fill px-4 py-3 text-left text-[17px] font-medium">
             {o}
           </button>
         ))}

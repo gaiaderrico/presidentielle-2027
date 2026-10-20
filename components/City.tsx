@@ -3,6 +3,7 @@
 import type { ReactNode, Ref } from "react";
 import { useContent, useT } from "@/lib/i18n";
 import { levelIndexFor } from "@/lib/levels";
+import { randomStream } from "@/lib/rng";
 
 // Fixed illustration palette (the scene keeps its own daylight in dark mode, and exports cleanly as a PNG).
 const P = {
@@ -25,6 +26,87 @@ const P = {
 };
 
 const GROUND = 168;
+
+export type TimeOfDay = "day" | "dusk" | "night";
+
+const SKIES: Record<TimeOfDay, { top: string; bottom: string; sun: string; sunY: number; hill: string }> = {
+  day: { top: P.skyTop, bottom: P.skyBottom, sun: P.sun, sunY: 40, hill: P.hill },
+  dusk: { top: "#f0a98a", bottom: "#fde0c2", sun: "#ec7f4a", sunY: 78, hill: "#e3cdb0" },
+  night: { top: "#16223a", bottom: "#33456a", sun: "#f3ecd8", sunY: 36, hill: "#c9b99f" },
+};
+
+/** The hour decides the sky: a small surprise for players who come back at another time. */
+export function timeOfDay(hour = new Date().getHours()): TimeOfDay {
+  if (hour >= 8 && hour < 18) return "day";
+  if (hour >= 18 && hour < 21) return "dusk";
+  if (hour >= 6 && hour < 8) return "dusk";
+  return "night";
+}
+
+// Height of the hill line at x (the three quadratic curves of the hill path).
+function hillY(x: number) {
+  const segs: [number, number, number][] = [
+    [150, 128, 146],
+    [146, 164, 142],
+    [142, 120, 140],
+  ];
+  const i = Math.min(2, Math.max(0, Math.floor(x / 120)));
+  const t = (x - i * 120) / 120;
+  const [y0, c, y1] = segs[i];
+  return (1 - t) * (1 - t) * y0 + 2 * (1 - t) * t * c + t * t * y1;
+}
+
+/**
+ * Seeded decor: each player gets their own sky and hillside, identical on every visit.
+ * New trees appear on the hill as voix grow (one every 40 voix), so progress is visible between two levels.
+ */
+function Decor({ seed, voix, time }: { seed: number; voix: number; time: TimeOfDay }) {
+  const rng = randomStream(seed);
+  const clouds = Array.from({ length: 2 + Math.floor(rng.next() * 3) }, () => ({
+    x: rng.range(0, 280),
+    y: rng.range(14, 58),
+    s: rng.range(0.7, 1.3),
+    dur: rng.range(70, 130),
+  }));
+  const stars = Array.from({ length: 16 }, () => ({ x: rng.range(4, 356), y: rng.range(6, 90), r: rng.range(0.5, 1.3), dur: rng.range(2, 5) }));
+  const allTrees = Array.from({ length: 16 }, () => ({ x: rng.range(6, 354), s: rng.range(0.32, 0.55), light: rng.next() < 0.5 }));
+  const trees = allTrees.slice(0, Math.min(allTrees.length, 2 + Math.floor(voix / 40)));
+  const birdY = rng.range(30, 70);
+  return (
+    <g aria-hidden>
+      {time === "night"
+        ? stars.map((st, i) => (
+            <circle key={i} cx={st.x} cy={st.y} r={st.r} fill="#ffffff" opacity={0.8}>
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur={`${st.dur}s`} repeatCount="indefinite" />
+            </circle>
+          ))
+        : clouds.map((c, i) => (
+            <g key={i} className="drift" style={{ animationDuration: `${c.dur}s` }}>
+              <g transform={`translate(${c.x} ${c.y}) scale(${c.s})`} fill="#ffffff" opacity={time === "dusk" ? 0.55 : 0.8}>
+                <ellipse cx={0} cy={0} rx={16} ry={6} />
+                <ellipse cx={-7} cy={-4} rx={8} ry={6} />
+                <ellipse cx={6} cy={-5} rx={9} ry={7} />
+              </g>
+            </g>
+          ))}
+      {time === "day" && (
+        <g className="fly" fill="none" stroke={P.navy} strokeWidth={1} strokeLinecap="round" opacity={0.55}>
+          <path d={`M-20 ${birdY} q3 -3 6 0 q3 -3 6 0`} />
+          <path d={`M-6 ${birdY - 6} q2.5 -2.5 5 0 q2.5 -2.5 5 0`} />
+        </g>
+      )}
+      {trees.map((t, i) => {
+        const base = hillY(t.x) + 3;
+        return (
+          <g key={i} className="grow">
+            <rect x={t.x - 0.8} y={base - 8 * t.s} width={1.6} height={8 * t.s} fill={P.trunk} />
+            <circle cx={t.x} cy={base - 14 * t.s} r={8 * t.s} fill={t.light ? P.leaf2 : P.leaf} />
+          </g>
+        );
+      })}
+    </g>
+  );
+}
 
 function Tree({ x, s = 1, light = false, delay = 0 }: { x: number; s?: number; light?: boolean; delay?: number }) {
   return (
@@ -174,15 +256,19 @@ type CityProps = {
   interactive?: boolean;
   selected?: string | null;
   onSelect?: (id: string) => void;
+  /** Seed of the procedural decor (e.g. from the session id). */
+  seed?: number;
+  time?: TimeOfDay;
 };
 
-export function City({ voix, label, svgRef, className = "", interactive = false, selected = null, onSelect }: CityProps) {
+export function City({ voix, label, svgRef, className = "", interactive = false, selected = null, onSelect, seed = 2027, time = "day" }: CityProps) {
   const c = useContent();
   const t = useT();
   const level = levelIndexFor(voix);
   const visible = layers.map((_, i) => i).filter((i) => i <= level);
   const back = visible.filter((i) => BACK.includes(i));
   const front = visible.filter((i) => !BACK.includes(i));
+  const sky = SKIES[time];
   return (
     <svg
       ref={svgRef}
@@ -194,13 +280,15 @@ export function City({ voix, label, svgRef, className = "", interactive = false,
     >
       <defs>
         <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stopColor={P.skyTop} />
-          <stop offset="1" stopColor={P.skyBottom} />
+          <stop offset="0" stopColor={sky.top} />
+          <stop offset="1" stopColor={sky.bottom} />
         </linearGradient>
       </defs>
       <rect width="360" height="200" fill="url(#sky)" />
-      <circle cx={318} cy={40} r={16} fill={P.sun} />
-      <path d="M0 150 Q 60 128 120 146 T 240 142 T 360 140 V 200 H 0 Z" fill={P.hill} />
+      <circle cx={318} cy={sky.sunY} r={time === "night" ? 12 : 16} fill={sky.sun} />
+      {time === "night" && <circle cx={323} cy={sky.sunY - 4} r={10} fill={sky.top} />}
+      <path d="M0 150 Q 60 128 120 146 T 240 142 T 360 140 V 200 H 0 Z" fill={sky.hill} />
+      <Decor seed={seed} voix={voix} time={time} />
       {back.map((i) => layers[i](i * 90))}
       <rect y={GROUND} width="360" height={200 - GROUND} fill={P.ground} />
       <rect y={186} width="360" height={12} fill={P.road} />
@@ -210,6 +298,8 @@ export function City({ voix, label, svgRef, className = "", interactive = false,
           .sort((a, b) => (BACK.includes(b.level) ? 1 : 0) - (BACK.includes(a.level) ? 1 : 0))
           .map((b) => {
             const built = b.level <= level;
+            // Only the next unlock is highlighted: one clear landmark to aim for, the rest stays quiet.
+            const isNext = b.level === level + 1;
             const isSel = selected === b.id;
             const { x, y, w, h } = b.area;
             return (
@@ -217,14 +307,30 @@ export function City({ voix, label, svgRef, className = "", interactive = false,
                 key={b.id}
                 role="button"
                 tabIndex={0}
-                aria-label={`${b.name}${built ? "" : t(" (à débloquer)", " (locked)")}`}
+                aria-label={`${b.name}${built ? "" : isNext ? t(" (prochain bâtiment)", " (next building)") : t(" (à débloquer)", " (locked)")}`}
                 onClick={() => onSelect?.(b.id)}
                 onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onSelect?.(b.id))}
                 style={{ cursor: "pointer", outline: "none" }}
               >
-                {!built && <rect x={x} y={y} width={w} height={h} rx={4} fill="#ffffff" fillOpacity={0.45} stroke={P.roof} strokeWidth={1} strokeDasharray="3 3" />}
                 {!built && (
-                  <text x={x + w / 2} y={y + h / 2 + 4} textAnchor="middle" fontSize={11}>
+                  <rect
+                    x={x}
+                    y={y}
+                    width={w}
+                    height={h}
+                    rx={4}
+                    fill="#ffffff"
+                    fillOpacity={isNext ? 0.55 : 0.22}
+                    stroke={isNext ? P.accent : P.roof}
+                    strokeOpacity={isNext ? 1 : 0.35}
+                    strokeWidth={isNext ? 1.5 : 1}
+                    strokeDasharray="3 3"
+                  >
+                    {isNext && <animate attributeName="stroke-dashoffset" values="0;12" dur="1.2s" repeatCount="indefinite" />}
+                  </rect>
+                )}
+                {!built && (
+                  <text x={x + w / 2} y={y + h / 2 + 4} textAnchor="middle" fontSize={isNext ? 11 : 9} opacity={isNext ? 1 : 0.5}>
                     🔒
                   </text>
                 )}

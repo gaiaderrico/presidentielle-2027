@@ -60,7 +60,7 @@ export function HubClient() {
       </div>
 
       {/* Multiplayer, explained in 3 steps */}
-      <section className={`flex flex-col gap-3 rounded-[2rem] p-5 ${friendFirst ? "bg-accent text-accent-ink" : "bg-ink text-paper"}`}>
+      <section className={`flex flex-col gap-3 rounded-[2rem] p-5 ${friendFirst ? "bg-accent text-accent-ink" : "bg-hero text-white"}`}>
         <p className="font-display text-2xl font-extrabold">👫 {t("Joue avec un ami", "Play with a friend")}</p>
         <ol className="flex flex-col gap-1.5 text-[15px]">
           <li>1. {t("Choisis un défi ci-dessous et joue-le.", "Pick a challenge below and play it.")}</li>
@@ -82,13 +82,13 @@ export function HubClient() {
       {/* Difficulty */}
       <section className="flex flex-col gap-2" aria-label={t("Niveau des questions", "Question level")}>
         <p className="font-semibold">{t("Niveau des questions", "Question level")}</p>
-        <div className="grid grid-cols-4 gap-1 rounded-2xl border border-line bg-card p-1">
+        <div className="grid grid-cols-4 gap-0.5 rounded-[11px] bg-fill p-0.5">
           {LEVEL_CHOICES.map((l) => (
             <button
               key={l}
               onClick={() => chooseLevel(l)}
               aria-pressed={level === l}
-              className={`min-h-10 rounded-xl px-1 text-sm font-semibold transition ${level === l ? "bg-ink text-paper" : "text-muted"}`}
+              className={`min-h-8 rounded-[9px] px-1 text-[13px] font-semibold transition ${level === l ? "bg-card text-ink shadow-[0_3px_8px_rgba(0,0,0,0.12),0_3px_1px_rgba(0,0,0,0.04)]" : "text-ink/70"}`}
             >
               {levelChoiceLabel(l, t)}
             </button>
@@ -102,7 +102,7 @@ export function HubClient() {
           .filter((card) => !friendFirst || card.modes.includes("friend"))
           .map((card) => (
             <li key={card.type}>
-              <button onClick={() => open(card)} className="flex w-full items-center gap-4 rounded-3xl border border-line bg-card p-4 text-left shadow-sm transition active:scale-[0.99]">
+              <button onClick={() => open(card)} className="flex w-full items-center gap-4 rounded-[22px] bg-card p-4 text-left shadow-sm transition active:scale-[0.99]">
                 <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden>
                   {card.emoji}
                 </span>

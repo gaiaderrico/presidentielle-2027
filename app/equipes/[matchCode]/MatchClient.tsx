@@ -3,6 +3,7 @@
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { City } from "@/components/City";
+import { hashSeed } from "@/lib/rng";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import { fetchMatch, joinMatch, type MatchSummary, type TeamSummary } from "@/lib/api";
 import { useContent, useT } from "@/lib/i18n";
@@ -98,7 +99,7 @@ export function MatchClient() {
           <label htmlFor="matchName" className="text-sm font-semibold">
             {tr("Ton prénom", "Your first name")}
           </label>
-          <input id="matchName" maxLength={20} value={name} onChange={(e) => setName(e.target.value)} className="min-h-12 rounded-2xl border-2 border-line bg-card px-4 text-base" autoComplete="given-name" />
+          <input id="matchName" maxLength={20} value={name} onChange={(e) => setName(e.target.value)} className="min-h-12 rounded-[12px] border-0 bg-fill px-4 text-base" autoComplete="given-name" />
           {error && <p className="text-bad">{error}</p>}
           <Button type="submit" disabled={!name.trim() || joining}>
             {joining ? tr("Connexion…", "Joining…") : tr("Jouer pour mon équipe", "Play for my team")}
@@ -150,7 +151,7 @@ function TeamPanel({ team, leading, mine }: { team: TeamSummary; leading: boolea
         {team.name}
         {mine && <span className="ml-1 text-xs font-semibold text-accent">{tr("(toi)", "(you)")}</span>}
       </p>
-      <City voix={team.voix} label={`${tr("Ville de l'équipe", "City of team")} ${team.name}`} className="!rounded-xl" />
+      <City voix={team.voix} label={`${tr("Ville de l'équipe", "City of team")} ${team.name}`} className="!rounded-xl" seed={hashSeed(team.name)} />
       <p className="font-display text-3xl font-extrabold tabular-nums">
         {team.avgScore ?? "–"}
         {team.total && <span className="text-base text-muted">/{team.total}</span>}

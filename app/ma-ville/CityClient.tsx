@@ -2,14 +2,17 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { City } from "@/components/City";
+import { City, timeOfDay, type TimeOfDay } from "@/components/City";
 import { IconClose, IconLock } from "@/components/Icons";
 import { ShareSheet } from "@/components/ShareSheet";
+import { Sheet } from "@/components/Sheet";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import type { CityBuilding } from "@/lib/content";
+import { haptic } from "@/lib/feedback";
 import { useContent, useT } from "@/lib/i18n";
 import { levelIndexFor } from "@/lib/levels";
-import { siteUrl } from "@/lib/session";
+import { hashSeed } from "@/lib/rng";
+import { getSessionId, siteUrl } from "@/lib/session";
 import { track } from "@/lib/track";
 import { useVoix } from "@/lib/voix";
 
@@ -50,11 +53,15 @@ export function CityClient() {
   const [mounted, setMounted] = useState(false);
   const [sharing, setSharing] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
+  const [seed, setSeed] = useState(2027);
+  const [time, setTime] = useState<TimeOfDay>("day");
   const svgRef = useRef<SVGSVGElement>(null);
   const tracked = useRef(false);
 
   useEffect(() => {
     setMounted(true);
+    setSeed(hashSeed(getSessionId()));
+    setTime(timeOfDay());
     if (tracked.current) return;
     tracked.current = true;
     track("city_view");
@@ -71,8 +78,10 @@ export function CityClient() {
     `My city is ${level.withArticle} with ${total} voix on ${c.site.appName}. Grow yours 👉 ${siteUrl()}`,
   );
   const building = c.cityBuildings.find((b) => b.id === selected) ?? null;
+  const upcoming = next ? c.cityBuildings.filter((b) => b.level === levelIdx + 1) : [];
 
   const open = (id: string) => {
+    haptic("tap");
     setSelected(id);
     const b = c.cityBuildings.find((x) => x.id === id);
     track("city_building_open", { building: id, unlocked: b ? b.level <= levelIdx : false });
@@ -107,7 +116,17 @@ export function CityClient() {
       <div className="-mx-4">
         <div className="no-scrollbar overflow-x-auto px-4">
           <div className="w-[170%] max-w-[54rem] sm:w-full">
-            <City voix={total} svgRef={svgRef} label={`${t("Ta ville :", "Your city:")} ${level.name}, ${total} voix`} interactive selected={selected} onSelect={open} className="shadow-sm" />
+            <City
+              voix={total}
+              svgRef={svgRef}
+              label={`${t("Ta ville :", "Your city:")} ${level.name}, ${total} voix`}
+              interactive
+              selected={selected}
+              onSelect={open}
+              seed={seed}
+              time={time}
+              className="shadow-sm"
+            />
           </div>
         </div>
         <p className="mt-2 px-4 text-center text-sm font-semibold text-muted">👆 {t("Touche un bâtiment pour l'explorer · ↔ fais glisser pour te balader", "Tap a building to explore it · ↔ swipe to look around")}</p>
@@ -122,6 +141,22 @@ export function CityClient() {
         <p className="text-sm font-semibold">{next ? t(`Encore ${next.min - total} voix pour devenir ${next.withArticle}`, `${next.min - total} more voix to become ${next.withArticle}`) : t("Niveau maximum : ta ville est une Capitale !", "Top level: your city is a Capital!")}</p>
       </div>
 
+      {upcoming.length > 0 && (
+        <button
+          onClick={() => open(upcoming[0].id)}
+          className="flex items-center gap-3 rounded-2xl bg-card p-3 text-left shadow-[0_1px_3px_rgba(27,42,65,0.08)] ring-1 ring-line/70 transition active:scale-[0.99]"
+        >
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-soft text-2xl" aria-hidden>
+            {upcoming[0].emoji}
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-xs font-bold uppercase tracking-wider text-accent">{t("Prochaine découverte", "Next discovery")}</span>
+            <span className="block truncate font-semibold">{upcoming.map((b) => b.name).join(t(" et ", " and "))}</span>
+          </span>
+          <span className="shrink-0 text-sm font-bold tabular-nums text-muted">{next!.min - total} voix</span>
+        </button>
+      )}
+
       <section className="flex flex-col gap-3" aria-label={t("Les bâtiments de ta ville", "The buildings in your city")}>
         <h2 className="font-display text-xl font-bold">{t("Les bâtiments", "Buildings")}</h2>
         <ul className="grid grid-cols-2 gap-2">
@@ -131,7 +166,7 @@ export function CityClient() {
               <li key={b.id}>
                 <button
                   onClick={() => open(b.id)}
-                  className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition ${built ? "border-line bg-card" : "border-dashed border-line bg-transparent"} ${selected === b.id ? "ring-2 ring-accent" : ""}`}
+                  className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition ${built ? "border-transparent bg-card" : "border-dashed border-muted/40 bg-transparent"} ${selected === b.id ? "ring-2 ring-accent" : ""}`}
                 >
                   <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xl ${built ? "bg-accent-soft" : "bg-line/60 grayscale"}`} aria-hidden>
                     {b.emoji}
@@ -187,15 +222,7 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
   const t = useT();
   const unlock = c.levels[b.level];
   return (
-    <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/40" onClick={onClose}>
-      <div
-        className="pop max-h-[85dvh] w-full max-w-md overflow-y-auto rounded-t-[2rem] bg-card p-6"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="building-title"
-        onClick={(e) => e.stopPropagation()}
-        style={{ paddingBottom: "calc(2rem + env(safe-area-inset-bottom, 0px))" }}
-      >
+    <Sheet onClose={onClose} labelledBy="building-title">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
             <span className={`grid h-14 w-14 place-items-center rounded-2xl text-3xl ${built ? "bg-accent-soft" : "bg-line grayscale"}`} aria-hidden>
@@ -208,7 +235,7 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
               </h2>
             </div>
           </div>
-          <button onClick={onClose} className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line" aria-label={t("Fermer", "Close")}>
+          <button onClick={onClose} className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-fill" aria-label={t("Fermer", "Close")}>
             <IconClose width={18} height={18} />
           </button>
         </div>
@@ -244,7 +271,6 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
             <ButtonLink href="/defis">{t("Gagner des voix", "Earn voix")}</ButtonLink>
           </div>
         )}
-      </div>
-    </div>
+    </Sheet>
   );
 }

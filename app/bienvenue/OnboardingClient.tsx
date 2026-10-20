@@ -17,7 +17,7 @@ function Choice({ selected, onClick, children }: { selected: boolean; onClick: (
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`min-h-12 rounded-2xl border-2 px-4 py-2.5 text-left font-semibold transition ${selected ? "border-accent bg-accent-soft text-ink" : "border-line bg-card"}`}
+      className={`min-h-12 rounded-2xl border-2 px-4 py-2.5 text-left font-semibold transition ${selected ? "border-accent bg-accent-soft text-ink" : "border-transparent bg-card"}`}
     >
       {children}
     </button>
@@ -89,7 +89,7 @@ export function OnboardingClient() {
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-6 px-4 pb-10 pt-3">
       <div className="flex items-center gap-3">
-        <button onClick={back} className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line bg-card" aria-label={t("Étape précédente", "Previous step")}>
+        <button onClick={back} className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-fill" aria-label={t("Étape précédente", "Previous step")}>
           <IconBack />
         </button>
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin={1} aria-valuemax={STEPS} aria-valuenow={step + 1}>
@@ -119,7 +119,7 @@ export function OnboardingClient() {
             placeholder={t("Ton prénom (facultatif)", "Your first name (optional)")}
             value={p.firstName}
             onChange={(e) => set({ firstName: e.target.value })}
-            className="min-h-14 rounded-2xl border-2 border-line bg-card px-4 text-lg"
+            className="min-h-14 rounded-[12px] border-0 bg-fill px-4 text-lg"
           />
           <p className="-mt-3 text-sm text-muted">{t("Il sert seulement à montrer à tes amis qui les défie.", "It's only used to show your friends who challenged them.")}</p>
           <Button onClick={next}>{t("Continuer", "Continue")}</Button>
@@ -151,7 +151,7 @@ export function OnboardingClient() {
               <div className="flex flex-col gap-2">
                 {q.options.map((o, oi) => {
                   const picked = answers[qi] === oi;
-                  const state = !checked ? (picked ? "border-accent bg-accent-soft" : "border-line bg-card") : oi === q.answer ? "border-ok bg-ok-soft" : picked ? "border-bad bg-bad-soft" : "border-line bg-card opacity-60";
+                  const state = !checked ? (picked ? "border-accent bg-accent-soft" : "border-transparent bg-card") : oi === q.answer ? "border-ok bg-ok-soft" : picked ? "border-bad bg-bad-soft" : "border-transparent bg-card opacity-60";
                   return (
                     <button
                       key={o}
@@ -211,7 +211,7 @@ export function OnboardingClient() {
       {step === 4 && (
         <section className="pop flex flex-col gap-5">
           <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Comment ça marche", "How it works")}</p>
-          <div key={slide} className="pop flex min-h-72 flex-col justify-center gap-3 rounded-[2rem] bg-ink p-6 text-paper">
+          <div key={slide} className="pop flex min-h-72 flex-col justify-center gap-3 rounded-[2rem] bg-hero p-6 text-white">
             <p className="text-6xl" aria-hidden>
               {ob.tutorial[slide].emoji}
             </p>
@@ -230,14 +230,14 @@ export function OnboardingClient() {
 
       {step === 5 && (
         <section className="pop flex flex-col gap-5">
-          <div className="rounded-3xl bg-ink p-6 text-paper">
+          <div className="rounded-3xl bg-hero p-6 text-white">
             <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Ton niveau de départ", "Your starting level")}</p>
             <p className="mt-1 font-display text-4xl font-extrabold">{ob.levels[level].label}</p>
             <p className="mt-2 opacity-90">{ob.levels[level].text}</p>
             <p className="mt-2 text-sm opacity-75">{t("Tu peux changer le niveau des défis à tout moment.", "You can change the challenge level at any time.")}</p>
           </div>
           <ul className="flex flex-col gap-3">
-            <li className="rounded-2xl border border-line bg-card px-4 py-3">
+            <li className="rounded-[14px] bg-card px-4 py-3">
               <strong>{t("Ton fil :", "Your feed:")}</strong>{" "}
               {t(
                 "des actus de la gauche, du centre, de la droite et de l'extrême droite, plus des infos neutres, en alternance.",
@@ -245,13 +245,13 @@ export function OnboardingClient() {
               )}
             </li>
             {intl && (
-              <li className="rounded-2xl border border-line bg-card px-4 py-3">
+              <li className="rounded-[14px] bg-card px-4 py-3">
                 🌍 <strong>{t("Mode international :", "International mode:")}</strong>{" "}
                 {t("on commence par qui peut voter en France et pourquoi la présidentielle te concerne quand même.", "we start with who can vote in France and why the election still matters to you.")}
               </li>
             )}
             {p.interests.length > 0 && (
-              <li className="rounded-2xl border border-line bg-card px-4 py-3">
+              <li className="rounded-[14px] bg-card px-4 py-3">
                 <strong>{t("Tes sujets en premier :", "Your topics first:")}</strong> {p.interests.map((id) => c.topicOf(id).label).join(", ")}
               </li>
             )}

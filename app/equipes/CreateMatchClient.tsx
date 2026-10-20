@@ -65,17 +65,17 @@ export function CreateMatchClient() {
         <Card className="flex flex-col gap-3">
           <label className="flex flex-col gap-2 text-sm font-semibold" htmlFor="teamA">
             {tr("Équipe 1", "Team 1")}
-            <input id="teamA" maxLength={30} value={teamA} onChange={(e) => setTeamA(e.target.value)} placeholder="BDE ESSEC" className="min-h-12 rounded-2xl border-2 border-line bg-paper px-4 text-base font-normal" />
+            <input id="teamA" maxLength={30} value={teamA} onChange={(e) => setTeamA(e.target.value)} placeholder="BDE ESSEC" className="min-h-12 rounded-[12px] border-0 bg-fill px-4 text-base font-normal" />
           </label>
           <label className="flex flex-col gap-2 text-sm font-semibold" htmlFor="teamB">
             {tr("Équipe 2", "Team 2")}
-            <input id="teamB" maxLength={30} value={teamB} onChange={(e) => setTeamB(e.target.value)} placeholder="BDE Centrale" className="min-h-12 rounded-2xl border-2 border-line bg-paper px-4 text-base font-normal" />
+            <input id="teamB" maxLength={30} value={teamB} onChange={(e) => setTeamB(e.target.value)} placeholder="BDE Centrale" className="min-h-12 rounded-[12px] border-0 bg-fill px-4 text-base font-normal" />
           </label>
         </Card>
         <fieldset className="flex flex-col gap-2">
           <legend className="mb-2 font-semibold">{tr("Choisis le défi du match", "Pick the match challenge")}</legend>
           {defis.teamChallenges.map((t) => (
-            <label key={t} className={`flex min-h-12 items-center gap-3 rounded-2xl border-2 px-4 ${type === t ? "border-accent bg-accent-soft" : "border-line bg-card"}`}>
+            <label key={t} className={`flex min-h-12 items-center gap-3 rounded-2xl border-2 px-4 ${type === t ? "border-accent bg-accent-soft" : "border-transparent bg-card"}`}>
               <input type="radio" name="challenge" value={t} checked={type === t} onChange={() => setType(t)} className="h-5 w-5 accent-[var(--accent)]" />
               <span className="font-semibold">{defis.names[t]}</span>
             </label>

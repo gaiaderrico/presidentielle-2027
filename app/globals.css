@@ -1,35 +1,40 @@
 @import "tailwindcss";
 
-/* Neutral palette, no party colours: navy ink, warm off-white paper, one orange accent. Greens only in the city. */
+/* iOS-style system palette (apple-ui-designer): grouped grey background, white cards, near-black text,
+   one orange accent used sparingly. No party colours. Greens only in the city. */
 :root {
-  --paper: #faf6ef;
+  --paper: #f2f2f7;
   --card: #ffffff;
-  --ink: #1b2a41;
-  --muted: #5e6a7d;
-  --line: #e6dfd3;
-  --accent: #e8661c;
+  --ink: #1c1c1e;
+  --muted: #6e6e73;
+  --line: #e5e5ea;
+  --fill: rgba(118, 118, 128, 0.12);
+  --hero: #1c1c1e;
+  --accent: #f2601d;
   --accent-ink: #ffffff;
-  --accent-soft: #fdebdc;
-  --ok: #2f7d5b;
-  --ok-soft: #e3f2ea;
-  --bad: #b3412e;
-  --bad-soft: #f8e4df;
+  --accent-soft: #fff0e6;
+  --ok: #248a3d;
+  --ok-soft: #e7f6ec;
+  --bad: #d70015;
+  --bad-soft: #fdecee;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #121a27;
-    --card: #1b2536;
-    --ink: #eef1f6;
-    --muted: #9ba6b8;
-    --line: #2c3850;
-    --accent: #ff8a3d;
-    --accent-ink: #1b1206;
-    --accent-soft: #3a2616;
-    --ok: #63c193;
-    --ok-soft: #173326;
-    --bad: #f0907c;
-    --bad-soft: #3a1f1a;
+    --paper: #000000;
+    --card: #1c1c1e;
+    --ink: #f5f5f7;
+    --muted: #98989f;
+    --line: #38383a;
+    --fill: rgba(118, 118, 128, 0.24);
+    --hero: #1c1c1e;
+    --accent: #ff7a33;
+    --accent-ink: #1a0c03;
+    --accent-soft: #3a2010;
+    --ok: #30d158;
+    --ok-soft: #0f2e18;
+    --bad: #ff453a;
+    --bad-soft: #3a1412;
     color-scheme: dark;
   }
 }
@@ -40,6 +45,8 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-fill: var(--fill);
+  --color-hero: var(--hero);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
@@ -47,8 +54,8 @@
   --color-ok-soft: var(--ok-soft);
   --color-bad: var(--bad);
   --color-bad-soft: var(--bad-soft);
-  --font-sans: var(--font-dmsans);
-  --font-display: var(--font-bricolage);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 html,
@@ -58,13 +65,15 @@ body {
 }
 
 body {
-  background-image: radial-gradient(120% 50% at 50% -10%, var(--accent-soft), transparent 60%);
-  background-repeat: no-repeat;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  font-family: var(--font-dmsans), system-ui, sans-serif;
-  -webkit-tap-highlight-color: transparent;
+/* Headings: SF Pro Display style, tight tracking */
+.font-display {
+  letter-spacing: -0.025em;
 }
 
 h1,
@@ -124,6 +133,93 @@ h3 {
   animation: pop 0.25s ease-out both;
 }
 
+/* City decor: clouds drift, birds cross the sky */
+@keyframes drift {
+  from {
+    transform: translateX(-12px);
+  }
+  to {
+    transform: translateX(70px);
+  }
+}
+.drift {
+  animation: drift 90s ease-in-out infinite alternate;
+}
+
+@keyframes fly {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(200px, -8px);
+  }
+  100% {
+    transform: translate(400px, 0);
+  }
+}
+.fly {
+  animation: fly 22s linear infinite;
+}
+
+/* Answer feedback: a wrong answer shakes, a right one bounces once */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+.shake {
+  animation: shake 0.35s ease-in-out;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.bump {
+  animation: bump 0.3s ease-out;
+}
+
+/* Bottom sheets slide up from the edge, like a native sheet */
+@keyframes sheetIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.sheet-in {
+  animation: sheetIn 0.32s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fadeIn 0.2s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -131,6 +227,10 @@ h3 {
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+  }
+  .drift,
+  .fly {
+    animation: none !important;
   }
 }
 

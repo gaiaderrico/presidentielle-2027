@@ -5,6 +5,7 @@ import type { ChallengeType } from "@/lib/content";
 import { useT } from "@/lib/i18n";
 import { track } from "@/lib/track";
 import { VOIX, addVoix } from "@/lib/voix";
+import { Sheet } from "./Sheet";
 import { Button } from "./ui";
 
 type Props = {
@@ -30,10 +31,7 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
     if (!open) return;
     setCopied(false);
     if (challengeType !== "city") track("share_open", { challengeType, challengeCode: code });
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, challengeType, code, onClose]);
+  }, [open, challengeType, code]);
 
   if (!open) return null;
 
@@ -72,16 +70,7 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
   };
 
   return (
-    <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50" onClick={onClose}>
-      <div
-        className="pop w-full max-w-md rounded-t-3xl bg-card p-5 pb-8 shadow-xl"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="share-title"
-        onClick={(e) => e.stopPropagation()}
-        style={{ paddingBottom: "calc(2rem + env(safe-area-inset-bottom, 0px))" }}
-      >
-        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-line" aria-hidden />
+    <Sheet onClose={onClose} labelledBy="share-title">
         <h2 id="share-title" className="font-display text-xl font-bold">
           {title ?? t("Défie un·e ami·e", "Challenge a friend")}
         </h2>
@@ -102,7 +91,7 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => clicked("whatsapp")}
-            className={`inline-flex min-h-12 items-center justify-center rounded-2xl px-5 font-semibold ${canShare ? "border-2 border-line" : "bg-accent text-accent-ink"}`}
+            className={`inline-flex min-h-12 items-center justify-center rounded-2xl px-5 font-semibold ${canShare ? "bg-fill text-accent" : "bg-accent text-accent-ink"}`}
           >
             WhatsApp
           </a>
@@ -114,7 +103,6 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
           </button>
         </div>
         <p className="sr-only">{url}</p>
-      </div>
-    </div>
+    </Sheet>
   );
 }
