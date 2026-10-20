@@ -91,7 +91,7 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => clicked("whatsapp")}
-            className={`inline-flex min-h-12 items-center justify-center rounded-2xl px-5 font-semibold ${canShare ? "border-2 border-line" : "bg-accent text-accent-ink"}`}
+            className={`inline-flex min-h-12 items-center justify-center rounded-2xl px-5 font-semibold ${canShare ? "bg-fill text-accent" : "bg-accent text-accent-ink"}`}
           >
             WhatsApp
           </a>

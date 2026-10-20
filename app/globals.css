@@ -1,35 +1,40 @@
 @import "tailwindcss";
 
-/* Neutral palette, no party colours: navy ink, warm off-white paper, one orange accent. Greens only in the city. */
+/* iOS-style system palette (apple-ui-designer): grouped grey background, white cards, near-black text,
+   one orange accent used sparingly. No party colours. Greens only in the city. */
 :root {
-  --paper: #faf6ef;
+  --paper: #f2f2f7;
   --card: #ffffff;
-  --ink: #1b2a41;
-  --muted: #5e6a7d;
-  --line: #e6dfd3;
-  --accent: #e8661c;
+  --ink: #1c1c1e;
+  --muted: #6e6e73;
+  --line: #e5e5ea;
+  --fill: rgba(118, 118, 128, 0.12);
+  --hero: #1c1c1e;
+  --accent: #f2601d;
   --accent-ink: #ffffff;
-  --accent-soft: #fdebdc;
-  --ok: #2f7d5b;
-  --ok-soft: #e3f2ea;
-  --bad: #b3412e;
-  --bad-soft: #f8e4df;
+  --accent-soft: #fff0e6;
+  --ok: #248a3d;
+  --ok-soft: #e7f6ec;
+  --bad: #d70015;
+  --bad-soft: #fdecee;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #121a27;
-    --card: #1b2536;
-    --ink: #eef1f6;
-    --muted: #9ba6b8;
-    --line: #2c3850;
-    --accent: #ff8a3d;
-    --accent-ink: #1b1206;
-    --accent-soft: #3a2616;
-    --ok: #63c193;
-    --ok-soft: #173326;
-    --bad: #f0907c;
-    --bad-soft: #3a1f1a;
+    --paper: #000000;
+    --card: #1c1c1e;
+    --ink: #f5f5f7;
+    --muted: #98989f;
+    --line: #38383a;
+    --fill: rgba(118, 118, 128, 0.24);
+    --hero: #1c1c1e;
+    --accent: #ff7a33;
+    --accent-ink: #1a0c03;
+    --accent-soft: #3a2010;
+    --ok: #30d158;
+    --ok-soft: #0f2e18;
+    --bad: #ff453a;
+    --bad-soft: #3a1412;
     color-scheme: dark;
   }
 }
@@ -40,6 +45,8 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-fill: var(--fill);
+  --color-hero: var(--hero);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
@@ -47,8 +54,8 @@
   --color-ok-soft: var(--ok-soft);
   --color-bad: var(--bad);
   --color-bad-soft: var(--bad-soft);
-  --font-sans: var(--font-dmsans);
-  --font-display: var(--font-bricolage);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 html,
@@ -58,13 +65,15 @@ body {
 }
 
 body {
-  background-image: radial-gradient(120% 50% at 50% -10%, var(--accent-soft), transparent 60%);
-  background-repeat: no-repeat;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  font-family: var(--font-dmsans), system-ui, sans-serif;
-  -webkit-tap-highlight-color: transparent;
+/* Headings: SF Pro Display style, tight tracking */
+.font-display {
+  letter-spacing: -0.025em;
 }
 
 h1,

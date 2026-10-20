@@ -99,7 +99,7 @@ export function MatchClient() {
           <label htmlFor="matchName" className="text-sm font-semibold">
             {tr("Ton prénom", "Your first name")}
           </label>
-          <input id="matchName" maxLength={20} value={name} onChange={(e) => setName(e.target.value)} className="min-h-12 rounded-2xl border-2 border-line bg-card px-4 text-base" autoComplete="given-name" />
+          <input id="matchName" maxLength={20} value={name} onChange={(e) => setName(e.target.value)} className="min-h-12 rounded-[12px] border-0 bg-fill px-4 text-base" autoComplete="given-name" />
           {error && <p className="text-bad">{error}</p>}
           <Button type="submit" disabled={!name.trim() || joining}>
             {joining ? tr("Connexion…", "Joining…") : tr("Jouer pour mon équipe", "Play for my team")}

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import { Suspense } from "react";
 import { Boot } from "@/components/Boot";
 import { BottomNav } from "@/components/BottomNav";
@@ -7,9 +6,6 @@ import { Footer } from "@/components/Footer";
 import { LevelUp } from "@/components/LevelUp";
 import { TopBar } from "@/components/TopBar";
 import "./globals.css";
-
-const display = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], weight: ["600", "700", "800"] });
-const body = DM_Sans({ variable: "--font-dmsans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "polis · Présidentielle 2027",
@@ -22,14 +18,14 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf6ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#121a27" },
+    { media: "(prefers-color-scheme: light)", color: "#f2f2f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr" className={`${display.variable} ${body.variable} h-full antialiased`}>
+    <html lang="fr" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-paper text-ink">
         <Suspense fallback={<div className="h-14" />}>
           <TopBar />

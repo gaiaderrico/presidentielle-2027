@@ -50,7 +50,7 @@ function Landing() {
 
   return (
     <Page className="!gap-6 !pt-4">
-      <section className="relative overflow-hidden rounded-[2rem] bg-ink p-6 pb-0 text-paper shadow-lg">
+      <section className="relative overflow-hidden rounded-[2rem] bg-hero p-6 pb-0 text-white shadow-lg">
         <Logo onDark className="mb-5 h-10" />
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full bg-accent px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-accent-ink">{days === null ? "J-…" : t(`J-${days}`, `D-${days}`)}</span>
@@ -90,7 +90,7 @@ function Landing() {
 
       <ul className="grid gap-3">
         {features.map((f) => (
-          <li key={f.emoji} className="flex items-start gap-4 rounded-3xl border border-line bg-card p-4">
+          <li key={f.emoji} className="flex items-start gap-4 rounded-[22px] bg-card p-4">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-accent-soft text-2xl" aria-hidden>
               {f.emoji}
             </span>
@@ -136,7 +136,7 @@ function FriendLanding({ code }: { code: string }) {
 
   return (
     <Page>
-      <section className="rounded-[2rem] bg-ink p-6 text-paper shadow-lg">
+      <section className="rounded-[2rem] bg-hero p-6 text-white shadow-lg">
         <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Défi reçu", "Challenge received")} ⚡</p>
         {ref === null ? (
           <p className="mt-2 font-display text-2xl font-bold">{t("Chargement du défi…", "Loading the challenge…")}</p>
@@ -165,7 +165,7 @@ function FriendLanding({ code }: { code: string }) {
           autoComplete="given-name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="min-h-12 rounded-2xl border-2 border-line bg-paper px-4 text-base"
+          className="min-h-12 rounded-[12px] border-0 bg-fill px-4 text-base"
           placeholder={t("Facultatif", "Optional")}
         />
       </Card>

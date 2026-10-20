@@ -166,7 +166,7 @@ export function CityClient() {
               <li key={b.id}>
                 <button
                   onClick={() => open(b.id)}
-                  className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition ${built ? "border-line bg-card" : "border-dashed border-line bg-transparent"} ${selected === b.id ? "ring-2 ring-accent" : ""}`}
+                  className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition ${built ? "border-transparent bg-card" : "border-dashed border-muted/40 bg-transparent"} ${selected === b.id ? "ring-2 ring-accent" : ""}`}
                 >
                   <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-xl ${built ? "bg-accent-soft" : "bg-line/60 grayscale"}`} aria-hidden>
                     {b.emoji}
@@ -235,7 +235,7 @@ function BuildingSheet({ b, built, total, onClose }: { b: CityBuilding; built: b
               </h2>
             </div>
           </div>
-          <button onClick={onClose} className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line" aria-label={t("Fermer", "Close")}>
+          <button onClick={onClose} className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-fill" aria-label={t("Fermer", "Close")}>
             <IconClose width={18} height={18} />
           </button>
         </div>

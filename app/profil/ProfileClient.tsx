@@ -49,7 +49,7 @@ export function ProfileClient() {
   return (
     <Page>
       <div className="flex items-center gap-4">
-        <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-ink font-display text-2xl font-extrabold text-paper">{(p.firstName || "?").slice(0, 1).toUpperCase()}</span>
+        <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-hero font-display text-2xl font-extrabold text-white">{(p.firstName || "?").slice(0, 1).toUpperCase()}</span>
         <div className="min-w-0">
           <h1 className="truncate font-display text-3xl font-extrabold">{p.firstName || t("Mon profil", "My profile")}</h1>
           <p className="text-muted">
@@ -60,9 +60,9 @@ export function ProfileClient() {
 
       <Card className="flex flex-col gap-3">
         <h2 className="font-display text-lg font-bold">{t("Langue", "Language")}</h2>
-        <div className="grid grid-cols-2 gap-1 rounded-2xl border border-line bg-paper p-1">
+        <div className="grid grid-cols-2 gap-1 rounded-[11px] bg-fill p-0.5">
           {(["fr", "en"] as const).map((l) => (
-            <button key={l} onClick={() => setLang(l)} aria-pressed={lang === l} className={`min-h-10 rounded-xl font-semibold ${lang === l ? "bg-ink text-paper" : "text-muted"}`}>
+            <button key={l} onClick={() => setLang(l)} aria-pressed={lang === l} className={`min-h-8 rounded-[9px] text-[13px] font-semibold transition ${lang === l ? "bg-card text-ink shadow-[0_3px_8px_rgba(0,0,0,0.12),0_3px_1px_rgba(0,0,0,0.04)]" : "text-ink/70"}`}>
               {l === "fr" ? "Français" : "English"}
             </button>
           ))}
@@ -76,7 +76,7 @@ export function ProfileClient() {
           {c.topics.map((tp) => {
             const on = p.interests.includes(tp.id);
             return (
-              <button key={tp.id} onClick={() => toggleTopic(tp.id)} aria-pressed={on} className={`min-h-10 rounded-full border-2 px-3 text-sm font-semibold ${on ? "border-accent bg-accent-soft" : "border-line"}`}>
+              <button key={tp.id} onClick={() => toggleTopic(tp.id)} aria-pressed={on} className={`min-h-10 rounded-full border-2 px-3 text-sm font-semibold ${on ? "border-accent bg-accent-soft" : "border-transparent bg-fill"}`}>
                 {tp.emoji} {tp.label}
               </button>
             );
@@ -93,7 +93,7 @@ export function ProfileClient() {
               key={o.id}
               onClick={() => update({ voter: o.id as Profile["voter"] })}
               aria-pressed={p.voter === o.id}
-              className={`min-h-10 rounded-full border-2 px-3 text-sm font-semibold ${p.voter === o.id ? "border-accent bg-accent-soft" : "border-line"}`}
+              className={`min-h-10 rounded-full border-2 px-3 text-sm font-semibold ${p.voter === o.id ? "border-accent bg-accent-soft" : "border-transparent bg-fill"}`}
             >
               {o.label}
             </button>
@@ -153,7 +153,7 @@ export function ProfileClient() {
           {t("Données personnelles", "Personal data")}
         </Link>
         {!confirmWipe ? (
-          <Button variant="ghost" onClick={() => setConfirmWipe(true)}>
+          <Button variant="ghost" className="!text-bad" onClick={() => setConfirmWipe(true)}>
             {t("Effacer toutes mes données sur ce téléphone", "Delete all my data on this phone")}
           </Button>
         ) : (

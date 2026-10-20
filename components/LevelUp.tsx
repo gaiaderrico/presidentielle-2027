@@ -45,7 +45,7 @@ export function LevelUp() {
           <Link
             href="/ma-ville"
             onClick={() => setIndex(null)}
-            className="inline-flex min-h-12 items-center justify-center rounded-2xl border-2 border-line px-4 font-semibold"
+            className="inline-flex min-h-12 items-center justify-center rounded-[14px] bg-fill px-4 font-semibold text-accent"
           >
             {t("Voir ma ville", "See my city")}
           </Link>

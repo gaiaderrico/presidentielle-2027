@@ -110,5 +110,6 @@ _None yet._
 | Sky follows the time of day (day / dusk / night) | A small surprise for players who come back (open-world "micro-discoveries") |
 | Only the next building to unlock is highlighted (orange animated outline) + a "Prochaine découverte" card | One clear landmark to aim for instead of every locked building looking the same (open-world wayfinding) |
 | Bottom sheets: slide up, grabber, drag down or Escape to close; thinner borders, translucent bars | Native iOS feel (apple-ui-designer) |
+| Full iOS-style redesign: system font (SF Pro on iPhone), grouped grey background with white cards and no borders, near-black text, iOS buttons (50pt, grey-fill secondary), segmented controls, grey text fields, tab bar without pill, red delete action, dark mode in true black | The first pass was too subtle to notice. apple-ui-designer: native over custom, hierarchy by size and weight, accent used sparingly. Also removes the 2 Google Fonts downloads |
 | `voix` and `profile` share one typed persisted store (`lib/store.ts`) | One data flow for all local state (Zustand-style pattern, no new dependency) |
 | Not done: a daily streak / daily goal | Feature creep: it does not help the round-1 test (finish one challenge) |

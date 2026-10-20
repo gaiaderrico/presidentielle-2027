@@ -97,7 +97,7 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
     );
     const voix = done.score * VOIX.challengeCorrect + VOIX.challengeFinish;
     return (
-      <div className="pop flex flex-col gap-4 rounded-[2rem] bg-ink p-6 text-paper shadow-lg">
+      <div className="pop flex flex-col gap-4 rounded-[2rem] bg-hero p-6 text-white shadow-lg">
         <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Défi rapide terminé", "Quick challenge done")}</p>
         <p className="font-display text-6xl font-extrabold tabular-nums">
           {done.score}/{items.length}
@@ -135,7 +135,7 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
       <h2 className="font-display text-[22px] font-bold leading-snug">{item.question}</h2>
       <div className="flex flex-col gap-2">
         {item.options.map((o, i) => {
-          const state = !answered ? "border-line bg-card" : i === item.answer ? "border-ok bg-ok-soft" : i === picked ? "border-bad bg-bad-soft" : "border-line opacity-60";
+          const state = !answered ? "border-transparent bg-card" : i === item.answer ? "border-ok bg-ok-soft" : i === picked ? "border-bad bg-bad-soft" : "border-line opacity-60";
           return (
             <button key={o} onClick={() => pick(i)} disabled={answered} className={`min-h-12 rounded-2xl border-2 px-4 py-2.5 text-left font-medium transition ${state}`}>
               {o}

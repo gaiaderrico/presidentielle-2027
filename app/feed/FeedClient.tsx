@@ -39,7 +39,7 @@ export function FeedClient() {
   if (!profile.done && !skipProfile) {
     return (
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-4 px-4 py-8">
-        <div className="rounded-[2rem] bg-ink p-6 text-paper">
+        <div className="rounded-[2rem] bg-hero p-6 text-white">
           <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Ton fil d'actu", "Your news feed")}</p>
           <h1 className="mt-2 font-display text-3xl font-extrabold leading-tight">{t("Une minute pour l'adapter à toi ?", "One minute to make it yours?")}</h1>
           <p className="mt-2 opacity-90">{t("Ton niveau et tes sujets, pour des actus utiles. Tu verras toujours tous les bords.", "Your level and topics, for useful news. You will always see every side.")}</p>
@@ -182,7 +182,7 @@ function Feed() {
           <span className="text-xs font-bold tabular-nums text-muted" aria-live="polite">
             {currentCardNumber}/{total}
           </span>
-          <button onClick={() => setShowInfo(true)} className="grid h-9 w-9 place-items-center rounded-full border border-line bg-card text-muted" aria-label={t("Pourquoi ces actus ?", "Why these news?")}>
+          <button onClick={() => setShowInfo(true)} className="grid h-9 w-9 place-items-center rounded-full bg-fill text-muted" aria-label={t("Pourquoi ces actus ?", "Why these news?")}>
             <IconInfo width={18} height={18} />
           </button>
         </div>
@@ -193,7 +193,7 @@ function Feed() {
         <button
           onClick={() => goTo(Math.max(current - 1, 0))}
           disabled={current === 0}
-          className="grid h-12 w-12 place-items-center rounded-full border border-line bg-card/95 shadow-md transition disabled:opacity-30"
+          className="grid h-12 w-12 place-items-center rounded-full bg-card/90 shadow-[0_4px_16px_rgba(0,0,0,0.12)] backdrop-blur transition disabled:opacity-30"
           aria-label={t("Carte précédente", "Previous card")}
         >
           <IconUp />
@@ -218,14 +218,14 @@ function Feed() {
             {s.kind === "card" && <CardView card={s.card} reaction={reactions[s.card.id]} onReact={(r) => react(s.card, r)} first={pos === 0} />}
             {s.kind === "challenge" && <InlineChallenge readCards={s.readCards} used={usedQuestions.current} onContinue={() => goTo(pos + 1)} />}
             {s.kind === "end" && (
-              <div className="pop flex flex-col gap-4 rounded-[2rem] bg-ink p-6 text-paper shadow-lg">
+              <div className="pop flex flex-col gap-4 rounded-[2rem] bg-hero p-6 text-white shadow-lg">
                 <p className="text-4xl" aria-hidden>
                   🎉
                 </p>
                 <h2 className="font-display text-3xl font-extrabold leading-tight">{t("Tu es à jour sur la campagne !", "You're up to date on the campaign!")}</h2>
                 <p className="opacity-90">{t("De nouvelles actus arrivent régulièrement jusqu'au 18 avril.", "New stories keep coming until 18 April.")}</p>
                 <ButtonLink href="/quiz">{t("Tester ce que j'ai retenu", "Test what I remember")}</ButtonLink>
-                <Link href="/defis" className="inline-flex min-h-12 items-center justify-center rounded-2xl border-2 border-paper/30 font-semibold">
+                <Link href="/defis" className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-white/15 text-white font-semibold">
                   {t("Voir les défis", "See the challenges")}
                 </Link>
               </div>
@@ -247,7 +247,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
   const date = formatDate(card.date, c.lang);
   return (
     <div className="flex flex-col gap-3">
-      <article className="flex flex-col overflow-hidden rounded-[2rem] border border-line bg-card shadow-sm">
+      <article className="flex flex-col overflow-hidden rounded-[22px] bg-card shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
         <div className="flex items-center justify-between gap-2 bg-accent-soft px-5 py-3 text-sm font-bold">
           <span className="inline-flex items-center gap-2">
             <span className="text-lg" aria-hidden>
@@ -259,7 +259,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
         </div>
         <div className="flex flex-col gap-3 p-5">
           {card.kind === "actu" && (
-            <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-muted">
+            <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-fill px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-muted">
               <CampIcon camp={card.camp} />
               {c.campLabels[card.camp]}
               {card.actor && <span className="normal-case tracking-normal"> · {card.actor}</span>}
@@ -300,7 +300,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
             key={r}
             onClick={() => onReact(r)}
             aria-pressed={reaction === r}
-            className={`min-h-12 rounded-2xl border-2 font-semibold transition ${reaction === r ? "border-accent bg-accent-soft text-accent" : "border-line bg-card"}`}
+            className={`min-h-12 rounded-2xl border-2 font-semibold transition ${reaction === r ? "border-accent bg-accent-soft text-accent" : "border-transparent bg-card"}`}
           >
             {r === "up" ? t("👍 Intéressant", "👍 Interesting") : t("👎 Bof", "👎 Meh")}
           </button>
@@ -336,7 +336,7 @@ function InfoSheet({ onClose, interests, position }: { onClose: () => void; inte
           <h2 id="why-title" className="font-display text-2xl font-bold">
             {t("Pourquoi ces actus ?", "Why these news?")}
           </h2>
-          <button onClick={onClose} className="grid h-10 w-10 place-items-center rounded-full border border-line" aria-label={t("Fermer", "Close")}>
+          <button onClick={onClose} className="grid h-10 w-10 place-items-center rounded-full bg-fill" aria-label={t("Fermer", "Close")}>
             <IconClose width={18} height={18} />
           </button>
         </div>
@@ -355,7 +355,7 @@ function InfoSheet({ onClose, interests, position }: { onClose: () => void; inte
           )}
           <li>✅ {t("Chaque carte a une source. On ne te dira jamais pour qui voter.", "Every card has a source. We will never tell you who to vote for.")}</li>
         </ul>
-        <Link href="/profil" className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-2xl border-2 border-line font-semibold">
+        <Link href="/profil" className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-[14px] bg-fill font-semibold text-accent">
           {t("Modifier mes sujets", "Edit my topics")}
         </Link>
       </div>

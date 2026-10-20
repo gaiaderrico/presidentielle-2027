@@ -297,14 +297,14 @@ function Mcq({ item, shuffled, label, disabled, onAnswer }: { item: McqItem; shu
           // Colour classes are exclusive: border-line/bg-card would otherwise win over the red/green ones.
           const state =
             picked === null
-              ? "border-line bg-card"
+              ? "border-transparent bg-card"
               : i === item.answer
                 ? `border-ok bg-ok-soft ${i === picked ? "bump" : ""}`
                 : i === picked
                   ? "shake border-bad bg-bad-soft"
-                  : "border-line bg-card opacity-60";
+                  : "border-transparent bg-card opacity-60";
           return (
-            <button key={i} onClick={() => pick(i)} disabled={picked !== null} className={`min-h-14 rounded-2xl border-2 px-4 py-3 text-left text-[17px] font-medium transition active:scale-[0.99] ${state}`}>
+            <button key={i} onClick={() => pick(i)} disabled={picked !== null} className={`min-h-14 rounded-[14px] border-2 px-4 py-3 text-left text-[17px] font-medium transition active:scale-[0.99] ${state}`}>
               {text}
               {picked !== null && i === item.answer && <span className="ml-2 font-bold text-ok">✓</span>}
             </button>
@@ -359,7 +359,7 @@ function VraiFaux({ item, disabled, onAnswer }: { item: VraiFauxItem; disabled: 
           onPointerMove={move}
           onPointerUp={up}
           onPointerCancel={up}
-          className={`flex min-h-56 flex-col justify-center rounded-3xl border-2 bg-card p-6 shadow-sm ${done ? (ok ? "border-ok" : "border-bad") : "cursor-grab border-line"}`}
+          className={`flex min-h-56 flex-col justify-center rounded-3xl border-2 bg-card p-6 shadow-sm ${done ? (ok ? "border-ok" : "border-bad") : "cursor-grab border-transparent shadow-[0_8px_30px_rgba(0,0,0,0.08)]"}`}
           style={{ transform: `translateX(${dx}px) rotate(${dx / 18}deg)`, transition: startX.current === null ? "transform 0.3s ease" : "none" }}
         >
           {hint && (
@@ -377,10 +377,10 @@ function VraiFaux({ item, disabled, onAnswer }: { item: VraiFauxItem; disabled: 
         <>
           <p className="text-center text-sm text-muted">{t("Glisse à droite pour Vrai, à gauche pour Faux", "Swipe right for True, left for False")}</p>
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="secondary" onClick={() => answer(false)} className="!border-bad !text-bad">
+            <Button variant="secondary" onClick={() => answer(false)} className="!bg-bad-soft !text-bad">
               ← {no}
             </Button>
-            <Button variant="secondary" onClick={() => answer(true)} className="!border-ok !text-ok">
+            <Button variant="secondary" onClick={() => answer(true)} className="!bg-ok-soft !text-ok">
               {yes} →
             </Button>
           </div>
@@ -461,14 +461,14 @@ function AutreCamp({ item, disabled, onAnswer }: { item: AutreCampItem; disabled
           <div className="flex flex-col gap-3">
             {options.map((o) => {
               const state = !picked
-                ? "border-line bg-card"
+                ? "border-transparent bg-card"
                 : o.kind === "good"
                   ? `border-ok bg-ok-soft ${o.text === picked ? "bump" : ""}`
                   : o.text === picked
                     ? "shake border-bad bg-bad-soft"
-                    : "border-line bg-card opacity-60";
+                    : "border-transparent bg-card opacity-60";
               return (
-                <button key={o.text} onClick={() => pick(o)} disabled={!!picked} className={`min-h-14 rounded-2xl border-2 px-4 py-3 text-left text-[17px] font-medium transition ${state}`}>
+                <button key={o.text} onClick={() => pick(o)} disabled={!!picked} className={`min-h-14 rounded-[14px] border-2 px-4 py-3 text-left text-[17px] font-medium transition ${state}`}>
                   « {o.text} »
                 </button>
               );
@@ -491,7 +491,7 @@ function Prono({ item, isLast, onAnswer }: { item: PronoItem; isLast: boolean; o
       </Card>
       <div className="flex flex-col gap-3">
         {item.options.map((o) => (
-          <button key={o} onClick={() => onAnswer(o)} className="min-h-14 rounded-2xl border-2 border-line bg-card px-4 py-3 text-left text-[17px] font-medium">
+          <button key={o} onClick={() => onAnswer(o)} className="min-h-14 rounded-[12px] border-0 bg-fill px-4 py-3 text-left text-[17px] font-medium">
             {o}
           </button>
         ))}

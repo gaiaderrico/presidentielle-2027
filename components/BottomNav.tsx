@@ -21,13 +21,13 @@ export function BottomNav() {
   if (HIDDEN.includes(path)) return null;
   return (
     <>
-      <div className="h-[calc(4.25rem+env(safe-area-inset-bottom,0px))]" aria-hidden />
+      <div className="h-[calc(3.25rem+env(safe-area-inset-bottom,0px))]" aria-hidden />
       <nav
         aria-label={t("Navigation principale", "Main navigation")}
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-line/60 bg-card/80 backdrop-blur-xl backdrop-saturate-150"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-line/70 bg-card/75 backdrop-blur-xl backdrop-saturate-[1.8]"
         style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       >
-        <ul className="mx-auto grid h-17 max-w-md grid-cols-4">
+        <ul className="mx-auto grid h-13 max-w-md grid-cols-4">
           {TABS.map(({ href, fr, en, Icon }) => {
             const active = path === href || (href !== "/feed" && path.startsWith(href + "/")) || (href === "/feed" && path === "/quiz");
             return (
@@ -36,11 +36,9 @@ export function BottomNav() {
                   href={href}
                   onClick={() => haptic("tap")}
                   aria-current={active ? "page" : undefined}
-                  className={`flex h-full flex-col items-center justify-center gap-1 text-xs font-semibold transition ${active ? "text-accent" : "text-muted"}`}
+                  className={`flex h-full flex-col items-center justify-center gap-0.5 pt-1 text-[10px] font-medium tracking-normal transition active:opacity-60 ${active ? "text-accent" : "text-muted"}`}
                 >
-                  <span className={`grid h-8 w-14 place-items-center rounded-full transition ${active ? "bg-accent-soft" : ""}`}>
-                    <Icon width={22} height={22} />
-                  </span>
+                  <Icon width={25} height={25} strokeWidth={active ? 2.4 : 1.8} />
                   {t(fr, en)}
                 </Link>
               </li>
