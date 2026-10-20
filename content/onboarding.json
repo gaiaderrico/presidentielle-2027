@@ -1,0 +1,59 @@
+{
+  "followsNews": {
+    "question": "Tu suis l'actualité politique ?",
+    "options": [
+      { "id": "jamais", "label": "Presque jamais", "points": 0 },
+      { "id": "parfois", "label": "De temps en temps", "points": 1 },
+      { "id": "souvent", "label": "Souvent", "points": 2 }
+    ]
+  },
+  "voted": {
+    "question": "Tu as déjà voté ?",
+    "options": [
+      { "id": "oui", "label": "Oui" },
+      { "id": "non", "label": "Pas encore" }
+    ]
+  },
+  "registered": {
+    "question": "Tu es inscrit·e sur les listes électorales ?",
+    "options": [
+      { "id": "oui", "label": "Oui" },
+      { "id": "non", "label": "Non" },
+      { "id": "nsp", "label": "Je ne sais pas" }
+    ],
+    "help": "Pour voter à la présidentielle, il faut être inscrit·e au plus tard le vendredi 12 mars 2027.",
+    "checkUrl": "https://www.service-public.fr/particuliers/vosdroits/services-en-ligne-et-formulaires/ISE"
+  },
+  "knowledge": [
+    {
+      "id": "k-mandat",
+      "question": "Le président de la République est élu pour…",
+      "options": ["4 ans", "5 ans", "7 ans"],
+      "answer": 1,
+      "explanation": "Depuis 2002, le mandat présidentiel dure 5 ans (le quinquennat)."
+    },
+    {
+      "id": "k-lois",
+      "question": "Qui vote les lois en France ?",
+      "options": ["Le président seul", "Le Parlement (Assemblée nationale et Sénat)", "Le Conseil constitutionnel"],
+      "answer": 1,
+      "explanation": "Les lois sont votées par le Parlement : l'Assemblée nationale et le Sénat."
+    },
+    {
+      "id": "k-deputes",
+      "question": "Combien y a-t-il de députés à l'Assemblée nationale ?",
+      "options": ["348", "577", "1 000"],
+      "answer": 1,
+      "explanation": "Il y a 577 députés. 348, c'est le nombre de sénateurs."
+    }
+  ],
+  "levels": {
+    "debutant": { "label": "Débutant·e", "text": "On commence par les bases, puis l'actu de la campagne, expliquée simplement." },
+    "intermediaire": { "label": "Intermédiaire", "text": "Un rappel des règles clés, puis l'actu de tous les bords." },
+    "avance": { "label": "Avancé·e", "text": "Direct à l'actu de la campagne, de tous les bords." }
+  },
+  "ideas": {
+    "question": "Et toi, aujourd'hui, tu te situes plutôt où ?",
+    "privacy": "Cette réponse reste uniquement sur ton téléphone : elle n'est jamais envoyée ni enregistrée chez nous. On s'en sert seulement pour te montrer plus souvent les idées des autres camps. On ne te dira jamais pour qui voter."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "topics": [
+    { "id": "election", "label": "Présidentielle", "emoji": "🗳️" },
+    { "id": "logement", "label": "Logement", "emoji": "🏠" },
+    { "id": "pouvoir-achat", "label": "Pouvoir d'achat", "emoji": "💶" },
+    { "id": "emploi", "label": "Emploi", "emoji": "💼" },
+    { "id": "etudes", "label": "Études et bourses", "emoji": "🎓" },
+    { "id": "climat", "label": "Climat", "emoji": "🌍" },
+    { "id": "sante", "label": "Santé", "emoji": "🩺" },
+    { "id": "securite", "label": "Sécurité", "emoji": "🛡️" },
+    { "id": "immigration", "label": "Immigration", "emoji": "🧭" },
+    { "id": "europe", "label": "Europe", "emoji": "🇪🇺" },
+    { "id": "budget", "label": "Budget et impôts", "emoji": "📊" },
+    { "id": "institutions", "label": "Institutions", "emoji": "🏛️" }
+  ],
+  "camps": {
+    "neutre": "Info neutre",
+    "gauche": "Gauche",
+    "centre": "Centre",
+    "droite": "Droite",
+    "extreme-droite": "Extrême droite"
+  }
+}

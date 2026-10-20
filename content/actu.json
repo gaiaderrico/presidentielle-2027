@@ -1,0 +1,400 @@
+{
+  "checkedOn": "2026-10-20",
+  "cards": [
+    {
+      "id": "retailleau-rearmer-etat",
+      "date": "2026-10-18",
+      "topic": "securite",
+      "camp": "droite",
+      "actor": "Les Républicains",
+      "title": "Retailleau veut « réarmer l'État » après le 17 octobre",
+      "text": "Le 18 octobre, Bruno Retailleau (LR) a accusé les élus LFI d'avoir « armé la violence avec leurs mots d'ordre ». Il propose une révision de la Constitution pour fixer la majorité pénale des mineurs à 15 ans et instaurer des peines minimales.",
+      "why": "La proposition porte sur la façon dont la justice traite les jeunes de moins de 18 ans.",
+      "source": { "label": "franceinfo", "url": "https://www.franceinfo.fr/societe/mobilisation-du-17-octobre/les-elus-lfi-ont-arme-la-violence-avec-leurs-mots-d-ordre-accuse-le-president-de-lr-bruno-retailleau_8242834.html" },
+      "quiz": {
+        "question": "Quel âge Bruno Retailleau propose-t-il pour la majorité pénale des mineurs ?",
+        "options": ["13 ans", "16 ans", "15 ans"],
+        "answer": 2,
+        "explanation": "Il propose une révision constitutionnelle pour la fixer à 15 ans."
+      }
+    },
+    {
+      "id": "mobilisation-17-octobre",
+      "date": "2026-10-17",
+      "topic": "pouvoir-achat",
+      "camp": "neutre",
+      "actor": "Mobilisation sociale",
+      "title": "17 octobre : 550 000 manifestants contre la vie chère",
+      "text": "Le 17 octobre, environ 550 000 personnes ont manifesté en France selon le ministère de l'Intérieur (800 000 selon les organisateurs) contre la « vie chère ». Lycéens, étudiants, anciens gilets jaunes et syndicats ont défilé ; des violences et environ 400 interpellations ont été signalées.",
+      "why": "Lycéens et étudiants faisaient partie des cortèges, centrés sur le coût de la vie.",
+      "source": { "label": "franceinfo", "url": "https://www.franceinfo.fr/societe/education/blocage-des-lycees/lyon-rennes-marseille-belfort-poitiers-la-journee-de-mobilisation-du-17-octobre-a-commence_8241559.html" },
+      "quiz": {
+        "question": "Selon le ministère de l'Intérieur, combien de personnes ont manifesté le 17 octobre ?",
+        "options": ["110 000", "550 000", "800 000"],
+        "answer": 1,
+        "explanation": "800 000 est le chiffre des organisateurs ; 110 000 est le chiffre officiel pour Paris seulement."
+      }
+    },
+    {
+      "id": "ps-motion-rejet-budget",
+      "date": "2026-10-13",
+      "topic": "budget",
+      "camp": "gauche",
+      "actor": "Parti socialiste",
+      "title": "Budget : la motion de rejet du PS repoussée",
+      "text": "Le 13 octobre, les députés ont rejeté par 236 voix contre 149 la motion de rejet préalable déposée par les socialistes contre le budget 2027. La gauche l'a soutenue ; le bloc central et le RN ont voté contre. L'examen du texte a donc commencé.",
+      "sides": [
+        { "label": "PS (Estelle Mercier)", "text": "reproche au gouvernement son « tabou absolu, la mise à contribution des plus riches »." },
+        { "label": "RN (Sophie-Laurence Roy)", "text": "accuse le PS d'offrir au gouvernement une opposition qui « refuse de discuter »." },
+        { "label": "Gouvernement (David Amiel)", "text": "défend un « budget de sauvegarde »." }
+      ],
+      "source": { "label": "LCP", "url": "https://lcp.fr/actualites/la-motion-de-rejet-des-socialistes-n-ayant-pas-ete-adoptee-l-examen-du-budget-2027-aura" },
+      "quiz": {
+        "question": "Quel groupe avait déposé cette motion de rejet du budget ?",
+        "options": ["Le groupe socialiste", "Le Rassemblement national", "Horizons"],
+        "answer": 0,
+        "explanation": "La motion venait des députés socialistes ; elle a été rejetée par 236 voix contre 149."
+      }
+    },
+    {
+      "id": "rn-contre-motion-rejet",
+      "date": "2026-10-13",
+      "topic": "budget",
+      "camp": "extreme-droite",
+      "actor": "Rassemblement national",
+      "title": "Budget : le RN refuse de rejeter le texte d'emblée",
+      "text": "Les députés RN, groupe présidé par Marine Le Pen, ont décidé le 13 octobre de voter contre la motion de rejet du PS sur le budget 2027. « Discuter le budget, c'est la base du Parlement », a déclaré Jean-Philippe Tanguy en annonçant ce choix.",
+      "source": { "label": "LCP", "url": "https://lcp.fr/actualites/budget-2027-les-deputes-du-rassemblement-national-voteront-contre-la-motion-de-rejet-des" },
+      "quiz": {
+        "question": "Quelle raison Jean-Philippe Tanguy donne-t-il au vote du RN ?",
+        "options": ["Le RN soutient le budget du gouvernement", "Le RN demande un référendum", "Le RN veut que le budget soit débattu"],
+        "answer": 2,
+        "explanation": "Il a dit : « On veut avoir ce débat » et « Discuter le budget, c'est la base du Parlement »."
+      }
+    },
+    {
+      "id": "horizons-budget-alternatif",
+      "date": "2026-10-13",
+      "topic": "budget",
+      "camp": "centre",
+      "actor": "Horizons",
+      "title": "Horizons propose un « budget alternatif »",
+      "text": "Horizons, le parti d'Édouard Philippe, propose d'annuler 10 milliards d'euros de hausses d'impôts prévues, compensées par autant d'économies. Parmi ses pistes : revenir sur la suspension de la réforme des retraites et ne pas remplacer un fonctionnaire sur trois.",
+      "source": { "label": "franceinfo", "url": "https://www.franceinfo.fr/economie/budget/horizons-propose-un-budget-alternatif-avec-10-milliards-d-economies-supplementaires_8234875.html" },
+      "quiz": {
+        "question": "Combien de hausses d'impôts Horizons veut-il annuler ?",
+        "options": ["1 milliard d'euros", "10 milliards d'euros", "54 milliards d'euros"],
+        "answer": 1,
+        "explanation": "Horizons veut annuler 10 milliards de hausses d'impôts, compensées par 10 milliards d'économies."
+      }
+    },
+    {
+      "id": "glucksmann-primaire",
+      "date": "2026-10-11",
+      "topic": "election",
+      "camp": "gauche",
+      "actor": "Place publique / PS",
+      "title": "Glucksmann gagne la primaire dès le 1er tour",
+      "text": "Le 11 octobre, Raphaël Glucksmann (Place publique) a remporté la primaire sociale-démocrate avec 66,17 % des voix, devant Olivier Faure (PS, 14,46 %). Il devient le candidat du PS, de Place publique et de la GRS. Il a déclaré : « Il n'y aura pas d'accord avec LFI ».",
+      "source": { "label": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/primaire-de-la-gauche-raphael-glucksmann-plie-le-match-et-remporte-le-scrutin-des-le-premier-tour-avec-66" },
+      "quiz": {
+        "question": "Qui est arrivé deuxième de cette primaire ?",
+        "options": ["Ségolène Royal", "Jérôme Guedj", "Olivier Faure"],
+        "answer": 2,
+        "explanation": "Olivier Faure, premier secrétaire du PS, a obtenu 14,46 %."
+      }
+    },
+    {
+      "id": "melenchon-parcoursup",
+      "date": "2026-10-11",
+      "topic": "etudes",
+      "camp": "gauche",
+      "actor": "La France insoumise",
+      "title": "À Clermont, Mélenchon veut abolir Parcoursup",
+      "text": "Lors d'un meeting au Zénith de Clermont-Ferrand le 11 octobre, Jean-Luc Mélenchon (LFI) a déclaré que « Parcoursup doit être aboli » et s'est dit opposé à la sélection à l'université. Il a aussi proposé d'abaisser l'âge du droit de vote à 16 ans.",
+      "why": "Parcoursup est la plateforme d'admission dans l'enseignement supérieur après le bac.",
+      "source": { "label": "AFP via Sud Radio", "url": "https://www.sudradio.fr/societe/a-clermont-ferrand-melenchon-fait-salle-comble-pour-denoncer-lignominie-parcoursup" },
+      "quiz": {
+        "question": "À quel âge Jean-Luc Mélenchon propose-t-il d'ouvrir le droit de vote ?",
+        "options": ["16 ans", "17 ans", "18 ans"],
+        "answer": 0,
+        "explanation": "Il a proposé d'abaisser le droit de vote à 16 ans (il est aujourd'hui à 18 ans)."
+      }
+    },
+    {
+      "id": "attal-pacte-jeunesse",
+      "date": "2026-10-10",
+      "topic": "etudes",
+      "camp": "centre",
+      "actor": "Renaissance",
+      "title": "Attal présente un « pacte pour la jeunesse »",
+      "text": "À Lyon le 10 octobre, Gabriel Attal (Renaissance) a proposé de garder Parcoursup en le réformant, avec moins de contrôle continu et plus d'épreuves finales. Il veut aussi moins d'élèves par classe et une convention de 150 jeunes de 16 à 25 ans tirés au sort.",
+      "sides": [
+        { "label": "LFI (Jean-Luc Mélenchon)", "text": "a répondu sur X en dénonçant une « consternante duplicité d'Attal »." }
+      ],
+      "source": { "label": "AFP via La Gazette France", "url": "https://www.lagazettefrance.fr/article/presidentielle-attal-melenchon-pour-les-candidats-l-atout-ou-le-peril-jeune" },
+      "quiz": {
+        "question": "Que propose Gabriel Attal pour Parcoursup ?",
+        "options": ["Le supprimer", "Le remplacer par un tirage au sort", "Le garder en le réformant"],
+        "answer": 2,
+        "explanation": "Il veut le conserver, avec moins de contrôle continu et plus d'accompagnement."
+      }
+    },
+    {
+      "id": "platret-candidat",
+      "date": "2026-10-08",
+      "topic": "emploi",
+      "camp": "droite",
+      "actor": "Gilles Platret (divers droite)",
+      "title": "Gilles Platret se déclare candidat",
+      "text": "Le 8 octobre, Gilles Platret, maire de Chalon-sur-Saône (divers droite, ex-LR), a officialisé sa candidature lors d'une réunion publique dans sa ville. Il propose d'abroger les 35 heures et de rétablir les frontières nationales. Il doit encore réunir 500 parrainages.",
+      "why": "La durée légale de 35 heures par semaine fixe le seuil à partir duquel on compte des heures supplémentaires.",
+      "source": { "label": "Lyon Capitale", "url": "https://www.lyoncapitale.fr/?p=521848" },
+      "quiz": {
+        "question": "Que propose Gilles Platret sur le temps de travail ?",
+        "options": ["Passer à 32 heures", "Abroger les 35 heures", "Garder les 35 heures"],
+        "answer": 1,
+        "explanation": "Il propose l'abrogation de la durée légale de 35 heures."
+      }
+    },
+    {
+      "id": "parcoursup-reforme-gouvernement",
+      "date": "2026-10-08",
+      "topic": "etudes",
+      "camp": "neutre",
+      "actor": "Gouvernement",
+      "title": "Parcoursup : le gouvernement ouvre la voie à une réforme",
+      "text": "Face à la mobilisation des lycéens, le Premier ministre Sébastien Lecornu a dit le 7 octobre vouloir « rendre Parcoursup plus transparent et intelligible ». Le ministre de l'Enseignement supérieur, Philippe Baptiste, refuse sa suppression mais estime que l'outil doit évoluer.",
+      "why": "Parcoursup concerne chaque année les lycéen·ne·s et étudiant·e·s qui demandent une formation.",
+      "source": { "label": "LCP", "url": "https://lcp.fr/actualites/parcoursup-face-a-la-mobilisation-des-lyceens-le-gouvernement-ouvre-la-voie-a-une" },
+      "quiz": {
+        "question": "Quelle est la position du ministre Philippe Baptiste ?",
+        "options": ["Faire évoluer Parcoursup sans le supprimer", "Supprimer Parcoursup", "Ne rien changer"],
+        "answer": 0,
+        "explanation": "Il s'oppose à la suppression mais dit que l'outil doit évoluer."
+      }
+    },
+    {
+      "id": "wauquiez-casseur-payeur",
+      "date": "2026-10-02",
+      "topic": "securite",
+      "camp": "droite",
+      "actor": "Les Républicains",
+      "title": "Wauquiez veut faire payer les casseurs",
+      "text": "Le 2 octobre, Laurent Wauquiez, chef des députés LR, a demandé que les auteurs de dégâts en marge des mobilisations lycéennes paient les réparations : « tu casses, tu paies ». Ce principe existe dans la loi depuis 2019, mais les préfectures ne l'utilisent pas, selon le gouvernement.",
+      "source": { "label": "franceinfo", "url": "https://www.franceinfo.fr/societe/education/blocage-des-lycees/appliquer-la-loi-du-casseur-payeur-pour-les-degats-en-marge-des-mobilisations-lyceennes-comme-le-veut-laurent-wauquiez-est-il-si-simple_8219986.html" },
+      "quiz": {
+        "question": "Depuis quand le principe « casseur payeur » existe-t-il dans la loi ?",
+        "options": ["2005", "2026", "2019"],
+        "answer": 2,
+        "explanation": "Il est en vigueur depuis 2019, mais il n'est en pratique pas appliqué par les préfectures."
+      }
+    },
+    {
+      "id": "budget-2027-education-apl",
+      "date": "2026-10-02",
+      "topic": "logement",
+      "camp": "neutre",
+      "actor": "Projet de budget 2027",
+      "title": "Budget 2027 : APL gelées, plus de crédits pour l'école",
+      "text": "Le projet de budget 2027 prévoit 65,53 milliards d'euros pour l'enseignement scolaire (64,43 en 2026) et 500 millions de plus pour le supérieur. Les APL ne seraient pas revalorisées, et les foyers aisés devraient choisir entre l'APL de leur enfant étudiant et la demi-part fiscale.",
+      "why": "Beaucoup d'étudiant·e·s locataires touchent l'APL ; ces mesures sont encore débattues au Parlement.",
+      "source": { "label": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/economie/mobilisation-des-lyceens-et-des-etudiants-ce-que-prevoit-le-budget-2027-sur-leducation" },
+      "quiz": {
+        "question": "Que prévoit le projet de budget pour les APL en 2027 ?",
+        "options": ["Une hausse de 10 %", "Pas de revalorisation", "Leur suppression pour tous les étudiants"],
+        "answer": 1,
+        "explanation": "Les APL ne seraient pas revalorisées l'an prochain ; seuls les foyers aisés devraient choisir entre APL et demi-part."
+      }
+    },
+    {
+      "id": "philippe-retraites-65-ans",
+      "date": "2026-09-29",
+      "topic": "emploi",
+      "camp": "centre",
+      "actor": "Horizons",
+      "title": "Philippe propose la retraite à 65 ans",
+      "text": "Le 29 septembre, Édouard Philippe (Horizons) a présenté son projet : relancer la réforme de 2023, puis porter en moins de dix ans l'âge légal à 65 ans et la durée de cotisation à 45 ans. Il veut ajouter un volet par capitalisation au système par répartition.",
+      "why": "La durée de cotisation s'appliquerait aux personnes qui commencent aujourd'hui leur vie professionnelle.",
+      "source": { "label": "franceinfo (avec AFP)", "url": "https://www.franceinfo.fr/elections/presidentielle/age-de-depart-a-65-ans-45-annuites-de-cotisation-edouard-philippe-candidat-horizons-a-la-presidentielle-devoile-son-projet-de-reforme-des-retraites_8214737.html" },
+      "quiz": {
+        "question": "Quelle durée de cotisation propose Édouard Philippe ?",
+        "options": ["40 ans", "43 ans", "45 ans"],
+        "answer": 2,
+        "explanation": "Il propose 45 années de cotisation et un âge légal de 65 ans, atteints en moins de dix ans."
+      }
+    },
+    {
+      "id": "rn-groupe-senat",
+      "date": "2026-09-28",
+      "topic": "institutions",
+      "camp": "extreme-droite",
+      "actor": "Rassemblement national",
+      "title": "Sénatoriales : le RN peut former un groupe au Sénat",
+      "text": "Aux sénatoriales du 27 septembre, le RN et ses alliés ont fait élire 12 nouveaux sénateurs, alors qu'ils n'en comptaient que 3. Ils dépassent le seuil de 10 élus nécessaire pour former un groupe, une première pour eux dans l'histoire du Sénat.",
+      "why": "Le Sénat vote les lois, dont le budget, avec l'Assemblée nationale.",
+      "source": { "label": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/ces-chiffrent-qui-illustrent-la-poussee-du-rn-aux-elections-senatoriales-de-2026" },
+      "quiz": {
+        "question": "Combien de sénateurs faut-il au minimum pour former un groupe au Sénat ?",
+        "options": ["10", "3", "50"],
+        "answer": 0,
+        "explanation": "Le seuil est de dix parlementaires ; le RN et ses alliés l'ont dépassé."
+      }
+    },
+    {
+      "id": "becht-extreme-centre",
+      "date": "2026-09-24",
+      "topic": "election",
+      "camp": "centre",
+      "actor": "Olivier Becht",
+      "title": "Olivier Becht candidat de « l'extrême centre »",
+      "text": "Le 24 septembre, dans Paris Match, le député du Haut-Rhin Olivier Becht, ancien ministre délégué au Commerce extérieur, a annoncé sa candidature. Il se dit « à l'extrême centre » et présente un projet intitulé « Le Projet France, Refonder ou Périr ».",
+      "source": { "label": "Sud Radio", "url": "https://www.sudradio.fr/politique/qui-est-olivier-becht-cet-ancien-ministre-qui-se-lance-dans-la-course-a-lelysee" },
+      "quiz": {
+        "question": "Quel poste ministériel Olivier Becht a-t-il occupé ?",
+        "options": ["Ministre de l'Intérieur", "Ministre délégué au Commerce extérieur", "Ministre de l'Éducation"],
+        "answer": 1,
+        "explanation": "Il a été ministre délégué au Commerce extérieur de 2022 à janvier 2024."
+      }
+    },
+    {
+      "id": "macron-taxes-carburants",
+      "date": "2026-09-24",
+      "topic": "pouvoir-achat",
+      "camp": "centre",
+      "actor": "Emmanuel Macron",
+      "title": "Macron n'exclut pas de baisser les taxes sur les carburants",
+      "text": "Interrogé sur France 2 et TF1 le 24 septembre, Emmanuel Macron n'a pas exclu de baisser les taxes sur les carburants si les prix continuent d'augmenter, tout en jugant que ce n'est « pas la décision la plus vertueuse », car ces taxes financent les dépenses de l'État.",
+      "sides": [
+        { "label": "RN (Sébastien Chenu)", "text": "« Emmanuel Macron est déconnecté quand il dit qu'il ne veut pas baisser les taxes sur les carburants »." },
+        { "label": "LR (François-Xavier Bellamy)", "text": "« il y a des leviers pour agir, nous ne sommes pas condamnés à l'inaction »." },
+        { "label": "LFI (Éric Coquerel)", "text": "« le chef de l'État se révèle impuissant »." }
+      ],
+      "source": { "label": "franceinfo", "url": "https://www.franceinfo.fr/politique/deconnecte-mensonges-aucune-perspective-d-espoir-la-classe-politique-reagit-a-l-interview-d-emmanuel-macron-sur-france-2_8208617.html" }
+    },
+    {
+      "id": "ecologistes-vote-decembre",
+      "date": "2026-09-21",
+      "topic": "election",
+      "camp": "gauche",
+      "actor": "Les Écologistes",
+      "title": "Écologistes : Tondelier candidate, choix final en décembre",
+      "text": "Le 21 septembre, le conseil fédéral des Écologistes a adopté à 69,44 % une motion qui abandonne le projet de primaire. Marine Tondelier reste candidate jusqu'au vote des adhérents (10-13 décembre), qui choisiront entre une candidature écologiste et le soutien à un autre candidat de gauche.",
+      "source": { "label": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-les-ecologistes-reportent-lheure-du-choix-a-decembre-marine-tondelier-toujours-en-lice" },
+      "quiz": {
+        "question": "Que décideront les adhérents écologistes du 10 au 13 décembre ?",
+        "options": ["La date de leur congrès", "S'ils gardent leur candidate ou soutiennent un autre candidat de gauche", "Le nom de leur Premier ministre"],
+        "answer": 1,
+        "explanation": "Ils choisiront entre une candidature du parti et le soutien à un candidat d'une autre force de gauche."
+      }
+    },
+    {
+      "id": "repas-1-euro-budget",
+      "date": "2026-09-21",
+      "topic": "etudes",
+      "camp": "neutre",
+      "actor": "Gouvernement",
+      "title": "Repas à 1 € : 143 millions prévus dans le budget 2027",
+      "text": "Depuis le 4 mai 2026, tous les étudiants peuvent manger au restaurant universitaire pour 1 €, sans condition de ressources. Le gouvernement prévoit 143 millions d'euros pour ce dispositif en 2027 et prévient qu'il ne pourrait pas être assuré pour tous sans adoption du budget.",
+      "why": "Le prix d'un repas au restaurant universitaire est passé de 3,30 € à 1 € pour tous les étudiant·e·s.",
+      "source": { "label": "LCP", "url": "https://lcp.fr/actualites/universite-pas-de-repas-a-1-euro-pour-tous-si-le-budget-2027-n-est-pas-adopte-previent" },
+      "quiz": {
+        "question": "Depuis quand le repas à 1 € est-il ouvert à tous les étudiants ?",
+        "options": ["4 mai 2026", "Septembre 2025", "1er janvier 2027"],
+        "answer": 0,
+        "explanation": "Avant le 4 mai 2026, il était réservé aux boursiers et aux étudiants précaires."
+      }
+    },
+    {
+      "id": "rn-bardella-seul-candidat",
+      "date": "2026-09-21",
+      "topic": "institutions",
+      "camp": "extreme-droite",
+      "actor": "Rassemblement national",
+      "title": "RN : Bardella seul candidat à sa réélection",
+      "text": "Plus de 112 000 adhérents du RN sont appelés à voter en ligne jusqu'au 22 octobre pour élire le président du parti, avant un congrès à Orléans fin octobre. Jordan Bardella est le seul candidat ; les adhérents peuvent aussi voter blanc et élisent 100 membres du conseil national.",
+      "source": { "label": "AFP via La Gazette France", "url": "https://www.lagazettefrance.fr/article/rn-plus-de-112-000-adherents-appeles-a-reelire-bardella-fin-octobre" },
+      "quiz": {
+        "question": "Jusqu'à quand les adhérents du RN peuvent-ils voter ?",
+        "options": ["5 novembre", "22 octobre", "18 avril"],
+        "answer": 1,
+        "explanation": "Le vote en ligne est ouvert jusqu'au 22 octobre inclus."
+      }
+    },
+    {
+      "id": "zemmour-candidat",
+      "date": "2026-09-17",
+      "topic": "election",
+      "camp": "extreme-droite",
+      "actor": "Reconquête",
+      "title": "Éric Zemmour confirme sa candidature",
+      "text": "Le 17 septembre sur BFMTV, Éric Zemmour, président de Reconquête, a confirmé qu'il sera candidat à la présidentielle de 2027. Il était arrivé quatrième au premier tour en 2022, avec 7,07 % des voix. Il a annoncé faire campagne avec Sarah Knafo.",
+      "source": { "label": "LCP", "url": "https://lcp.fr/actualites/presidentielle-2027-eric-zemmour-officialise-sa-candidature-441871" },
+      "quiz": {
+        "question": "Quel score Éric Zemmour avait-il obtenu au 1er tour en 2022 ?",
+        "options": ["21,95 %", "2,28 %", "7,07 %"],
+        "answer": 2,
+        "explanation": "Il avait obtenu 7,07 % et était arrivé quatrième."
+      }
+    },
+    {
+      "id": "budget-2027-effort-54-milliards",
+      "date": "2026-09-17",
+      "topic": "budget",
+      "camp": "neutre",
+      "actor": "Gouvernement",
+      "title": "Budget 2027 : un effort de 54 milliards d'euros annoncé",
+      "text": "Le 17 septembre, le Premier ministre Sébastien Lecornu a présenté un effort budgétaire d'environ 54 milliards d'euros pour 2027. Objectif : un déficit public de 5 % du PIB (4,8 % hors nouvelles dépenses militaires). Le point d'indice des fonctionnaires serait gelé.",
+      "why": "Le budget fixe le financement des universités, des bourses et des aides au logement.",
+      "source": { "label": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/budget-2027-sebastien-lecornu-propose-un-effort-de-54-milliards-deuros" },
+      "quiz": {
+        "question": "Quel déficit public le gouvernement vise-t-il pour 2027 ?",
+        "options": ["3 % du PIB", "5 % du PIB", "6,5 % du PIB"],
+        "answer": 1,
+        "explanation": "La cible est 5 % du PIB ; sans économies, le déficit approcherait 6,5 %."
+      }
+    },
+    {
+      "id": "retailleau-refuse-rassemblement",
+      "date": "2026-09-16",
+      "topic": "election",
+      "camp": "droite",
+      "actor": "Les Républicains",
+      "title": "Retailleau refuse un rassemblement avec Philippe",
+      "text": "Le 16 septembre sur franceinfo, Bruno Retailleau (LR) a rejeté l'idée d'un rassemblement de la droite et du centre pour 2027. Sa différence avec Édouard Philippe n'est « pas seulement de degré, mais de nature », a-t-il dit : « Cette élection présidentielle ne se gagnera pas au centre ».",
+      "source": { "label": "franceinfo", "url": "https://www.franceinfo.fr/politique/bruno-retailleau/une-difference-de-nature-avec-edouard-philippe-bruno-retailleau-rejette-l-idee-d-un-rassemblement-de-la-droite-pour-l-election-presidentielle_8195303.html" }
+    },
+    {
+      "id": "roussel-taxes-essence",
+      "date": "2026-09-12",
+      "topic": "pouvoir-achat",
+      "camp": "gauche",
+      "actor": "Parti communiste français",
+      "title": "Roussel réclame une baisse des taxes sur l'essence",
+      "text": "À la Fête de l'Humanité le 12 septembre, Fabien Roussel (PCF) a demandé « la baisse des taxes sur l'essence » et une hausse des salaires et des pensions. Il a proposé une « nationalisation sanction » de TotalEnergies et appelé à « envahir les ronds-points ».",
+      "source": { "label": "franceinfo", "url": "https://www.franceinfo.fr/elections/presidentielle/direct-presidentielle-2027-fete-de-l-humanite-fete-de-la-rose-campus-des-jeunes-republicains-la-rentree-politique-bat-son-plein_8189465.html" },
+      "quiz": {
+        "question": "Quelle entreprise Fabien Roussel propose-t-il de nationaliser ?",
+        "options": ["Renault", "EDF", "TotalEnergies"],
+        "answer": 2,
+        "explanation": "Il a proposé une « nationalisation sanction » de TotalEnergies."
+      }
+    },
+    {
+      "id": "parrainages-500",
+      "date": "2026-09-02",
+      "topic": "election",
+      "camp": "neutre",
+      "actor": "Règles de l'élection",
+      "title": "Présidentielle : la règle des 500 parrainages",
+      "text": "Pour se présenter, un candidat doit réunir au moins 500 parrainages d'élus venant d'au moins 30 départements ou collectivités d'outre-mer, sans plus de 50 par territoire. Un élu ne peut parrainer qu'un seul candidat. La période officielle de recueil doit se terminer le 12 mars 2027.",
+      "source": { "label": "Public Sénat", "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-une-multitude-de-candidats-mais-combien-seront-ils-reellement-sur-la-ligne-de-depart" },
+      "quiz": {
+        "question": "Combien de parrainages d'élus faut-il au minimum pour être candidat ?",
+        "options": ["50", "500", "30"],
+        "answer": 1,
+        "explanation": "Il faut 500 parrainages, venant d'au moins 30 départements ou collectivités d'outre-mer."
+      }
+    }
+  ]
+}

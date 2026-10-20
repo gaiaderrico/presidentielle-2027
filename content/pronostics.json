@@ -1,0 +1,23 @@
+{
+  "todo": "Ajouter les sources officielles 2022 (ministère de l'Intérieur) pour les questions 1 et 2.",
+  "items": [
+    {
+      "id": "p-candidats",
+      "question": "Combien de candidats auront leurs 500 parrainages ?",
+      "options": ["Moins de 10", "10 à 12", "Plus de 12"],
+      "context": "En 2022, il y avait 12 candidats."
+    },
+    {
+      "id": "p-participation",
+      "question": "La participation au 1er tour sera…",
+      "options": ["Plus haute qu'en 2022", "Plus basse qu'en 2022"],
+      "context": "En 2022, environ 74 % des inscrits ont voté au 1er tour."
+    },
+    {
+      "id": "p-abstention-jeunes",
+      "question": "L'abstention des 18-24 ans au 1er tour sera…",
+      "options": ["Plus haute qu'en 2022 (41 %)", "Plus basse"],
+      "context": "En 2022, environ 41 % des 18-24 ans n'ont pas voté au 1er tour."
+    }
+  ]
+}

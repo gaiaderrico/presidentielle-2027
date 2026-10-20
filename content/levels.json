@@ -1,0 +1,11 @@
+{
+  "levels": [
+    { "min": 0, "name": "Hameau", "withArticle": "un Hameau", "opened": "Quelques maisons et des arbres." },
+    { "min": 100, "name": "Village", "withArticle": "un Village", "opened": "La mairie vient d'ouvrir." },
+    { "min": 250, "name": "Bourg", "withArticle": "un Bourg", "opened": "Une école vient d'ouvrir." },
+    { "min": 500, "name": "Ville", "withArticle": "une Ville", "opened": "Une bibliothèque et un parc viennent d'ouvrir.", "badge": "500 voix, comme les parrainages : tu pourrais être candidat·e !" },
+    { "min": 1000, "name": "Grande ville", "withArticle": "une Grande ville", "opened": "Le tram arrive et la ville se remplit d'arbres." },
+    { "min": 1500, "name": "Métropole", "withArticle": "une Métropole", "opened": "Un stade vient d'ouvrir." },
+    { "min": 2500, "name": "Capitale", "withArticle": "une Capitale", "opened": "L'Assemblée s'installe chez toi." }
+  ]
+}

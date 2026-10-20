@@ -1,0 +1,84 @@
+{
+  "items": [
+    {
+      "id": "vf-dates",
+      "statement": "Le 1er tour de la présidentielle aura lieu le dimanche 18 avril 2027.",
+      "answer": true,
+      "explanation": "Le 1er tour est le 18 avril et le 2nd tour le 2 mai 2027.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/presidentielle-2027-les-dates-du-premier-et-du-second-tour-fixees-438582"
+      }
+    },
+    {
+      "id": "vf-inscription",
+      "statement": "Tu peux t'inscrire sur les listes électorales jusqu'à la veille du vote.",
+      "answer": false,
+      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027. C'est la procuration qu'on peut faire jusqu'à la veille.",
+      "source": {
+        "label": "info.gouv.fr",
+        "url": "https://www.info.gouv.fr/public/index.php/actualite/tout-ce-qu-il-faut-savoir-sur-l-election-presidentielle"
+      }
+    },
+    {
+      "id": "vf-parrainages",
+      "statement": "Pour être candidat, il faut 500 signatures d'élus venant d'au moins 30 départements.",
+      "answer": true,
+      "explanation": "Ce sont les « parrainages ».",
+      "source": {
+        "label": "info.gouv.fr",
+        "url": "https://www.info.gouv.fr/actualite/presidentielle-2027-date-a-retenir-et-informations-cles"
+      }
+    },
+    {
+      "id": "vf-glucksmann",
+      "statement": "Raphaël Glucksmann a remporté la primaire de la gauche sociale-démocrate avec environ 66 % des voix.",
+      "answer": true,
+      "explanation": "Il a gagné dès le 1er tour le 11 octobre 2026.",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/primaire-de-la-gauche-raphael-glucksmann-plie-le-match-et-remporte-le-scrutin-des-le-premier-tour-avec-66"
+      }
+    },
+    {
+      "id": "vf-melenchon",
+      "statement": "Jean-Luc Mélenchon se présente pour la première fois à la présidentielle.",
+      "answer": false,
+      "explanation": "C'est sa 4e candidature, après 2012, 2017 et 2022.",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/election-presidentielle-2027-qui-sont-les-candidats-declares-ou-presque"
+      }
+    },
+    {
+      "id": "vf-attal",
+      "statement": "Gabriel Attal est le candidat des Républicains.",
+      "answer": false,
+      "explanation": "Il a repris le parti d'Emmanuel Macron ; le candidat LR est Bruno Retailleau.",
+      "source": {
+        "label": "ici.fr",
+        "url": "https://www.ici.fr/infos/politique/presidentielle-2027-qui-sont-les-candidats-declares-1598133"
+      }
+    },
+    {
+      "id": "vf-35h",
+      "statement": "Un candidat déclaré veut supprimer les 35 heures.",
+      "answer": true,
+      "explanation": "Gilles Platret veut abroger les 35 heures.",
+      "source": {
+        "label": "franceinfo",
+        "url": "https://www.franceinfo.fr/elections/presidentielle/portraits-qui-sont-les-candidats-declares-a-l-election-presidentielle-de-2027_8208032.html"
+      }
+    },
+    {
+      "id": "vf-abstention",
+      "statement": "En 2022, plus de 6 jeunes de 18-24 ans sur 10 n'ont pas voté au 1er tour de la présidentielle.",
+      "answer": false,
+      "explanation": "Ils étaient environ 4 sur 10 (41 %), contre 22 à 27 % pour le reste de la population.",
+      "source": {
+        "label": "DH",
+        "url": "https://www.dhnet.be/actu/monde/2022/06/13/la-gauche-peut-lemporter-sils-reviennent-aux-urnes-ces-francais-pourraient-aider-la-nupes-a-gagner-les-legislatives-YLF7VLXVZ5FRHAPK7YGOZGGOLI/"
+      }
+    }
+  ]
+}

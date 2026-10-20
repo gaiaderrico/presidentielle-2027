@@ -1,0 +1,92 @@
+{
+  "checkedOn": "2026-10-20",
+  "cards": [
+    {
+      "id": "dates",
+      "kind": "bases",
+      "camp": "neutre",
+      "topic": "election",
+      "title": "Les dates",
+      "text": "Le 1er tour est le dimanche 18 avril 2027, le 2nd tour le dimanche 2 mai.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/presidentielle-2027-les-dates-du-premier-et-du-second-tour-fixees-438582"
+      }
+    },
+    {
+      "id": "inscription",
+      "kind": "bases",
+      "camp": "neutre",
+      "topic": "election",
+      "title": "S'inscrire à temps",
+      "text": "Pour voter, il faut être inscrit sur les listes électorales au plus tard le vendredi 12 mars 2027. La procuration, elle, peut se faire jusqu'à la veille.",
+      "source": {
+        "label": "info.gouv.fr",
+        "url": "https://www.info.gouv.fr/public/index.php/actualite/tout-ce-qu-il-faut-savoir-sur-l-election-presidentielle"
+      }
+    },
+    {
+      "id": "parrainages",
+      "kind": "bases",
+      "camp": "neutre",
+      "topic": "election",
+      "title": "Les 500 parrainages",
+      "text": "Pour être candidat, il faut les signatures de 500 élus, venant d'au moins 30 départements différents.",
+      "source": {
+        "label": "info.gouv.fr",
+        "url": "https://www.info.gouv.fr/actualite/presidentielle-2027-date-a-retenir-et-informations-cles"
+      }
+    },
+    {
+      "id": "majorite",
+      "kind": "bases",
+      "camp": "neutre",
+      "topic": "election",
+      "title": "Comment on gagne",
+      "text": "Un candidat est élu dès le 1er tour s'il a plus de la moitié des voix. Sinon, seuls les deux premiers vont au 2nd tour.",
+      "source": {
+        "label": "info.gouv.fr",
+        "url": "https://www.info.gouv.fr/actualite/presidentielle-2027-date-a-retenir-et-informations-cles"
+      }
+    },
+    {
+      "id": "melenchon",
+      "kind": "actu",
+      "camp": "gauche",
+      "topic": "election",
+      "actor": "La France insoumise",
+      "title": "Mélenchon, 4e candidature",
+      "text": "Jean-Luc Mélenchon se présente pour la 4e fois, après 2012, 2017 et 2022.",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/election-presidentielle-2027-qui-sont-les-candidats-declares-ou-presque"
+      }
+    },
+    {
+      "id": "attal",
+      "kind": "actu",
+      "camp": "centre",
+      "topic": "election",
+      "actor": "Renaissance",
+      "title": "Attal, candidat du parti de Macron",
+      "text": "Gabriel Attal a repris le parti d'Emmanuel Macron tout en prenant ses distances avec lui, et il est candidat.",
+      "source": {
+        "label": "franceinfo",
+        "url": "https://www.franceinfo.fr/elections/presidentielle/portraits-qui-sont-les-candidats-declares-a-l-election-presidentielle-de-2027_8208032.html"
+      }
+    },
+    {
+      "id": "retailleau",
+      "kind": "actu",
+      "camp": "droite",
+      "topic": "election",
+      "actor": "Les Républicains",
+      "title": "Retailleau pour LR",
+      "text": "Bruno Retailleau, président des Républicains, porte les couleurs de son parti.",
+      "source": {
+        "label": "ici.fr",
+        "url": "https://www.ici.fr/infos/politique/presidentielle-2027-qui-sont-les-candidats-declares-1598133"
+      }
+    }
+  ]
+}

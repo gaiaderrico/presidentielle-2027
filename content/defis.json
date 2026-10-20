@@ -1,0 +1,78 @@
+{
+  "hub": [
+    {
+      "type": "vrai-faux",
+      "title": "Vrai ou Faux",
+      "description": "8 affirmations sur la campagne. Tu démêles le vrai du faux.",
+      "duration": "2 min",
+      "modes": [
+        "solo",
+        "friend",
+        "team"
+      ],
+      "emoji": "✅"
+    },
+    {
+      "type": "qui-propose",
+      "title": "Qui propose ça ?",
+      "description": "Une proposition, tu devines le candidat.",
+      "duration": "1 min",
+      "modes": [
+        "solo",
+        "friend",
+        "team"
+      ],
+      "emoji": "🕵️"
+    },
+    {
+      "type": "autre-camp",
+      "title": "Défends l'autre camp",
+      "description": "Trouve le meilleur argument du camp que tu ne soutiens pas.",
+      "duration": "2 min",
+      "modes": [
+        "solo",
+        "friend",
+        "team"
+      ],
+      "emoji": "🔄"
+    },
+    {
+      "type": "pronostics",
+      "title": "Pronostics",
+      "description": "Fais tes pronos, on compare après le vote.",
+      "duration": "1 min",
+      "modes": [
+        "solo",
+        "friend"
+      ],
+      "emoji": "🔮"
+    },
+    {
+      "type": "equipes",
+      "title": "Équipe contre équipe",
+      "description": "Ton groupe contre un autre groupe.",
+      "duration": "3 min",
+      "modes": [],
+      "emoji": "🤝"
+    }
+  ],
+  "names": {
+    "quiz": "Mini-quiz",
+    "vrai-faux": "Vrai ou Faux",
+    "qui-propose": "Qui propose ça ?",
+    "autre-camp": "Défends l'autre camp",
+    "pronostics": "Pronostics"
+  },
+  "teamChallenges": [
+    "quiz",
+    "vrai-faux",
+    "qui-propose",
+    "autre-camp"
+  ],
+  "resultLines": {
+    "perfect": "Imbattable. Personne ne te la fait à l'envers.",
+    "high": "Très solide. Tes amis vont galérer.",
+    "mid": "Pas mal, mais quelques pièges t'ont eu.",
+    "low": "La campagne est pleine de pièges. Tes amis feront peut-être pire ?"
+  }
+}

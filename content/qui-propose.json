@@ -1,0 +1,69 @@
+{
+  "todo": "Ajouter 4 items tirés des programmes des principaux candidats dès leur publication (équilibre gauche / centre / droite).",
+  "items": [
+    {
+      "id": "qp-platret",
+      "prompt": "« Abroger les 35 heures, rétablir les frontières et interdire le voile dans l'espace public »",
+      "options": [
+        "Gilles Platret",
+        "Olivier Becht",
+        "Antoine Mikolajczak",
+        "Marine Tondelier"
+      ],
+      "answer": 0,
+      "explanation": "C'est Gilles Platret, maire divers droite de Chalon-sur-Saône.",
+      "source": {
+        "label": "franceinfo",
+        "url": "https://www.franceinfo.fr/elections/presidentielle/portraits-qui-sont-les-candidats-declares-a-l-election-presidentielle-de-2027_8208032.html"
+      }
+    },
+    {
+      "id": "qp-becht",
+      "prompt": "Incarner « l'extrême centre »",
+      "options": [
+        "Olivier Becht",
+        "Gilles Platret",
+        "Marine Tondelier",
+        "Antoine Mikolajczak"
+      ],
+      "answer": 0,
+      "explanation": "C'est Olivier Becht, député et ancien ministre.",
+      "source": {
+        "label": "franceinfo",
+        "url": "https://www.franceinfo.fr/elections/presidentielle/portraits-qui-sont-les-candidats-declares-a-l-election-presidentielle-de-2027_8208032.html"
+      }
+    },
+    {
+      "id": "qp-mikolajczak",
+      "prompt": "Trois priorités : « décider collectivement », « produire en France », « vivre en bonne santé »",
+      "options": [
+        "Antoine Mikolajczak",
+        "Olivier Becht",
+        "Gilles Platret",
+        "Marine Tondelier"
+      ],
+      "answer": 0,
+      "explanation": "C'est Antoine Mikolajczak, candidat du mouvement Équinoxe.",
+      "source": {
+        "label": "ici.fr",
+        "url": "https://www.ici.fr/infos/politique/presidentielle-2027-qui-sont-les-candidats-declares-1598133"
+      }
+    },
+    {
+      "id": "qp-tondelier",
+      "prompt": "Candidate des Écologistes, en attendant le vote des adhérents du 10 au 13 décembre 2026",
+      "options": [
+        "Marine Tondelier",
+        "Raphaël Glucksmann",
+        "Jean-Luc Mélenchon",
+        "Olivier Becht"
+      ],
+      "answer": 0,
+      "explanation": "Marine Tondelier est la candidate des Écologistes. Les adhérents voteront en décembre pour confirmer une candidature autonome ou soutenir un autre candidat de gauche.",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-2027-les-ecologistes-reportent-lheure-du-choix-a-decembre-marine-tondelier-toujours-en-lice"
+      }
+    }
+  ]
+}

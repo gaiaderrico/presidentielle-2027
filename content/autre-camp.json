@@ -1,0 +1,32 @@
+{
+  "resultMessage": "Comprendre les arguments de l'autre camp ne veut pas dire être d'accord. Ça permet de débattre.",
+  "items": [
+    {
+      "id": "ac-35h",
+      "topic": "Supprimer les 35 heures",
+      "pour": "Travailler plus permettrait de produire plus et d'augmenter les salaires.",
+      "contre": "Les 35 heures aident à partager le travail et protègent la vie personnelle.",
+      "offTopic": "Les 35 heures ont été votées en 2022.",
+      "offTopicCorrection": "Faux : les 35 heures viennent des lois Aubry de 1998 et 2000.",
+      "source": { "label": "vie-publique.fr", "url": "https://www.vie-publique.fr" }
+    },
+    {
+      "id": "ac-smic",
+      "topic": "Augmenter fortement le SMIC",
+      "pour": "Ça aide directement le pouvoir d'achat des salariés les moins payés.",
+      "contre": "Ça augmente le coût du travail et peut freiner les embauches dans les petites entreprises.",
+      "offTopic": "Le SMIC est fixé par chaque entreprise.",
+      "offTopicCorrection": "Faux : le SMIC est fixé au niveau national par l'État.",
+      "source": { "label": "service-public.fr", "url": "https://www.service-public.fr/particuliers/vosdroits/F2300" }
+    },
+    {
+      "id": "ac-tva",
+      "topic": "Baisser la TVA sur les produits de première nécessité",
+      "pour": "Les prix baissent tout de suite pour tout le monde en caisse.",
+      "contre": "Ça coûte cher à l'État et les commerçants ne baissent pas toujours leurs prix.",
+      "offTopic": "La TVA ne s'applique pas à l'alimentation.",
+      "offTopicCorrection": "Faux : l'alimentation est soumise à la TVA, le plus souvent au taux réduit de 5,5 %.",
+      "source": { "label": "service-public.fr", "url": "https://entreprendre.service-public.fr/vosdroits/F23567" }
+    }
+  ]
+}

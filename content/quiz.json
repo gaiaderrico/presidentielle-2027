@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "q-inscription",
+      "question": "Jusqu'à quand peut-on s'inscrire sur les listes électorales ?",
+      "options": [
+        "La veille du vote",
+        "Le 12 mars 2027",
+        "Le 1er janvier 2027"
+      ],
+      "answer": 1,
+      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027. C'est la procuration qu'on peut faire jusqu'à la veille.",
+      "source": {
+        "label": "info.gouv.fr",
+        "url": "https://www.info.gouv.fr/public/index.php/actualite/tout-ce-qu-il-faut-savoir-sur-l-election-presidentielle"
+      }
+    },
+    {
+      "id": "q-parrainages",
+      "question": "Combien de parrainages faut-il pour être candidat ?",
+      "options": [
+        "100",
+        "500",
+        "1 000"
+      ],
+      "answer": 1,
+      "explanation": "Il faut 500 signatures d'élus, venant d'au moins 30 départements différents.",
+      "source": {
+        "label": "info.gouv.fr",
+        "url": "https://www.info.gouv.fr/actualite/presidentielle-2027-date-a-retenir-et-informations-cles"
+      }
+    },
+    {
+      "id": "q-primaire",
+      "question": "Qui a remporté la primaire de la gauche sociale-démocrate ?",
+      "options": [
+        "Olivier Faure",
+        "Raphaël Glucksmann",
+        "Marine Tondelier"
+      ],
+      "answer": 1,
+      "explanation": "Raphaël Glucksmann l’a emporté dès le 1er tour, le 11 octobre 2026, avec environ 66 % des voix (14,5 % pour Olivier Faure).",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/primaire-de-la-gauche-raphael-glucksmann-plie-le-match-et-remporte-le-scrutin-des-le-premier-tour-avec-66"
+      }
+    }
+  ]
+}

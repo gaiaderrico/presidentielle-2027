@@ -1,0 +1,116 @@
+{
+  "buildings": [
+    {
+      "id": "maisons",
+      "level": 0,
+      "emoji": "🏠",
+      "name": "Les maisons",
+      "area": { "x": 14, "y": 128, "w": 72, "h": 40 },
+      "title": "Le logement",
+      "facts": [
+        "La commune délivre les permis de construire et fixe les règles d'urbanisme.",
+        "L'État fixe les règles de location et les aides au logement, comme les APL, versées par la CAF."
+      ],
+      "forYou": "Si tu loues un logement, tu peux peut-être toucher les APL : fais une simulation sur le site de la CAF.",
+      "source": { "label": "caf.fr", "url": "https://www.caf.fr" }
+    },
+    {
+      "id": "mairie",
+      "level": 1,
+      "emoji": "🏛️",
+      "name": "La mairie",
+      "area": { "x": 146, "y": 88, "w": 68, "h": 80 },
+      "title": "La mairie",
+      "facts": [
+        "Le conseil municipal est élu pour 6 ans, puis il élit le maire. Les dernières élections municipales ont eu lieu en mars 2026.",
+        "La mairie gère l'état civil, les écoles maternelles et élémentaires, l'urbanisme et les listes électorales."
+      ],
+      "forYou": "C'est en mairie, ou en ligne sur service-public.fr, que tu t'inscris sur les listes électorales. Date limite pour la présidentielle : vendredi 12 mars 2027.",
+      "source": { "label": "service-public.fr", "url": "https://www.service-public.fr" }
+    },
+    {
+      "id": "ecole",
+      "level": 2,
+      "emoji": "🎒",
+      "name": "L'école",
+      "area": { "x": 222, "y": 98, "w": 62, "h": 70 },
+      "title": "Qui s'occupe de l'école ?",
+      "facts": [
+        "Les bâtiments des écoles maternelles et élémentaires dépendent de la commune, les collèges du département, les lycées de la région.",
+        "Les programmes et les enseignants dépendent de l'État (Éducation nationale). Les universités et les bourses étudiantes relèvent aussi de l'État."
+      ],
+      "forYou": "Les bourses sur critères sociaux se demandent chaque année avec le dossier social étudiant, sur messervices.etudiant.gouv.fr.",
+      "source": { "label": "education.gouv.fr", "url": "https://www.education.gouv.fr" }
+    },
+    {
+      "id": "bibliotheque",
+      "level": 3,
+      "emoji": "📚",
+      "name": "La bibliothèque",
+      "area": { "x": 96, "y": 122, "w": 50, "h": 46 },
+      "title": "La bibliothèque",
+      "facts": [
+        "La plupart des bibliothèques publiques sont gérées par les communes ou les intercommunalités.",
+        "Leur budget est voté par le conseil municipal ou communautaire."
+      ],
+      "forYou": "Renseigne-toi auprès de la bibliothèque de ta ville : beaucoup proposent des tarifs réduits pour les étudiant·e·s.",
+      "source": { "label": "vie-publique.fr", "url": "https://www.vie-publique.fr" }
+    },
+    {
+      "id": "parc",
+      "level": 3,
+      "emoji": "🌳",
+      "name": "Le parc",
+      "area": { "x": 296, "y": 134, "w": 52, "h": 34 },
+      "title": "Les espaces verts",
+      "facts": [
+        "Les parcs et jardins publics sont en général gérés par la commune.",
+        "La loi Climat et résilience de 2021 fixe un objectif de « zéro artificialisation nette » des sols en 2050."
+      ],
+      "forYou": "Construire des logements ou garder des espaces naturels : c'est un des choix que font les élu·e·s locaux.",
+      "source": { "label": "vie-publique.fr", "url": "https://www.vie-publique.fr" }
+    },
+    {
+      "id": "tram",
+      "level": 4,
+      "emoji": "🚋",
+      "name": "Le tram",
+      "area": { "x": 38, "y": 172, "w": 96, "h": 24 },
+      "title": "Les transports",
+      "facts": [
+        "Les transports en ville sont organisés par une autorité organisatrice de la mobilité, souvent l'intercommunalité.",
+        "Les régions organisent les TER. En Île-de-France, c'est Île-de-France Mobilités, présidée par la présidente de la région."
+      ],
+      "forYou": "Le prix de ton abonnement de transport est décidé localement, pas par le président de la République.",
+      "source": { "label": "Île-de-France Mobilités", "url": "https://www.iledefrance-mobilites.fr" }
+    },
+    {
+      "id": "stade",
+      "level": 5,
+      "emoji": "🏟️",
+      "name": "Le stade",
+      "area": { "x": 16, "y": 98, "w": 110, "h": 30 },
+      "title": "Le sport",
+      "facts": [
+        "Les équipements sportifs sont le plus souvent construits et gérés par les communes et les intercommunalités.",
+        "Le ministère des Sports fixe la politique nationale du sport."
+      ],
+      "forYou": "Gymnases, piscines, terrains : leur ouverture et leurs tarifs se décident souvent au niveau local.",
+      "source": { "label": "vie-publique.fr", "url": "https://www.vie-publique.fr" }
+    },
+    {
+      "id": "assemblee",
+      "level": 6,
+      "emoji": "⚖️",
+      "name": "L'Assemblée",
+      "area": { "x": 224, "y": 78, "w": 114, "h": 36 },
+      "title": "L'Assemblée nationale",
+      "facts": [
+        "577 député·e·s sont élu·e·s pour 5 ans au suffrage universel direct.",
+        "Avec le Sénat, l'Assemblée vote les lois et le budget. Elle contrôle le gouvernement et peut le renverser avec une motion de censure."
+      ],
+      "forYou": "Le président est élu en 2027, mais il a besoin d'une majorité à l'Assemblée pour faire voter ses projets.",
+      "source": { "label": "assemblee-nationale.fr", "url": "https://www.assemblee-nationale.fr" }
+    }
+  ]
+}
