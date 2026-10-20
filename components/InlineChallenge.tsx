@@ -13,10 +13,14 @@ import { Button, SourceLink } from "./ui";
 
 const QUESTIONS = 3;
 
-/** 3 questions about the cards just read (easiest first), completed with other news questions, then the basic quiz. */
-function pickItems(c: Content, readCards: FeedCard[]): McqItem[] {
-  const fromRead = readCards.map((card) => c.cardQuizItems.find((q) => q.id === `${card.id}-q`)).filter((q): q is McqItem => !!q);
-  const others = [...c.cardQuizItems, ...c.quizItems].filter((q) => !fromRead.some((x) => x.id === q.id)).sort((a, b) => diffOf(a) - diffOf(b));
+/**
+ * 3 questions: first about the cards just read (easiest first), then other news questions, then the basic quiz.
+ * Questions already used by an earlier quick challenge (`used`) are skipped.
+ */
+function pickItems(c: Content, readCards: FeedCard[], used: Set<string>): McqItem[] {
+  const fresh = (q: McqItem) => !used.has(q.id);
+  const fromRead = readCards.map((card) => c.cardQuizItems.find((q) => q.id === `${card.id}-q`)).filter((q): q is McqItem => !!q && fresh(q));
+  const others = [...c.cardQuizItems, ...c.quizItems].filter((q) => fresh(q) && !fromRead.some((x) => x.id === q.id)).sort((a, b) => diffOf(a) - diffOf(b));
   return [...fromRead.sort((a, b) => diffOf(a) - diffOf(b)), ...others].slice(0, QUESTIONS);
 }
 
@@ -25,10 +29,16 @@ function pickItems(c: Content, readCards: FeedCard[]): McqItem[] {
  * Tracked like any challenge (challenge_start / answer / challenge_finish, origin "feed-inline"),
  * so it counts in the completion rate, and it can be sent to a friend.
  */
-export function InlineChallenge({ readCards, onContinue }: { readCards: FeedCard[]; onContinue: () => void }) {
+export function InlineChallenge({ readCards, used, onContinue }: { readCards: FeedCard[]; used: Set<string>; onContinue: () => void }) {
   const c = useContent();
   const t = useT();
-  const items = useMemo(() => pickItems(c, readCards), [c, readCards]);
+  // Picked once per challenge (ids stay the same when the language changes), then reserved for this challenge.
+  const [ids] = useState(() => {
+    const picked = pickItems(c, readCards, used).map((q) => q.id);
+    picked.forEach((id) => used.add(id));
+    return picked;
+  });
+  const items = useMemo(() => ids.map((id) => [...c.cardQuizItems, ...c.quizItems].find((q) => q.id === id)).filter((q): q is McqItem => !!q), [ids, c]);
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [score, setScore] = useState(0);
