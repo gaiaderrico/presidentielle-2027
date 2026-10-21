@@ -13,6 +13,17 @@ import { creditFriendPlays, getMyCodes } from "@/lib/voix";
 export function Boot() {
   useEffect(() => {
     captureTesterTag();
+    // The app installed on the home screen always starts on Accueil (iPhone otherwise reopens the last page).
+    // Only on a fresh launch: sessionStorage is empty when the app starts, then set for the rest of the visit.
+    try {
+      const standalone = window.matchMedia?.("(display-mode: standalone)").matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
+      if (standalone && !sessionStorage.getItem("p27.launched")) {
+        sessionStorage.setItem("p27.launched", "1");
+        if (window.location.pathname !== "/") return window.location.replace("/");
+      }
+    } catch {
+      // storage blocked: keep the page as it is
+    }
     // An account email that couldn't be saved at onboarding (server down) is sent again.
     const { email, firstName } = getProfile();
     if (email && readJSON<boolean>("p27.accountSynced", true) === false) {

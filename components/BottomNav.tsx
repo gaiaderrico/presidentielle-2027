@@ -5,7 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { haptic } from "@/lib/feedback";
 import { useT } from "@/lib/i18n";
-import { useProfile } from "@/lib/profile";
+import { useReturningPlayer } from "@/lib/returning";
 import { IconCity, IconHome, IconNews, IconTrophy, IconUser } from "./Icons";
 
 const TABS = [
@@ -21,12 +21,12 @@ const HIDDEN = ["/bienvenue", "/stats"];
 export function BottomNav() {
   const path = usePathname();
   const params = useSearchParams();
-  const profile = useProfile();
+  const returning = useReturningPlayer();
   const t = useT();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   // The home page is a welcome screen for new visitors and friends opening a challenge link: no tab bar there.
-  const welcome = path === "/" && (!mounted || !profile.done || params.has("c"));
+  const welcome = path === "/" && (!mounted || !returning || params.has("c"));
   if (HIDDEN.includes(path) || welcome) return null;
   return (
     <>

@@ -12,6 +12,7 @@ import { daysUntilFirstRound } from "@/lib/feed";
 import { useContent, useT } from "@/lib/i18n";
 import { levelIndexFor } from "@/lib/levels";
 import { useProfile } from "@/lib/profile";
+import { useReturningPlayer } from "@/lib/returning";
 import { dayKey, streakInfo, useProgress } from "@/lib/progress";
 import type { RefChallenge } from "@/lib/results";
 import { hashSeed } from "@/lib/rng";
@@ -43,7 +44,8 @@ function Landing() {
     }
   }, []);
 
-  const returning = mounted && profile.done;
+  const returningPlayer = useReturningPlayer();
+  const returning = mounted && returningPlayer;
   // Players who already did the onboarding get their own home page; this page is the welcome for new visitors.
   if (returning) return <PlayerHome days={days} />;
   const features = [

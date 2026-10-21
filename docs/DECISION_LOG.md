@@ -241,3 +241,10 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 | `/partenaires`, its API, the "Asso, BDE, promo" card and the level-4 row of `/stats` removed | The team doesn't want partnerships and has no time to follow up. No pledge had been recorded |
 | Instagram also linked in the home footer and Profil. Events `prompt_view` (pop-up shown) and `instagram_click`; `/stats` level 1 shows emails and Instagram taps with how many people saw each pop-up (conversion), the follow itself can't be verified | Measure the asks |
 | Instagram link stored without the QR-code tracking parameters (`content/site.json`) | Clean link |
+
+## 2026-10-21: opening the app goes to Accueil (requested by the team)
+| Decision | Why |
+|---|---|
+| Accueil is shown to anyone who has already used polis on this phone (onboarding done, at least 1 voix, or a challenge played), not only after the onboarding | Players who skipped the onboarding ("Voir l'actu directement", "Continuer sans profil") kept seeing the welcome page |
+| The app installed on the home screen always starts on Accueil (first page load of a launch in standalone mode) | iPhone otherwise reopens the last page or the page the app was added from |
+| First-time visitors and friend links (`/?c=`) still get the welcome page | Unchanged first impression and friend flow |
