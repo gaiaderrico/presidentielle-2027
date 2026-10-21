@@ -7,6 +7,7 @@ import { getSessionId } from "@/lib/session";
 import { readJSON, writeJSON } from "@/lib/storage";
 import { useT } from "@/lib/i18n";
 import { track } from "@/lib/track";
+import { VOIX, addVoix } from "@/lib/voix";
 import { Button, Card } from "./ui";
 
 export function EmailCapture() {
@@ -29,6 +30,7 @@ export function EmailCapture() {
     const res = await submitEmail(getSessionId(), email.trim(), consent);
     if (res?.ok) {
       track("email_submit");
+      addVoix(VOIX.email, t("Inscrit·e aux prochains défis", "Signed up for the next challenges"), "email");
       writeJSON("p27.emailDone", true);
       setState("done");
     } else {
@@ -48,8 +50,15 @@ export function EmailCapture() {
   return (
     <Card>
       <form onSubmit={submit} className="flex flex-col gap-3" noValidate>
-        <h2 className="font-display text-xl font-bold">{t("Les prochains défis avant le vote ?", "More challenges before the vote?")}</h2>
-        <p className="text-muted">{t("On t'envoie un nouveau défi par mois jusqu'au 18 avril, et tes résultats de pronostics. Pas de spam.", "We send you one new challenge a month until 18 April, and your prediction results. No spam.")}</p>
+        <h2 className="font-display text-xl font-bold">
+          ✉️ {t("Ne rate pas le 12 mars", "Don't miss 12 March")} <span className="text-sm font-semibold text-accent">+{VOIX.email} voix</span>
+        </h2>
+        <ul className="flex flex-col gap-1 text-[15px] text-muted">
+          <li>⏰ {t("Un rappel avant la date limite d'inscription sur les listes", "A reminder before the voter registration deadline")}</li>
+          <li>⚡ {t("Un nouveau défi par mois jusqu'au 18 avril", "One new challenge a month until 18 April")}</li>
+          <li>🔮 {t("Tes résultats de pronostics après le vote", "Your prediction results after the vote")}</li>
+        </ul>
+        <p className="text-sm text-muted">{t("Pas de spam, désinscription en un clic.", "No spam, unsubscribe in one click.")}</p>
         <label htmlFor="email" className="sr-only">
           {t("Ton email", "Your email")}
         </label>
@@ -69,7 +78,7 @@ export function EmailCapture() {
         </label>
         {state === "error" && <p className="text-sm text-bad">{t("L'envoi n'a pas marché. Vérifie ta connexion et réessaie.", "Sending failed. Check your connection and try again.")}</p>}
         <Button type="submit" disabled={!valid || !consent || state === "sending"}>
-          {state === "sending" ? t("Envoi…", "Sending…") : t("Je veux les prochains défis", "Send me the next challenges")}
+          {state === "sending" ? t("Envoi…", "Sending…") : t(`Oui, je m'inscris (+${VOIX.email} voix)`, `Yes, sign me up (+${VOIX.email} voix)`)}
         </Button>
       </form>
     </Card>

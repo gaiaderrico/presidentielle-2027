@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { City } from "@/components/City";
 import { DailyCard } from "@/components/DailyCard";
+import { PartnerCTA } from "@/components/PartnerCTA";
 import { Logo } from "@/components/Logo";
 import { Button, Card, Page } from "@/components/ui";
 import { fetchChallenge } from "@/lib/api";
@@ -83,6 +84,7 @@ function Landing() {
           <Button variant="secondary" onClick={() => router.push("/defis")}>
             {t("Voir les défis", "See the challenges")}
           </Button>
+          <PartnerCTA />
         </div>
       ) : (
         <div className="flex flex-col gap-2">

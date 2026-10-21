@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { DailyCard } from "@/components/DailyCard";
 import { Duels } from "@/components/Duels";
+import { PartnerCTA } from "@/components/PartnerCTA";
 import { Button, Page } from "@/components/ui";
 import type { ChallengeType, Mode } from "@/lib/content";
 import { LEVEL_CHOICES, isLevelChoice, levelChoiceLabel, type LevelChoice } from "@/lib/difficulty";
@@ -145,9 +146,7 @@ export function HubClient() {
         </span>
       </Link>
 
-      <Link href="/partenaires" className="text-center text-[15px] font-semibold text-accent underline underline-offset-4">
-        {t("Tu es dans une asso ou un BDE ? Fais jouer tes membres →", "In a student group? Get your members playing →")}
-      </Link>
+      <PartnerCTA />
 
       {picked && picked.type !== "equipes" && (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50" onClick={() => setPicked(null)}>

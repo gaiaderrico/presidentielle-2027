@@ -17,6 +17,8 @@ export const VOIX = {
   predictions: 10,
   teamWin: 50,
   daily: 30, // first daily challenge finished each day
+  email: 20, // email left for the next challenges (once)
+  reminder: 10, // reminder for tomorrow's challenge added to the calendar (once a day)
   dayStreak: 10, // first challenge of the day when the day streak is at least 2
 } as const;
 

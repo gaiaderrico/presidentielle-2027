@@ -22,21 +22,42 @@ export async function POST(req: Request) {
   const sb = db();
   if (!sb) return Response.json({ error: "Supabase n'est pas configuré (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)." }, { status: 503 });
 
-  const events = await fetchAll<EventRow>("events", "created_at, session_id, event, payload");
+  const allEvents = await fetchAll<EventRow>("events", "created_at, session_id, event, payload");
+
+  // Who is who. A session is one browser on one device: the same person can have several (WhatsApp's in-app browser,
+  // Safari, a laptop…). A tester tag (?t=T03) groups that person's sessions; an untagged session counts as one visitor.
+  // Tags starting with "ZZ" are the team's own tests: their sessions are left out of every number.
+  const tagBySession = new Map<string, string>();
+  for (const e of allEvents) {
+    const tag = e.payload?.testerTag;
+    if (e.session_id && typeof tag === "string" && tag && !tagBySession.has(e.session_id)) tagBySession.set(e.session_id, tag);
+  }
+  const isTestTag = (tag: string) => /^ZZ/i.test(tag);
+  const testSessions = new Set([...tagBySession].filter(([, tag]) => isTestTag(tag)).map(([sid]) => sid));
+  const events = allEvents.filter((e) => !e.session_id || !testSessions.has(e.session_id));
+  const personOf = (sid: string) => (tagBySession.has(sid) ? `tag:${tagBySession.get(sid)}` : `session:${sid}`);
+  const people = (sessions: Iterable<string>) => new Set([...sessions].map(personOf));
   const emailRows = await fetchAll<{ created_at: string; email: string; session_id: string | null }>("emails", "created_at, email, session_id");
   const emailCount = emailRows.length;
   const { count: accountCount } = await sb.from("accounts").select("id", { count: "exact", head: true });
 
   const p = (e: EventRow, k: string) => (e.payload?.[k] ?? null) as string | number | boolean | null;
 
-  // Primary metric (Test Card v2): players who finished ≥1 challenge (mini-quiz included) ÷ players who opened the app.
+  // Primary metric (Test Card v2): people who finished ≥1 challenge (mini-quiz included) ÷ people who opened the app.
+  // Counted per person (tester tag), not per session.
   const finishedSessions = sessionsWith(events, "challenge_finish");
   const allSessions = new Set(events.filter((e) => e.session_id).map((e) => e.session_id as string));
-  const taggedSessions = new Set(events.filter((e) => e.session_id && e.payload?.testerTag).map((e) => e.session_id as string));
-  const finishedTagged = [...taggedSessions].filter((s) => finishedSessions.has(s)).length;
-  // Secondary metric (Test Card v1): players who finished ≥1 challenge AND clicked share ÷ players who finished ≥1 challenge.
-  const sharedSessions = sessionsWith(events, "share_click");
-  const finishedAndShared = [...finishedSessions].filter((s) => sharedSessions.has(s)).length;
+  const taggedSessions = new Set([...allSessions].filter((s) => tagBySession.has(s)));
+  const finishedPeople = people(finishedSessions);
+  const allPeople = people(allSessions);
+  const taggedPeople = people(taggedSessions);
+  const finishedTagged = [...taggedPeople].filter((x) => finishedPeople.has(x)).length;
+  // Secondary metric (Test Card v1): people who finished ≥1 challenge AND clicked share ÷ people who finished ≥1 challenge.
+  const sharedPeople = people(sessionsWith(events, "share_click"));
+  const finishedAndShared = [...finishedPeople].filter((x) => sharedPeople.has(x)).length;
+  // Untagged visitors: who only opened a page, and who actually played (read a card or started a challenge).
+  const untaggedSessions = [...allSessions].filter((s) => !tagBySession.has(s));
+  const playedSessions = new Set(events.filter((e) => e.session_id && (e.event === "feed_card_view" || e.event === "challenge_start")).map((e) => e.session_id as string));
 
   const landingSessions = sessionsWith(events, "landing_view");
   const feedStartSessions = sessionsWith(events, "feed_card_view");
@@ -120,24 +141,31 @@ export async function POST(req: Request) {
 
   // Engagement: players who came back on another day (Paris time), daily challenge, badges, feedback.
   const parisDay = (iso: string) => new Date(iso).toLocaleDateString("sv-SE", { timeZone: "Europe/Paris" });
-  const activeDays = [...bySession.values()].map((list) => new Set(list.map((e) => parisDay(e.created_at))).size);
+  // Days active per person: a tester who played on 2 different days, even on 2 different phones, came back.
+  const daysByPerson = new Map<string, Set<string>>();
+  for (const e of events) {
+    if (!e.session_id) continue;
+    const key = personOf(e.session_id);
+    (daysByPerson.get(key) ?? daysByPerson.set(key, new Set()).get(key)!).add(parisDay(e.created_at));
+  }
+  const activeDays = [...daysByPerson.values()].map((d) => d.size);
   const dailyEvents = events.filter((e) => p(e, "origin") === "daily");
   const feedback = events.filter((e) => e.event === "feedback_submit");
   const ratings = feedback.map((e) => Number(p(e, "rating"))).filter((r) => r >= 1 && r <= 5);
 
   // Commitment ladder (course, Day 3): every level with its trace.
   const tagOf = (sid: string | null) => (sid ? (bySession.get(sid)?.map((e) => p(e, "testerTag")).find((t) => t) as string | undefined) ?? null : null);
-  const daysOf = new Map([...bySession.entries()].map(([sid, list]) => [sid, new Set(list.map((e) => parisDay(e.created_at))).size]));
+  const label = (key: string) => (key.startsWith("tag:") ? key.slice(4) : `sans tag (${key.slice(8, 16)})`);
   const pledges = events.filter((e) => e.event === "partner_pledge");
   const ladder = {
     l1: { emails: emailRows.map((r) => ({ at: r.created_at, email: r.email, testerTag: tagOf(r.session_id) })) },
     l2: {
-      returning: [...daysOf.entries()].filter(([, n]) => n >= 2).map(([sid, n]) => ({ session: sid.slice(0, 8), testerTag: tagOf(sid), days: n })),
+      returning: [...daysByPerson.entries()].filter(([, d]) => d.size >= 2).map(([key, d]) => ({ person: label(key), days: d.size, dates: [...d].sort().join(" ") })),
       calendarAdds: events.filter((e) => e.event === "calendar_add").map((e) => ({ at: e.created_at, testerTag: tagOf(e.session_id) })),
     },
     l3: {
       // Level 3 counts the player who shares (share_click), not the friend who opens or plays the link.
-      shares: shares.map((e) => ({ at: e.created_at, session: (e.session_id ?? "").slice(0, 8), testerTag: tagOf(e.session_id), method: String(p(e, "method") ?? ""), code: String(p(e, "challengeCode") ?? "") })),
+      shares: shares.map((e) => ({ at: e.created_at, person: e.session_id ? label(personOf(e.session_id)) : "", testerTag: tagOf(e.session_id), method: String(p(e, "method") ?? ""), code: String(p(e, "challengeCode") ?? "") })),
       quotes: feedback.filter((e) => p(e, "quotable") === true).map((e) => ({ at: e.created_at, name: String(p(e, "name") ?? ""), rating: Number(p(e, "rating")), comment: String(p(e, "comment") ?? ""), testerTag: tagOf(e.session_id) })),
     },
     l4: {
@@ -160,20 +188,27 @@ export async function POST(req: Request) {
   const voixValues = sessions.map((s) => s.voix);
   return Response.json({
     funnel: {
-      landingViews: landingSessions.size,
-      feedStarts: feedStartSessions.size,
-      feedSkips: feedSkipSessions.size,
+      landingViews: people(landingSessions).size,
+      feedStarts: people(feedStartSessions).size,
+      feedSkips: people(feedSkipSessions).size,
       quizFinishes: quizFinish.length,
-      challengeFinishers: finishedSessions.size,
+      challengeFinishers: finishedPeople.size,
     },
     completionRate: {
-      finished: finishedSessions.size,
-      players: allSessions.size,
-      rate: allSessions.size ? finishedSessions.size / allSessions.size : null,
-      tagged: { finished: finishedTagged, players: taggedSessions.size, rate: taggedSessions.size ? finishedTagged / taggedSessions.size : null },
+      finished: finishedPeople.size,
+      players: allPeople.size,
+      rate: allPeople.size ? finishedPeople.size / allPeople.size : null,
+      tagged: { finished: finishedTagged, players: taggedPeople.size, rate: taggedPeople.size ? finishedTagged / taggedPeople.size : null },
     },
-    inlineChallenge: { reached: reachedThreeCards.length, started: inlineStarts.size, finished: inlineFinishes.size },
-    shareRate: { finishedAndShared, finished: finishedSessions.size, rate: finishedSessions.size ? finishedAndShared / finishedSessions.size : null },
+    people: {
+      sessions: allSessions.size,
+      testers: taggedPeople.size,
+      testerSessions: taggedSessions.size,
+      untagged: { sessions: untaggedSessions.length, played: untaggedSessions.filter((s) => playedSessions.has(s)).length },
+      excludedTest: { sessions: testSessions.size, tags: [...new Set([...tagBySession.values()].filter(isTestTag))] },
+    },
+    inlineChallenge: { reached: people(reachedThreeCards).size, started: people(inlineStarts).size, finished: people(inlineFinishes).size },
+    shareRate: { finishedAndShared, finished: finishedPeople.size, rate: finishedPeople.size ? finishedAndShared / finishedPeople.size : null },
     friends: { opened: new Set(friendLandings.map((e) => e.session_id)).size, finished: new Set(friendFinishes.map((e) => e.session_id)).size, perCode },
     challengesChosen: countBy(starts, (e) => String(p(e, "challengeType"))),
     modesChosen: countBy(starts, (e) => String(p(e, "mode"))),

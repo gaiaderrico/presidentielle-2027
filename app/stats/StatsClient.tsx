@@ -13,6 +13,13 @@ type Stats = {
     tagged: { finished: number; players: number; rate: number | null };
   };
   shareRate: { finishedAndShared: number; finished: number; rate: number | null };
+  people: {
+    sessions: number;
+    testers: number;
+    testerSessions: number;
+    untagged: { sessions: number; played: number };
+    excludedTest: { sessions: number; tags: string[] };
+  };
   inlineChallenge: { reached: number; started: number; finished: number };
   friends: { opened: number; finished: number; perCode: Record<string, { opened: number; finished: number }> };
   challengesChosen: Record<string, number>;
@@ -32,9 +39,9 @@ type Stats = {
   feedback: { count: number; avg: number | null; ratings: Record<string, number>; comments: { at: string; rating: number; comment: string; testerTag: string | null }[] };
   ladder: {
     l1: { emails: { at: string; email: string; testerTag: string | null }[] };
-    l2: { returning: { session: string; testerTag: string | null; days: number }[]; calendarAdds: { at: string; testerTag: string | null }[] };
+    l2: { returning: { person: string; days: number; dates: string }[]; calendarAdds: { at: string; testerTag: string | null }[] };
     l3: {
-      shares: { at: string; session: string; testerTag: string | null; method: string; code: string }[];
+      shares: { at: string; person: string; testerTag: string | null; method: string; code: string }[];
       quotes: { at: string; name: string; rating: number; comment: string; testerTag: string | null }[];
     };
     l4: { pledges: Record<string, string | number | null>[] };
@@ -101,7 +108,7 @@ const when = (iso: string) => new Date(iso).toLocaleString("fr-FR", { day: "2-di
 
 /** Day 3 of the course: the commitment ladder, with a trace for every level (exports go straight into the evidence log). */
 function Ladder({ ladder, accounts }: { ladder: Stats["ladder"]; accounts: number }) {
-  const sharers = new Set(ladder.l3.shares.map((s) => s.session)).size;
+  const sharers = new Set(ladder.l3.shares.map((s) => s.person)).size;
   const rows = [
     { level: 1, title: "Un peu de temps", value: ladder.l1.emails.length, detail: `emails laissés pour les prochains défis (avec consentement) · ${accounts} comptes créés avec un email`, exportName: "emails", data: ladder.l1.emails },
     { level: 2, title: "Du temps", value: ladder.l2.returning.length, detail: `joueurs revenus un autre jour · ${ladder.l2.calendarAdds.length} dates ajoutées à un agenda`, exportName: "revenus", data: ladder.l2.returning },
@@ -254,14 +261,26 @@ export function StatsClient() {
         <p className="text-sm font-semibold">Test Card : au moins un défi terminé (objectif ≥ 40 %)</p>
         <p className={`font-display text-6xl font-extrabold tabular-nums ${ok ? "text-ok" : "text-bad"}`}>{pct(main.rate)}</p>
         <p className="text-sm">
-          {main.finished} joueurs sur {main.players} ont terminé au moins un défi (mini-quiz après le fil inclus)
-          {stats.completionRate.tagged.players > 0 ? " · testeurs avec étiquette ?t= uniquement" : ""}.
+          {main.finished} {stats.completionRate.tagged.players > 0 ? "testeurs" : "joueurs"} sur {main.players} ont terminé au moins un défi (mini-quiz après le fil inclus)
+          {stats.completionRate.tagged.players > 0 ? " · un testeur = une étiquette ?t=, même s'il a ouvert polis sur plusieurs navigateurs" : ""}.
         </p>
         {stats.completionRate.tagged.players > 0 && (
           <p className="mt-1 text-sm text-muted">
-            Tous les joueurs (testeurs + amis + visiteurs) : {stats.completionRate.finished} sur {stats.completionRate.players} ({pct(stats.completionRate.rate)}).
+            Testeurs + visiteurs sans étiquette : {stats.completionRate.finished} sur {stats.completionRate.players} ({pct(stats.completionRate.rate)}).
           </p>
         )}
+      </Card>
+      <Card className="flex flex-col gap-1">
+        <p className="text-sm font-semibold">Qui compte comme joueur ?</p>
+        <p>
+          <strong>{stats.people.testers}</strong> testeurs (étiquettes ?t= différentes, sur {stats.people.testerSessions} navigateurs) ·{" "}
+          <strong>{stats.people.untagged.sessions}</strong> visiteurs sans étiquette, dont <strong>{stats.people.untagged.played}</strong> ont joué (carte lue ou défi commencé) et{" "}
+          {stats.people.untagged.sessions - stats.people.untagged.played} ont seulement ouvert une page.
+        </p>
+        <p className="text-sm text-muted">
+          Un visiteur sans étiquette = un navigateur : la même personne peut compter plusieurs fois (WhatsApp, Safari, ordinateur…), et l&apos;équipe aussi.
+          {stats.people.excludedTest.sessions > 0 ? ` Exclus de tous les chiffres : ${stats.people.excludedTest.sessions} sessions de test de l'équipe (${stats.people.excludedTest.tags.join(", ")}).` : ""} Pour qu&apos;un test soit exclu, donnez-lui une étiquette qui commence par ZZ (ex. ?t=ZZ1).
+        </p>
       </Card>
       <Card className="flex flex-col gap-1">
         <p className="text-sm font-semibold">Défi rapide dans le fil (après 3 cartes)</p>
@@ -284,7 +303,7 @@ export function StatsClient() {
         <Card className="flex flex-col gap-2">
           <h2 className="font-display text-lg font-bold">Ils reviennent ?</h2>
           <p>
-            <strong>{stats.engagement.returning}</strong> joueurs sur {stats.engagement.players} sont revenus un autre jour (
+            <strong>{stats.engagement.returning}</strong> joueurs (testeurs + visiteurs) sur {stats.engagement.players} sont revenus un autre jour (
             {pct(stats.engagement.players ? stats.engagement.returning / stats.engagement.players : null)})
           </p>
           <p>

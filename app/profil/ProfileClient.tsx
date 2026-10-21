@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { PartnerCTA } from "@/components/PartnerCTA";
 import { Trophies } from "@/components/Trophies";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import { setLang, useContent, useLang, useT } from "@/lib/i18n";
@@ -62,6 +63,8 @@ export function ProfileClient() {
       </div>
 
       <Trophies />
+
+      <PartnerCTA />
 
       <Card className="flex flex-col gap-3">
         <h2 className="font-display text-lg font-bold">{t("Langue", "Language")}</h2>

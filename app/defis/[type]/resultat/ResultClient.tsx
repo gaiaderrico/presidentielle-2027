@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { daysLabel, typeEmoji, useToday } from "@/components/DailyCard";
 import { EmailCapture } from "@/components/EmailCapture";
 import { FeedbackCard } from "@/components/FeedbackCard";
+import { PartnerCTA } from "@/components/PartnerCTA";
+import { RemindMe } from "@/components/RemindMe";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Button, ButtonLink, Card, Page, SourceLink } from "@/components/ui";
 import type { ChallengeType } from "@/lib/content";
@@ -12,6 +14,7 @@ import { useContent, useT } from "@/lib/i18n";
 import { dailyChallenge, streakInfo, useProgress } from "@/lib/progress";
 import { consumeAutoShare, getLastResult, type LastResult } from "@/lib/results";
 import { challengeLink } from "@/lib/session";
+import { recordChallengeShare, whatsappLink } from "@/lib/share";
 import { readJSON } from "@/lib/storage";
 import { VOIX } from "@/lib/voix";
 
@@ -82,7 +85,30 @@ export function ResultClient() {
             {t("Toi", "You")} {result.score}/{result.total} – {result.ref.firstName || t("Ton ami·e", "Your friend")} {result.ref.score}/{result.ref.total}
           </p>
         )}
+        {result.code && (
+          <div className="mt-3 flex w-full flex-col gap-2">
+            <p className="text-[15px] font-semibold">
+              {isProno ? t("Tes amis voient-ils la même chose que toi ?", "Do your friends see it the same way?") : t("Tes amis feraient mieux ? Envoie-leur les mêmes questions.", "Would your friends do better? Send them the same questions.")}
+            </p>
+            <a
+              href={whatsappLink(message)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => recordChallengeShare(result.type, result.code, "whatsapp")}
+              className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-[14px] bg-[#25D366] px-5 text-[17px] font-bold text-white shadow-md transition active:opacity-80"
+            >
+              💬 {t("Envoyer sur WhatsApp", "Send on WhatsApp")} · +{VOIX.share} voix
+            </a>
+            <button onClick={() => setSharing(true)} className="min-h-10 text-[15px] font-semibold text-accent">
+              {t("Autres options (copier le lien, Instagram…)", "Other options (copy link, Instagram…)")}
+            </button>
+          </div>
+        )}
       </Card>
+
+      {/* Small commitments right after the score, while the player is engaged: book tomorrow's slot, then the email. */}
+      <RemindMe />
+      <EmailCapture />
 
       {result.match && (
         <ButtonLink href={`/equipes/${result.match.code}`} variant="secondary">
@@ -92,9 +118,16 @@ export function ResultClient() {
 
       {result.type === "autre-camp" && <p className="rounded-2xl bg-card px-4 py-3 font-semibold">{c.autreCamp.resultMessage}</p>}
 
-      <section className="flex flex-col gap-3" aria-label={t("Correction", "Answers")}>
+      <details className="group rounded-[22px] bg-card">
+        <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between px-5 font-semibold">
+          {isProno ? t(`Revoir mes ${result.items.length} pronos`, `See my ${result.items.length} predictions`) : t(`Voir la correction (${result.items.length} questions)`, `See the answers (${result.items.length} questions)`)}
+          <span className="text-accent transition group-open:rotate-180" aria-hidden>
+            ⌄
+          </span>
+        </summary>
+      <section className="flex flex-col gap-3 px-2 pb-2" aria-label={t("Correction", "Answers")}>
         {result.items.map((item, i) => (
-          <Card key={item.id} className="flex flex-col gap-2">
+          <Card key={item.id} className="flex flex-col gap-2 !bg-paper">
             <p className="text-sm font-semibold text-muted">{isProno ? `${t("Prono", "Prediction")} ${i + 1}` : `Question ${i + 1}`}</p>
             <p className="font-semibold">{item.question}</p>
             {isProno ? (
@@ -118,6 +151,7 @@ export function ResultClient() {
           </Card>
         ))}
       </section>
+      </details>
 
       <NextStep played={result.type} />
 
@@ -130,9 +164,9 @@ export function ResultClient() {
         </ButtonLink>
       </div>
 
-      <FeedbackCard challengeType={result.type} />
+      <PartnerCTA />
 
-      <EmailCapture />
+      <FeedbackCard challengeType={result.type} />
 
       <div className="fixed inset-x-0 z-20 px-4 pb-3" style={{ bottom: "calc(4.25rem + env(safe-area-inset-bottom, 0px))" }}>
         <div className="mx-auto max-w-md">

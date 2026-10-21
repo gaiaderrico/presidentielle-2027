@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Card, Page, SourceLink } from "@/components/ui";
 import type { GuideSection } from "@/lib/content";
+import { downloadCalendar } from "@/lib/calendar";
 import { haptic } from "@/lib/feedback";
 import { toggleStep, useGuide } from "@/lib/guide";
 import { useContent, useLang, useT } from "@/lib/i18n";
@@ -16,33 +17,6 @@ function profileFor(voter: Profile["voter"]): string {
   if (voter === "eu") return "ue";
   if (voter === "non-eu") return "hors-ue";
   return "france";
-}
-
-/** An .ics file with one all-day event per date and a reminder the day before (works with Apple, Google and Outlook calendars). */
-function calendarFile(items: { id: string; date: string; label: string }[], url: string): string {
-  const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
-  const day = (iso: string) => iso.replace(/-/g, "");
-  const next = (iso: string) => {
-    const [y, m, d] = iso.split("-").map(Number);
-    const n = new Date(Date.UTC(y, m - 1, d + 1));
-    return n.toISOString().slice(0, 10).replace(/-/g, "");
-  };
-  const events = items.flatMap((i) => [
-    "BEGIN:VEVENT",
-    `UID:polis-${i.id}-${i.date}@polis-2027`,
-    `DTSTAMP:${stamp}`,
-    `DTSTART;VALUE=DATE:${day(i.date)}`,
-    `DTEND;VALUE=DATE:${next(i.date)}`,
-    `SUMMARY:🗳️ ${i.label} · Présidentielle 2027`,
-    `DESCRIPTION:${url}`,
-    "BEGIN:VALARM",
-    "TRIGGER:-PT12H",
-    "ACTION:DISPLAY",
-    `DESCRIPTION:${i.label}`,
-    "END:VALARM",
-    "END:VEVENT",
-  ]);
-  return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//polis//presidentielle-2027//FR", "CALSCALE:GREGORIAN", ...events, "END:VCALENDAR"].join("\r\n");
 }
 
 function daysUntil(iso: string): number {
@@ -84,12 +58,11 @@ export function VoterClient() {
   }, [mounted, doneCount, steps.length]);
 
   const addToCalendar = () => {
-    const blob = new Blob([calendarFile(deadlines, `${window.location.origin}/voter?profil=${current.id}`)], { type: "text/calendar;charset=utf-8" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "presidentielle-2027.ics";
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    const url = `${window.location.origin}/voter?profil=${current.id}`;
+    downloadCalendar(
+      "presidentielle-2027.ics",
+      deadlines.map((d) => ({ id: d.id, start: d.date, title: `🗳️ ${d.label} · Présidentielle 2027`, url })),
+    );
     track("calendar_add", { guideProfile: current.id, dates: deadlines.map((d) => d.id) });
     haptic("success");
   };

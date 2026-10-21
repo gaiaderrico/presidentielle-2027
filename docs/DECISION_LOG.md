@@ -173,3 +173,28 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 | Debates: quotes balanced (4 left, 4 right / far right, 1 Macron); no "who won"; interpretive "why it matters" lines rewritten as facts | Neutrality |
 | Every event has a source (Conseil constitutionnel, Assemblée, Sénat, Parlement européen, Élysée, Légifrance, INA, LCP, Public Sénat, France 24/AFP…), checked on 2026-10-21; no Wikipedia | Editorial rule: facts only, a source for every item |
 | Known limits: 2024 European scores come from Public Sénat (official ministry site blocked); some dates are only a year or a month; Wauquiez has not declared (his 2026 item is his stated position) | Logged rather than hidden |
+
+## 2026-10-21: /stats counts people, not sessions (team question: "we didn't talk to 81 people")
+| Decision | Why |
+|---|---|
+| A **tester = one `?t=` tag**, even with several sessions (WhatsApp's in-app browser, Safari and a laptop each create a session). An untagged session still counts as one visitor | 81 "players" were 81 sessions: 21 tagged sessions for 16 tags, and 60 untagged sessions, 54 of which only opened a page |
+| Tags starting with **ZZ** are the team's own tests and are left out of every number (today: ZZV2, ZZEVERY3, 2 sessions) | Team tests were inflating the counts |
+| New block "Qui compte comme joueur ?": testers, untagged visitors who played vs only opened a page, excluded test sessions | Shows where the totals come from |
+| Same rule for the share rate, the return rate and the commitment ladder (levels 2 and 3 per person) | One definition everywhere |
+- **Effect on the Test Card v2 metric** (threshold unchanged, ≥ 40 %): before, 5 finished out of 19 tagged *sessions* (26 %); now 5 out of 14 tagged *testers* (36 %). The threshold did not move; the denominator was corrected to count people instead of browsers. Log this change, and why, next to the result.
+- Still to check by hand: whether any of the 14 tags (e.g. T01, 3 sessions) or the untagged sessions that "came back" are team members.
+
+## 2026-10-21: commitments made easy and visible (Day 3 sprint, requested by the team)
+| Change | Marketing lever | Level |
+|---|---|---|
+| Result page: one-tap green "Envoyer sur WhatsApp · +30 voix" inside the score card, with "Tes amis feraient mieux ?" | Ask at the peak moment, one tap instead of a menu, reward, curiosity/competition | 3 |
+| "Rappelle-moi demain": pick 8h / 12h30 / 19h, a 5-minute event with an alert goes into the phone's calendar (+10 voix once a day). On the result page and on the daily challenge once done | Small, concrete "book a slot" commitment (foot in the door), reward | 2 |
+| Email box moved right under the score, prefilled with the account email, value first ("Ne rate pas le 12 mars": reminder before the registration deadline, one challenge a month, prediction results), +20 voix. Consent box still unticked by default | Deadline, concrete value, reward, less friction; consent stays explicit (RGPD) | 1 |
+| "Asso, BDE, promo ? Organise un match polis" card on the home page (returning players), result page, Défis and Profil | Visible everywhere a group leader may be | 4 |
+| Answers on the result page folded into "Voir la correction" | The commitment asks are visible without scrolling | all |
+- **Promise to keep**: the email box now promises a reminder before the 12 March 2027 registration deadline. Someone in the team must send it.
+
+## 2026-10-21: bug — account creation failed for every new player
+- Cause: the `accounts` table was added to `supabase/schema.sql` but the SQL was never run on the Supabase project (API error "Could not find the table 'public.accounts'"). Every new player was stuck on the first onboarding step ("Tout passer" only appears after it).
+- Code fix: a failed account save no longer blocks the onboarding; the email stays on the phone and is sent again on the next visit (`p27.accountSynced`, `components/Boot.tsx`). `account_create` is only tracked once the server saved it.
+- Still to do in Supabase (SQL Editor): create the `accounts` table from `supabase/schema.sql`. Until then no account is stored.

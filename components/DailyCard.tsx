@@ -6,6 +6,7 @@ import type { ChallengeType, Content } from "@/lib/content";
 import { useContent, useT } from "@/lib/i18n";
 import { DAILY_COUNT, dailyChallenge, dayKey, streakInfo, useProgress } from "@/lib/progress";
 import { VOIX } from "@/lib/voix";
+import { RemindMe } from "./RemindMe";
 import { Button } from "./ui";
 
 export function typeEmoji(c: Content, type: ChallengeType) {
@@ -53,6 +54,7 @@ export function DailyCard() {
             ✓ {done.score}/{done.total} · {name}
           </p>
           <p className="text-muted">{t("Fait pour aujourd'hui. Un nouveau défi t'attend demain.", "Done for today. A new challenge is waiting for you tomorrow.")}</p>
+          <RemindMe compact />
         </>
       ) : (
         <>

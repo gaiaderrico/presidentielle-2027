@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import type { ChallengeType } from "@/lib/content";
 import { useT } from "@/lib/i18n";
-import { recordShare } from "@/lib/progress";
+import { recordChallengeShare, whatsappLink } from "@/lib/share";
 import { track } from "@/lib/track";
-import { VOIX, addVoix } from "@/lib/voix";
+import { VOIX } from "@/lib/voix";
 import { Sheet } from "./Sheet";
 import { Button } from "./ui";
 
@@ -41,9 +41,7 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
       track("city_share", { method });
       return;
     }
-    track("share_click", { challengeType, challengeCode: code, method });
-    if (code) addVoix(VOIX.share, "Défi envoyé à un·e ami·e", `share:${code}`);
-    recordShare();
+    recordChallengeShare(challengeType, code, method);
   };
 
   const webShare = async () => {
@@ -89,7 +87,7 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
         <div className="mt-4 flex flex-col gap-3">
           {canShare && <Button onClick={webShare}>{t("Partager", "Share")}</Button>}
           <a
-            href={`https://wa.me/?text=${encodeURIComponent(message)}`}
+            href={whatsappLink(message)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => clicked("whatsapp")}

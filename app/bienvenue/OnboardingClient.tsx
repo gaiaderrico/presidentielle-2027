@@ -5,6 +5,7 @@ import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { IconBack } from "@/components/Icons";
 import { Button } from "@/components/ui";
 import { EMAIL_RE, createAccount } from "@/lib/api";
+import { writeJSON } from "@/lib/storage";
 import { useContent, useT } from "@/lib/i18n";
 import { EMPTY_PROFILE, computeLevel, getProfile, isInternational, saveProfile, type LevelId, type Profile } from "@/lib/profile";
 import { getSessionId } from "@/lib/session";
@@ -82,11 +83,9 @@ export function OnboardingClient() {
     if (!emailOk) return;
     setAccount("sending");
     const res = await createAccount(getSessionId(), email, p.firstName.trim());
-    if (!res?.ok) {
-      setAccount("error");
-      return;
-    }
-    if (!hasAccount) track("account_create");
+    // A server problem must never block the onboarding: the email stays on the phone and Boot sends it again on the next visit.
+    writeJSON("p27.accountSynced", !!res?.ok);
+    if (res?.ok && !hasAccount) track("account_create");
     saveProfile({ ...getProfile(), email, firstName: p.firstName });
     setAccountEmail(email);
     setAccount("idle");
