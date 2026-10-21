@@ -230,6 +230,7 @@ export async function POST(req: Request) {
     },
     emails: emailCount ?? 0,
     accounts: accountCount ?? 0,
+    accountSkips: people(sessionsWith(events, "account_skip")).size,
     profile: {
       completed: onboard.length,
       levels: countBy(onboard, (e) => String(p(e, "level"))),

@@ -28,6 +28,7 @@ export type EventName =
   | "feedback_submit"
   | "guide_view"
   | "account_create"
+  | "account_skip"
   | "timeline_view"
   | "calendar_add";
 

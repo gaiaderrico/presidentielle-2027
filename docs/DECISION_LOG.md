@@ -198,3 +198,10 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 - Cause: the `accounts` table was added to `supabase/schema.sql` but the SQL was never run on the Supabase project (API error "Could not find the table 'public.accounts'"). Every new player was stuck on the first onboarding step ("Tout passer" only appears after it).
 - Code fix: a failed account save no longer blocks the onboarding; the email stays on the phone and is sent again on the next visit (`p27.accountSynced`, `components/Boot.tsx`). `account_create` is only tracked once the server saved it.
 - Still to do in Supabase (SQL Editor): create the `accounts` table from `supabase/schema.sql`. Until then no account is stored.
+
+## 2026-10-21: account email at onboarding is optional again
+| Decision | Why |
+|---|---|
+| The first onboarding step keeps "Crée ton compte" but adds "Continuer sans compte" (event `account_skip`, counted in `/stats` next to "Comptes créés") | A required email is not a commitment (level 1 counts an email given by choice), it adds friction before the first challenge (primary metric), and round-2 testers had already found the onboarding too pushy (every step became skippable). Data minimisation (RGPD): the account has no password and no use yet |
+| The email ask that counts for the commitment ladder is the one after a challenge ("Ne rate pas le 12 mars", consent box) | Asked once the player has seen the value |
+- Decided by the team on 2026-10-21, after the required email was added the same morning.

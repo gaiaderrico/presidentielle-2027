@@ -138,7 +138,7 @@ export function OnboardingClient() {
             <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Bienvenue", "Welcome")} 👋</p>
             <h1 className="mt-1 font-display text-3xl font-extrabold leading-tight">{hasAccount ? t("Ton compte", "Your account") : t("Crée ton compte", "Create your account")}</h1>
             <p className="mt-2 text-muted">
-              {t("Ton email crée ton compte. Ensuite, 4 petites questions pour adapter l'app à toi : celles-là, tu peux les passer.", "Your email creates your account. Then 4 quick questions to adapt the app to you: those you can skip.")}
+              {t("Facultatif : tu peux jouer sans compte. Ensuite, 4 petites questions pour adapter l'app à toi, que tu peux aussi passer.", "Optional: you can play without an account. Then 4 quick questions to adapt the app to you, which you can skip too.")}
             </p>
           </div>
           <label htmlFor="ob-email" className="sr-only">
@@ -173,6 +173,18 @@ export function OnboardingClient() {
           <Button type="submit" disabled={!emailOk || account === "sending"}>
             {account === "sending" ? t("Création…", "Creating…") : hasAccount ? t("Continuer", "Continue") : t("Créer mon compte", "Create my account")}
           </Button>
+          {!hasAccount && (
+            <button
+              type="button"
+              onClick={() => {
+                track("account_skip");
+                next();
+              }}
+              className="-mt-2 min-h-11 font-semibold text-muted underline underline-offset-4"
+            >
+              {t("Continuer sans compte", "Continue without an account")}
+            </button>
+          )}
         </form>
       )}
 

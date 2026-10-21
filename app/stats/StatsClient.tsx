@@ -32,6 +32,7 @@ type Stats = {
   voix: { avg: number; levels: Record<string, number>; cityViewRate: number | null };
   emails: number;
   accounts: number;
+  accountSkips: number;
   profile: { completed: number; levels: Record<string, number>; registered: Record<string, number>; voter: Record<string, number>; testSkipped: number; interests: Record<string, number> };
   levelsChosen: Record<string, number>;
   city: { buildingOpens: Record<string, number> };
@@ -368,7 +369,9 @@ export function StatsClient() {
           <p>Moyenne : <strong>{Math.round(stats.voix.avg)}</strong> voix par joueur</p>
           <p>Ont ouvert « Ma ville » : <strong>{pct(stats.voix.cityViewRate)}</strong></p>
           <p>Mini-quiz moyen : <strong>{stats.quizAvg === null ? "–" : stats.quizAvg.toFixed(1)}</strong> / 3</p>
-          <p>Comptes créés : <strong>{stats.accounts}</strong></p>
+          <p>
+            Comptes créés : <strong>{stats.accounts}</strong> · continué sans compte : <strong>{stats.accountSkips}</strong>
+          </p>
           <p>Emails collectés : <strong>{stats.emails}</strong></p>
           <div className="mt-2">
             <Bars data={stats.voix.levels} />
