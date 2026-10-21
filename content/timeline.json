@@ -1,0 +1,1045 @@
+{
+  "checked": "21 octobre 2026",
+  "candidates": [
+    {
+      "id": "melenchon",
+      "name": "Jean-Luc Mélenchon",
+      "camp": "gauche",
+      "party": "La France insoumise",
+      "born": "1951",
+      "events": [
+        {
+          "id": "melenchon-1986-senat",
+          "date": "1986-09-28",
+          "title": "Élu sénateur de l'Essonne",
+          "text": "Élu sénateur de l'Essonne le 28 septembre 1986, il est réélu en 1995 et 2004. Son mandat prend fin en janvier 2010 après son élection au Parlement européen.",
+          "source": {
+            "label": "Sénat – fiche de Jean-Luc Mélenchon",
+            "url": "https://www.senat.fr/senateur/melenchon_jean_luc86039k.html"
+          }
+        },
+        {
+          "id": "melenchon-2000-ministre",
+          "date": "2000-03-27",
+          "title": "Ministre délégué à l'Enseignement professionnel",
+          "text": "Nommé ministre délégué à l'Enseignement professionnel, auprès du ministre de l'Éducation nationale, dans le gouvernement de Lionel Jospin (2000-2002).",
+          "source": {
+            "label": "Légifrance – décrets du 27 mars 2000 relatifs à la composition du Gouvernement",
+            "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000764184"
+          }
+        },
+        {
+          "id": "melenchon-2012-presidentielle",
+          "date": "2012-04-22",
+          "title": "Présidentielle 2012 : 11,10 %",
+          "text": "Candidat à l'élection présidentielle, il obtient 3 984 822 voix au 1er tour, soit 11,10 % des suffrages exprimés (4e position).",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2012-152 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2012/2012152PDR.htm"
+          }
+        },
+        {
+          "id": "melenchon-2017-presidentielle",
+          "date": "2017-04-23",
+          "title": "Présidentielle 2017 : 19,58 %",
+          "text": "Candidat à l'élection présidentielle, il obtient 7 059 951 voix au 1er tour, soit 19,58 % des suffrages exprimés (4e position).",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2017-169 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2017/2017169PDR.htm"
+          }
+        },
+        {
+          "id": "melenchon-2022-presidentielle",
+          "date": "2022-04-10",
+          "title": "Présidentielle 2022 : 21,95 %",
+          "text": "Candidat à l'élection présidentielle, il obtient 7 712 520 voix au 1er tour, soit 21,95 % des suffrages exprimés (3e position).",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2022-195 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2022/2022195PDR.htm"
+          }
+        },
+        {
+          "id": "melenchon-2027-candidature",
+          "date": "2026-05-03",
+          "title": "Candidat déclaré pour 2027",
+          "text": "Le 3 mai 2026, au journal de 20 heures de TF1, il annonce sa candidature à l'élection présidentielle de 2027.",
+          "source": {
+            "label": "LCP – 3 mai 2026",
+            "url": "https://lcp.fr/actualites/presidentielle-jean-luc-melenchon-officialise-sa-candidature-pour-2027-435851"
+          }
+        }
+      ]
+    },
+    {
+      "id": "roussel",
+      "name": "Fabien Roussel",
+      "camp": "gauche",
+      "party": "Parti communiste français (PCF)",
+      "born": "1969",
+      "events": [
+        {
+          "id": "roussel-2017-depute",
+          "date": "2017-06-18",
+          "title": "Élu député du Nord",
+          "text": "Élu député de la 20e circonscription du Nord le 18 juin 2017, il est réélu en 2022. Son mandat s'achève le 9 juin 2024.",
+          "source": {
+            "label": "Assemblée nationale – fiche de Fabien Roussel",
+            "url": "https://www.assemblee-nationale.fr/dyn/deputes/PA720692/fonctions?archive=oui"
+          }
+        },
+        {
+          "id": "roussel-2018-pcf",
+          "date": "2018-11-25",
+          "title": "Secrétaire national du PCF",
+          "text": "Élu à la tête du Parti communiste français lors du congrès d'Ivry-sur-Seine, il succède à Pierre Laurent comme secrétaire national.",
+          "source": {
+            "label": "Europe 1 – 25 novembre 2018",
+            "url": "https://www.europe1.fr/politique/pcf-fabien-roussel-elu-nouveau-secretaire-national-3807716"
+          }
+        },
+        {
+          "id": "roussel-2022-presidentielle",
+          "date": "2022-04-10",
+          "title": "Présidentielle 2022 : 2,28 %",
+          "text": "Candidat à l'élection présidentielle, il obtient 802 422 voix au 1er tour, soit 2,28 % des suffrages exprimés.",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2022-195 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2022/2022195PDR.htm"
+          }
+        },
+        {
+          "id": "roussel-2026-maire",
+          "date": "2026-03-15",
+          "title": "Réélu maire de Saint-Amand-les-Eaux",
+          "text": "Maire de Saint-Amand-les-Eaux (Nord) depuis 2025, il est réélu dès le 1er tour des municipales, sa liste obtenant 51,06 % des voix.",
+          "source": {
+            "label": "France 24 / AFP – 15 mars 2026",
+            "url": "https://www.france24.com/fr/info-en-continu/20260315-municipales-fabien-roussel-pcf-annonce-son-%C3%A9lection-d%C3%A8s-le-premier-tour-%C3%A0-saint-amand-les-eaux"
+          }
+        },
+        {
+          "id": "roussel-2027-candidature",
+          "date": "2026-09-06",
+          "title": "Candidat du PCF pour 2027",
+          "text": "Le 6 septembre 2026, les adhérents du PCF approuvent à 72 % sa candidature à l'élection présidentielle de 2027.",
+          "source": {
+            "label": "LCP – 6 septembre 2026",
+            "url": "https://lcp.fr/actualites/fabien-roussel-officiellement-candidat-du-pcf-a-l-election-presidentielle-de-2027-441389"
+          }
+        }
+      ]
+    },
+    {
+      "id": "glucksmann",
+      "name": "Raphaël Glucksmann",
+      "camp": "gauche",
+      "party": "Place publique",
+      "born": "1979",
+      "events": [
+        {
+          "id": "glucksmann-2018-place-publique",
+          "date": "2018-11-06",
+          "title": "Cofonde Place publique",
+          "text": "Avec une vingtaine de personnalités de la société civile, il lance un nouveau parti, Place publique.",
+          "source": {
+            "label": "Public Sénat – 6 novembre 2018",
+            "url": "https://www.publicsenat.fr/actualites/politique/place-publique-un-nouveau-parti-dans-un-paysage-deja-tres-emiette-a-gauche-135149"
+          }
+        },
+        {
+          "id": "glucksmann-2019-depute-europeen",
+          "date": "2019-07-02",
+          "title": "Député européen",
+          "text": "Élu aux élections européennes de 2019, il siège au Parlement européen à partir du 2 juillet 2019, dans le groupe des Socialistes et Démocrates (S&D).",
+          "source": {
+            "label": "Parlement européen – fiche de Raphaël Glucksmann (9e législature)",
+            "url": "https://www.europarl.europa.eu/meps/fr/197694/RAPHAEL_GLUCKSMANN/history/9"
+          }
+        },
+        {
+          "id": "glucksmann-2020-inge",
+          "date": "2020-09",
+          "title": "Président d'une commission spéciale du Parlement européen",
+          "text": "Il est élu président de la commission spéciale du Parlement européen sur l'ingérence étrangère dans les processus démocratiques (INGE).",
+          "source": {
+            "label": "Parlement européen – communiqué de presse, septembre 2020",
+            "url": "https://www.europarl.europa.eu/news/fr/press-room/20200918IPR87423/les-nouvelles-commissions-debutent-leurs-travaux"
+          }
+        },
+        {
+          "id": "glucksmann-2024-europeennes",
+          "date": "2024-06-09",
+          "title": "Européennes 2024 : 13,83 %",
+          "text": "Tête de la liste PS–Place publique aux élections européennes, sa liste obtient 13,83 % des suffrages (3e position).",
+          "source": {
+            "label": "Public Sénat – 9 juin 2024",
+            "url": "https://www.publicsenat.fr/actualites/politique/resultats-europeennes-2024-jordan-bardella-en-tete-valerie-hayer-en-deuxieme-position-glucksmann-troisieme"
+          }
+        },
+        {
+          "id": "glucksmann-2026-candidature",
+          "date": "2026-08-23",
+          "title": "Annonce sa candidature",
+          "text": "Le 23 août 2026, il annonce sa candidature à l'élection présidentielle de 2027 et sa participation à une primaire de la gauche sociale-démocrate.",
+          "source": {
+            "label": "LCP – 23 août 2026",
+            "url": "https://lcp.fr/actualites/presidentielle-2027-raphael-glucksmann-officialise-sa-candidature-et-participera-a-la"
+          }
+        },
+        {
+          "id": "glucksmann-2026-primaire",
+          "date": "2026-10-11",
+          "title": "Désigné par la primaire sociale-démocrate",
+          "text": "Il remporte dès le 1er tour la primaire de la gauche sociale-démocrate (vote du 9 au 11 octobre 2026) avec plus de 66 % des voix ; il en devient le candidat pour 2027.",
+          "source": {
+            "label": "LCP – 11 octobre 2026",
+            "url": "https://lcp.fr/actualites/primaire-socialiste-vainqueur-des-le-1er-tour-raphael-glucksmann-sera-le-candidat-de-la"
+          }
+        }
+      ]
+    },
+    {
+      "id": "attal",
+      "name": "Gabriel Attal",
+      "camp": "centre",
+      "party": "Renaissance",
+      "born": "1989",
+      "events": [
+        {
+          "id": "attal-2017-depute",
+          "date": "2017-06-18",
+          "title": "Élu député des Hauts-de-Seine",
+          "text": "Élu député de la 10e circonscription des Hauts-de-Seine le 18 juin 2017. Il a été réélu en 2022 et en 2024.",
+          "source": {
+            "label": "Assemblée nationale – fiche de Gabriel Attal",
+            "url": "https://www.assemblee-nationale.fr/dyn/deputes/PA722190/fonctions?archive=oui"
+          }
+        },
+        {
+          "id": "attal-2018-gouvernement",
+          "date": "2018-10-16",
+          "title": "Entre au gouvernement",
+          "text": "Nommé secrétaire d'État auprès du ministre de l'Éducation nationale et de la Jeunesse dans le gouvernement d'Édouard Philippe.",
+          "source": {
+            "label": "Élysée – communiqué du 16 octobre 2018",
+            "url": "https://www.elysee.fr/emmanuel-macron/2018/10/16/communique-de-presse-remaniement-et-composition-du-nouveau-gouvernement"
+          }
+        },
+        {
+          "id": "attal-2024-premier-ministre",
+          "date": "2024-01-09",
+          "title": "Premier ministre",
+          "text": "Le président de la République le nomme Premier ministre le 9 janvier 2024 et le charge de former un gouvernement.",
+          "source": {
+            "label": "Élysée – communiqué du 9 janvier 2024",
+            "url": "https://www.elysee.fr/emmanuel-macron/2024/01/09/le-president-de-la-republique-a-nomme-m-gabriel-attal-premier-ministre-et-la-charge-de-former-un-gouvernement"
+          }
+        },
+        {
+          "id": "attal-2024-renaissance",
+          "date": "2024-12-08",
+          "title": "Secrétaire général de Renaissance",
+          "text": "Il est élu secrétaire général du parti Renaissance avec 94,9 % des voix.",
+          "source": {
+            "label": "Europe 1 – 8 décembre 2024",
+            "url": "https://www.europe1.fr/politique/gabriel-attal-officiellement-elu-secretaire-general-de-renaissance-234383"
+          }
+        },
+        {
+          "id": "attal-2027-candidature",
+          "date": "2026-05-22",
+          "title": "Candidat déclaré pour 2027",
+          "text": "Le 22 mai 2026, il annonce sa candidature à l'élection présidentielle de 2027, lors d'un déplacement en Aveyron.",
+          "source": {
+            "label": "LCP – 22 mai 2026",
+            "url": "https://lcp.fr/actualites/presidentielle-2027-gabriel-attal-officialise-sa-candidature-436721"
+          }
+        }
+      ]
+    },
+    {
+      "id": "philippe",
+      "name": "Édouard Philippe",
+      "camp": "centre",
+      "party": "Horizons",
+      "born": "1970",
+      "events": [
+        {
+          "id": "philippe-2010-maire",
+          "date": "2010",
+          "title": "Maire du Havre",
+          "text": "Il succède à Antoine Rufenacht comme maire du Havre (Seine-Maritime).",
+          "source": {
+            "label": "Ville du Havre – fiche d'Édouard Philippe",
+            "url": "https://lehavre.fr/ma-ville/le-conseil-municipal/les-elus/edouard-philippe"
+          }
+        },
+        {
+          "id": "philippe-2012-depute",
+          "date": "2012-03-23",
+          "title": "Député de Seine-Maritime",
+          "text": "Il devient député de la 7e circonscription de Seine-Maritime en mars 2012, puis est réélu en juin 2012. Il quitte l'Assemblée en 2017 en entrant au gouvernement.",
+          "source": {
+            "label": "Assemblée nationale – fiche d'Édouard Philippe",
+            "url": "https://www.assemblee-nationale.fr/dyn/deputes/PA345619/fonctions?archive=oui"
+          }
+        },
+        {
+          "id": "philippe-2017-premier-ministre",
+          "date": "2017-05-15",
+          "title": "Premier ministre",
+          "text": "Emmanuel Macron le nomme Premier ministre le 15 mai 2017.",
+          "source": {
+            "label": "Ville du Havre – fiche d'Édouard Philippe",
+            "url": "https://lehavre.fr/ma-ville/le-conseil-municipal/les-elus/edouard-philippe"
+          }
+        },
+        {
+          "id": "philippe-2021-horizons",
+          "date": "2021-10-09",
+          "title": "Fonde le parti Horizons",
+          "text": "Quinze mois après avoir quitté Matignon, il lance au Havre son propre parti, Horizons.",
+          "source": {
+            "label": "France 24 / AFP – 9 octobre 2021",
+            "url": "https://www.france24.com/fr/info-en-continu/20211009-a-six-mois-de-la-pr%C3%A9sidentielle-edouard-philippe-lance-son-propre-parti"
+          }
+        },
+        {
+          "id": "philippe-2024-candidature",
+          "date": "2024-09-03",
+          "title": "Annonce sa candidature",
+          "text": "Dans un entretien au Point publié le 3 septembre 2024, il annonce qu'il sera candidat à la prochaine élection présidentielle.",
+          "source": {
+            "label": "France 24 – 3 septembre 2024",
+            "url": "https://www.france24.com/fr/france/20240903-en-pleine-crise-politique-%C3%A9douard-philippe-annonce-sa-candidature-%C3%A0-l-%C3%A9lys%C3%A9e"
+          }
+        },
+        {
+          "id": "philippe-2026-maire",
+          "date": "2026-03-22",
+          "title": "Réélu maire du Havre",
+          "text": "Il est réélu maire du Havre au second tour des municipales, avec environ 47 % des voix. Il avait présenté cette réélection comme une étape avant sa candidature de 2027.",
+          "source": {
+            "label": "LCP – 22 mars 2026",
+            "url": "https://lcp.fr/actualites/municipales-edouard-philippe-reelu-maire-du-havre-434013"
+          }
+        }
+      ]
+    },
+    {
+      "id": "retailleau",
+      "name": "Bruno Retailleau",
+      "camp": "droite",
+      "party": "Les Républicains (LR)",
+      "born": "1960",
+      "events": [
+        {
+          "id": "retailleau-2004-senat",
+          "date": "2004-09-26",
+          "title": "Élu sénateur de la Vendée",
+          "text": "Élu sénateur de la Vendée le 26 septembre 2004, il est réélu en 2014, 2020 et 2026.",
+          "source": {
+            "label": "Sénat – fiche de Bruno Retailleau",
+            "url": "https://www.senat.fr/senateur/retailleau_bruno04033b.html"
+          }
+        },
+        {
+          "id": "retailleau-2014-groupe-senat",
+          "date": "2014",
+          "title": "Président du groupe UMP puis LR au Sénat",
+          "text": "Il prend la présidence du groupe UMP (devenu LR) au Sénat, qu'il exerce pendant dix ans, jusqu'à son entrée au gouvernement en 2024.",
+          "source": {
+            "label": "Public Sénat – 17 octobre 2025",
+            "url": "https://www.publicsenat.fr/actualites/politique/lr-bruno-retailleau-ne-retrouvera-pas-la-presidence-du-groupe-au-senat"
+          }
+        },
+        {
+          "id": "retailleau-2024-interieur",
+          "date": "2024-09-21",
+          "title": "Ministre de l'Intérieur",
+          "text": "Il est nommé ministre de l'Intérieur dans le gouvernement de Michel Barnier.",
+          "source": {
+            "label": "Légifrance – décret du 21 septembre 2024 relatif à la composition du Gouvernement",
+            "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000050246032"
+          }
+        },
+        {
+          "id": "retailleau-2025-president-lr",
+          "date": "2025-05-18",
+          "title": "Président des Républicains",
+          "text": "Il est élu président des Républicains par les adhérents avec 74,31 % des voix, face à Laurent Wauquiez.",
+          "source": {
+            "label": "Public Sénat – 18 mai 2025",
+            "url": "https://www.publicsenat.fr/actualites/politique/presidence-de-lr-bruno-retailleau-elu-avec-7431-des-voix"
+          }
+        },
+        {
+          "id": "retailleau-2027-candidature",
+          "date": "2026-04-19",
+          "title": "Désigné candidat de LR pour 2027",
+          "text": "Lors d'une consultation interne, les adhérents des Républicains choisissent de le désigner directement candidat à la présidentielle de 2027, avec 73,8 % des voix.",
+          "source": {
+            "label": "LCP – 19 avril 2026",
+            "url": "https://lcp.fr/actualites/presidentielle-bruno-retailleau-choisi-comme-candidat-officiel-des-republicains-435440"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wauquiez",
+      "name": "Laurent Wauquiez",
+      "camp": "droite",
+      "party": "Les Républicains (LR)",
+      "born": "1975",
+      "events": [
+        {
+          "id": "wauquiez-2004-depute",
+          "date": "2004",
+          "title": "Élu député de la Haute-Loire",
+          "text": "Il est élu député UMP de la Haute-Loire dès le 1er tour. Il est réélu en 2007 et 2012.",
+          "source": {
+            "label": "Public Sénat – 10 décembre 2017",
+            "url": "https://www.publicsenat.fr/actualites/non-classe/les-grandes-dates-de-laurent-wauquiez-80634"
+          }
+        },
+        {
+          "id": "wauquiez-2011-ministre",
+          "date": "2011-06-29",
+          "title": "Ministre de l'Enseignement supérieur",
+          "text": "Il est nommé ministre de l'Enseignement supérieur et de la Recherche dans le gouvernement de François Fillon.",
+          "source": {
+            "label": "Légifrance – décret du 29 juin 2011 relatif à la composition du Gouvernement",
+            "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000024277023"
+          }
+        },
+        {
+          "id": "wauquiez-2016-region",
+          "date": "2016",
+          "title": "Président de la région Auvergne-Rhône-Alpes",
+          "text": "Il devient président du conseil régional d'Auvergne-Rhône-Alpes et quitte la mairie du Puy-en-Velay, qu'il dirigeait depuis 2008.",
+          "source": {
+            "label": "Public Sénat – 10 décembre 2017",
+            "url": "https://www.publicsenat.fr/actualites/non-classe/les-grandes-dates-de-laurent-wauquiez-80634"
+          }
+        },
+        {
+          "id": "wauquiez-2017-president-lr",
+          "date": "2017-12-10",
+          "title": "Président des Républicains",
+          "text": "Il est élu président des Républicains dès le 1er tour avec 74,64 % des voix.",
+          "source": {
+            "label": "Public Sénat – 10 décembre 2017",
+            "url": "https://www.publicsenat.fr/actualites/non-classe/les-grandes-dates-de-laurent-wauquiez-80634"
+          }
+        },
+        {
+          "id": "wauquiez-2024-groupe-an",
+          "date": "2024-07-19",
+          "title": "Président du groupe Droite républicaine",
+          "text": "Réélu député de la Haute-Loire en juillet 2024, il prend la présidence du groupe Droite républicaine à l'Assemblée nationale.",
+          "source": {
+            "label": "Assemblée nationale – fiche de Laurent Wauquiez",
+            "url": "https://www.assemblee-nationale.fr/dyn/deputes/PA267285/fonctions"
+          }
+        },
+        {
+          "id": "wauquiez-2026-position",
+          "date": "2026-07-01",
+          "title": "Position pour 2027",
+          "text": "Le 1er juillet 2026, il estime qu'Édouard Philippe « peut incarner l'ordre et le sérieux » et se prononce pour une candidature unique de la droite et du centre.",
+          "source": {
+            "label": "France 24 / AFP – 1er juillet 2026",
+            "url": "https://www.france24.com/fr/info-en-continu/20260701-pr%C3%A9sidentielle-philippe-peut-incarner-l-ordre-et-le-s%C3%A9rieux-pour-redresser-la-france-dit-wauquiez"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lepen",
+      "name": "Marine Le Pen",
+      "camp": "extreme-droite",
+      "party": "Rassemblement national (RN)",
+      "born": "1968",
+      "events": [
+        {
+          "id": "lepen-1998-region",
+          "date": "1998",
+          "title": "Premier mandat : conseillère régionale",
+          "text": "Elle est élue pour la première fois en 1998, conseillère régionale du Nord-Pas-de-Calais. Elle sera ensuite députée européenne (2004-2017) puis députée du Pas-de-Calais (depuis 2017).",
+          "source": {
+            "label": "France 24 – 6 juillet 2026",
+            "url": "https://www.france24.com/fr/france/20260706-des-premiers-engagements-a-sa-condamnation-la-carriere-politique-de-marine-le-pen-en-12-dates"
+          }
+        },
+        {
+          "id": "lepen-2011-presidente-fn",
+          "date": "2011-01",
+          "title": "Présidente du Front national",
+          "text": "Elle succède à son père, Jean-Marie Le Pen, à la tête du Front national (aujourd'hui Rassemblement national).",
+          "source": {
+            "label": "France 24 – 6 juillet 2026",
+            "url": "https://www.france24.com/fr/france/20260706-des-premiers-engagements-a-sa-condamnation-la-carriere-politique-de-marine-le-pen-en-12-dates"
+          }
+        },
+        {
+          "id": "lepen-2012-presidentielle",
+          "date": "2012-04-22",
+          "title": "Présidentielle 2012 : 17,90 %",
+          "text": "Candidate à l'élection présidentielle, elle obtient 6 421 426 voix au 1er tour, soit 17,90 % des suffrages exprimés (3e position).",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2012-152 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2012/2012152PDR.htm"
+          }
+        },
+        {
+          "id": "lepen-2017-presidentielle",
+          "date": "2017-04-23",
+          "title": "Présidentielle 2017 : 21,30 %",
+          "text": "Elle obtient 7 678 491 voix au 1er tour, soit 21,30 % des suffrages exprimés (2e position), et se qualifie pour le second tour face à Emmanuel Macron.",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2017-169 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2017/2017169PDR.htm"
+          }
+        },
+        {
+          "id": "lepen-2022-presidentielle",
+          "date": "2022-04-10",
+          "title": "Présidentielle 2022 : 23,15 %",
+          "text": "Elle obtient 8 133 828 voix au 1er tour, soit 23,15 % des suffrages exprimés (2e position), et se qualifie pour le second tour face à Emmanuel Macron.",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2022-195 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2022/2022195PDR.htm"
+          }
+        },
+        {
+          "id": "lepen-2026-appel-candidature",
+          "date": "2026-07-07",
+          "title": "Décision en appel et candidature",
+          "text": "Le 7 juillet 2026, la cour d'appel de Paris la condamne notamment à 45 mois d'inéligibilité dont 30 avec sursis : elle peut se présenter. Elle se déclare candidate et forme un pourvoi en cassation.",
+          "source": {
+            "label": "Public Sénat – 7 juillet 2026",
+            "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-marine-le-pen-est-candidate-et-se-pourvoit-en-cassation"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bardella",
+      "name": "Jordan Bardella",
+      "camp": "extreme-droite",
+      "party": "Rassemblement national (RN)",
+      "born": "1995",
+      "events": [
+        {
+          "id": "bardella-2015-region",
+          "date": "2015",
+          "title": "Premier mandat : conseiller régional",
+          "text": "Il est élu conseiller régional d'Île-de-France, son premier mandat, à l'âge de 20 ans. Il quitte ce mandat en février 2025.",
+          "source": {
+            "label": "France 24 / AFP – 25 février 2025",
+            "url": "https://www.france24.com/fr/info-en-continu/20250225-jordan-bardella-a-d%C3%A9missionn%C3%A9-de-son-mandat-de-conseiller-r%C3%A9gional-d-%C3%AEle-de-france"
+          }
+        },
+        {
+          "id": "bardella-2019-depute-europeen",
+          "date": "2019-07-02",
+          "title": "Député européen",
+          "text": "Élu aux élections européennes de 2019 sur la liste du Rassemblement national, il siège au Parlement européen à partir du 2 juillet 2019.",
+          "source": {
+            "label": "Parlement européen – fiche de Jordan Bardella (9e législature)",
+            "url": "https://www.europarl.europa.eu/meps/fr/131580/JORDAN_BARDELLA/history/9"
+          }
+        },
+        {
+          "id": "bardella-2022-president-rn",
+          "date": "2022-11-05",
+          "title": "Président du Rassemblement national",
+          "text": "Il est élu président du Rassemblement national lors du congrès du parti à Paris, face à Louis Aliot. Il succède à Marine Le Pen.",
+          "source": {
+            "label": "Public Sénat – 5 novembre 2022",
+            "url": "https://www.publicsenat.fr/actualites/politique/jordan-bardella-elu-sans-surprise-president-du-rassemblement-national-226265"
+          }
+        },
+        {
+          "id": "bardella-2024-europeennes",
+          "date": "2024-06-09",
+          "title": "Européennes 2024 : 31,37 %",
+          "text": "Tête de la liste du Rassemblement national aux élections européennes, sa liste arrive en tête avec 31,37 % des suffrages.",
+          "source": {
+            "label": "Public Sénat – 9 juin 2024",
+            "url": "https://www.publicsenat.fr/actualites/politique/resultats-europeennes-2024-jordan-bardella-en-tete-valerie-hayer-en-deuxieme-position-glucksmann-troisieme"
+          }
+        },
+        {
+          "id": "bardella-2026-statut",
+          "date": "2026-07-10",
+          "title": "Statut pour 2027",
+          "text": "Après la décision en appel du 7 juillet 2026, Marine Le Pen est la candidate du RN. Il n'est pas candidat : il est présenté comme son Premier ministre en cas de victoire.",
+          "source": {
+            "label": "France 24 / AFP – 10 juillet 2026",
+            "url": "https://www.france24.com/fr/info-en-continu/20260710-jordan-bardella-retour-%C3%A0-l-arri%C3%A8re-plan"
+          }
+        }
+      ]
+    },
+    {
+      "id": "zemmour",
+      "name": "Éric Zemmour",
+      "camp": "extreme-droite",
+      "party": "Reconquête",
+      "born": "1958",
+      "events": [
+        {
+          "id": "zemmour-2021-candidature",
+          "date": "2021-11-30",
+          "title": "Entrée en politique : candidature à la présidentielle",
+          "text": "Il annonce sa candidature à l'élection présidentielle de 2022 dans une vidéo publiée sur les réseaux sociaux.",
+          "source": {
+            "label": "France 24 – 30 novembre 2021",
+            "url": "https://www.france24.com/fr/france/20211130-pr%C3%A9sidentielle-2022-le-pol%C3%A9miste-d-extr%C3%AAme-droite-%C3%A9ric-zemmour-annonce-sa-candidature"
+          }
+        },
+        {
+          "id": "zemmour-2021-reconquete",
+          "date": "2021-12-05",
+          "title": "Fonde le parti Reconquête",
+          "text": "Lors d'un meeting à Villepinte, il lance sa campagne et son parti, Reconquête.",
+          "source": {
+            "label": "Public Sénat – 10 avril 2022",
+            "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-apres-une-entree-fracassante-en-campagne-la-degringolade-d-eric"
+          }
+        },
+        {
+          "id": "zemmour-2022-presidentielle",
+          "date": "2022-04-10",
+          "title": "Présidentielle 2022 : 7,07 %",
+          "text": "Candidat à l'élection présidentielle, il obtient 2 485 226 voix au 1er tour, soit 7,07 % des suffrages exprimés (4e position).",
+          "source": {
+            "label": "Conseil constitutionnel – décision n° 2022-195 PDR",
+            "url": "https://www.conseil-constitutionnel.fr/decision/2022/2022195PDR.htm"
+          }
+        },
+        {
+          "id": "zemmour-2022-legislatives",
+          "date": "2022-06-12",
+          "title": "Candidat aux législatives dans le Var",
+          "text": "Candidat aux élections législatives dans la 4e circonscription du Var, il n'est pas qualifié pour le second tour.",
+          "source": {
+            "label": "Public Sénat – 12 juin 2022",
+            "url": "https://www.publicsenat.fr/actualites/politique/legislatives-eric-zemmour-elimine-des-le-1er-tour-213118"
+          }
+        },
+        {
+          "id": "zemmour-2027-candidature",
+          "date": "2026-09-17",
+          "title": "Candidat déclaré pour 2027",
+          "text": "Le 17 septembre 2026, sur BFMTV, le président de Reconquête confirme sa candidature à l'élection présidentielle de 2027.",
+          "source": {
+            "label": "LCP – 17 septembre 2026",
+            "url": "https://lcp.fr/actualites/presidentielle-2027-eric-zemmour-officialise-sa-candidature-441871"
+          }
+        }
+      ]
+    }
+  ],
+  "debates": [
+    {
+      "id": "debat-1974",
+      "date": "1974-05-10",
+      "title": "1974 : le tout premier débat d'entre-deux-tours",
+      "text": "Le 10 mai 1974, Valéry Giscard d'Estaing et François Mitterrand débattent environ 1 h 30 à la télévision, une première en France. Arbitré par Jacqueline Baudrier et Alain Duhamel, l'échange porte sur la croissance et la justice sociale.",
+      "why": "Il lance une tradition : depuis 1974, un duel télévisé précède le second tour de chaque présidentielle, sauf en 2002.",
+      "source": {
+        "label": "INA (Lumni Enseignement)",
+        "url": "https://enseignants.lumni.fr/fiche-media/00000000134/debat-entre-valery-giscard-d-estaing-et-francois-mitterrand-en-1974.html"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 74-32 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/1974/7432PDR.htm"
+      },
+      "people": [
+        "Valéry Giscard d'Estaing",
+        "François Mitterrand"
+      ],
+      "quote": "Vous n'avez pas, monsieur Mitterrand, le monopole du cœur.",
+      "quoteBy": "Valéry Giscard d'Estaing",
+      "result": "Valéry Giscard d'Estaing élu avec 50,81 % des suffrages exprimés (19 mai 1974)"
+    },
+    {
+      "id": "debat-1981",
+      "date": "1981-05-05",
+      "title": "1981 : la revanche de 1974",
+      "text": "Le 5 mai 1981, les adversaires de 1974 se retrouvent, Giscard d'Estaing étant désormais président sortant. L'équipe de Mitterrand pose 21 conditions (décor, réalisation, journalistes). Giscard oppose sa gestion de la France au « ministère de la parole ».",
+      "why": "Il montre que le cadre du débat (décor, caméras, journalistes) se négocie entre candidats, une pratique qui perdure.",
+      "source": {
+        "label": "INA – Fresque François Mitterrand",
+        "url": "https://fresques.ina.fr/mitterrand/fiche-media/Mitter00183/le-ministere-de-la-parole-contre-l-homme-du-passif.html"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 81-47 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/1981/8147pdr.htm"
+      },
+      "people": [
+        "Valéry Giscard d'Estaing",
+        "François Mitterrand"
+      ],
+      "quote": "C'est quand même ennuyeux que dans l'intervalle, vous soyez devenu, vous, l'homme du passif.",
+      "quoteBy": "François Mitterrand",
+      "result": "François Mitterrand élu avec 51,76 % des suffrages exprimés (10 mai 1981)"
+    },
+    {
+      "id": "debat-1988",
+      "date": "1988-04-28",
+      "title": "1988 : le président face à son Premier ministre",
+      "text": "Le 28 avril 1988, après deux ans de cohabitation, le président Mitterrand affronte son Premier ministre, Jacques Chirac, qui veut l'appeler « monsieur Mitterrand ». Réponse : « Mais vous avez tout à fait raison, monsieur le Premier ministre. »",
+      "why": "Seul débat ayant opposé un président et son Premier ministre en exercice : il montre les tensions de la cohabitation au sommet de l'État.",
+      "source": {
+        "label": "INA (Lumni Enseignement)",
+        "url": "https://enseignants.lumni.fr/fiche-media/00000000155/debat-entre-francois-mitterrand-et-jacques-chirac-en-1988.html"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 88-60 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/1988/8860PDR.htm"
+      },
+      "people": [
+        "François Mitterrand",
+        "Jacques Chirac"
+      ],
+      "quote": "Ce soir, je ne suis pas le Premier ministre, et vous n'êtes pas le président de la République.",
+      "quoteBy": "Jacques Chirac",
+      "result": "François Mitterrand réélu avec 54,02 % des suffrages exprimés (8 mai 1988)"
+    },
+    {
+      "id": "debat-1995",
+      "date": "1995-05-02",
+      "title": "1995 : un débat courtois et le quinquennat",
+      "text": "Le 2 mai 1995, Jacques Chirac (RPR) et Lionel Jospin (PS) débattent sur un ton courtois, animés par Alain Duhamel et Guillaume Durand. Jospin défend un mandat présidentiel de cinq ans au lieu de sept ; sa formule fait rire Chirac.",
+      "why": "Le quinquennat évoqué ce soir-là est adopté par référendum le 24 septembre 2000 (plus de 73 % de oui).",
+      "source": {
+        "label": "INA",
+        "url": "https://www.ina.fr/ina-eclaire-actu/video/i05081232/lionel-jospin-mieux-vaut-5-ans-avec-jospin-que-7-ans-avec-chirac"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 95-81 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/1995/9581PDR.htm"
+      },
+      "people": [
+        "Jacques Chirac",
+        "Lionel Jospin"
+      ],
+      "quote": "Mieux vaut 5 ans avec Jospin que 7 ans avec Chirac.",
+      "quoteBy": "Lionel Jospin",
+      "result": "Jacques Chirac élu avec 52,64 % des suffrages exprimés (7 mai 1995)"
+    },
+    {
+      "id": "debat-2002",
+      "date": "2002-04-23",
+      "title": "2002 : le débat qui n'a pas eu lieu",
+      "text": "Le 21 avril 2002, Jean-Marie Le Pen (FN) accède au second tour face au président sortant Jacques Chirac. Le 23 avril, à Rennes, Chirac annonce qu'il refuse de débattre avec lui.",
+      "why": "Seule présidentielle sans débat d'entre-deux-tours depuis 1974 : ce rendez-vous est une tradition, pas une obligation légale.",
+      "source": {
+        "label": "INA",
+        "url": "https://www.ina.fr/ina-eclaire-actu/2002-jacques-chirac-refuse-le-debat-televise-avec-jean-marie-le-pen-pour-ne-pas-banaliser-ses-idees"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 2002-111 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/2002/2002111PDR.htm"
+      },
+      "people": [
+        "Jacques Chirac",
+        "Jean-Marie Le Pen"
+      ],
+      "quote": "Je ne peux pas accepter la banalisation de l'intolérance et de la haine.",
+      "quoteBy": "Jacques Chirac",
+      "result": "Jacques Chirac réélu avec 82,21 % des suffrages exprimés (5 mai 2002)"
+    },
+    {
+      "id": "debat-2007",
+      "date": "2007-05-02",
+      "title": "2007 : « Calmez-vous » et la colère assumée",
+      "text": "Le 2 mai 2007, Nicolas Sarkozy (UMP) et Ségolène Royal (PS) débattent 2 h 40 sur TF1 et France 2. Sur la scolarisation des enfants handicapés, Royal se dit « très en colère » ; Sarkozy lui répond : « Pour être président de la République, il faut être calme. »",
+      "why": "Premier débat d'entre-deux-tours avec une femme candidate.",
+      "source": {
+        "label": "INA (Lumni Enseignement)",
+        "url": "https://enseignants.lumni.fr/fiche-media/00000001248/debat-entre-segolene-royal-et-nicolas-sarkozy-pour-la-presidentielle-de-2007.html"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 2007-141 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/2007/2007141pdr.htm"
+      },
+      "people": [
+        "Nicolas Sarkozy",
+        "Ségolène Royal"
+      ],
+      "quote": "Il y a des colères qui sont parfaitement saines.",
+      "quoteBy": "Ségolène Royal",
+      "result": "Nicolas Sarkozy élu avec 53,06 % des suffrages exprimés (6 mai 2007)"
+    },
+    {
+      "id": "debat-2012",
+      "date": "2012-05-02",
+      "title": "2012 : l'anaphore « Moi président »",
+      "text": "Le 2 mai 2012, le président sortant Nicolas Sarkozy (UMP) affronte François Hollande (PS). À Laurence Ferrari qui lui demande quel président il veut être, Hollande répond par une longue série de phrases ouvertes par « Moi président de la République ».",
+      "why": "La formule est restée : les engagements pris pendant le débat sont ensuite rappelés pendant le mandat, comme dans une question écrite à l'Assemblée dès 2014.",
+      "source": {
+        "label": "Assemblée nationale – question écrite n° 55697",
+        "url": "https://questions.assemblee-nationale.fr/dyn/14/questions/QANR5L14QE55697.pdf"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 2012-154 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/2012/2012154PDR.htm"
+      },
+      "people": [
+        "François Hollande",
+        "Nicolas Sarkozy"
+      ],
+      "quote": "Moi président de la République, je ne serai pas le chef de la majorité…",
+      "quoteBy": "François Hollande",
+      "result": "François Hollande élu avec 51,64 % des suffrages exprimés (6 mai 2012)"
+    },
+    {
+      "id": "debat-2017",
+      "date": "2017-05-03",
+      "title": "2017 : un débat très tendu",
+      "text": "Le 3 mai 2017, Emmanuel Macron (En marche !) et Marine Le Pen (FN) s'opposent dans un débat très tendu, suivi par 16,5 millions de téléspectateurs. Euro, Europe, terrorisme : les attaques fusent des deux côtés ; Macron parle de « poudre de perlimpinpin ».",
+      "why": "Premier débat d'entre-deux-tours avec une candidate d'extrême droite, après le refus de débattre de 2002.",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/debat-presidentiel-les-10-phrases-marquantes-60057"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 2017-171 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/2017/2017171PDR.htm"
+      },
+      "people": [
+        "Emmanuel Macron",
+        "Marine Le Pen"
+      ],
+      "quote": "De toute façon la France sera dirigée par une femme, ce sera ou moi ou Mme Merkel.",
+      "quoteBy": "Marine Le Pen",
+      "result": "Emmanuel Macron élu avec 66,10 % des suffrages exprimés (7 mai 2017)"
+    },
+    {
+      "id": "debat-2022",
+      "date": "2022-04-20",
+      "title": "2022 : le match retour",
+      "text": "Le 20 avril 2022, le président sortant Emmanuel Macron et Marine Le Pen (RN) se retrouvent près de 3 heures, face à Léa Salamé et Gilles Bouleau. Pouvoir d'achat, Europe, Russie, climat : sur le prêt russe, Le Pen répond « Nous sommes un parti pauvre ».",
+      "why": "Second « match retour » après 1974-1981 : en pleine guerre en Ukraine, il montre comment l'actualité internationale entre dans le débat.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/presidentielle-macron-le-pen-un-debat-projet-contre-projet-110171"
+      },
+      "source2": {
+        "label": "Conseil constitutionnel – décision n° 2022-197 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/2022/2022197PDR.htm"
+      },
+      "people": [
+        "Emmanuel Macron",
+        "Marine Le Pen"
+      ],
+      "quote": "Vous parlez à votre banquier quand vous parlez de la Russie.",
+      "quoteBy": "Emmanuel Macron",
+      "result": "Emmanuel Macron réélu avec 58,55 % des suffrages exprimés (24 avril 2022)"
+    }
+  ],
+  "history": [
+    {
+      "id": "vote-des-femmes-1944",
+      "date": "1944-04-21",
+      "title": "Le droit de vote des femmes",
+      "text": "L'ordonnance du 21 avril 1944 rend les femmes « électrices et éligibles dans les mêmes conditions que les hommes ». Elles votent pour la première fois aux municipales du 29 avril 1945.",
+      "why": "Le suffrage universel réellement universel est récent : en 2027, femmes et hommes votent et se présentent dans les mêmes conditions.",
+      "source": {
+        "label": "Assemblée nationale",
+        "url": "https://www2.assemblee-nationale.fr/14/evenements/2015/33-premieres-deputees/vers-la-reconnaissance-de-la-citoyennete-des-femmes"
+      }
+    },
+    {
+      "id": "constitution-1958",
+      "date": "1958-10-04",
+      "title": "La Constitution de la Ve République",
+      "text": "Approuvée par référendum le 28 septembre 1958 par 79,25 % des votants, la nouvelle Constitution est proclamée le 4 octobre 1958. Elle renforce le pouvoir exécutif face au Parlement.",
+      "why": "C'est toujours la Constitution en vigueur : elle fixe les pouvoirs du président élu en 2027, du gouvernement et du Parlement.",
+      "source": {
+        "label": "Conseil constitutionnel",
+        "url": "https://www.conseil-constitutionnel.fr/actualites/67e-anniversaire-de-la-constitution-de-la-ve-republique"
+      }
+    },
+    {
+      "id": "referendum-election-directe-1962",
+      "date": "1962-10-28",
+      "title": "Le président élu directement par les citoyens",
+      "text": "Par référendum, 62,25 % des suffrages exprimés approuvent l'élection du président de la République au suffrage universel direct. Jusque-là, il était élu par un collège de grands électeurs.",
+      "why": "C'est pour cela qu'en 2027, chaque électeur choisit directement le président, ce qui fait de cette élection la plus importante.",
+      "source": {
+        "label": "Conseil constitutionnel",
+        "url": "https://www.conseil-constitutionnel.fr/referendum-sous-la-ve-republique/tableau-recapitulatif-des-referendums-de-la-veme-republique"
+      }
+    },
+    {
+      "id": "premiere-presidentielle-directe-1965",
+      "date": "1965-12-05",
+      "title": "Première présidentielle au suffrage direct",
+      "text": "Au premier tour, le 5 décembre 1965, le général de Gaulle n'obtient pas la majorité absolue et est mis en ballottage. Il est élu au second tour, le 19 décembre, face à François Mitterrand.",
+      "why": "Elle illustre la règle des deux tours : sans majorité absolue au 1er tour, seuls les deux premiers candidats s'affrontent au second.",
+      "source": {
+        "label": "INA – Fresques De Gaulle",
+        "url": "https://fresques.ina.fr/de-gaulle/fiche-media/Gaulle00251/allocution-du-11-decembre-1965.html"
+      }
+    },
+    {
+      "id": "vote-a-18-ans-1974",
+      "date": "1974-07-05",
+      "title": "Le droit de vote à 18 ans",
+      "text": "La loi du 5 juillet 1974 abaisse l'âge de la majorité, et donc du droit de vote, de 21 à 18 ans. Des millions de jeunes deviennent électeurs.",
+      "why": "Tout Français ou Française qui a 18 ans au plus tard la veille du scrutin peut voter en 2027.",
+      "source": {
+        "label": "Assemblée nationale (rapport n° 3392)",
+        "url": "https://www.assemblee-nationale.fr/dyn/15/rapports/cion_lois/l15b3392_rapport-fond.pdf"
+      }
+    },
+    {
+      "id": "alternance-1981",
+      "date": "1981-05-10",
+      "title": "Première alternance de la Ve République",
+      "text": "François Mitterrand (Parti socialiste) est élu avec environ 51,76 % des suffrages exprimés face au président sortant Valéry Giscard d'Estaing. C'est le premier président de gauche de la Ve République.",
+      "why": "Elle montre que les institutions permettent le passage pacifique du pouvoir d'un camp politique à l'autre par l'élection.",
+      "source": {
+        "label": "Conseil constitutionnel – décision n° 81-47 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/1981/8147pdr.htm"
+      }
+    },
+    {
+      "id": "premiere-cohabitation-1986",
+      "date": "1986-03",
+      "title": "La première cohabitation",
+      "text": "Après les législatives de mars 1986, remportées par l'opposition de droite, le président socialiste François Mitterrand nomme Jacques Chirac Premier ministre. Président et majorité de l'Assemblée sont de camps opposés.",
+      "why": "Si le président élu en 2027 n'obtient pas de majorité aux législatives, il peut devoir gouverner avec un Premier ministre d'un autre camp.",
+      "source": {
+        "label": "Conseil constitutionnel",
+        "url": "https://www.conseil-constitutionnel.fr/la-constitution/comment-la-constitution-organise-t-elle-la-cohabitation"
+      }
+    },
+    {
+      "id": "referendum-quinquennat-2000",
+      "date": "2000-09-24",
+      "title": "Le quinquennat remplace le septennat",
+      "text": "Par référendum, 73 % des suffrages exprimés approuvent la réduction du mandat présidentiel de sept à cinq ans, avec une abstention record d'environ 70 % des inscrits.",
+      "why": "C'est pourquoi on élit le président tous les cinq ans : après 2022, la prochaine élection a lieu en 2027.",
+      "source": {
+        "label": "Conseil constitutionnel",
+        "url": "https://www.conseil-constitutionnel.fr/evenements/referendum-sur-le-quinquennat"
+      }
+    },
+    {
+      "id": "inversion-calendrier-2001",
+      "date": "2001-05-15",
+      "title": "La présidentielle passe avant les législatives",
+      "text": "Une loi organique modifie la date de fin du mandat des députés élus en 1997. Ainsi, à partir de 2002, l'élection présidentielle a lieu quelques semaines avant les élections législatives.",
+      "why": "C'est pourquoi des élections législatives suivent normalement la présidentielle, pour donner une majorité au nouveau président.",
+      "source": {
+        "label": "Légifrance",
+        "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000404920"
+      }
+    },
+    {
+      "id": "21-avril-2002",
+      "date": "2002-04-21",
+      "title": "Le 21 avril 2002",
+      "text": "Jean-Marie Le Pen (Front national) se qualifie pour le second tour et le candidat socialiste Lionel Jospin est éliminé. Jacques Chirac est réélu le 5 mai avec 82,21 % des suffrages exprimés.",
+      "why": "Il rappelle que la dispersion des voix au 1er tour peut changer l'affiche du second tour, un enjeu discuté avant chaque présidentielle.",
+      "source": {
+        "label": "Public Sénat",
+        "url": "https://www.publicsenat.fr/actualites/politique/presidentielle-il-y-a-20-ans-le-seisme-du-21-avril-2002-203366"
+      }
+    },
+    {
+      "id": "revision-constitutionnelle-2008",
+      "date": "2008-07-23",
+      "title": "Révision constitutionnelle de 2008",
+      "text": "La loi constitutionnelle du 23 juillet 2008 limite le président à deux mandats consécutifs et restreint le 49.3 aux budgets et à un autre texte par session. Elle crée aussi la question prioritaire de constitutionnalité.",
+      "why": "Emmanuel Macron, élu en 2017 et réélu en 2022, ne peut pas se représenter en 2027 : nul ne peut exercer plus de deux mandats consécutifs.",
+      "source": {
+        "label": "Conseil constitutionnel",
+        "url": "https://www.conseil-constitutionnel.fr/les-revisions-constitutionnelles/loi-constitutionnelle-n-2008-724-du-23-juillet-2008"
+      }
+    },
+    {
+      "id": "election-macron-2017",
+      "date": "2017-05-07",
+      "title": "Un président hors des partis traditionnels",
+      "text": "Emmanuel Macron, fondateur du mouvement En Marche !, est élu face à Marine Le Pen avec environ 66,10 % des suffrages exprimés. Aucun candidat du PS ni de LR n'est présent au second tour.",
+      "why": "Cette élection a recomposé le paysage politique : en 2027, l'offre ne se résume plus au face-à-face gauche-droite d'avant.",
+      "source": {
+        "label": "Conseil constitutionnel – décision n° 2017-171 PDR",
+        "url": "https://www.conseil-constitutionnel.fr/decision/2017/2017171PDR.htm"
+      }
+    },
+    {
+      "id": "majorite-relative-2022",
+      "date": "2022-06-19",
+      "title": "Une majorité seulement relative",
+      "text": "Aux législatives qui suivent la réélection d'Emmanuel Macron, sa coalition Ensemble obtient 246 sièges, sous la majorité absolue de 289. Aucun groupe ne peut faire adopter seul les textes.",
+      "why": "Sans majorité absolue, un gouvernement doit négocier ou recourir au 49.3 et s'expose aux motions de censure, comme depuis 2022.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/legislatives-2022-ensemble-loin-de-la-majorite-absolue-le-rn-cree-la-surprise-la-nupes"
+      }
+    },
+    {
+      "id": "retraites-49-3-2023",
+      "date": "2023-03-16",
+      "title": "Réforme des retraites adoptée par le 49.3",
+      "text": "La Première ministre Élisabeth Borne engage la responsabilité du gouvernement (49.3) sur la réforme portant l'âge légal de départ à 64 ans. Le 20 mars, la principale motion de censure échoue à 9 voix près.",
+      "why": "Les retraites et l'usage du 49.3 restent des sujets majeurs du débat politique à l'approche de 2027.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/reforme-des-retraites-elisabeth-borne-annonce-le-recours-au-493-la-responsabilite-du"
+      }
+    },
+    {
+      "id": "dissolution-2024",
+      "date": "2024-06-09",
+      "title": "Dissolution de l'Assemblée nationale",
+      "text": "Le soir des élections européennes, Emmanuel Macron dissout l'Assemblée nationale. Des législatives anticipées ont lieu les 30 juin et 7 juillet 2024.",
+      "why": "L'Assemblée élue en 2024, fragmentée en blocs, explique l'instabilité gouvernementale qui précède la présidentielle de 2027.",
+      "source": {
+        "label": "Élysée",
+        "url": "https://www.elysee.fr/emmanuel-macron/2024/06/09/adresse-aux-francais-4"
+      }
+    },
+    {
+      "id": "censure-barnier-2024",
+      "date": "2024-12-04",
+      "title": "Le gouvernement Barnier censuré",
+      "text": "Après un 49.3 sur le budget de la Sécurité sociale, une motion de censure est adoptée par 331 députés. C'est la deuxième censure d'un gouvernement sous la Ve République, après 1962.",
+      "why": "Elle montre que l'Assemblée peut renverser le gouvernement, une limite clé au pouvoir exécutif dans une Assemblée sans majorité.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/le-gouvernement-de-michel-barnier-censure-au-terme-d-une-journee-historique-a-l"
+      }
+    },
+    {
+      "id": "confiance-bayrou-2025",
+      "date": "2025-09-08",
+      "title": "Le gouvernement Bayrou perd la confiance",
+      "text": "Le Premier ministre François Bayrou demande la confiance de l'Assemblée nationale : 364 députés votent contre, 194 pour. Le gouvernement doit démissionner.",
+      "why": "Trois Premiers ministres se succèdent en un an : la question d'une majorité stable sera centrale après 2027.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/chute-du-gouvernement-l-assemblee-nationale-a-refuse-la-confiance-a-francois-bayrou"
+      }
+    },
+    {
+      "id": "budget-2026-49-3",
+      "date": "2026-02-02",
+      "title": "Budget 2026 adopté après des 49.3",
+      "text": "Le gouvernement de Sébastien Lecornu recourt au 49.3 sur le budget de l'État pour 2026. Le 2 février 2026, les deux dernières motions de censure sont rejetées (260 voix au plus, 289 requises) : le budget est adopté.",
+      "why": "Le budget 2027, débattu à l'automne 2026, se joue dans la même Assemblée, avec les mêmes outils : 49.3 et motions de censure.",
+      "source": {
+        "label": "LCP",
+        "url": "https://lcp.fr/actualites/le-budget-2026-definitivement-adopte-apres-le-rejet-des-deux-dernieres-motions-de"
+      }
+    }
+  ]
+}

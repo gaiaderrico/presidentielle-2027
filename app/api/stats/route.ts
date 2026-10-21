@@ -23,7 +23,8 @@ export async function POST(req: Request) {
   if (!sb) return Response.json({ error: "Supabase n'est pas configuré (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)." }, { status: 503 });
 
   const events = await fetchAll<EventRow>("events", "created_at, session_id, event, payload");
-  const { count: emailCount } = await sb.from("emails").select("id", { count: "exact", head: true });
+  const emailRows = await fetchAll<{ created_at: string; email: string; session_id: string | null }>("emails", "created_at, email, session_id");
+  const emailCount = emailRows.length;
   const { count: accountCount } = await sb.from("accounts").select("id", { count: "exact", head: true });
 
   const p = (e: EventRow, k: string) => (e.payload?.[k] ?? null) as string | number | boolean | null;
@@ -124,6 +125,38 @@ export async function POST(req: Request) {
   const feedback = events.filter((e) => e.event === "feedback_submit");
   const ratings = feedback.map((e) => Number(p(e, "rating"))).filter((r) => r >= 1 && r <= 5);
 
+  // Commitment ladder (course, Day 3): every level with its trace.
+  const tagOf = (sid: string | null) => (sid ? (bySession.get(sid)?.map((e) => p(e, "testerTag")).find((t) => t) as string | undefined) ?? null : null);
+  const daysOf = new Map([...bySession.entries()].map(([sid, list]) => [sid, new Set(list.map((e) => parisDay(e.created_at))).size]));
+  const pledges = events.filter((e) => e.event === "partner_pledge");
+  const ladder = {
+    l1: { emails: emailRows.map((r) => ({ at: r.created_at, email: r.email, testerTag: tagOf(r.session_id) })) },
+    l2: {
+      returning: [...daysOf.entries()].filter(([, n]) => n >= 2).map(([sid, n]) => ({ session: sid.slice(0, 8), testerTag: tagOf(sid), days: n })),
+      calendarAdds: events.filter((e) => e.event === "calendar_add").map((e) => ({ at: e.created_at, testerTag: tagOf(e.session_id) })),
+    },
+    l3: {
+      shares: shares.map((e) => ({ at: e.created_at, testerTag: tagOf(e.session_id), method: String(p(e, "method") ?? ""), code: String(p(e, "challengeCode") ?? "") })),
+      friendFinishes: friendFinishes.map((e) => ({ at: e.created_at, refCode: String(p(e, "refCode") ?? "") })),
+      quotes: feedback.filter((e) => p(e, "quotable") === true).map((e) => ({ at: e.created_at, name: String(p(e, "name") ?? ""), rating: Number(p(e, "rating")), comment: String(p(e, "comment") ?? ""), testerTag: tagOf(e.session_id) })),
+    },
+    l4: {
+      pledges: pledges.map((e) => ({
+        at: e.created_at,
+        ref: String(p(e, "ref") ?? ""),
+        org: String(p(e, "org") ?? ""),
+        name: String(p(e, "name") ?? ""),
+        role: String(p(e, "role") ?? ""),
+        email: String(p(e, "email") ?? ""),
+        commitments: (Array.isArray(e.payload?.commitments) ? e.payload.commitments : []).join(", "),
+        members: p(e, "members"),
+        when: p(e, "when"),
+        note: String(p(e, "note") ?? ""),
+        testerTag: (p(e, "testerTag") as string | null) ?? tagOf(e.session_id),
+      })),
+    },
+  };
+
   const voixValues = sessions.map((s) => s.voix);
   return Response.json({
     funnel: {
@@ -188,6 +221,7 @@ export async function POST(req: Request) {
         .map((e) => ({ at: e.created_at, rating: Number(p(e, "rating")), comment: String(p(e, "comment")), testerTag: p(e, "testerTag") as string | null }))
         .reverse(),
     },
+    ladder,
     sessions,
   });
 }

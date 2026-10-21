@@ -4,7 +4,7 @@ const EVENTS = new Set([
   "landing_view", "feed_card_view", "feed_reaction", "feed_skip", "quiz_finish", "hub_view", "challenge_start", "answer",
   "challenge_finish", "share_open", "share_click", "friend_landing_view", "friend_finish", "team_match_create", "team_join",
   "team_finish", "points_earned", "level_up", "city_view", "city_share", "email_submit", "onboarding_finish", "city_building_open",
-  "badge_unlock", "feedback_submit", "guide_view", "account_create",
+  "badge_unlock", "feedback_submit", "guide_view", "account_create", "timeline_view", "calendar_add",
 ]);
 
 // Keys that must never reach the database (political opinion in "Défends l'autre camp").
@@ -24,6 +24,8 @@ export async function POST(req: Request) {
     if (rating === null) return Response.json({ error: "Note invalide" }, { status: 400 });
     payload.rating = rating;
     payload.comment = typeof payload.comment === "string" ? payload.comment.replace(/[\u0000-\u001f<>]/g, " ").trim().slice(0, 300) : "";
+    payload.quotable = payload.quotable === true;
+    payload.name = payload.quotable && typeof payload.name === "string" ? payload.name.replace(/[\u0000-\u001f<>]/g, "").trim().slice(0, 20) : "";
   }
   // Feed reactions are stored without any identifier, so they cannot be linked to a player.
   const anonymous = body.event === "feed_reaction";

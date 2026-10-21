@@ -925,6 +925,10 @@
       "name": "Ready to vote",
       "how": "Tick every step of the \"Voting: how it works\" guide."
     },
+    "memoire": {
+      "name": "Sharp memory",
+      "how": "Put 4 dates of the timeline in order without a mistake."
+    },
     "parrainages": {
       "name": "500 endorsements",
       "how": "Reach 500 voix, the number of signatures a candidate needs."
@@ -1117,6 +1121,416 @@
           }
         ],
         "tip": "Even if you can't vote, the presidential election affects you: the government decides, for example, visa and residence permit policy."
+      }
+    }
+  },
+  "timeline": {
+    "checked": "21 October 2026",
+    "candidates": {
+      "melenchon": {
+        "party": "La France insoumise (France Unbowed)"
+      },
+      "roussel": {
+        "party": "Parti communiste français (French Communist Party)"
+      },
+      "glucksmann": {
+        "party": "Place publique (Public Square)"
+      },
+      "attal": {
+        "party": "Renaissance"
+      },
+      "philippe": {
+        "party": "Horizons"
+      },
+      "retailleau": {
+        "party": "Les Républicains (The Republicans)"
+      },
+      "wauquiez": {
+        "party": "Les Républicains (The Republicans)"
+      },
+      "lepen": {
+        "party": "Rassemblement national (National Rally)"
+      },
+      "bardella": {
+        "party": "Rassemblement national (National Rally)"
+      },
+      "zemmour": {
+        "party": "Reconquête (Reconquest)"
+      }
+    },
+    "events": {
+      "vote-des-femmes-1944": {
+        "title": "Women win the right to vote",
+        "text": "The ordinance of 21 April 1944 makes women \"voters and eligible under the same conditions as men\". They vote for the first time in the municipal elections of 29 April 1945.",
+        "why": "Truly universal suffrage is recent: in 2027, women and men vote and stand for office on equal terms."
+      },
+      "constitution-1958": {
+        "title": "The Fifth Republic's Constitution",
+        "text": "Approved by referendum on 28 September 1958 by 79.25% of voters, the new Constitution is proclaimed on 4 October 1958. It strengthens the executive relative to Parliament.",
+        "why": "It is still the Constitution in force: it sets the powers of the president elected in 2027, the government and Parliament."
+      },
+      "referendum-election-directe-1962": {
+        "title": "President to be elected directly by citizens",
+        "text": "In a referendum, 62.25% of votes cast approve electing the President of the Republic by direct universal suffrage. Until then, the president was chosen by an electoral college of officials.",
+        "why": "This is why in 2027 every voter directly chooses the president, making it the central election."
+      },
+      "premiere-presidentielle-directe-1965": {
+        "title": "First direct presidential election",
+        "text": "In the first round on 5 December 1965, General de Gaulle fails to win an absolute majority and is forced into a run-off. He is elected in the second round on 19 December against François Mitterrand.",
+        "why": "It shows the two-round rule: without an absolute majority in round one, only the top two candidates face off in round two."
+      },
+      "vote-a-18-ans-1974": {
+        "title": "Voting age lowered to 18",
+        "text": "The law of 5 July 1974 lowers the age of majority, and therefore the voting age, from 21 to 18. Millions of young people become voters.",
+        "why": "Any French citizen who is 18 by the day before the vote can vote in 2027."
+      },
+      "alternance-1981": {
+        "title": "First change of political side in power",
+        "text": "François Mitterrand (Socialist Party) is elected with about 51.76% of votes cast against outgoing president Valéry Giscard d'Estaing. He is the Fifth Republic's first left-wing president.",
+        "why": "It shows the institutions allow power to pass peacefully from one political side to another through elections."
+      },
+      "premiere-cohabitation-1986": {
+        "title": "The first \"cohabitation\"",
+        "text": "After the March 1986 legislative elections, won by the right-wing opposition, Socialist president François Mitterrand appoints Jacques Chirac Prime Minister. The president and the Assembly majority are from opposing camps.",
+        "why": "If the president elected in 2027 lacks a majority in the legislative elections, they may have to govern with a Prime Minister from another camp."
+      },
+      "referendum-quinquennat-2000": {
+        "title": "Five-year term replaces seven-year term",
+        "text": "In a referendum, 73% of votes cast approve cutting the presidential term from seven to five years, with record abstention of about 70% of registered voters.",
+        "why": "This is why the president is elected every five years: after 2022, the next election is in 2027."
+      },
+      "inversion-calendrier-2001": {
+        "title": "Presidential election moved before legislative",
+        "text": "An organic law changes the end date of the term of deputies elected in 1997. As a result, from 2002 the presidential election takes place a few weeks before the legislative elections.",
+        "why": "This is why legislative elections normally follow the presidential one, to give the new president a majority."
+      },
+      "21-avril-2002": {
+        "title": "21 April 2002",
+        "text": "Jean-Marie Le Pen (Front national) reaches the second round and Socialist candidate Lionel Jospin is eliminated. Jacques Chirac is re-elected on 5 May with 82.21% of votes cast.",
+        "why": "It shows that scattered first-round votes can change who reaches the run-off, an issue debated before every presidential election."
+      },
+      "revision-constitutionnelle-2008": {
+        "title": "2008 constitutional reform",
+        "text": "The constitutional law of 23 July 2008 limits the president to two consecutive terms and restricts Article 49.3 to budget bills plus one other text per session. It also creates the priority question of constitutionality.",
+        "why": "Emmanuel Macron, elected in 2017 and re-elected in 2022, cannot run in 2027: no one may serve more than two consecutive terms."
+      },
+      "election-macron-2017": {
+        "title": "A president from outside traditional parties",
+        "text": "Emmanuel Macron, founder of the En Marche! movement, is elected against Marine Le Pen with about 66.10% of votes cast. No Socialist or Republican candidate reaches the second round.",
+        "why": "This election reshaped the political landscape: in 2027, the choice is no longer the old left-right face-off."
+      },
+      "majorite-relative-2022": {
+        "title": "Only a relative majority",
+        "text": "In the legislative elections after Emmanuel Macron's re-election, his Ensemble coalition wins 246 seats, short of the 289 absolute majority. No group can pass laws on its own.",
+        "why": "Without an absolute majority, a government must negotiate or use Article 49.3 and faces censure motions, as since 2022."
+      },
+      "retraites-49-3-2023": {
+        "title": "Pension reform passed with Article 49.3",
+        "text": "Prime Minister Élisabeth Borne invokes Article 49.3 on the reform raising the legal retirement age to 64. On 20 March, the main censure motion fails by 9 votes.",
+        "why": "Pensions and the use of Article 49.3 remain major issues of political debate ahead of 2027."
+      },
+      "dissolution-2024": {
+        "title": "Dissolution of the National Assembly",
+        "text": "On the evening of the European elections, Emmanuel Macron dissolves the National Assembly. Early legislative elections take place on 30 June and 7 July 2024.",
+        "why": "The fragmented Assembly elected in 2024 explains the government instability preceding the 2027 presidential election."
+      },
+      "censure-barnier-2024": {
+        "title": "Barnier government brought down",
+        "text": "After Article 49.3 is used on the social security budget, a censure motion is passed by 331 deputies. It is only the second time a Fifth Republic government is censured, after 1962.",
+        "why": "It shows the Assembly can bring down the government, a key check on executive power in an Assembly without a majority."
+      },
+      "confiance-bayrou-2025": {
+        "title": "Bayrou government loses confidence vote",
+        "text": "Prime Minister François Bayrou asks the National Assembly for a vote of confidence: 364 deputies vote against, 194 in favour. The government must resign.",
+        "why": "Three Prime Ministers in about a year: securing a stable majority will be a central question after 2027."
+      },
+      "budget-2026-49-3": {
+        "title": "2026 budget passed after Article 49.3",
+        "text": "Sébastien Lecornu's government uses Article 49.3 on the 2026 State budget. On 2 February 2026, the last two censure motions are rejected (260 votes at most, 289 needed): the budget is adopted.",
+        "why": "The 2027 budget, debated in autumn 2026, is fought in the same Assembly with the same tools: Article 49.3 and censure motions."
+      },
+      "debat-1974": {
+        "title": "1974: the very first runoff debate",
+        "text": "On 10 May 1974, Valéry Giscard d'Estaing and François Mitterrand debated for about 90 minutes on both public channels, a first in France. Moderated by Jacqueline Baudrier and Alain Duhamel, it focused on economic growth and social justice.",
+        "why": "It started a tradition: since 1974, a televised duel has preceded the runoff of every presidential election except 2002.",
+        "quote": "You do not, Mr Mitterrand, have a monopoly on heart.",
+        "result": "Valéry Giscard d'Estaing elected with 50.81% of votes cast (19 May 1974)"
+      },
+      "debat-1981": {
+        "title": "1981: the 1974 rematch",
+        "text": "On 5 May 1981 the 1974 rivals met again, Giscard d'Estaing now as outgoing president. Mitterrand's team set 21 conditions (set, filming, journalists' role). Giscard contrasted his record of running France with what he called Mitterrand's 'ministry of words'.",
+        "why": "It shows that the debate's format (set, cameras, journalists) is negotiated between the candidates, a practice that continues today.",
+        "quote": "It is rather awkward that in the meantime you have become, yourself, the man of the deficit.",
+        "result": "François Mitterrand elected with 51.76% of votes cast (10 May 1981)"
+      },
+      "debat-1988": {
+        "title": "1988: the president versus his prime minister",
+        "text": "On 28 April 1988, after two years of 'cohabitation', President Mitterrand faced his prime minister, Jacques Chirac. Chirac asked to call him 'Mr Mitterrand'; Mitterrand replied: 'But you are quite right, Mr Prime Minister.'",
+        "why": "The only runoff debate between a sitting president and his own prime minister: it shows the tensions of 'cohabitation' at the top of the state.",
+        "quote": "Tonight, I am not the prime minister, and you are not the president of the Republic.",
+        "result": "François Mitterrand re-elected with 54.02% of votes cast (8 May 1988)"
+      },
+      "debat-1995": {
+        "title": "1995: a courteous debate and the five-year term",
+        "text": "On 2 May 1995, Jacques Chirac (RPR) and Lionel Jospin (PS) held a courteous debate moderated by Alain Duhamel and Guillaume Durand. Jospin argued for a five-year presidential term instead of seven; his quip made Chirac laugh.",
+        "why": "The five-year term raised that night was adopted by referendum on 24 September 2000 (over 73% yes).",
+        "quote": "Better five years with Jospin than seven years with Chirac.",
+        "result": "Jacques Chirac elected with 52.64% of votes cast (7 May 1995)"
+      },
+      "debat-2002": {
+        "title": "2002: the debate that never happened",
+        "text": "On 21 April 2002, Jean-Marie Le Pen (FN) reaches the second round against the outgoing president Jacques Chirac. On 23 April, in Rennes, Chirac announces he refuses to debate him.",
+        "why": "The only presidential election without a runoff debate since 1974: the debate is a tradition, not a legal requirement.",
+        "quote": "I cannot accept the normalisation of intolerance and hatred.",
+        "result": "Jacques Chirac re-elected with 82.21% of votes cast (5 May 2002)"
+      },
+      "debat-2007": {
+        "title": "2007: 'Calm down' and anger owned",
+        "text": "On 2 May 2007, Nicolas Sarkozy (UMP) and Ségolène Royal (PS) debated for 2 h 40 on TF1 and France 2. On schooling for disabled children, Royal said she was 'very angry'; Sarkozy replied: 'To be president of the Republic, you have to be calm.'",
+        "why": "The first debate between the two rounds with a woman candidate.",
+        "quote": "Some anger is perfectly healthy.",
+        "result": "Nicolas Sarkozy elected with 53.06% of votes cast (6 May 2007)"
+      },
+      "debat-2012": {
+        "title": "2012: the 'Me, as president' refrain",
+        "text": "On 2 May 2012, outgoing president Nicolas Sarkozy (UMP) faced François Hollande (PS), with Laurence Ferrari and David Pujadas moderating. Asked what president he would be, Hollande answered with a long series of sentences opening 'Me, as president…'.",
+        "why": "The line stuck: promises made during the debate are later quoted back during the term, as in a written question in the Assemblée as early as 2014.",
+        "quote": "As president of the Republic, I will not be the head of the majority…",
+        "result": "François Hollande elected with 51.64% of votes cast (6 May 2012)"
+      },
+      "debat-2017": {
+        "title": "2017: a very heated debate",
+        "text": "On 3 May 2017, Emmanuel Macron (En Marche!) and Marine Le Pen (FN) clashed in a very heated debate watched by 16.5 million viewers. The euro, Europe, terrorism: attacks came from both sides; Macron called her proposals 'snake oil' ('poudre de perlimpinpin').",
+        "why": "The first debate between the two rounds with a far-right candidate, after the refusal to debate in 2002.",
+        "quote": "Either way, France will be led by a woman: it will be either me or Mrs Merkel.",
+        "result": "Emmanuel Macron elected with 66.10% of votes cast (7 May 2017)"
+      },
+      "debat-2022": {
+        "title": "2022: the rematch",
+        "text": "On 20 April 2022, outgoing president Emmanuel Macron and Marine Le Pen (RN) met again for nearly 3 hours, hosted by Léa Salamé and Gilles Bouleau. Cost of living, Europe, Russia, climate: on the Russian loan, Le Pen replied 'We are a poor party'.",
+        "why": "The second rematch after 1974–1981: held during the war in Ukraine, it shows how world events enter the debate.",
+        "quote": "You are speaking to your banker when you speak about Russia.",
+        "result": "Emmanuel Macron re-elected with 58.55% of votes cast (24 April 2022)"
+      },
+      "melenchon-1986-senat": {
+        "title": "Elected senator for Essonne",
+        "text": "Elected senator for Essonne on 28 September 1986, re-elected in 1995 and 2004. His term ended in January 2010 after his election to the European Parliament."
+      },
+      "melenchon-2000-ministre": {
+        "title": "Minister for Vocational Education",
+        "text": "Appointed Minister Delegate for Vocational Education, attached to the Minister of National Education, in Lionel Jospin's government (2000-2002)."
+      },
+      "melenchon-2012-presidentielle": {
+        "title": "2012 presidential election: 11.10%",
+        "text": "Running for president, he received 3,984,822 votes in the first round, i.e. 11.10% of valid votes (4th place)."
+      },
+      "melenchon-2017-presidentielle": {
+        "title": "2017 presidential election: 19.58%",
+        "text": "Running for president, he received 7,059,951 votes in the first round, i.e. 19.58% of valid votes (4th place)."
+      },
+      "melenchon-2022-presidentielle": {
+        "title": "2022 presidential election: 21.95%",
+        "text": "Running for president, he received 7,712,520 votes in the first round, i.e. 21.95% of valid votes (3rd place)."
+      },
+      "melenchon-2027-candidature": {
+        "title": "Declared candidate for 2027",
+        "text": "On 3 May 2026, on TF1's 8 pm news, he announced he is running in the 2027 presidential election."
+      },
+      "roussel-2017-depute": {
+        "title": "Elected MP for the Nord",
+        "text": "Elected MP for the Nord's 20th constituency on 18 June 2017, he was re-elected in 2022. His term ended on 9 June 2024."
+      },
+      "roussel-2018-pcf": {
+        "title": "National secretary of the PCF",
+        "text": "Elected head of the French Communist Party at the Ivry-sur-Seine congress, succeeding Pierre Laurent as national secretary."
+      },
+      "roussel-2022-presidentielle": {
+        "title": "2022 presidential election: 2.28%",
+        "text": "Running for president, he received 802,422 votes in the first round, i.e. 2.28% of valid votes."
+      },
+      "roussel-2026-maire": {
+        "title": "Re-elected mayor of Saint-Amand-les-Eaux",
+        "text": "Mayor of Saint-Amand-les-Eaux (Nord) since 2025, he was re-elected in the first round of the municipal elections, his list winning 51.06% of the vote."
+      },
+      "roussel-2027-candidature": {
+        "title": "PCF candidate for 2027",
+        "text": "On 6 September 2026, PCF members approved his candidacy for the 2027 presidential election with 72% of the vote."
+      },
+      "glucksmann-2018-place-publique": {
+        "title": "Co-founds Place publique",
+        "text": "With about twenty civil-society figures, he launched a new party, Place publique."
+      },
+      "glucksmann-2019-depute-europeen": {
+        "title": "Member of the European Parliament",
+        "text": "Elected in the 2019 European elections, he has sat in the European Parliament since 2 July 2019, in the Socialists and Democrats (S&D) group."
+      },
+      "glucksmann-2020-inge": {
+        "title": "Chair of a European Parliament special committee",
+        "text": "He was elected chair of the European Parliament's special committee on foreign interference in democratic processes (INGE)."
+      },
+      "glucksmann-2024-europeennes": {
+        "title": "2024 European elections: 13.83%",
+        "text": "Leading the PS–Place publique list in the European elections, his list won 13.83% of the vote (3rd place)."
+      },
+      "glucksmann-2026-candidature": {
+        "title": "Announces his candidacy",
+        "text": "On 23 August 2026, he announced his candidacy for the 2027 presidential election and his participation in a social-democratic left primary."
+      },
+      "glucksmann-2026-primaire": {
+        "title": "Chosen by the social-democratic primary",
+        "text": "He won the social-democratic left primary in the first round (vote held 9-11 October 2026) with over 66% of the vote, becoming its 2027 candidate."
+      },
+      "attal-2017-depute": {
+        "title": "Elected MP for Hauts-de-Seine",
+        "text": "Elected MP for the 10th constituency of Hauts-de-Seine on 18 June 2017. He was re-elected in 2022 and 2024."
+      },
+      "attal-2018-gouvernement": {
+        "title": "Joins the government",
+        "text": "Appointed Secretary of State to the Minister of National Education and Youth in Édouard Philippe's government."
+      },
+      "attal-2024-premier-ministre": {
+        "title": "Prime Minister",
+        "text": "The President of the Republic appointed him Prime Minister on 9 January 2024 and asked him to form a government."
+      },
+      "attal-2024-renaissance": {
+        "title": "Secretary-general of Renaissance",
+        "text": "He was elected secretary-general of the Renaissance party with 94.9% of the vote."
+      },
+      "attal-2027-candidature": {
+        "title": "Declared candidate for 2027",
+        "text": "On 22 May 2026, he announced his candidacy for the 2027 presidential election during a visit to Aveyron."
+      },
+      "philippe-2010-maire": {
+        "title": "Mayor of Le Havre",
+        "text": "He succeeded Antoine Rufenacht as mayor of Le Havre (Seine-Maritime)."
+      },
+      "philippe-2012-depute": {
+        "title": "MP for Seine-Maritime",
+        "text": "He became MP for the 7th constituency of Seine-Maritime in March 2012 and was re-elected in June 2012. He left the Assembly in 2017 on joining the government."
+      },
+      "philippe-2017-premier-ministre": {
+        "title": "Prime Minister",
+        "text": "Emmanuel Macron appointed him Prime Minister on 15 May 2017."
+      },
+      "philippe-2021-horizons": {
+        "title": "Founds the Horizons party",
+        "text": "Fifteen months after leaving Matignon, he launched his own party, Horizons, in Le Havre."
+      },
+      "philippe-2024-candidature": {
+        "title": "Announces his candidacy",
+        "text": "In an interview with Le Point published on 3 September 2024, he announced he would run in the next presidential election."
+      },
+      "philippe-2026-maire": {
+        "title": "Re-elected mayor of Le Havre",
+        "text": "He was re-elected mayor of Le Havre in the municipal run-off with about 47% of the vote. He had presented this re-election as a step before his 2027 candidacy."
+      },
+      "retailleau-2004-senat": {
+        "title": "Elected senator for Vendée",
+        "text": "Elected senator for Vendée on 26 September 2004, he was re-elected in 2014, 2020 and 2026."
+      },
+      "retailleau-2014-groupe-senat": {
+        "title": "Leader of the UMP, then LR, group in the Senate",
+        "text": "He became leader of the UMP (later LR) group in the Senate, a post he held for ten years until joining the government in 2024."
+      },
+      "retailleau-2024-interieur": {
+        "title": "Minister of the Interior",
+        "text": "He was appointed Minister of the Interior in Michel Barnier's government."
+      },
+      "retailleau-2025-president-lr": {
+        "title": "President of Les Républicains",
+        "text": "He was elected president of Les Républicains by party members with 74.31% of the vote, against Laurent Wauquiez."
+      },
+      "retailleau-2027-candidature": {
+        "title": "Chosen as LR candidate for 2027",
+        "text": "In an internal vote, Les Républicains members chose to designate him directly as their 2027 presidential candidate, with 73.8% of the vote."
+      },
+      "wauquiez-2004-depute": {
+        "title": "Elected MP for Haute-Loire",
+        "text": "He was elected UMP MP for Haute-Loire in the first round. He was re-elected in 2007 and 2012."
+      },
+      "wauquiez-2011-ministre": {
+        "title": "Minister of Higher Education",
+        "text": "He was appointed Minister of Higher Education and Research in François Fillon's government."
+      },
+      "wauquiez-2016-region": {
+        "title": "President of the Auvergne-Rhône-Alpes region",
+        "text": "He became president of the Auvergne-Rhône-Alpes regional council and stepped down as mayor of Le Puy-en-Velay, which he had led since 2008."
+      },
+      "wauquiez-2017-president-lr": {
+        "title": "President of Les Républicains",
+        "text": "He was elected president of Les Républicains in the first round with 74.64% of the vote."
+      },
+      "wauquiez-2024-groupe-an": {
+        "title": "Leader of the Droite républicaine group",
+        "text": "Re-elected MP for Haute-Loire in July 2024, he became leader of the Droite républicaine group in the National Assembly."
+      },
+      "wauquiez-2026-position": {
+        "title": "Position on 2027",
+        "text": "On 1 July 2026, he said Édouard Philippe \"can embody order and seriousness\" and called for a single candidate of the right and centre."
+      },
+      "lepen-1998-region": {
+        "title": "First office: regional councillor",
+        "text": "She was first elected in 1998, as a regional councillor in Nord-Pas-de-Calais. She later served as an MEP (2004-2017) and as MP for Pas-de-Calais (since 2017)."
+      },
+      "lepen-2011-presidente-fn": {
+        "title": "President of the Front national",
+        "text": "She succeeded her father, Jean-Marie Le Pen, as leader of the Front national (now Rassemblement national)."
+      },
+      "lepen-2012-presidentielle": {
+        "title": "2012 presidential election: 17.90%",
+        "text": "Running for president, she received 6,421,426 votes in the first round, i.e. 17.90% of valid votes (3rd place)."
+      },
+      "lepen-2017-presidentielle": {
+        "title": "2017 presidential election: 21.30%",
+        "text": "She received 7,678,491 votes in the first round, i.e. 21.30% of valid votes (2nd place), qualifying for the run-off against Emmanuel Macron."
+      },
+      "lepen-2022-presidentielle": {
+        "title": "2022 presidential election: 23.15%",
+        "text": "She received 8,133,828 votes in the first round, i.e. 23.15% of valid votes (2nd place), qualifying for the run-off against Emmanuel Macron."
+      },
+      "lepen-2026-appel-candidature": {
+        "title": "Appeal ruling and candidacy",
+        "text": "On 7 July 2026, the Paris Court of Appeal sentenced her notably to 45 months' ineligibility, 30 of them suspended, so she can run. She declared her candidacy and appealed to the Court of Cassation."
+      },
+      "bardella-2015-region": {
+        "title": "First office: regional councillor",
+        "text": "He was elected regional councillor for Île-de-France, his first elected office, at the age of 20. He left this seat in February 2025."
+      },
+      "bardella-2019-depute-europeen": {
+        "title": "Member of the European Parliament",
+        "text": "Elected in the 2019 European elections on the Rassemblement national list, he has sat in the European Parliament since 2 July 2019."
+      },
+      "bardella-2022-president-rn": {
+        "title": "President of the Rassemblement national",
+        "text": "He was elected president of the Rassemblement national at the party congress in Paris, against Louis Aliot, succeeding Marine Le Pen."
+      },
+      "bardella-2024-europeennes": {
+        "title": "2024 European elections: 31.37%",
+        "text": "Leading the Rassemblement national list in the European elections, his list came first with 31.37% of the vote."
+      },
+      "bardella-2026-statut": {
+        "title": "Status for 2027",
+        "text": "After the 7 July 2026 appeal ruling, Marine Le Pen is the RN candidate. He is not running: he is presented as her Prime Minister if she wins."
+      },
+      "zemmour-2021-candidature": {
+        "title": "Enters politics: presidential bid",
+        "text": "He announced his candidacy for the 2022 presidential election in a video posted on social media."
+      },
+      "zemmour-2021-reconquete": {
+        "title": "Founds the Reconquête party",
+        "text": "At a rally in Villepinte, he launched his campaign and his party, Reconquête."
+      },
+      "zemmour-2022-presidentielle": {
+        "title": "2022 presidential election: 7.07%",
+        "text": "Running for president, he received 2,485,226 votes in the first round, i.e. 7.07% of valid votes (4th place)."
+      },
+      "zemmour-2022-legislatives": {
+        "title": "Parliamentary candidate in the Var",
+        "text": "Running in the parliamentary elections in the Var's 4th constituency, he did not qualify for the run-off."
+      },
+      "zemmour-2027-candidature": {
+        "title": "Declared candidate for 2027",
+        "text": "On 17 September 2026, on BFMTV, the Reconquête president confirmed his candidacy for the 2027 presidential election."
       }
     }
   },

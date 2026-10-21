@@ -30,6 +30,16 @@ type Stats = {
   city: { buildingOpens: Record<string, number> };
   engagement: { players: number; returning: number; daysPlayed: Record<string, number>; dailyStarted: number; dailyFinished: number; badges: Record<string, number> };
   feedback: { count: number; avg: number | null; ratings: Record<string, number>; comments: { at: string; rating: number; comment: string; testerTag: string | null }[] };
+  ladder: {
+    l1: { emails: { at: string; email: string; testerTag: string | null }[] };
+    l2: { returning: { session: string; testerTag: string | null; days: number }[]; calendarAdds: { at: string; testerTag: string | null }[] };
+    l3: {
+      shares: { at: string; testerTag: string | null; method: string; code: string }[];
+      friendFinishes: { at: string; refCode: string }[];
+      quotes: { at: string; name: string; rating: number; comment: string; testerTag: string | null }[];
+    };
+    l4: { pledges: Record<string, string | number | null>[] };
+  };
   sessions: {
     sessionId: string;
     testerTag: string | null;
@@ -74,6 +84,74 @@ function Bars({ data, label = (k: string) => k }: { data: Record<string, number>
         </li>
       ))}
     </ul>
+  );
+}
+
+function download(name: string, rows: Record<string, unknown>[]) {
+  if (!rows.length) return;
+  const head = Object.keys(rows[0]);
+  const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const text = [head.join(","), ...rows.map((r) => head.map((h) => esc(r[h])).join(","))].join("\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: "text/csv;charset=utf-8" }));
+  a.download = `${name}-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+}
+
+const when = (iso: string) => new Date(iso).toLocaleString("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+
+/** Day 3 of the course: the commitment ladder, with a trace for every level (exports go straight into the evidence log). */
+function Ladder({ ladder, accounts }: { ladder: Stats["ladder"]; accounts: number }) {
+  const sharers = new Set(ladder.l3.shares.map((s) => s.code)).size;
+  const rows = [
+    { level: 1, title: "Un peu de temps", value: ladder.l1.emails.length, detail: `emails laissés pour les prochains défis (avec consentement) · ${accounts} comptes créés avec un email`, exportName: "emails", data: ladder.l1.emails },
+    { level: 2, title: "Du temps", value: ladder.l2.returning.length, detail: `joueurs revenus un autre jour · ${ladder.l2.calendarAdds.length} dates ajoutées à un agenda`, exportName: "revenus", data: ladder.l2.returning },
+    { level: 3, title: "Réputation", value: ladder.l3.friendFinishes.length, detail: `amis qui ont joué un défi reçu · ${sharers} défis envoyés · ${ladder.l3.quotes.length} avis citables`, exportName: "reputation", data: [...ladder.l3.shares.map((s) => ({ type: "partage", ...s })), ...ladder.l3.friendFinishes.map((f) => ({ type: "ami a joué", ...f })), ...ladder.l3.quotes.map((q) => ({ type: "avis citable", ...q }))] },
+    { level: 4, title: "Engagement formel", value: ladder.l4.pledges.length, detail: "engagements signés par une organisation (/partenaires)", exportName: "engagements", data: ladder.l4.pledges },
+  ];
+  return (
+    <Card className="flex flex-col gap-3">
+      <h2 className="font-display text-lg font-bold">Échelle d&apos;engagement (Jour 3)</h2>
+      <p className="-mt-2 text-sm text-muted">Chaque ligne s&apos;exporte en CSV horodaté : c&apos;est la trace à joindre au log. Un engagement d&apos;une personne que vous connaissiez compte un niveau en dessous.</p>
+      <ul className="flex flex-col gap-2">
+        {rows.map((r) => (
+          <li key={r.level} className="flex items-center gap-3 rounded-2xl bg-fill px-3 py-2">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent font-bold text-accent-ink">{r.level}</span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-semibold">
+                {r.title} : <span className="tabular-nums">{r.value}</span>
+              </span>
+              <span className="block text-sm text-muted">{r.detail}</span>
+            </span>
+            <button onClick={() => download(r.exportName, r.data as Record<string, unknown>[])} disabled={!r.data.length} className="shrink-0 rounded-full bg-card px-3 py-1 text-sm font-semibold text-accent disabled:opacity-40">
+              CSV
+            </button>
+          </li>
+        ))}
+      </ul>
+      {ladder.l4.pledges.length > 0 && (
+        <ul className="flex flex-col gap-2 text-sm">
+          {ladder.l4.pledges.map((pl) => (
+            <li key={String(pl.ref)} className="rounded-xl bg-accent-soft px-3 py-2">
+              <strong>{pl.org}</strong> · {pl.name} ({pl.role}) · {pl.commitments}
+              <span className="block text-xs text-muted">
+                réf. {pl.ref} · {when(String(pl.at))}
+                {pl.when ? ` · prévu le ${pl.when}` : ""}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+      {ladder.l3.quotes.length > 0 && (
+        <ul className="flex flex-col gap-2 text-sm">
+          {ladder.l3.quotes.map((q) => (
+            <li key={q.at} className="rounded-xl bg-fill px-3 py-2">
+              « {q.comment} » <span className="text-muted">— {q.name || "anonyme"}, {q.rating} ★ · {when(q.at)}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Card>
   );
 }
 
@@ -200,6 +278,8 @@ export function StatsClient() {
           {stats.shareRate.finishedAndShared} joueurs ont partagé sur {stats.shareRate.finished} qui ont fini au moins un défi.
         </p>
       </Card>
+
+      <Ladder ladder={stats.ladder} accounts={stats.accounts} />
 
       <div className="grid gap-3 md:grid-cols-2">
         <Card className="flex flex-col gap-2">

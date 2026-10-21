@@ -220,6 +220,19 @@ h3 {
   animation: fadeIn 0.2s ease-out both;
 }
 
+/* Timeline: items fade up as they scroll into view */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
@@ -86,6 +87,9 @@ export function CreateMatchClient() {
           {state === "sending" ? tr("Création…", "Creating…") : tr("Créer le match", "Create the match")}
         </Button>
       </form>
+      <Link href="/partenaires" className="text-center font-semibold text-accent underline underline-offset-4">
+        {tr("Tu es dans une asso ou un BDE ? Organise un match polis →", "In a student group? Organise a polis match →")}
+      </Link>
     </Page>
   );
 }

@@ -151,3 +151,25 @@ This reverses "Not done: a daily streak" above: the team asked for features that
 | The first onboarding step is now "Crée ton compte": email (required) + first name (optional). The email is sent to `/api/account` and stored in a new `accounts` table (one row per email, no password); "Tout passer" only appears after this step | The team wants every player who does the onboarding to have an account tied to an email |
 | The account email is never used to write to players; the "prochains défis" emails still need the consent box (`emails` table), now prefilled with the account email | Keeps consent for messages separate from account creation. Privacy page updated |
 | Event `account_create` (no email in the payload) and "Comptes créés" in `/stats` | Measure how many players create an account |
+
+## 2026-10-21: Day 3 (traction): tools for the commitment ladder
+The course grades commitments by level (deck slides 40–42), each with a trace in the evidence log. A commitment from someone the team already knew counts one level lower.
+| Level | What polis now captures | Trace |
+|---|---|---|
+| 1 · a little time | Email for the next challenges (existing) | `/stats` → Échelle d'engagement → CSV of emails with timestamp and tester tag |
+| 2 · time | Players who come back another day (daily challenge, streak); "Ajouter ces dates à mon agenda" in the voting guide (.ics with a reminder, event `calendar_add`) | CSV of returning players (days active, tag) |
+| 3 · reputation | Challenge sent (`share_click`) and friend who played it (`friend_finish`); new: "OK pour être cité·e" in the feedback survey (optional first name) | CSV of shares, friend plays, quotable feedback |
+| 4 · formal commitment | New page `/partenaires`: a student organisation (BDE, club, class) commits in writing (name, role, email, commitments: team match, "register to vote" session before 12 March 2027, relay to members, meeting), with a reference and timestamp on screen | `partner_pledge` events, list + CSV in `/stats` |
+- Stored in `events` (no schema change); contact details only with the consent box ticked; privacy page updated.
+- Baseline when this shipped (2026-10-21, ~10:45): L1 0 emails, L2 3 players came back another day, L3 2 shares and 1 friend play, L4 0.
+
+## 2026-10-21: timeline "La ligne du temps" (`/frise`, requested by the team)
+| Decision | Why |
+|---|---|
+| 3 tracks: **candidates** (10 people, 5–6 events each), **great debates** (the 9 debates between the two rounds, 1974–2022, incl. 2002 when there was none), **history** (18 dates, 1944–2026, each with "why it matters in 2027") | Understand where the candidates come from and how the rules of today were made |
+| Interactive: "Qui a dit ça ?" on each debate (+5 voix, first answer kept), "Remets dans l'ordre" with 4 random history dates (+20 voix once a day, badge "Mémoire vive"), items fade in as you scroll, candidate picker | A game layer, like the rest of the app |
+| Candidates: same criteria for everyone (offices, elections with official Conseil constitutionnel scores, 2027 status); camps take turns in the picker and the first candidate shown changes every day; no party colours | Neutrality (A6) |
+| Court cases left out, except Marine Le Pen's appeal ruling of 7 July 2026, because it decides whether she can stand (stated neutrally: 45 months of ineligibility, 30 suspended, so she can run; appeal to the Cour de cassation pending) | Only what changes the 2027 race |
+| Debates: quotes balanced (4 left, 4 right / far right, 1 Macron); no "who won"; interpretive "why it matters" lines rewritten as facts | Neutrality |
+| Every event has a source (Conseil constitutionnel, Assemblée, Sénat, Parlement européen, Élysée, Légifrance, INA, LCP, Public Sénat, France 24/AFP…), checked on 2026-10-21; no Wikipedia | Editorial rule: facts only, a source for every item |
+| Known limits: 2024 European scores come from Public Sénat (official ministry site blocked); some dates are only a year or a month; Wauquiez has not declared (his 2026 item is his stated position) | Logged rather than hidden |

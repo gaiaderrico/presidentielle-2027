@@ -73,6 +73,12 @@
       "how": "Coche toutes les étapes du guide « Voter : mode d'emploi »."
     },
     {
+      "id": "memoire",
+      "emoji": "📜",
+      "name": "Mémoire vive",
+      "how": "Remets 4 dates de la frise dans l'ordre sans faute."
+    },
+    {
       "id": "parrainages",
       "emoji": "🏛️",
       "name": "500 parrainages",

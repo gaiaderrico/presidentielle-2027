@@ -13,6 +13,7 @@ import actuJson from "@/content/actu.json";
 import onboardingJson from "@/content/onboarding.json";
 import badgesJson from "@/content/badges.json";
 import guideJson from "@/content/guide.json";
+import timelineJson from "@/content/timeline.json";
 import enOverlay from "@/content/en/overlay.json";
 
 export type Lang = "fr" | "en";
@@ -64,6 +65,10 @@ export type GuideProfile = { id: string; emoji: string; label: string; canVote: 
 export type GuideStep = { id: string; text: string; link?: Source };
 export type GuideSection = { id: string; profiles: string[]; emoji: string; title: string; intro?: string; steps: GuideStep[]; tip?: string; sources: Source[] };
 export type GuideDeadline = { id: string; date: string; label: string; profiles: string[] };
+export type TimelineEvent = { id: string; date: string; title: string; text: string; why?: string; source: Source; source2?: Source };
+export type TimelineCandidate = { id: string; name: string; camp: BlocCamp; party: string; born?: string; events: TimelineEvent[] };
+export type TimelineDebate = TimelineEvent & { people: string[]; quote?: string; quoteBy?: string; result?: string };
+export type Timeline = { checked: string; candidates: TimelineCandidate[]; debates: TimelineDebate[]; history: TimelineEvent[] };
 export type Guide = { checked: string; profiles: GuideProfile[]; deadlines: GuideDeadline[]; sections: GuideSection[] };
 
 export type ChallengeType = "quiz" | "vrai-faux" | "qui-propose" | "autre-camp" | "pronostics";
@@ -100,6 +105,19 @@ function makeGuide(base: Guide, over: Dict | undefined): Guide {
     profiles: overlayList(base.profiles, over?.profiles),
     deadlines: overlayList(base.deadlines, over?.deadlines),
     sections: overlayList(base.sections, over?.sections),
+  };
+}
+
+// Timeline translations are keyed by event id (and candidate id for the party name); dates and sources stay from the French file.
+function makeTimeline(base: Timeline, over: Dict | undefined): Timeline {
+  const events = (over?.events ?? {}) as Record<string, unknown>;
+  const candidates = (over?.candidates ?? {}) as Record<string, unknown>;
+  const tr = <T extends { id: string }>(e: T): T => merge(e, events[e.id]);
+  return {
+    checked: (over?.checked as string) ?? base.checked,
+    candidates: base.candidates.map((c) => ({ ...merge(c, candidates[c.id]), events: c.events.map(tr) })),
+    debates: base.debates.map(tr),
+    history: base.history.map(tr),
   };
 }
 
@@ -154,6 +172,7 @@ function makeContent(lang: Lang) {
     levels: merge(levelsJson.levels as Level[], ov("levels")),
     badges: overlayList(badgesJson.badges as Badge[], ov("badges")),
     guide: makeGuide(guideJson as Guide, ov("guide")),
+    timeline: makeTimeline(timelineJson as Timeline, ov("timeline")),
     defis,
     site: merge(siteJson, ov("site")),
     onboarding: merge(onboardingJson as Onboarding, ov("onboarding")),

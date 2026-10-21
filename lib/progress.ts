@@ -18,7 +18,7 @@ export type ProgressState = {
   daily: Record<string, { score: number; total: number }>; // daily challenge result per date
   types: ChallengeType[]; // challenge types finished at least once
   camps: BlocCamp[]; // blocs with at least one news card read
-  flags: Record<string, true>; // perfect, shared, friend, team, guide
+  flags: Record<string, true>; // perfect, shared, friend, team, guide, order
   badges: Record<string, number>; // badge id → unlock time
 };
 
@@ -99,6 +99,7 @@ const RULES: Record<string, (s: ProgressState, voix: number) => boolean> = {
   recruteur: (s) => !!s.flags.friend,
   equipe: (s) => !!s.flags.team,
   "pret-a-voter": (s) => !!s.flags.guide,
+  memoire: (s) => !!s.flags.order,
   parrainages: (_, voix) => voix >= 500,
 };
 
@@ -161,6 +162,12 @@ export function recordShare() {
 export function recordGuideDone() {
   const s = store.get();
   if (!s.flags.guide) commit({ ...s, flags: { ...s.flags, guide: true } });
+}
+
+/** "Remets dans l'ordre" on the history timeline, without a mistake. */
+export function recordOrderPerfect() {
+  const s = store.get();
+  if (!s.flags.order) commit({ ...s, flags: { ...s.flags, order: true } });
 }
 
 export function recordFriendPlayed() {

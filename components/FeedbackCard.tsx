@@ -16,6 +16,8 @@ export function FeedbackCard({ challengeType }: { challengeType: ChallengeType }
   const [state, setState] = useState<"hidden" | "ask" | "done">("hidden");
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState("");
+  const [quotable, setQuotable] = useState(false);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     // Answered on this phone → never again. "Pas maintenant" → not again in this tab.
@@ -36,7 +38,8 @@ export function FeedbackCard({ challengeType }: { challengeType: ChallengeType }
   const send = (e: FormEvent) => {
     e.preventDefault();
     if (rating === null) return;
-    track("feedback_submit", { rating, comment: comment.trim().slice(0, 300), challengeType });
+    const text = comment.trim().slice(0, 300);
+    track("feedback_submit", { rating, comment: text, challengeType, quotable: quotable && !!text, name: quotable && text ? name.trim().slice(0, 20) : "" });
     writeJSON("p27.feedbackDone", true);
     haptic("success");
     setState("done");
@@ -83,6 +86,24 @@ export function FeedbackCard({ challengeType }: { challengeType: ChallengeType }
               placeholder={t("Trop dur, trop long, il manque…", "Too hard, too long, it's missing…")}
             />
             <p className="-mt-1 text-xs text-muted">{t("N'écris ni ton nom, ni ton opinion politique.", "Don't write your name or your political opinion.")}</p>
+            {comment.trim() && (
+              <>
+                <label className="flex items-start gap-3 text-sm">
+                  <input type="checkbox" checked={quotable} onChange={(e) => setQuotable(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--accent)]" />
+                  <span>{t("OK pour que l'équipe polis cite mon avis (présentation du projet, réseaux).", "OK for the polis team to quote my feedback (project presentation, social media).")}</span>
+                </label>
+                {quotable && (
+                  <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    maxLength={20}
+                    autoComplete="given-name"
+                    placeholder={t("Ton prénom (facultatif, sinon anonyme)", "Your first name (optional, otherwise anonymous)")}
+                    className="min-h-11 rounded-[12px] border-0 bg-fill px-4 text-base"
+                  />
+                )}
+              </>
+            )}
             <Button type="submit">{t("Envoyer mon avis", "Send my feedback")}</Button>
           </>
         )}

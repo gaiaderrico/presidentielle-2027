@@ -18,6 +18,33 @@ function profileFor(voter: Profile["voter"]): string {
   return "france";
 }
 
+/** An .ics file with one all-day event per date and a reminder the day before (works with Apple, Google and Outlook calendars). */
+function calendarFile(items: { id: string; date: string; label: string }[], url: string): string {
+  const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
+  const day = (iso: string) => iso.replace(/-/g, "");
+  const next = (iso: string) => {
+    const [y, m, d] = iso.split("-").map(Number);
+    const n = new Date(Date.UTC(y, m - 1, d + 1));
+    return n.toISOString().slice(0, 10).replace(/-/g, "");
+  };
+  const events = items.flatMap((i) => [
+    "BEGIN:VEVENT",
+    `UID:polis-${i.id}-${i.date}@polis-2027`,
+    `DTSTAMP:${stamp}`,
+    `DTSTART;VALUE=DATE:${day(i.date)}`,
+    `DTEND;VALUE=DATE:${next(i.date)}`,
+    `SUMMARY:🗳️ ${i.label} · Présidentielle 2027`,
+    `DESCRIPTION:${url}`,
+    "BEGIN:VALARM",
+    "TRIGGER:-PT12H",
+    "ACTION:DISPLAY",
+    `DESCRIPTION:${i.label}`,
+    "END:VALARM",
+    "END:VEVENT",
+  ]);
+  return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//polis//presidentielle-2027//FR", "CALSCALE:GREGORIAN", ...events, "END:VCALENDAR"].join("\r\n");
+}
+
 function daysUntil(iso: string): number {
   const [y, m, d] = iso.split("-").map(Number);
   const now = new Date();
@@ -55,6 +82,17 @@ export function VoterClient() {
   useEffect(() => {
     if (mounted && steps.length && doneCount === steps.length) recordGuideDone();
   }, [mounted, doneCount, steps.length]);
+
+  const addToCalendar = () => {
+    const blob = new Blob([calendarFile(deadlines, `${window.location.origin}/voter?profil=${current.id}`)], { type: "text/calendar;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "presidentielle-2027.ics";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    track("calendar_add", { guideProfile: current.id, dates: deadlines.map((d) => d.id) });
+    haptic("success");
+  };
 
   const choose = (id: string) => router.replace(`/voter?profil=${id}`, { scroll: false });
   const dateLabel = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString(lang === "en" ? "en-GB" : "fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
@@ -102,6 +140,11 @@ export function VoterClient() {
               </li>
             ))}
           </ul>
+        )}
+        {mounted && deadlines.length > 0 && (
+          <button onClick={addToCalendar} className="min-h-11 rounded-[14px] bg-white/15 px-4 text-[15px] font-semibold transition active:opacity-70">
+            📅 {t("Ajouter ces dates à mon agenda (avec rappel)", "Add these dates to my calendar (with a reminder)")}
+          </button>
         )}
         {steps.length > 0 && (
           <div className="flex flex-col gap-1">

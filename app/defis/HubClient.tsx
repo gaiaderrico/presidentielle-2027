@@ -125,6 +125,16 @@ export function HubClient() {
           ))}
       </ul>
 
+      <Link href="/frise" className="flex items-center gap-4 rounded-[22px] bg-card p-4 transition active:scale-[0.99]">
+        <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden>
+          🕰️
+        </span>
+        <span className="flex min-w-0 flex-col gap-0.5">
+          <span className="font-display text-xl font-bold">{t("La ligne du temps", "The timeline")}</span>
+          <span className="text-[15px] leading-snug text-muted">{t("Le parcours des candidats, « Qui a dit ça ? » dans les grands débats, l'histoire en 4 dates.", "The candidates' careers, \"Who said that?\" in the great debates, history in order.")}</span>
+        </span>
+      </Link>
+
       <Link href="/voter" className="flex items-center gap-4 rounded-[22px] bg-card p-4 transition active:scale-[0.99]">
         <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden>
           🗳️
@@ -133,6 +143,10 @@ export function HubClient() {
           <span className="font-display text-xl font-bold">{t("Voter : mode d'emploi", "Voting: how it works")}</span>
           <span className="text-[15px] leading-snug text-muted">{t("S'inscrire, la procuration, le jour du vote, voter depuis l'étranger…", "Registering, proxy votes, election day, voting from abroad…")}</span>
         </span>
+      </Link>
+
+      <Link href="/partenaires" className="text-center text-[15px] font-semibold text-accent underline underline-offset-4">
+        {t("Tu es dans une asso ou un BDE ? Fais jouer tes membres →", "In a student group? Get your members playing →")}
       </Link>
 
       {picked && picked.type !== "equipes" && (
