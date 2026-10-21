@@ -20,7 +20,7 @@ Without Supabase variables the app still runs: you can read the feed, play every
 2. In **SQL Editor > New query**, paste `supabase/schema.sql` and click **Run**.
 3. In **Project Settings > API**, copy the **Project URL** into `SUPABASE_URL` and the **service_role** key into `SUPABASE_SERVICE_ROLE_KEY`.
 
-Row Level Security is on for every table, with no policy. The browser never talks to Supabase: every read and write goes through `app/api/*` with the service key. This is stricter than "anon can insert", and it means `emails`, `events` and `predictions` can never be read from the client.
+Row Level Security is on for every table, with no policy. The browser never talks to Supabase: every read and write goes through `app/api/*` with the service key. This is stricter than "anon can insert", and it means `accounts`, `emails`, `events` and `predictions` can never be read from the client.
 
 ## Deploy on Vercel
 
@@ -64,7 +64,7 @@ Everything players read lives in `content/*.json`. Edit, commit, and Vercel rede
 
 ## Profile and personalised feed
 
-- `/bienvenue` (6 steps, back arrow on each): first name, habits (follows the news, voted, registered), a 3-question level test, topics, political position (optional), result.
+- `/bienvenue` (6 steps, back arrow on each): account (email, required, + optional first name; saved in `accounts` through `/api/account`), habits (follows the news, voted, registered), a 3-question level test, topics, political position (optional), result.
 - Level = right answers in the test + how often they follow the news → débutant / intermédiaire / avancé. Beginners get the "bases" cards first; advanced players go straight to the news. Not registered (or not sure) → the registration card comes first.
 - Feed rule (`lib/feed.ts`): camps take turns (gauche, centre, droite, extrême droite) with a neutral card after every 2; the player's topics first inside each camp; 👍 on a camp → the next cards come from the camps with the fewest 👍; if the player gave a position, the camps farthest from it come first. Nothing is ever hidden: every camp is always shown.
 - **The political position never leaves the phone**: it is not in any event, and the server strips `position`, `ideas`, `leaning`, `opinion`, `side`, `pour`, `contre` from every event.
@@ -82,7 +82,7 @@ Everything players read lives in `content/*.json`. Edit, commit, and Vercel rede
 
 - The Pour / Contre answer in "Défends l'autre camp" stays in the component state: never stored, never sent. The server also strips `opinion`, `side`, `position`, `pour` and `contre` keys from any event.
 - Feed 👍 / 👎 (`feed_reaction`) are stored **without session id or tester tag**: likes per camp can be counted, but never linked to a player.
-- Email only with the consent box ticked. First name optional. No cookies, no third-party trackers (only `localStorage`).
+- The account is created at onboarding with an email, no password (`accounts` table, one row per email, linked to the last session that used it). It is never used to write to players: the "prochains défis" emails (`emails` table) need the consent box ticked. First name optional. No cookies, no third-party trackers (only `localStorage`).
 
 ## Implementation choices not written in the spec
 

@@ -24,6 +24,7 @@ export async function POST(req: Request) {
 
   const events = await fetchAll<EventRow>("events", "created_at, session_id, event, payload");
   const { count: emailCount } = await sb.from("emails").select("id", { count: "exact", head: true });
+  const { count: accountCount } = await sb.from("accounts").select("id", { count: "exact", head: true });
 
   const p = (e: EventRow, k: string) => (e.payload?.[k] ?? null) as string | number | boolean | null;
 
@@ -160,6 +161,7 @@ export async function POST(req: Request) {
       cityViewRate: bySession.size ? cityViewSessions.size / bySession.size : null,
     },
     emails: emailCount ?? 0,
+    accounts: accountCount ?? 0,
     profile: {
       completed: onboard.length,
       levels: countBy(onboard, (e) => String(p(e, "level"))),

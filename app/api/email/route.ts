@@ -1,6 +1,4 @@
-import { UUID_RE, db, readJsonBody } from "@/lib/server/db";
-
-const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/;
+import { EMAIL_RE, UUID_RE, db, readJsonBody } from "@/lib/server/db";
 
 export async function POST(req: Request) {
   const body = await readJsonBody(req, 2000);

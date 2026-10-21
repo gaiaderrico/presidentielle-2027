@@ -57,6 +57,7 @@ export function ProfileClient() {
           <p className="text-muted">
             {ob.levels[p.level].label} · {c.levels[levelIndexFor(total)].name} · {total} voix
           </p>
+          {p.email && <p className="truncate text-sm text-muted">{p.email}</p>}
         </div>
       </div>
 
