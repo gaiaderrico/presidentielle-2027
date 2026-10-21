@@ -12,15 +12,15 @@ export function PrivacyClient() {
       <Card className="flex flex-col gap-3 leading-relaxed">
         <p>
           {t(
-            `${c.site.appName} est un projet étudiant qui sert à tester une idée : apprendre la présidentielle 2027 en jouant. Ton compte se crée avec ton email, sans mot de passe. Il n'y a ni cookie ni traceur tiers.`,
-            `${c.site.appName} is a student project that tests an idea: learning about the 2027 French presidential election by playing. Your account is created with your email, without a password. There are no cookies and no third-party trackers.`,
+            `${c.site.appName} est un projet étudiant qui sert à tester une idée : apprendre la présidentielle 2027 en jouant. Tu peux jouer sans compte ; si tu veux, tu en crées un avec ton email, sans mot de passe. Il n'y a ni cookie ni traceur tiers.`,
+            `${c.site.appName} is a student project that tests an idea: learning about the 2027 French presidential election by playing. You can play without an account; if you want one, you create it with your email, without a password. There are no cookies and no third-party trackers.`,
           )}
         </p>
         <h2 className="font-display text-lg font-bold">{t("Ce qu'on collecte", "What we collect")}</h2>
         <ul className="list-disc space-y-1 pl-5">
           <li>{t("Des événements d'usage anonymes (pages vues, défis joués, scores, partages), liés à un identifiant aléatoire stocké sur ton téléphone.", "Anonymous usage events (pages viewed, challenges played, scores, shares), linked to a random ID stored on your phone.")}</li>
           <li>{t("Ton prénom, seulement si tu le donnes, pour que tes amis sachent qui les défie.", "Your first name, only if you give it, so your friends know who challenged them.")}</li>
-          <li>{t("Ton email, pour créer ton compte. On ne t'écrit pas sans ton accord.", "Your email, to create your account. We never write to you without your consent.")}</li>
+          <li>{t("Ton email, seulement si tu crées un compte (facultatif). On ne t'écrit pas sans ton accord.", "Your email, only if you create an account (optional). We never write to you without your consent.")}</li>
           <li>{t("Ton accord pour recevoir les prochains défis par email, seulement si tu coches la case de consentement.", "Your agreement to receive the next challenges by email, only if you tick the consent box.")}</li>
           <li>{t("Tes pronostics, pour les comparer aux résultats après le vote.", "Your predictions, to compare them with the results after the vote.")}</li>
           <li>{t("Les réponses de ton profil : ton niveau, tes sujets, si tu peux voter en France et si tu es inscrit·e sur les listes.", "Your profile answers: your level, your topics, whether you can vote in France and whether you are on the electoral roll.")}</li>

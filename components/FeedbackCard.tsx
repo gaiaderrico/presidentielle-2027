@@ -85,7 +85,7 @@ export function FeedbackCard({ challengeType }: { challengeType: ChallengeType }
               className="rounded-[12px] border-0 bg-fill px-4 py-3 text-base"
               placeholder={t("Trop dur, trop long, il manque…", "Too hard, too long, it's missing…")}
             />
-            <p className="-mt-1 text-xs text-muted">{t("N'écris ni ton nom, ni ton opinion politique.", "Don't write your name or your political opinion.")}</p>
+            <p className="-mt-1 text-xs text-muted">{t("Dans le commentaire : pas d'informations personnelles ni d'opinion politique.", "In the comment: no personal details and no political opinion.")}</p>
             {comment.trim() && (
               <>
                 <label className="flex items-start gap-3 text-sm">

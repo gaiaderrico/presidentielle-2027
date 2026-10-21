@@ -27,18 +27,21 @@ Colours are CSS variables on `:root`, exposed to Tailwind as `bg-*`, `text-*`, `
 
 | Token (Tailwind) | Light | Dark | Usage |
 |---|---|---|---|
-| `paper` | `#f2f2f7` | `#000000` | App background (iOS grouped background) |
-| `card` | `#ffffff` | `#1c1c1e` | Cards, sheets, bottom nav |
-| `ink` | `#1c1c1e` | `#f5f5f7` | Main text; sheet backdrop at 40% (`bg-ink/40`) |
-| `muted` | `#6e6e73` | `#98989f` | Secondary text, inactive tabs |
-| `line` | `#e5e5ea` | `#38383a` | Hairlines, progress track |
-| `fill` | `rgba(118,118,128,.12)` | `…,.24` | Secondary buttons, chips, icon buttons |
-| `hero` | `#1c1c1e` | `#1c1c1e` | Dark hero cards (home, end of feed, level result). Text on it is always white |
-| `accent` | `#f2601d` | `#ff7a33` | The only brand colour: primary buttons, links, active tab, progress, voix |
-| `accent-ink` | `#ffffff` | `#1a0c03` | Text on `accent` |
-| `accent-soft` | `#fff0e6` | `#3a2010` | Topic band on cards, voix pill, selected chips |
-| `ok` / `ok-soft` | `#248a3d` / `#e7f6ec` | `#30d158` / `#0f2e18` | Right answer, "Facile" badge |
-| `bad` / `bad-soft` | `#d70015` / `#fdecee` | `#ff453a` / `#3a1412` | Wrong answer, "Difficile" badge, delete |
+| `paper` | `#f5f6fa` | `#05060d` | App background (white with a hint of blue) |
+| `card` | `#ffffff` | `#141829` | Cards, sheets, bottom nav |
+| `ink` | `#161a33` | `#f3f4fa` | Main text; sheet backdrop at 40% (`bg-ink/40`) |
+| `muted` | `#646b80` | `#9aa0b5` | Secondary text, inactive tabs |
+| `line` | `#e2e5ef` | `#2b3047` | Hairlines, progress track |
+| `fill` | `rgba(37,70,224,.07)` | `rgba(110,139,255,.14)` | Secondary buttons, chips, icon buttons |
+| `hero` | `#0b1f5c` | `#0f2470` | Navy blocks (home, end of feed, level result). Text on it is always white |
+| `accent` | `#2546e0` | `#7d97ff` | Blue: primary buttons, links, active tab, progress, voix |
+| `accent-ink` | `#ffffff` | `#0a0f2e` | Text on `accent` |
+| `accent-soft` | `#e9eeff` | `#1a2456` | Topic band on cards, voix pill, selected chips |
+| `rouge` | `#e1000f` | `#ff4d57` | Red accent. On a `bg-hero` block, `bg-accent` turns red and `text-accent` turns light red (`--rouge-light`, `#ff6b72`): countdowns, kickers, buttons. Also the tricolour stripe under the top bar and the city's flags |
+| `ok` / `ok-soft` | `#18753c` / `#e6f4ea` | `#30d158` / `#0f2e18` | Right answer, "Facile" badge |
+| `bad` / `bad-soft` | `#ce0500` / `#ffe9e9` | `#ff453a` / `#3a1412` | Wrong answer, "Difficile" badge, delete |
+
+Palette (2026-10-21): bleu, blanc, rouge in institutional tones, the national colours rather than any party's. Blue carries the actions, red stays an accent on navy blocks so it never looks like an error.
 
 **Never** use red, blue, pink, green or purple to represent a political side. Sides are shown with a neutral chip (`bg-fill`, `text-muted`) plus an icon: `‹` gauche, `●` centre, `›` droite, `»` extrême droite, `ⓘ` neutre. Greens are allowed only for trees in the city and for right/wrong feedback.
 

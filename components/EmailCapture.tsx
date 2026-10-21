@@ -58,7 +58,7 @@ export function EmailCapture() {
           <li>⚡ {t("Un nouveau défi par mois jusqu'au 18 avril", "One new challenge a month until 18 April")}</li>
           <li>🔮 {t("Tes résultats de pronostics après le vote", "Your prediction results after the vote")}</li>
         </ul>
-        <p className="text-sm text-muted">{t("Pas de spam, désinscription en un clic.", "No spam, unsubscribe in one click.")}</p>
+        <p className="text-sm text-muted">{t("Pas de spam : ces messages-là, rien d'autre.", "No spam: these messages, nothing else.")}</p>
         <label htmlFor="email" className="sr-only">
           {t("Ton email", "Your email")}
         </label>
@@ -74,7 +74,7 @@ export function EmailCapture() {
         />
         <label className="flex items-start gap-3 text-sm">
           <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-[var(--accent)]" required />
-          <span>{t("J'accepte de recevoir les prochains défis par email. Je peux me désinscrire à tout moment.", "I agree to receive the next challenges by email. I can unsubscribe at any time.")}</span>
+          <span>{t("J'accepte de recevoir par email un rappel avant le 12 mars 2027, un défi par mois jusqu'au vote et mes résultats de pronostics. Je peux retirer mon accord à tout moment.", "I agree to receive by email a reminder before 12 March 2027, one challenge a month until the vote and my prediction results. I can withdraw my consent at any time.")}</span>
         </label>
         {state === "error" && <p className="text-sm text-bad">{t("L'envoi n'a pas marché. Vérifie ta connexion et réessaie.", "Sending failed. Check your connection and try again.")}</p>}
         <Button type="submit" disabled={!valid || !consent || state === "sending"}>

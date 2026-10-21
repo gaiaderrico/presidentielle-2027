@@ -13,7 +13,7 @@ const ROOTS = ["/", "/feed", "/defis", "/ma-ville", "/profil", "/bienvenue"];
 
 function parentOf(path: string): string {
   if (path === "/quiz") return "/feed";
-  if (path.startsWith("/defis/") || path.startsWith("/equipes")) return "/defis";
+  if (path.startsWith("/defis/") || path.startsWith("/equipes") || ["/voter", "/frise", "/partenaires"].includes(path)) return "/defis";
   if (path === "/donnees-personnelles") return "/profil";
   return "/feed";
 }
@@ -52,7 +52,7 @@ export function TopBar() {
             <IconBack />
           </button>
         ) : null}
-        <Link href={path === "/" ? "/" : "/feed"} className="flex min-w-0 items-center gap-2" aria-label="polis">
+        <Link href="/" className="flex min-w-0 items-center gap-2" aria-label={t("polis, accueil", "polis, home")}>
           <Logo className="h-7" />
           <span className="hidden truncate text-xs font-semibold text-muted min-[400px]:inline">{t("Présidentielle 2027", "French election 2027")}</span>
         </Link>
@@ -82,6 +82,11 @@ export function TopBar() {
             </span>
           ))}
         </Link>
+      </div>
+      <div className="flex h-[3px]" aria-hidden>
+        <span className="flex-1 bg-accent" />
+        <span className="flex-1 bg-card" />
+        <span className="flex-1 bg-rouge" />
       </div>
     </header>
   );

@@ -132,7 +132,7 @@ export function HubClient() {
         </span>
         <span className="flex min-w-0 flex-col gap-0.5">
           <span className="font-display text-xl font-bold">{t("La ligne du temps", "The timeline")}</span>
-          <span className="text-[15px] leading-snug text-muted">{t("Le parcours des candidats, « Qui a dit ça ? » dans les grands débats, l'histoire en 4 dates.", "The candidates' careers, \"Who said that?\" in the great debates, history in order.")}</span>
+          <span className="text-[15px] leading-snug text-muted">{t("Le parcours des candidats et des figures de la campagne, « Qui a dit ça ? » dans les grands débats, l'histoire en 4 dates.", "The careers of candidates and key figures, \"Who said that?\" in the great debates, history in order.")}</span>
         </span>
       </Link>
 

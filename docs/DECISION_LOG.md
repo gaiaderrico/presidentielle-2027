@@ -205,3 +205,30 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 | The first onboarding step keeps "Crée ton compte" but adds "Continuer sans compte" (event `account_skip`, counted in `/stats` next to "Comptes créés") | A required email is not a commitment (level 1 counts an email given by choice), it adds friction before the first challenge (primary metric), and round-2 testers had already found the onboarding too pushy (every step became skippable). Data minimisation (RGPD): the account has no password and no use yet |
 | The email ask that counts for the commitment ladder is the one after a challenge ("Ne rate pas le 12 mars", consent box) | Asked once the player has seen the value |
 - Decided by the team on 2026-10-21, after the required email was added the same morning.
+
+## 2026-10-21: consistency pass (requested by the team)
+| Fixed | Before |
+|---|---|
+| Email consent now lists every message promised: reminder before 12 March 2027, one challenge a month until the vote, prediction results | The box promised all three, the consent box only covered "the next challenges" |
+| "Désinscription en un clic" removed ("Pas de spam : ces messages-là, rien d'autre") | Promised a one-click unsubscribe that does not exist |
+| Privacy page: the account is optional | Still said the account is created with your email |
+| Feedback: "pas d'informations personnelles ni d'opinion politique" in the comment | Said "don't write your name", then asked a first name to quote it |
+| Timeline track renamed "Candidats et figures", with each person's 2027 status (declared / not a candidate / not declared yet, as of the check date) | "Les candidats" included Jordan Bardella (not a candidate) and Laurent Wauquiez (not declared) |
+| `/stats` level 1 leaves out emails from team test sessions (ZZ tags) | They were counted, unlike everything else |
+| `/stats` says that calendar adds and shares are taps (the real add/send can't be verified) | Could be read as stronger evidence than it is |
+| Back arrow on `/voter`, `/frise`, `/partenaires` goes to Défis, and the Défis tab stays lit | Back went to the feed |
+| **Still open**: `content/site.json` `contactEmail` is the placeholder `TODO-equipe@exemple.fr` (privacy page contact, needed for data requests and to unsubscribe); the reminder before 12 March, the monthly challenge and prediction results must actually be sent by the team | Team decision: no address for now |
+
+## 2026-10-21: a home page for returning players (requested by the team)
+| Decision | Why |
+|---|---|
+| Players who did the onboarding now land on a personal home: greeting, days to the 1st round, day streak, city level and voix, their city (tap → Ma ville), a registration reminder if they can vote but aren't registered (J-x to 12 March 2027 → voting guide), today's challenge, 4 shortcuts (News, Challenges, Timeline, Voting) and the partner card | Once onboarded, there was no landing page: the installed app opened on the feed, the logo went to the feed and the tab bar had no Home |
+| New "Accueil" tab (5 tabs), the logo always goes home, the installed app (`manifest.ts`) opens on `/` | Home reachable from everywhere |
+| New visitors and friends opening a challenge link (`/?c=`) keep the welcome page, without the tab bar | First impression and the friend flow unchanged |
+
+## 2026-10-21: colours changed to bleu, blanc, rouge (requested by the team)
+| Decision | Why |
+|---|---|
+| White background and cards, République blue (`#2546e0`) for actions, navy (`#0b1f5c`) for the dark blocks, red (`#e1000f`) as the accent on those blocks, a thin tricolour stripe under the top bar; link preview, app icon theme and city flags follow | Team request: the national colours |
+| Institutional tones, red kept as an accent only; camps are still shown with neutral chips and icons, never with colours | National colours rather than a party's (neutrality, A6); red is also the "wrong answer" colour, so it can't be the main button colour |
+| Replaces the orange accent of the iOS redesign | |

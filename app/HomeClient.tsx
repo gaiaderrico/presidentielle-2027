@@ -4,15 +4,16 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { City } from "@/components/City";
-import { DailyCard } from "@/components/DailyCard";
+import { DailyCard, daysLabel } from "@/components/DailyCard";
 import { PartnerCTA } from "@/components/PartnerCTA";
 import { Logo } from "@/components/Logo";
 import { Button, Card, Page } from "@/components/ui";
 import { fetchChallenge } from "@/lib/api";
 import { daysUntilFirstRound } from "@/lib/feed";
 import { useContent, useT } from "@/lib/i18n";
+import { levelIndexFor } from "@/lib/levels";
 import { useProfile } from "@/lib/profile";
-import { dayKey, useProgress } from "@/lib/progress";
+import { dayKey, streakInfo, useProgress } from "@/lib/progress";
 import type { RefChallenge } from "@/lib/results";
 import { hashSeed } from "@/lib/rng";
 import { getFirstName, getSessionId, setFirstName } from "@/lib/session";
@@ -30,7 +31,6 @@ function Landing() {
   const profile = useProfile();
   const t = useT();
   const { total } = useVoix();
-  const progress = useProgress();
   const [days, setDays] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const tracked = useRef(false);
@@ -45,8 +45,8 @@ function Landing() {
   }, []);
 
   const returning = mounted && profile.done;
-  // Returning players: today's challenge comes first until it's done.
-  const dailyDone = mounted && !!progress.daily[dayKey()];
+  // Players who already did the onboarding get their own home page; this page is the welcome for new visitors.
+  if (returning) return <PlayerHome days={days} />;
   const features = [
     { emoji: "📰", title: t("L'actu de tous les bords", "News from every side"), text: t("Des cartes courtes, sourcées, de la gauche à l'extrême droite.", "Short, sourced cards, from the left to the far right.") },
     { emoji: "⚡", title: t("Des défis à ton niveau", "Challenges at your level"), text: t("Facile, moyen, difficile, ou progressif. Toujours avec l'explication.", "Easy, medium, hard, or progressive. Always with the explanation.") },
@@ -75,19 +75,7 @@ function Landing() {
         </div>
       </section>
 
-      {returning ? (
-        <div className="flex flex-col gap-3">
-          <DailyCard />
-          <Button variant={dailyDone ? "primary" : "secondary"} onClick={() => router.push("/feed")}>
-            {profile.firstName ? `${t("Reprendre l'actu", "Back to the news")}, ${profile.firstName}` : t("Reprendre l'actu", "Back to the news")}
-          </Button>
-          <Button variant="secondary" onClick={() => router.push("/defis")}>
-            {t("Voir les défis", "See the challenges")}
-          </Button>
-          <PartnerCTA />
-        </div>
-      ) : (
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2">
           <Button onClick={() => router.push("/bienvenue")}>{t("C'est parti", "Let's go")}</Button>
           <button
             onClick={() => router.push("/feed")}
@@ -95,8 +83,7 @@ function Landing() {
           >
             {t("Voir l'actu directement", "Go straight to the news")}
           </button>
-        </div>
-      )}
+      </div>
 
       <ul className="grid gap-3">
         {features.map((f) => (
@@ -112,6 +99,75 @@ function Landing() {
         ))}
       </ul>
       <p className="text-center text-sm font-semibold text-muted">{t("Neutre, gratuit, sans inscription. On ne te dira jamais pour qui voter.", "Neutral, free, no sign-up. We will never tell you who to vote for.")}</p>
+    </Page>
+  );
+}
+
+/** The returning player's home: where they stand (days left, streak, city), today's challenge and every section one tap away. */
+function PlayerHome({ days }: { days: number | null }) {
+  const profile = useProfile();
+  const progress = useProgress();
+  const { total } = useVoix();
+  const c = useContent();
+  const t = useT();
+  const today = dayKey();
+  const streak = streakInfo(progress.days, today).current;
+  const level = c.levels[levelIndexFor(total)];
+  const deadline = Math.round((new Date(2027, 2, 12).getTime() - new Date(new Date().toDateString()).getTime()) / 86_400_000);
+  const mustRegister = profile.voter === "fr" && profile.registered !== "oui" && deadline >= 0;
+
+  const shortcuts = [
+    { href: "/feed", emoji: "📰", title: t("L'actu", "News"), text: t("Tous les bords", "Every side") },
+    { href: "/defis", emoji: "⚡", title: t("Défis", "Challenges"), text: t("Joue et défie tes amis", "Play and challenge friends") },
+    { href: "/frise", emoji: "🕰️", title: t("La ligne du temps", "Timeline"), text: t("Candidats, débats, histoire", "Candidates, debates, history") },
+    { href: "/voter", emoji: "🗳️", title: t("Voter", "Voting"), text: t("Les démarches", "The steps") },
+  ];
+
+  return (
+    <Page className="!pt-4">
+      <section className="relative overflow-hidden rounded-[2rem] bg-hero p-5 pb-0 text-white shadow-lg">
+        <p className="text-sm font-semibold opacity-80">{t("Re-bonjour", "Welcome back")} 👋</p>
+        <h1 className="font-display text-3xl font-extrabold leading-tight">{profile.firstName || t("Content de te revoir", "Good to see you")}</h1>
+        <div className="mt-3 flex flex-wrap gap-2 text-xs font-extrabold">
+          <span className="rounded-full bg-accent px-3 py-1 uppercase tracking-wider text-accent-ink">{days === null ? "J-…" : t(`J-${days}`, `D-${days}`)} {t("avant le 1er tour", "to the 1st round")}</span>
+          {streak > 0 && <span className="rounded-full bg-white/15 px-3 py-1">🔥 {daysLabel(streak, t)}</span>}
+          <span className="rounded-full bg-white/15 px-3 py-1">
+            🏘️ {level.name} · {total} voix
+          </span>
+        </div>
+        <Link href="/ma-ville" className="-mx-5 mt-4 block" aria-label={t("Voir ma ville", "See my city")}>
+          <City voix={total} label={t("Ta ville", "Your city")} className="!rounded-none" seed={hashSeed(getSessionId())} />
+        </Link>
+      </section>
+
+      {mustRegister && (
+        <Link href="/voter?profil=france" className="flex items-center gap-3 rounded-[22px] border-2 border-accent bg-accent-soft p-4">
+          <span className="text-3xl" aria-hidden>
+            🗳️
+          </span>
+          <span className="min-w-0">
+            <span className="block font-display text-lg font-bold leading-tight">{t(`Inscris-toi sur les listes : J-${deadline}`, `Register to vote: D-${deadline}`)}</span>
+            <span className="text-[15px] text-muted">{t("Date limite le vendredi 12 mars 2027. Les démarches en 3 étapes →", "Deadline Friday 12 March 2027. The steps in 3 moves →")}</span>
+          </span>
+        </Link>
+      )}
+
+      <DailyCard />
+
+      <nav className="grid grid-cols-2 gap-3" aria-label={t("Rubriques", "Sections")}>
+        {shortcuts.map((s) => (
+          <Link key={s.href} href={s.href} className="flex flex-col gap-1 rounded-[22px] bg-card p-4 transition active:scale-[0.98]">
+            <span className="text-3xl" aria-hidden>
+              {s.emoji}
+            </span>
+            <span className="font-display text-lg font-bold leading-tight">{s.title}</span>
+            <span className="text-sm text-muted">{s.text}</span>
+          </Link>
+        ))}
+      </nav>
+
+      <PartnerCTA />
+      <p className="text-center text-sm font-semibold text-muted">{t("Neutre et gratuit. On ne te dira jamais pour qui voter.", "Neutral and free. We will never tell you who to vote for.")}</p>
     </Page>
   );
 }

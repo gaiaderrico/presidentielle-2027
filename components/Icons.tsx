@@ -11,6 +11,9 @@ export const IconUp = (p: SVGProps<SVGSVGElement>) => (
 export const IconDown = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}><path d="M6 9l6 6 6-6" /></svg>
 );
+export const IconHome = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}><path d="M3 11l9-7 9 7" /><path d="M5 10v10h5v-6h4v6h5V10" /></svg>
+);
 export const IconNews = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}><rect x="3" y="4" width="18" height="16" rx="3" /><path d="M7 9h10M7 13h10M7 17h6" /></svg>
 );

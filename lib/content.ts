@@ -66,7 +66,9 @@ export type GuideStep = { id: string; text: string; link?: Source };
 export type GuideSection = { id: string; profiles: string[]; emoji: string; title: string; intro?: string; steps: GuideStep[]; tip?: string; sources: Source[] };
 export type GuideDeadline = { id: string; date: string; label: string; profiles: string[] };
 export type TimelineEvent = { id: string; date: string; title: string; text: string; why?: string; source: Source; source2?: Source };
-export type TimelineCandidate = { id: string; name: string; camp: BlocCamp; party: string; born?: string; events: TimelineEvent[] };
+/** 2027 status on the date the timeline was checked: declared candidate, not a candidate, or not declared yet. */
+export type CandidateStatus = "candidat" | "non-candidat" | "non-declare";
+export type TimelineCandidate = { id: string; name: string; camp: BlocCamp; party: string; status: CandidateStatus; born?: string; events: TimelineEvent[] };
 export type TimelineDebate = TimelineEvent & { people: string[]; quote?: string; quoteBy?: string; result?: string };
 export type Timeline = { checked: string; candidates: TimelineCandidate[]; debates: TimelineDebate[]; history: TimelineEvent[] };
 export type Guide = { checked: string; profiles: GuideProfile[]; deadlines: GuideDeadline[]; sections: GuideSection[] };

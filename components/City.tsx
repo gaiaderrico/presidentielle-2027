@@ -19,7 +19,7 @@ const P = {
   roof: "#9b6b4e",
   navy: "#1b2a41",
   glass: "#f6c98b",
-  accent: "#e8661c",
+  accent: "#e1000f",
   leaf: "#5e9e6e",
   leaf2: "#7db88a",
   trunk: "#8a6a4f",

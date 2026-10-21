@@ -112,8 +112,8 @@ function Ladder({ ladder, accounts }: { ladder: Stats["ladder"]; accounts: numbe
   const sharers = new Set(ladder.l3.shares.map((s) => s.person)).size;
   const rows = [
     { level: 1, title: "Un peu de temps", value: ladder.l1.emails.length, detail: `emails laissés pour les prochains défis (avec consentement) · ${accounts} comptes créés avec un email`, exportName: "emails", data: ladder.l1.emails },
-    { level: 2, title: "Du temps", value: ladder.l2.returning.length, detail: `joueurs revenus un autre jour · ${ladder.l2.calendarAdds.length} dates ajoutées à un agenda`, exportName: "revenus", data: ladder.l2.returning },
-    { level: 3, title: "Réputation", value: sharers, detail: `joueurs qui ont partagé un défi (${ladder.l3.shares.length} partages) · ${ladder.l3.quotes.length} avis citables`, exportName: "reputation", data: [...ladder.l3.shares.map((s) => ({ type: "partage", ...s })), ...ladder.l3.quotes.map((q) => ({ type: "avis citable", ...q }))] },
+    { level: 2, title: "Du temps", value: ladder.l2.returning.length, detail: `joueurs revenus un autre jour · ${ladder.l2.calendarAdds.length} fichiers agenda ouverts (l'ajout réel n'est pas vérifiable)`, exportName: "revenus", data: ladder.l2.returning },
+    { level: 3, title: "Réputation", value: sharers, detail: `joueurs qui ont touché WhatsApp / Partager / Copier (${ladder.l3.shares.length} fois ; l'envoi réel n'est pas vérifiable) · ${ladder.l3.quotes.length} avis citables`, exportName: "reputation", data: [...ladder.l3.shares.map((s) => ({ type: "partage", ...s })), ...ladder.l3.quotes.map((q) => ({ type: "avis citable", ...q }))] },
     { level: 4, title: "Engagement formel", value: ladder.l4.pledges.length, detail: "engagements signés par une organisation (/partenaires)", exportName: "engagements", data: ladder.l4.pledges },
   ];
   return (

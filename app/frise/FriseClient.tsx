@@ -16,7 +16,7 @@ import { VOIX, addVoix } from "@/lib/voix";
 
 type TrackId = "candidats" | "debats" | "histoire";
 const TRACKS: { id: TrackId; emoji: string; fr: string; en: string }[] = [
-  { id: "candidats", emoji: "👤", fr: "Les candidats", en: "Candidates" },
+  { id: "candidats", emoji: "👤", fr: "Candidats et figures", en: "Candidates & key figures" },
   { id: "debats", emoji: "🎙️", fr: "Les grands débats", en: "Great debates" },
   { id: "histoire", emoji: "📜", fr: "L'histoire", en: "History" },
 ];
@@ -226,6 +226,14 @@ function CandidatesTrack() {
                 <CampIcon camp={cand.camp} /> {c.campLabels[cand.camp]} · {cand.party}
               </p>
               {cand.born && <p className="text-sm text-muted">{t(`Naissance : ${cand.born}`, `Born: ${cand.born}`)}</p>}
+              <p className={`mt-1 inline-block rounded-full px-2.5 py-0.5 text-xs font-bold ${cand.status === "candidat" ? "bg-ok-soft text-ok" : "bg-fill text-muted"}`}>
+                {cand.status === "candidat"
+                  ? t("Candidat·e déclaré·e pour 2027", "Declared candidate for 2027")
+                  : cand.status === "non-candidat"
+                    ? t("Pas candidat·e en 2027", "Not a candidate in 2027")
+                    : t("Pas (encore) déclaré·e pour 2027", "Not declared (yet) for 2027")}
+                {` · ${t("au", "as of")} ${c.timeline.checked}`}
+              </p>
             </div>
           </Card>
           <Rail key={`rail-${cand.id}`}>
@@ -240,7 +248,7 @@ function CandidatesTrack() {
             🕵️ {t("Et ses propositions ? Joue à « Qui propose ça ? »", "And their proposals? Play \"Who proposes this?\"")}
           </Link>
           <p className="text-center text-sm text-muted">
-            {t("Parcours factuel : mandats, fonctions et élections, avec les mêmes critères pour tout le monde.", "Factual record: offices, roles and elections, with the same criteria for everyone.")}
+            {t("Parcours factuel : mandats, fonctions et élections, avec les mêmes critères pour tout le monde. Figures citées dans la campagne, candidates ou non.", "Factual record: offices, roles and elections, with the same criteria for everyone. Figures in the campaign, whether candidates or not.")}
           </p>
         </>
       )}

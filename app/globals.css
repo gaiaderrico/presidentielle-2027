@@ -1,36 +1,40 @@
 @import "tailwindcss";
 
-/* iOS-style system palette (apple-ui-designer): grouped grey background, white cards, near-black text,
-   one orange accent used sparingly. No party colours. Greens only in the city. */
+/* Bleu, blanc, rouge: the national colours, in institutional tones (not a party's). White background and cards,
+   blue for actions, navy for the dark blocks, red as the accent on those blocks. Green/red stay for right/wrong answers. */
 :root {
-  --paper: #f2f2f7;
+  --paper: #f5f6fa;
   --card: #ffffff;
-  --ink: #1c1c1e;
-  --muted: #6e6e73;
-  --line: #e5e5ea;
-  --fill: rgba(118, 118, 128, 0.12);
-  --hero: #1c1c1e;
-  --accent: #f2601d;
+  --ink: #161a33;
+  --muted: #646b80;
+  --line: #e2e5ef;
+  --fill: rgba(37, 70, 224, 0.07);
+  --hero: #0b1f5c;
+  --accent: #2546e0;
   --accent-ink: #ffffff;
-  --accent-soft: #fff0e6;
-  --ok: #248a3d;
-  --ok-soft: #e7f6ec;
-  --bad: #d70015;
-  --bad-soft: #fdecee;
+  --accent-soft: #e9eeff;
+  --rouge: #e1000f;
+  --rouge-light: #ff6b72;
+  --ok: #18753c;
+  --ok-soft: #e6f4ea;
+  --bad: #ce0500;
+  --bad-soft: #ffe9e9;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #000000;
-    --card: #1c1c1e;
-    --ink: #f5f5f7;
-    --muted: #98989f;
-    --line: #38383a;
-    --fill: rgba(118, 118, 128, 0.24);
-    --hero: #1c1c1e;
-    --accent: #ff7a33;
-    --accent-ink: #1a0c03;
-    --accent-soft: #3a2010;
+    --paper: #05060d;
+    --card: #141829;
+    --ink: #f3f4fa;
+    --muted: #9aa0b5;
+    --line: #2b3047;
+    --fill: rgba(110, 139, 255, 0.14);
+    --hero: #0f2470;
+    --accent: #7d97ff;
+    --accent-ink: #0a0f2e;
+    --accent-soft: #1a2456;
+    --rouge: #ff4d57;
+    --rouge-light: #ff8a90;
     --ok: #30d158;
     --ok-soft: #0f2e18;
     --bad: #ff453a;
@@ -50,6 +54,7 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-rouge: var(--rouge);
   --color-ok: var(--ok);
   --color-ok-soft: var(--ok-soft);
   --color-bad: var(--bad);
@@ -218,6 +223,15 @@ h3 {
 }
 .fade-in {
   animation: fadeIn 0.2s ease-out both;
+}
+
+/* Tricolore: on the navy blocks, the accent turns red (countdowns, kickers, buttons), so blue + white + red read as one. */
+.bg-hero .text-accent {
+  color: var(--rouge-light);
+}
+.bg-hero .bg-accent {
+  background-color: var(--rouge);
+  color: #ffffff;
 }
 
 /* Timeline: items fade up as they scroll into view */

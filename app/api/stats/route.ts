@@ -38,7 +38,8 @@ export async function POST(req: Request) {
   const personOf = (sid: string) => (tagBySession.has(sid) ? `tag:${tagBySession.get(sid)}` : `session:${sid}`);
   const people = (sessions: Iterable<string>) => new Set([...sessions].map(personOf));
   const emailRows = await fetchAll<{ created_at: string; email: string; session_id: string | null }>("emails", "created_at, email, session_id");
-  const emailCount = emailRows.length;
+  // Emails left from the team's own test sessions (ZZ tags) are not counted.
+  const realEmails = emailRows.filter((r) => !r.session_id || !testSessions.has(r.session_id));
   const { count: accountCount } = await sb.from("accounts").select("id", { count: "exact", head: true });
 
   const p = (e: EventRow, k: string) => (e.payload?.[k] ?? null) as string | number | boolean | null;
@@ -158,7 +159,7 @@ export async function POST(req: Request) {
   const label = (key: string) => (key.startsWith("tag:") ? key.slice(4) : `sans tag (${key.slice(8, 16)})`);
   const pledges = events.filter((e) => e.event === "partner_pledge");
   const ladder = {
-    l1: { emails: emailRows.map((r) => ({ at: r.created_at, email: r.email, testerTag: tagOf(r.session_id) })) },
+    l1: { emails: realEmails.map((r) => ({ at: r.created_at, email: r.email, testerTag: tagOf(r.session_id) })) },
     l2: {
       returning: [...daysByPerson.entries()].filter(([, d]) => d.size >= 2).map(([key, d]) => ({ person: label(key), days: d.size, dates: [...d].sort().join(" ") })),
       calendarAdds: events.filter((e) => e.event === "calendar_add").map((e) => ({ at: e.created_at, testerTag: tagOf(e.session_id) })),
@@ -228,7 +229,7 @@ export async function POST(req: Request) {
       levels: countBy(sessions, (s) => s.level),
       cityViewRate: bySession.size ? cityViewSessions.size / bySession.size : null,
     },
-    emails: emailCount ?? 0,
+    emails: realEmails.length,
     accounts: accountCount ?? 0,
     accountSkips: people(sessionsWith(events, "account_skip")).size,
     profile: {
