@@ -97,7 +97,7 @@ export async function POST(req: Request) {
       cardsViewed: list.filter((e) => e.event === "feed_card_view").length,
       skippedFeed: list.some((e) => e.event === "feed_skip"),
       challenges: finishes
-        .map((e) => `${p(e, "challengeType")}${p(e, "origin") === "feed" ? " (après feed)" : p(e, "origin") === "feed-inline" ? " (défi rapide dans le fil)" : ""} [${p(e, "mode")}]`)
+        .map((e) => `${p(e, "challengeType")}${p(e, "origin") === "feed" ? " (après feed)" : p(e, "origin") === "feed-inline" ? " (défi rapide dans le fil)" : p(e, "origin") === "daily" ? " (défi du jour)" : ""} [${p(e, "mode")}]`)
         .join(", "),
       scores: finishes.map((e) => (p(e, "score") === null ? "prono" : String(p(e, "score")))).join(", "),
       voix,

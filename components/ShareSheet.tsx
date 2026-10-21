@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { ChallengeType } from "@/lib/content";
 import { useT } from "@/lib/i18n";
+import { recordShare } from "@/lib/progress";
 import { track } from "@/lib/track";
 import { VOIX, addVoix } from "@/lib/voix";
 import { Sheet } from "./Sheet";
@@ -42,6 +43,7 @@ export function ShareSheet({ open, onClose, message, url, challengeType, code, t
     }
     track("share_click", { challengeType, challengeCode: code, method });
     if (code) addVoix(VOIX.share, "Défi envoyé à un·e ami·e", `share:${code}`);
+    recordShare();
   };
 
   const webShare = async () => {

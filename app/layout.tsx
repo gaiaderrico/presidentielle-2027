@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
+import { BadgeToast } from "@/components/BadgeToast";
 import { Boot } from "@/components/Boot";
 import { BottomNav } from "@/components/BottomNav";
 import { Footer } from "@/components/Footer";
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <BottomNav />
         </Suspense>
         <LevelUp />
+        <BadgeToast />
         <Boot />
       </body>
     </html>

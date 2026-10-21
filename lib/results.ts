@@ -24,6 +24,8 @@ export type LastResult = {
   ref: RefChallenge | null;
   match: { code: string; team: "a" | "b" } | null;
   autoShare: boolean;
+  /** Date (YYYY-MM-DD) when this was the daily challenge. */
+  daily?: string | null;
   at: number;
 };
 

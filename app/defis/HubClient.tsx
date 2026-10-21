@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { DailyCard } from "@/components/DailyCard";
 import { Button, Page } from "@/components/ui";
 import type { ChallengeType, Mode } from "@/lib/content";
 import { LEVEL_CHOICES, isLevelChoice, levelChoiceLabel, type LevelChoice } from "@/lib/difficulty";
@@ -58,6 +59,8 @@ export function HubClient() {
         <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Défis", "Challenges")}</p>
         <h1 className="font-display text-4xl font-extrabold leading-none">{t("À toi de jouer", "Your turn")}</h1>
       </div>
+
+      <DailyCard />
 
       {/* Multiplayer, explained in 3 steps */}
       <section className={`flex flex-col gap-3 rounded-[2rem] p-5 ${friendFirst ? "bg-accent text-accent-ink" : "bg-hero text-white"}`}>

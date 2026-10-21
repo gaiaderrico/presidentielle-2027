@@ -48,6 +48,7 @@ Everything players read lives in `content/*.json`. Edit, commit, and Vercel rede
 | `content/levels.json` | City levels and the level-up messages. |
 | `content/defis.json` | Hub cards, durations, modes, result lines. |
 | `content/site.json` | App name and the **team contact email shown on the privacy page (to fill in)**. |
+| `content/badges.json` | Badges (trophées): emoji, name and how to unlock. The unlock rules are in `lib/progress.ts`, matched by `id`. |
 
 **Editorial rules:** facts only, a source for every item, as many items about the left as about the right/centre, nothing still uncertain. **Re-check every card the day before testing.**
 

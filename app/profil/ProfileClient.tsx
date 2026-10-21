@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Trophies } from "@/components/Trophies";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import { setLang, useContent, useLang, useT } from "@/lib/i18n";
 import { levelIndexFor } from "@/lib/levels";
@@ -29,6 +30,7 @@ export function ProfileClient() {
           <p className="text-muted">{t("Une minute pour adapter les actus à ton niveau et à tes sujets.", "One minute to adapt the news to your level and topics.")}</p>
         </Card>
         <ButtonLink href="/bienvenue">{t("Faire mon profil", "Set up my profile")}</ButtonLink>
+        <Trophies />
       </Page>
     );
   }
@@ -57,6 +59,8 @@ export function ProfileClient() {
           </p>
         </div>
       </div>
+
+      <Trophies />
 
       <Card className="flex flex-col gap-3">
         <h2 className="font-display text-lg font-bold">{t("Langue", "Language")}</h2>
@@ -158,7 +162,7 @@ export function ProfileClient() {
           </Button>
         ) : (
           <div className="flex flex-col gap-2 rounded-2xl bg-bad-soft p-4">
-            <p className="font-semibold">{t("Tes voix, ta ville et ton profil seront effacés. On continue ?", "Your voix, city and profile will be deleted. Continue?")}</p>
+            <p className="font-semibold">{t("Tes voix, ta ville, tes trophées et ton profil seront effacés. On continue ?", "Your voix, city, badges and profile will be deleted. Continue?")}</p>
             <div className="grid grid-cols-2 gap-2">
               <Button variant="secondary" onClick={() => setConfirmWipe(false)}>
                 {t("Annuler", "Cancel")}

@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { City } from "@/components/City";
+import { DailyCard } from "@/components/DailyCard";
 import { Logo } from "@/components/Logo";
 import { Button, Card, Page } from "@/components/ui";
 import { fetchChallenge } from "@/lib/api";
 import { daysUntilFirstRound } from "@/lib/feed";
 import { useContent, useT } from "@/lib/i18n";
 import { useProfile } from "@/lib/profile";
+import { dayKey, useProgress } from "@/lib/progress";
 import type { RefChallenge } from "@/lib/results";
 import { hashSeed } from "@/lib/rng";
 import { getFirstName, getSessionId, setFirstName } from "@/lib/session";
@@ -27,6 +29,7 @@ function Landing() {
   const profile = useProfile();
   const t = useT();
   const { total } = useVoix();
+  const progress = useProgress();
   const [days, setDays] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const tracked = useRef(false);
@@ -41,6 +44,8 @@ function Landing() {
   }, []);
 
   const returning = mounted && profile.done;
+  // Returning players: today's challenge comes first until it's done.
+  const dailyDone = mounted && !!progress.daily[dayKey()];
   const features = [
     { emoji: "📰", title: t("L'actu de tous les bords", "News from every side"), text: t("Des cartes courtes, sourcées, de la gauche à l'extrême droite.", "Short, sourced cards, from the left to the far right.") },
     { emoji: "⚡", title: t("Des défis à ton niveau", "Challenges at your level"), text: t("Facile, moyen, difficile, ou progressif. Toujours avec l'explication.", "Easy, medium, hard, or progressive. Always with the explanation.") },
@@ -71,7 +76,10 @@ function Landing() {
 
       {returning ? (
         <div className="flex flex-col gap-3">
-          <Button onClick={() => router.push("/feed")}>{profile.firstName ? `${t("Reprendre", "Continue")}, ${profile.firstName}` : t("Reprendre", "Continue")}</Button>
+          <DailyCard />
+          <Button variant={dailyDone ? "primary" : "secondary"} onClick={() => router.push("/feed")}>
+            {profile.firstName ? `${t("Reprendre l'actu", "Back to the news")}, ${profile.firstName}` : t("Reprendre l'actu", "Back to the news")}
+          </Button>
           <Button variant="secondary" onClick={() => router.push("/defis")}>
             {t("Voir les défis", "See the challenges")}
           </Button>

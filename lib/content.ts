@@ -11,6 +11,7 @@ import topicsJson from "@/content/topics.json";
 import cityJson from "@/content/city.json";
 import actuJson from "@/content/actu.json";
 import onboardingJson from "@/content/onboarding.json";
+import badgesJson from "@/content/badges.json";
 import enOverlay from "@/content/en/overlay.json";
 
 export type Lang = "fr" | "en";
@@ -55,6 +56,7 @@ export type VraiFauxItem = { id: string; statement: string; answer: boolean; exp
 export type AutreCampItem = { id: string; topic: string; pour: string; contre: string; offTopic: string; offTopicCorrection: string; source: Source; difficulty?: Difficulty };
 export type PronoItem = { id: string; question: string; options: string[]; context: string };
 export type Level = { min: number; name: string; withArticle: string; opened: string; badge?: string };
+export type Badge = { id: string; emoji: string; name: string; how: string };
 
 export type ChallengeType = "quiz" | "vrai-faux" | "qui-propose" | "autre-camp" | "pronostics";
 export type Mode = "solo" | "friend" | "team";
@@ -132,6 +134,7 @@ function makeContent(lang: Lang) {
     autreCamp: { resultMessage: autreOv?.resultMessage ?? autreCampBase.resultMessage, items: overlayList(autreCampBase.items, autreOv?.items) },
     pronoItems: overlayList(pronosticsJson.items as PronoItem[], ov("pronostics")),
     levels: merge(levelsJson.levels as Level[], ov("levels")),
+    badges: overlayList(badgesJson.badges as Badge[], ov("badges")),
     defis,
     site: merge(siteJson, ov("site")),
     onboarding: merge(onboardingJson as Onboarding, ov("onboarding")),

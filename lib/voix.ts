@@ -16,6 +16,8 @@ export const VOIX = {
   friendPlayed: 50,
   predictions: 10,
   teamWin: 50,
+  daily: 30, // first daily challenge finished each day
+  dayStreak: 10, // first challenge of the day when the day streak is at least 2
 } as const;
 
 export type VoixEntry = { amount: number; reason: string; at: number };
@@ -74,8 +76,8 @@ export function getMyCodes() {
   return load().myCodes;
 }
 
-/** Credits +50 voix for each new friend who finished one of my challenges. */
-export function creditFriendPlays(counts: Record<string, number>) {
+/** Credits +50 voix for each new friend who finished one of my challenges. Returns the number of new plays. */
+export function creditFriendPlays(counts: Record<string, number>): number {
   const s = load();
   let newPlays = 0;
   const credited = { ...s.credited };
@@ -86,9 +88,14 @@ export function creditFriendPlays(counts: Record<string, number>) {
       credited[code] = count;
     }
   }
-  if (!newPlays) return;
+  if (!newPlays) return 0;
   save({ ...s, credited });
   for (let i = 0; i < newPlays; i++) addVoix(VOIX.friendPlayed, "Un·e ami·e a joué ton défi");
+  return newPlays;
+}
+
+export function getVoixTotal() {
+  return load().total;
 }
 
 export const useVoix = store.use;

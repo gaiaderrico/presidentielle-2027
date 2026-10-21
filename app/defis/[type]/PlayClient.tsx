@@ -8,6 +8,7 @@ import { fetchChallenge } from "@/lib/api";
 import { isChallengeType, type Mode } from "@/lib/content";
 import { isLevelChoice } from "@/lib/difficulty";
 import { useT } from "@/lib/i18n";
+import { dailyChallenge, isDayKey } from "@/lib/progress";
 import type { RefChallenge } from "@/lib/results";
 
 export function PlayClient() {
@@ -20,11 +21,14 @@ export function PlayClient() {
   const matchCode = params.get("match");
   const team = params.get("team");
   const pid = params.get("pid");
+  const jour = params.get("jour");
 
   const hasRef = /^[A-Z0-9]{6}$/.test(refCode);
   const match = matchCode && pid && (team === "a" || team === "b") ? { code: matchCode, team: team as "a" | "b", pid } : null;
   const mode: Mode = match ? "team" : hasRef ? "friend" : modeParam === "friend" ? "friend" : "solo";
   const level = isLevelChoice(levelParam) ? levelParam : "progressif";
+  // Daily challenge: ?jour=YYYY-MM-DD replays that day's 5 questions (a friend's link wins over it).
+  const daily = !hasRef && !match && isDayKey(jour) && dailyChallenge(jour).type === type ? jour : null;
 
   const [ref, setRef] = useState<RefChallenge | null | undefined>(hasRef ? undefined : null);
 
@@ -58,14 +62,15 @@ export function PlayClient() {
   return (
     <Page>
       <ChallengePlayer
-        key={`${type}-${mode}-${refCode}-${pid ?? ""}-${level}`}
+        key={`${type}-${mode}-${refCode}-${pid ?? ""}-${level}-${daily ?? ""}`}
         type={type}
         mode={mode}
         refChallenge={ref}
         match={match}
         level={level}
         // A friend's link replays exactly the same questions.
-        fixedIds={ref?.itemIds ?? null}
+        fixedIds={ref?.itemIds ?? (daily ? dailyChallenge(daily).ids : null)}
+        daily={daily}
       />
     </Page>
   );

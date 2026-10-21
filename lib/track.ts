@@ -23,7 +23,8 @@ export type EventName =
   | "city_share"
   | "email_submit"
   | "onboarding_finish"
-  | "city_building_open";
+  | "city_building_open"
+  | "badge_unlock";
 
 /**
  * Sends one event to /api/event. Never throws.

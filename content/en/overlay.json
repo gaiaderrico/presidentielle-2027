@@ -876,6 +876,20 @@
       "low": "The campaign is full of traps. Maybe your friends will do worse?"
     }
   },
+  "badges": {
+    "premier-defi": { "name": "First challenge", "how": "Finish a challenge." },
+    "defi-du-jour": { "name": "Daily date", "how": "Finish a daily challenge." },
+    "sans-faute": { "name": "Flawless", "how": "Get every question of a challenge right." },
+    "serie-3": { "name": "3 days in a row", "how": "Play 3 days in a row." },
+    "serie-7": { "name": "One week", "how": "Play 7 days in a row." },
+    "touche-a-tout": { "name": "All-rounder", "how": "Play the mini-quiz, True or False, Who proposes this? and Defend the other side." },
+    "tous-les-bords": { "name": "Every side", "how": "Read a news card from the left, the centre, the right and the far right." },
+    "oracle": { "name": "Oracle", "how": "Make your predictions." },
+    "ambassadeur": { "name": "Ambassador", "how": "Send a challenge to a friend." },
+    "recruteur": { "name": "Recruiter", "how": "A friend plays your challenge." },
+    "equipe": { "name": "Team spirit", "how": "Finish a team match." },
+    "parrainages": { "name": "500 endorsements", "how": "Reach 500 voix, the number of signatures a candidate needs." }
+  },
   "site": {
     "appName": "polis",
     "projectEnd": "end of the student project (June 2027)"

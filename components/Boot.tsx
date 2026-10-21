@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { fetchFriendPlays } from "@/lib/api";
+import { recordFriendPlayed } from "@/lib/progress";
 import { captureTesterTag } from "@/lib/session";
 import { creditFriendPlays, getMyCodes } from "@/lib/voix";
 
@@ -12,7 +13,7 @@ export function Boot() {
     const codes = getMyCodes();
     if (!codes.length) return;
     fetchFriendPlays(codes).then((res) => {
-      if (res?.counts) creditFriendPlays(res.counts);
+      if (res?.counts && creditFriendPlays(res.counts) > 0) recordFriendPlayed();
     });
   }, []);
   return null;

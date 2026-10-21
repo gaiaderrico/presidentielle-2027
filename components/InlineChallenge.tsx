@@ -5,6 +5,7 @@ import { createChallenge } from "@/lib/api";
 import type { Content, FeedCard, McqItem } from "@/lib/content";
 import { diffOf, difficultyLabel } from "@/lib/difficulty";
 import { useContent, useT } from "@/lib/i18n";
+import { recordFinish } from "@/lib/progress";
 import { challengeLink, getFirstName, getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
 import { VOIX, addVoix, rememberCode } from "@/lib/voix";
@@ -85,6 +86,7 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
     });
     rememberCode(code);
     track("challenge_finish", { challengeType: "quiz", mode: "solo", score: finalScore, challengeCode: code, refCode: null, origin: "feed-inline" });
+    recordFinish({ type: "quiz", score: finalScore, total: items.length, mode: "solo" });
     setDone({ code, score: finalScore });
     setSaving(false);
   };

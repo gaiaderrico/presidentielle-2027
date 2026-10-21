@@ -9,6 +9,7 @@ import type { BlocCamp, Camp, FeedCard } from "@/lib/content";
 import { buildPool, campRotation, formatDate, pickNext } from "@/lib/feed";
 import { useContent, useT } from "@/lib/i18n";
 import { useProfile } from "@/lib/profile";
+import { recordCampRead } from "@/lib/progress";
 import { readSession, writeSession } from "@/lib/storage";
 import { track } from "@/lib/track";
 import { VOIX, addVoix } from "@/lib/voix";
@@ -127,6 +128,7 @@ function Feed() {
     writeSession("p27.seenCards", [...all.filter((x) => x !== card.id), card.id]);
     track("feed_card_view", { cardId: card.id, camp: card.camp, topic: card.topic });
     addVoix(VOIX.feedCard, t("Carte lue", "Card read"), `feed:${card.id}`);
+    recordCampRead(card.camp);
   }, [t]);
 
   useEffect(() => {

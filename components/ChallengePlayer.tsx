@@ -8,6 +8,7 @@ import { haptic } from "@/lib/feedback";
 import { QUESTION_COUNT, diffOf, difficultyLabel, nextTarget, pickClosest, startTarget, staticSequence, type LevelChoice } from "@/lib/difficulty";
 import { useContent, useT } from "@/lib/i18n";
 import { getProfile } from "@/lib/profile";
+import { dayKey, recordFinish } from "@/lib/progress";
 import { saveLastResult, type LastResult, type RefChallenge, type ResultItem } from "@/lib/results";
 import { getFirstName, getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
@@ -28,6 +29,8 @@ type Props = {
   /** Exact questions to play, in order (a friend's challenge). */
   fixedIds?: string[] | null;
   level?: LevelChoice;
+  /** Date (YYYY-MM-DD) when this is the daily challenge. */
+  daily?: string | null;
 };
 
 function shuffle<T>(arr: T[], seed: string): T[] {
@@ -44,11 +47,12 @@ function shuffle<T>(arr: T[], seed: string): T[] {
 
 const STREAK_FROM = 3;
 
-export function ChallengePlayer({ type, mode, context = "challenge", refChallenge = null, match = null, onDone, items = null, fixedIds = null, level = "progressif" }: Props) {
+export function ChallengePlayer({ type, mode, context = "challenge", refChallenge = null, match = null, onDone, items = null, fixedIds = null, level = "progressif", daily = null }: Props) {
   const router = useRouter();
   const c = useContent();
   const t = useT();
   const name = context === "feed" ? t("Mini-quiz", "Mini-quiz") : c.defis.names[type];
+  const origin = daily ? "daily" : context;
 
   const pool: AnyItem[] = useMemo(() => {
     switch (type) {
@@ -97,8 +101,8 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
   useEffect(() => {
     if (started.current) return;
     started.current = true;
-    track("challenge_start", { challengeType: type, mode, refCode: refChallenge?.code ?? null, origin: context, level });
-  }, [type, mode, refChallenge, context, level]);
+    track("challenge_start", { challengeType: type, mode, refCode: refChallenge?.code ?? null, origin, level });
+  }, [type, mode, refChallenge, origin, level]);
 
   const item = pool.find((i) => i.id === seq[idx]) ?? null;
 
@@ -133,6 +137,9 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     let gained = isProno ? 0 : score * perCorrect + streakBonus.current;
     if (isProno) gained += addVoix(VOIX.predictions, t("Pronostics faits", "Predictions made"), "pronostics");
     else if (context === "challenge") gained += addVoix(VOIX.challengeFinish, `${t("Défi terminé", "Challenge done")} · ${name}`);
+    // The daily bonus is given once per day, and only for today's challenge (not an old link).
+    if (daily && daily === dayKey()) gained += addVoix(VOIX.daily, t("Défi du jour", "Daily challenge"), `daily:${daily}`);
+    gained += recordFinish({ type, score, total: final.length, mode, daily }).bonus;
     if (isProno) await savePredictions(getSessionId(), preds);
     const playedIds = isProno ? preds.map((p) => p.questionId) : final.map((r) => r.id);
     const code = await createChallenge({
@@ -145,7 +152,7 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
       itemIds: playedIds,
     });
     rememberCode(code);
-    track("challenge_finish", { challengeType: type, mode, score: isProno ? null : score, challengeCode: code, refCode: refChallenge?.code ?? null, origin: context, level });
+    track("challenge_finish", { challengeType: type, mode, score: isProno ? null : score, challengeCode: code, refCode: refChallenge?.code ?? null, origin, level });
     if (context === "feed") track("quiz_finish", { score });
     if (refChallenge) track("friend_finish", { refCode: refChallenge.code, score: isProno ? null : score });
     if (match) {
@@ -165,6 +172,7 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
       ref: refChallenge,
       match: match ? { code: match.code, team: match.team } : null,
       autoShare: mode === "friend" && !refChallenge,
+      daily,
       at: Date.now(),
     };
     saveLastResult(result);
@@ -186,7 +194,7 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3 text-sm font-semibold text-muted">
-        <span>{name}</span>
+        <span>{daily ? `📅 ${t("Défi du jour", "Daily challenge")} · ${name}` : name}</span>
         <span className="flex items-center gap-2">
           {streak >= 2 && (
             <span key={streak} className="bump rounded-full bg-accent-soft px-2 py-0.5 text-xs font-extrabold text-accent">

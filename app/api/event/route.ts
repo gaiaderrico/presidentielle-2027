@@ -4,6 +4,7 @@ const EVENTS = new Set([
   "landing_view", "feed_card_view", "feed_reaction", "feed_skip", "quiz_finish", "hub_view", "challenge_start", "answer",
   "challenge_finish", "share_open", "share_click", "friend_landing_view", "friend_finish", "team_match_create", "team_join",
   "team_finish", "points_earned", "level_up", "city_view", "city_share", "email_submit", "onboarding_finish", "city_building_open",
+  "badge_unlock",
 ]);
 
 // Keys that must never reach the database (political opinion in "Défends l'autre camp").

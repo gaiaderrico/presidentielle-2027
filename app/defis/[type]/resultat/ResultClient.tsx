@@ -1,12 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { daysLabel, typeEmoji, useToday } from "@/components/DailyCard";
 import { EmailCapture } from "@/components/EmailCapture";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Button, ButtonLink, Card, Page, SourceLink } from "@/components/ui";
+import type { ChallengeType } from "@/lib/content";
+import { isLevelChoice } from "@/lib/difficulty";
 import { useContent, useT } from "@/lib/i18n";
+import { dailyChallenge, streakInfo, useProgress } from "@/lib/progress";
 import { consumeAutoShare, getLastResult, type LastResult } from "@/lib/results";
 import { challengeLink } from "@/lib/session";
+import { readJSON } from "@/lib/storage";
 import { VOIX } from "@/lib/voix";
 
 export function ResultClient() {
@@ -46,7 +51,12 @@ export function ResultClient() {
         `J'ai fait mes pronos pour la présidentielle 2027. Fais les tiens, on verra qui avait raison 👉 ${url}`,
         `I made my predictions for the 2027 French presidential election. Make yours, we'll see who was right 👉 ${url}`,
       )
-    : t(
+    : result.daily
+      ? t(
+          `J'ai fait ${result.score}/${result.total} au défi du jour sur la présidentielle 2027. Tu fais mieux ? 👉 ${url}`,
+          `I scored ${result.score}/${result.total} on today's challenge about the 2027 French presidential election. Can you beat me? 👉 ${url}`,
+        )
+      : t(
         `J'ai fait ${result.score}/${result.total} au défi "${name}" sur la présidentielle 2027. Tu fais mieux ? 👉 ${url}`,
         `I scored ${result.score}/${result.total} on the "${name}" challenge about the 2027 French presidential election. Can you beat me? 👉 ${url}`,
       );
@@ -54,7 +64,7 @@ export function ResultClient() {
   return (
     <Page className="pb-28">
       <Card className="flex flex-col items-center gap-2 text-center">
-        <p className="text-sm font-semibold text-muted">{name}</p>
+        <p className="text-sm font-semibold text-muted">{result.daily ? `📅 ${t("Défi du jour", "Daily challenge")} · ${name}` : name}</p>
         {isProno ? (
           <p className="font-display text-2xl font-bold">{t("Tes pronos sont enregistrés. On compare le 18 avril au soir !", "Your predictions are saved. We'll compare on the evening of 18 April!")}</p>
         ) : (
@@ -108,6 +118,8 @@ export function ResultClient() {
         ))}
       </section>
 
+      <NextStep played={result.type} />
+
       <div className="grid grid-cols-2 gap-3">
         <ButtonLink href="/defis" variant="secondary">
           {t("Essayer un autre défi", "Try another challenge")}
@@ -129,5 +141,45 @@ export function ResultClient() {
 
       <ShareSheet open={sharing} onClose={() => setSharing(false)} message={message} url={url} challengeType={result.type} code={result.code} />
     </Page>
+  );
+}
+
+const NEXT_ORDER: ChallengeType[] = ["vrai-faux", "qui-propose", "autre-camp", "pronostics"];
+
+/** "Et maintenant ?": the day streak, then one concrete next challenge (today's challenge first, then one not played yet). */
+function NextStep({ played }: { played: ChallengeType }) {
+  const c = useContent();
+  const t = useT();
+  const progress = useProgress();
+  const today = useToday();
+  if (!today) return null;
+
+  const streak = streakInfo(progress.days, today);
+  const daily = dailyChallenge(today);
+  const level = readJSON<string | null>("p27.levelChoice", null);
+  let next: { type: ChallengeType; href: string; daily: boolean };
+  if (!progress.daily[today]) {
+    next = { type: daily.type, href: `/defis/${daily.type}?jour=${today}`, daily: true };
+  } else {
+    // Predictions are a one-off: once made, only the replayable challenges rotate.
+    const type =
+      NEXT_ORDER.find((x) => x !== played && !progress.types.includes(x)) ??
+      NEXT_ORDER.slice(0, 3)[(NEXT_ORDER.indexOf(played) + 1) % 3];
+    next = { type, href: `/defis/${type}?mode=solo&niveau=${isLevelChoice(level) ? level : "progressif"}`, daily: false };
+  }
+
+  return (
+    <Card className="flex flex-col gap-3">
+      <h2 className="font-display text-lg font-bold">{t("Et maintenant ?", "What next?")}</h2>
+      {streak.current > 0 && (
+        <p className="-mt-1 font-semibold">
+          🔥 {t(`Série : ${daysLabel(streak.current, t)}.`, `Streak: ${daysLabel(streak.current, t)}.`)}{" "}
+          <span className="font-normal text-muted">{t("Reviens demain pour la garder.", "Come back tomorrow to keep it.")}</span>
+        </p>
+      )}
+      <ButtonLink href={next.href}>
+        {typeEmoji(c, next.type)} {next.daily ? `${t("Défi du jour", "Daily challenge")} · ${c.defis.names[next.type]} (+${VOIX.daily} voix)` : `${t("Enchaîner", "Up next")} : ${c.defis.names[next.type]}`}
+      </ButtonLink>
+    </Card>
   );
 }

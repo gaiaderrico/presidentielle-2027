@@ -113,3 +113,14 @@ _None yet._
 | Full iOS-style redesign: system font (SF Pro on iPhone), grouped grey background with white cards and no borders, near-black text, iOS buttons (50pt, grey-fill secondary), segmented controls, grey text fields, tab bar without pill, red delete action, dark mode in true black | The first pass was too subtle to notice. apple-ui-designer: native over custom, hierarchy by size and weight, accent used sparingly. Also removes the 2 Google Fonts downloads |
 | `voix` and `profile` share one typed persisted store (`lib/store.ts`) | One data flow for all local state (Zustand-style pattern, no new dependency) |
 | Not done: a daily streak / daily goal | Feature creep: it does not help the round-1 test (finish one challenge) |
+
+## 2026-10-21: engagement features (requested by the team)
+This reverses "Not done: a daily streak" above: the team asked for features that bring players back. Everything stays on the phone (`lib/progress.ts`, key `p27.progress`); only `badge_unlock` (badge id) and `origin: "daily"` on challenge events reach the server.
+| Decision | Why |
+|---|---|
+| **Défi du jour**: 5 questions, the same for everybody on a given day (seeded by the date), type rotates Vrai ou Faux → Qui propose ça ? → Mini-quiz. +30 voix once per day. Shown first in Défis and on the home page for returning players | A reason to come back every day, and a shared reference ("j'ai fait 4/5 au défi du jour") that makes sharing natural |
+| **Day streak** 🔥: days with at least one finished challenge (any kind, mini-quiz and quick challenge included). +10 voix on the first challenge of the day from 2 days in a row. "At risk" reminder when the streak isn't continued yet today | Habit loop; the bonus is small so level thresholds stay meaningful |
+| **12 badges** (`content/badges.json`, editable, English in the overlay): first challenge, daily challenge, flawless, 3 and 7 days, all-rounder, every side (read a card from all 4 blocs), predictions, sent a challenge, a friend played, team match, 500 voix. Banner when one unlocks, collection in Profil | Collection goal; several badges point at the behaviours we want (play every challenge type, read every side, share) |
+| **"Et maintenant ?"** on the result page: today's challenge if not done, otherwise a challenge type not played yet | The result page was a dead end ("Essayer un autre défi"); one concrete next step reduces drop-off |
+| Camps read (for "Tous les bords") are stored locally only and never sent | Reading habits per camp could hint at political leaning (same rule as feed 👍/👎) |
+| To measure: return rate (sessions active on 2+ days, from `events.created_at`), daily challenge starts/finishes (`origin = daily`), `badge_unlock` counts | Check whether these features change behaviour before adding more |
