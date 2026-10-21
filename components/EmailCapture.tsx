@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { submitEmail } from "@/lib/api";
+import { EMAIL_RE, submitEmail } from "@/lib/api";
+import { getProfile } from "@/lib/profile";
 import { getSessionId } from "@/lib/session";
 import { readJSON, writeJSON } from "@/lib/storage";
 import { useT } from "@/lib/i18n";
 import { track } from "@/lib/track";
 import { Button, Card } from "./ui";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function EmailCapture() {
   const t = useT();
@@ -18,6 +17,7 @@ export function EmailCapture() {
 
   useEffect(() => {
     if (readJSON<boolean>("p27.emailDone", false)) setState("done");
+    setEmail(getProfile().email);
   }, []);
 
   const valid = EMAIL_RE.test(email.trim());

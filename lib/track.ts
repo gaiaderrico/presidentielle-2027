@@ -26,7 +26,8 @@ export type EventName =
   | "city_building_open"
   | "badge_unlock"
   | "feedback_submit"
-  | "guide_view";
+  | "guide_view"
+  | "account_create";
 
 /**
  * Sends one event to /api/event. Never throws.

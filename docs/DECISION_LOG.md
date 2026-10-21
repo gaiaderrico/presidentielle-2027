@@ -144,3 +144,10 @@ This reverses "Not done: a daily streak" above: the team asked for features that
 | New badge "Prêt·e à voter" (whole checklist ticked) and event `guide_view` (which situation was opened, no other data) | Measure use of the guide |
 | **Corrections found while checking sources**: (1) "procuration possible jusqu'à la veille" removed from 1 feed card and 2 question explanations: F1604 sets no fixed deadline and says to do it as early as possible; (2) the registration deadline is now the 6th Friday whatever the method (décret 2026-493, from 1 July 2026): 12 March 2027 stays right; (3) `qui-peut-voter` and `elections-etudiantes` cited a home page, now a precise page | Accuracy |
 | Not fixed: `presidentielle-te-concerne` still cites the Campus France home page | Out of the guide's scope; to check |
+
+## 2026-10-21 (night): account created with an email at onboarding (requested by the team)
+| Decision | Why |
+|---|---|
+| The first onboarding step is now "Crée ton compte": email (required) + first name (optional). The email is sent to `/api/account` and stored in a new `accounts` table (one row per email, no password); "Tout passer" only appears after this step | The team wants every player who does the onboarding to have an account tied to an email |
+| The account email is never used to write to players; the "prochains défis" emails still need the consent box (`emails` table), now prefilled with the account email | Keeps consent for messages separate from account creation. Privacy page updated |
+| Event `account_create` (no email in the payload) and "Comptes créés" in `/stats` | Measure how many players create an account |

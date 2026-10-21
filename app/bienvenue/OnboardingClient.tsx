@@ -1,15 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { IconBack } from "@/components/Icons";
 import { Button } from "@/components/ui";
+import { EMAIL_RE, createAccount } from "@/lib/api";
 import { useContent, useT } from "@/lib/i18n";
 import { EMPTY_PROFILE, computeLevel, getProfile, isInternational, saveProfile, type LevelId, type Profile } from "@/lib/profile";
+import { getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
 import { addVoix } from "@/lib/voix";
 
-const STEPS = 6; // 0 name · 1 you · 2 level test · 3 topics · 4 tutorial · 5 result
+const STEPS = 6; // 0 account · 1 you · 2 level test · 3 topics · 4 tutorial · 5 result
 
 function Choice({ selected, onClick, children }: { selected: boolean; onClick: () => void; children: ReactNode }) {
   return (
@@ -51,8 +53,15 @@ export function OnboardingClient() {
   const [answers, setAnswers] = useState<(number | null)[]>(ob.knowledge.map(() => null));
   const [checked, setChecked] = useState(false);
   const [slide, setSlide] = useState(0);
+  // Email of the account already created on this phone ("" = none yet).
+  const [accountEmail, setAccountEmail] = useState("");
+  const [account, setAccount] = useState<"idle" | "sending" | "error">("idle");
 
-  useEffect(() => setP(getProfile()), []);
+  useEffect(() => {
+    const saved = getProfile();
+    setP(saved);
+    setAccountEmail(saved.email);
+  }, []);
 
   const set = (patch: Partial<Profile>) => setP((x) => ({ ...x, ...patch }));
   const back = () => (step === 0 ? router.push("/") : setStep(step - 1));
@@ -62,6 +71,28 @@ export function OnboardingClient() {
   // Test skipped: the level comes from how often they follow the news.
   const level: LevelId = checked ? computeLevel(knowledge, p.followsNews) : (LEVEL_FROM_HABIT[p.followsNews ?? ""] ?? "debutant");
   const intl = isInternational(p);
+
+  const email = p.email.trim();
+  const emailOk = EMAIL_RE.test(email);
+  const hasAccount = accountEmail !== "" && email === accountEmail;
+
+  // Step 0: the email creates the account. Saved right away, so it is kept even if the player leaves before the end.
+  const submitAccount = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!emailOk) return;
+    setAccount("sending");
+    const res = await createAccount(getSessionId(), email, p.firstName.trim());
+    if (!res?.ok) {
+      setAccount("error");
+      return;
+    }
+    if (!hasAccount) track("account_create");
+    saveProfile({ ...getProfile(), email, firstName: p.firstName });
+    setAccountEmail(email);
+    setAccount("idle");
+    set({ email });
+    next();
+  };
 
   const finish = () => {
     const final: Profile = { ...p, knowledge: checked ? knowledge : 0, level, done: true };
@@ -95,7 +126,7 @@ export function OnboardingClient() {
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuemin={1} aria-valuemax={STEPS} aria-valuenow={step + 1}>
           <div className="h-full rounded-full bg-accent transition-all duration-500" style={{ width: `${((step + 1) / STEPS) * 100}%` }} />
         </div>
-        {step < STEPS - 1 && (
+        {step > 0 && step < STEPS - 1 && (
           <button onClick={() => setStep(STEPS - 1)} className="shrink-0 text-sm font-semibold text-muted underline underline-offset-4">
             {t("Tout passer", "Skip all")}
           </button>
@@ -103,12 +134,29 @@ export function OnboardingClient() {
       </div>
 
       {step === 0 && (
-        <section className="pop flex flex-col gap-5">
+        <form onSubmit={submitAccount} noValidate className="pop flex flex-col gap-5">
           <div>
             <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Bienvenue", "Welcome")} 👋</p>
-            <h1 className="mt-1 font-display text-3xl font-extrabold leading-tight">{t("Comment tu t'appelles ?", "What's your name?")}</h1>
-            <p className="mt-2 text-muted">{t("4 petites questions pour adapter l'app à toi. Tu peux tout passer.", "4 quick questions to adapt the app to you. You can skip everything.")}</p>
+            <h1 className="mt-1 font-display text-3xl font-extrabold leading-tight">{hasAccount ? t("Ton compte", "Your account") : t("Crée ton compte", "Create your account")}</h1>
+            <p className="mt-2 text-muted">
+              {t("Ton email crée ton compte. Ensuite, 4 petites questions pour adapter l'app à toi : celles-là, tu peux les passer.", "Your email creates your account. Then 4 quick questions to adapt the app to you: those you can skip.")}
+            </p>
           </div>
+          <label htmlFor="ob-email" className="sr-only">
+            {t("Ton email", "Your email")}
+          </label>
+          <input
+            id="ob-email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            maxLength={254}
+            placeholder={t("ton@email.fr", "you@email.com")}
+            value={p.email}
+            onChange={(e) => set({ email: e.target.value })}
+            className="min-h-14 rounded-[12px] border-0 bg-fill px-4 text-lg"
+          />
+          <p className="-mt-3 text-sm text-muted">{t("Il sert seulement à ton compte : on ne t'écrit pas sans ton accord.", "It's only used for your account: we never write to you without your consent.")}</p>
           <label htmlFor="ob-name" className="sr-only">
             {t("Ton prénom", "Your first name")}
           </label>
@@ -121,9 +169,12 @@ export function OnboardingClient() {
             onChange={(e) => set({ firstName: e.target.value })}
             className="min-h-14 rounded-[12px] border-0 bg-fill px-4 text-lg"
           />
-          <p className="-mt-3 text-sm text-muted">{t("Il sert seulement à montrer à tes amis qui les défie.", "It's only used to show your friends who challenged them.")}</p>
-          <Button onClick={next}>{t("Continuer", "Continue")}</Button>
-        </section>
+          <p className="-mt-3 text-sm text-muted">{t("Ton prénom sert seulement à montrer à tes amis qui les défie.", "Your first name is only used to show your friends who challenged them.")}</p>
+          {account === "error" && <p className="text-sm text-bad">{t("La création du compte n'a pas marché. Vérifie ta connexion et réessaie.", "Creating your account failed. Check your connection and try again.")}</p>}
+          <Button type="submit" disabled={!emailOk || account === "sending"}>
+            {account === "sending" ? t("Création…", "Creating…") : hasAccount ? t("Continuer", "Continue") : t("Créer mon compte", "Create my account")}
+          </Button>
+        </form>
       )}
 
       {step === 1 && (

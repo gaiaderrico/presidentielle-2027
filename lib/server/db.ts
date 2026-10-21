@@ -22,6 +22,7 @@ export function newCode(length = 6) {
 
 export const CODE_RE = /^[A-Z0-9]{6}$/;
 export const UUID_RE = /^[A-Za-z0-9-]{8,64}$/;
+export const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/;
 
 export function cleanName(v: unknown, max = 20): string | null {
   if (typeof v !== "string") return null;

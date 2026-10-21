@@ -62,6 +62,14 @@ create table if not exists emails (
   consent boolean not null check (consent)
 );
 
+create table if not exists accounts (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  email text not null unique,    -- the account is created with this email at onboarding (no password)
+  session_id text,               -- last device that signed up with this email
+  first_name text
+);
+
 -- Row Level Security: ON for every table, with NO policy for the anon/authenticated roles.
 -- The browser never talks to Supabase directly: all reads and writes go through the Next.js
 -- API routes, which use the service role key (server-side only). This is stricter than
@@ -72,3 +80,4 @@ alter table predictions enable row level security;
 alter table matches enable row level security;
 alter table match_players enable row level security;
 alter table emails enable row level security;
+alter table accounts enable row level security;

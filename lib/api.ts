@@ -63,8 +63,15 @@ export function savePredictions(sessionId: string, answers: { questionId: string
   return post<{ ok: boolean }>("/api/prediction", { sessionId, answers });
 }
 
+/** Quick check in the browser; the server checks again. */
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export function submitEmail(sessionId: string, email: string, consent: boolean) {
   return post<{ ok: boolean }>("/api/email", { sessionId, email, consent });
+}
+
+export function createAccount(sessionId: string, email: string, firstName: string) {
+  return post<{ ok: boolean }>("/api/account", { sessionId, email, firstName });
 }
 
 export type TeamSummary = { name: string; players: number; finished: number; avgScore: number | null; total: number | null; voix: number };

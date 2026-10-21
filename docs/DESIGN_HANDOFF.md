@@ -91,7 +91,7 @@ System font stack (SF Pro on Apple devices): `--font-sans` for text, `--font-dis
 | `InlineChallenge` | — | `readCards`, `used`, `onContinue` | "⚡ Défi rapide" inside the feed, every 3 cards |
 | `ShareSheet` | challenge / city | `message`, `url`, `challengeType`, `code` | Web Share (if available), WhatsApp, Copy link; 3-step explanation for challenges |
 | `LevelUp` | — | — | Overlay when the city reaches a new level |
-| `EmailCapture` | idle / sending / done / error | — | Consent checkbox is required before the button enables |
+| `EmailCapture` | idle / sending / done / error | — | Consent checkbox is required before the button enables. Email prefilled from the account |
 
 ## States and Interactions
 
@@ -115,7 +115,8 @@ System font stack (SF Pro on Apple devices): `--font-sans` for text, `--font-dis
 | City building | Locked | Dashed outline + 🔒; tap → sheet with the level and voix still needed + "Gagner des voix" |
 | Voix pill (top bar) | Gain | `+N voix` floats up (1.2s), number `bump`s |
 | Email form | Error | Inline `text-bad` message under the field, form stays filled |
-| Onboarding step | Any | Back chevron, progress bar, "Tout passer" (jumps to result), "Passer" per step |
+| Onboarding step | Any | Back chevron, progress bar, "Tout passer" (jumps to result, shown after the account step), "Passer" per step |
+| Onboarding account step | Sending / error | "Créer mon compte" disabled until the email is valid; "Création…" while sending; inline `text-bad` message on error, form stays filled |
 
 There are no hover-only interactions: every hover state must also work on tap.
 

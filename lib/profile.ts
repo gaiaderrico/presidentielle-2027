@@ -9,6 +9,8 @@ export type LevelId = "debutant" | "intermediaire" | "avance";
 export type Profile = {
   done: boolean;
   firstName: string;
+  /** Account email, given at onboarding (no password). */
+  email: string;
   followsNews: "jamais" | "parfois" | "souvent" | null;
   voted: "oui" | "non" | null;
   /** Can vote at the French presidential election: "fr" = yes; "eu" / "non-eu" / "nsp" = international mode. */
@@ -24,6 +26,7 @@ export type Profile = {
 export const EMPTY_PROFILE: Profile = {
   done: false,
   firstName: "",
+  email: "",
   followsNews: null,
   voted: null,
   voter: null,
