@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { City } from "@/components/City";
 import { DailyCard, daysLabel } from "@/components/DailyCard";
-import { PartnerCTA } from "@/components/PartnerCTA";
 import { Logo } from "@/components/Logo";
 import { Button, Card, Page } from "@/components/ui";
 import { fetchChallenge } from "@/lib/api";
@@ -166,7 +165,6 @@ function PlayerHome({ days }: { days: number | null }) {
         ))}
       </nav>
 
-      <PartnerCTA />
       <p className="text-center text-sm font-semibold text-muted">{t("Neutre et gratuit. On ne te dira jamais pour qui voter.", "Neutral and free. We will never tell you who to vote for.")}</p>
     </Page>
   );

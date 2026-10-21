@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { daysLabel, typeEmoji, useToday } from "@/components/DailyCard";
-import { EmailCapture } from "@/components/EmailCapture";
+import { CommitPrompts } from "@/components/CommitPrompts";
 import { FeedbackCard } from "@/components/FeedbackCard";
-import { PartnerCTA } from "@/components/PartnerCTA";
-import { RemindMe } from "@/components/RemindMe";
 import { ShareSheet } from "@/components/ShareSheet";
-import { Button, ButtonLink, Card, Page, SourceLink } from "@/components/ui";
+import { ButtonLink, Card, Page, SourceLink } from "@/components/ui";
 import type { ChallengeType } from "@/lib/content";
 import { isLevelChoice } from "@/lib/difficulty";
 import { useContent, useT } from "@/lib/i18n";
@@ -66,7 +64,7 @@ export function ResultClient() {
       );
 
   return (
-    <Page className="pb-28">
+    <Page>
       <Card className="flex flex-col items-center gap-2 text-center">
         <p className="text-sm font-semibold text-muted">{result.daily ? `📅 ${t("Défi du jour", "Daily challenge")} · ${name}` : name}</p>
         {isProno ? (
@@ -105,10 +103,6 @@ export function ResultClient() {
           </div>
         )}
       </Card>
-
-      {/* Small commitments right after the score, while the player is engaged: book tomorrow's slot, then the email. */}
-      <RemindMe />
-      <EmailCapture />
 
       {result.match && (
         <ButtonLink href={`/equipes/${result.match.code}`} variant="secondary">
@@ -164,17 +158,10 @@ export function ResultClient() {
         </ButtonLink>
       </div>
 
-      <PartnerCTA />
-
       <FeedbackCard challengeType={result.type} />
 
-      <div className="fixed inset-x-0 z-20 px-4 pb-3" style={{ bottom: "calc(4.25rem + env(safe-area-inset-bottom, 0px))" }}>
-        <div className="mx-auto max-w-md">
-          <Button onClick={() => setSharing(true)} disabled={!result.code} className="shadow-lg">
-            👫 {t("Défie un·e ami·e", "Challenge a friend")} (+{VOIX.share} voix)
-          </Button>
-        </div>
-      </div>
+      {/* Email, then Instagram: as pop-ups after the score, once the share sheet (if any) is closed. */}
+      <CommitPrompts paused={sharing} />
 
       <ShareSheet open={sharing} onClose={() => setSharing(false)} message={message} url={url} challengeType={result.type} code={result.code} />
     </Page>

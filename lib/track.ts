@@ -29,6 +29,8 @@ export type EventName =
   | "guide_view"
   | "account_create"
   | "account_skip"
+  | "instagram_click"
+  | "prompt_view"
   | "timeline_view"
   | "calendar_add";
 

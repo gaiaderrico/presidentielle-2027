@@ -59,12 +59,6 @@ export function fetchDuels(codes: string[]) {
   return get<Duels>(`/api/challenge/replies?codes=${codes.map(encodeURIComponent).join(",")}`);
 }
 
-export type Pledge = { org: string; name: string; role: string; email: string; commitments: string[]; members: number | null; when: string | null; note: string; consent: boolean };
-
-export function submitPledge(sessionId: string, testerTag: string | null, pledge: Pledge) {
-  return post<{ ok: boolean; stored: boolean; ref: string }>("/api/pledge", { sessionId, testerTag, ...pledge });
-}
-
 export function savePredictions(sessionId: string, answers: { questionId: string; answer: string }[]) {
   return post<{ ok: boolean }>("/api/prediction", { sessionId, answers });
 }

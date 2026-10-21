@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { DailyCard } from "@/components/DailyCard";
 import { Duels } from "@/components/Duels";
-import { PartnerCTA } from "@/components/PartnerCTA";
 import { Button, Page } from "@/components/ui";
 import type { ChallengeType, Mode } from "@/lib/content";
 import { LEVEL_CHOICES, isLevelChoice, levelChoiceLabel, type LevelChoice } from "@/lib/difficulty";
@@ -145,8 +144,6 @@ export function HubClient() {
           <span className="text-[15px] leading-snug text-muted">{t("S'inscrire, la procuration, le jour du vote, voter depuis l'étranger…", "Registering, proxy votes, election day, voting from abroad…")}</span>
         </span>
       </Link>
-
-      <PartnerCTA />
 
       {picked && picked.type !== "equipes" && (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50" onClick={() => setPicked(null)}>

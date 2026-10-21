@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { PartnerCTA } from "@/components/PartnerCTA";
+import { InstagramGlyph } from "@/components/CommitPrompts";
 import { Trophies } from "@/components/Trophies";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import { setLang, useContent, useLang, useT } from "@/lib/i18n";
 import { levelIndexFor } from "@/lib/levels";
 import { isInternational, saveProfile, useProfile, type Profile } from "@/lib/profile";
+import { track } from "@/lib/track";
 import { useVoix } from "@/lib/voix";
 
 export function ProfileClient() {
@@ -63,8 +64,6 @@ export function ProfileClient() {
       </div>
 
       <Trophies />
-
-      <PartnerCTA />
 
       <Card className="flex flex-col gap-3">
         <h2 className="font-display text-lg font-bold">{t("Langue", "Language")}</h2>
@@ -160,6 +159,15 @@ export function ProfileClient() {
       </ButtonLink>
 
       <Card className="flex flex-col gap-3">
+        <a
+          href={c.site.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track("instagram_click", { from: "profile" })}
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] bg-[linear-gradient(45deg,#f9a825,#e1306c,#833ab4)] px-4 font-semibold text-white"
+        >
+          <InstagramGlyph size={20} /> {t("Suis polis sur Instagram", "Follow polis on Instagram")}
+        </a>
         <Link href="/donnees-personnelles" className="font-semibold underline underline-offset-4">
           {t("Données personnelles", "Personal data")}
         </Link>

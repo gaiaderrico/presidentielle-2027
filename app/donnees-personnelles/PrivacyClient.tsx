@@ -26,7 +26,6 @@ export function PrivacyClient() {
           <li>{t("Les réponses de ton profil : ton niveau, tes sujets, si tu peux voter en France et si tu es inscrit·e sur les listes.", "Your profile answers: your level, your topics, whether you can vote in France and whether you are on the electoral roll.")}</li>
           <li>{t("Tes voix et le niveau de ta ville.", "Your voix and your city level.")}</li>
           <li>{t("Ton avis sur le jeu (une note et un commentaire facultatif), seulement si tu l'envoies. On ne le cite que si tu as coché la case, avec ton prénom seulement si tu l'as donné.", "Your feedback on the game (a rating and an optional comment), only if you send it. We only quote it if you ticked the box, with your first name only if you gave it.")}</li>
-          <li>{t("Si tu engages ton association (page « Partenaires ») : son nom, ton nom, ton rôle et ton email, pour te recontacter.", "If you commit your organisation (\"Partners\" page): its name, your name, your role and your email, to contact you back.")}</li>
           <li>{t("Quand un·e ami·e joue ton défi, son prénom (s'il l'a donné) et son score s'affichent dans tes duels.", "When a friend plays your challenge, their first name (if they gave it) and score show up in your duels.")}</li>
         </ul>
         <h2 className="font-display text-lg font-bold">{t("Ce qu'on ne collecte jamais", "What we never collect")}</h2>

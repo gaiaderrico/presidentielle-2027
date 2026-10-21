@@ -38,8 +38,8 @@ export function BottomNav() {
       >
         <ul className="mx-auto grid h-13 max-w-md grid-cols-5">
           {TABS.map(({ href, fr, en, Icon }) => {
-            // Pages opened from the Défis hub (team match, voting guide, timeline, partners) keep the Défis tab lit.
-            const fromHub = href === "/defis" && (path.startsWith("/equipes") || ["/voter", "/frise", "/partenaires"].includes(path));
+            // Pages opened from the Défis hub (team match, voting guide, timeline) keep the Défis tab lit.
+            const fromHub = href === "/defis" && (path.startsWith("/equipes") || ["/voter", "/frise"].includes(path));
             const active = path === href || (href !== "/feed" && href !== "/" && path.startsWith(href + "/")) || (href === "/feed" && path === "/quiz") || fromHub;
             return (
               <li key={href}>

@@ -87,7 +87,8 @@ h3 {
   text-wrap: balance;
 }
 
-:focus-visible {
+/* Keyboard focus ring; not on containers focused by code (sheets, tabIndex -1). */
+:focus-visible:not([tabindex="-1"]) {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }

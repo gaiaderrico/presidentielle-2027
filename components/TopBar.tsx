@@ -13,7 +13,7 @@ const ROOTS = ["/", "/feed", "/defis", "/ma-ville", "/profil", "/bienvenue"];
 
 function parentOf(path: string): string {
   if (path === "/quiz") return "/feed";
-  if (path.startsWith("/defis/") || path.startsWith("/equipes") || ["/voter", "/frise", "/partenaires"].includes(path)) return "/defis";
+  if (path.startsWith("/defis/") || path.startsWith("/equipes") || ["/voter", "/frise"].includes(path)) return "/defis";
   if (path === "/donnees-personnelles") return "/profil";
   return "/feed";
 }

@@ -10,7 +10,8 @@ import { track } from "@/lib/track";
 import { VOIX, addVoix } from "@/lib/voix";
 import { Button, Card } from "./ui";
 
-export function EmailCapture() {
+/** Email for the next messages, with explicit consent. `bare` drops the card (inside a pop-up); `onDone` runs once saved. */
+export function EmailCapture({ bare = false, onDone }: { bare?: boolean; onDone?: () => void } = {}) {
   const t = useT();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
@@ -33,24 +34,27 @@ export function EmailCapture() {
       addVoix(VOIX.email, t("Inscrit·e aux prochains défis", "Signed up for the next challenges"), "email");
       writeJSON("p27.emailDone", true);
       setState("done");
+      onDone?.();
     } else {
       setState("error");
     }
   };
 
+  const Wrap = bare ? "div" : Card;
+
   if (state === "done") {
     return (
-      <Card className="text-center">
+      <Wrap className="text-center">
         <p className="font-display text-xl font-bold">{t("C'est noté !", "Done!")}</p>
         <p className="mt-1 text-muted">{t("Prochain défi dans ta boîte mail avant le 18 avril.", "Next challenge in your inbox before 18 April.")}</p>
-      </Card>
+      </Wrap>
     );
   }
 
   return (
-    <Card>
+    <Wrap>
       <form onSubmit={submit} className="flex flex-col gap-3" noValidate>
-        <h2 className="font-display text-xl font-bold">
+        <h2 id="email-title" className="font-display text-xl font-bold">
           ✉️ {t("Ne rate pas le 12 mars", "Don't miss 12 March")} <span className="text-sm font-semibold text-accent">+{VOIX.email} voix</span>
         </h2>
         <ul className="flex flex-col gap-1 text-[15px] text-muted">
@@ -81,6 +85,6 @@ export function EmailCapture() {
           {state === "sending" ? t("Envoi…", "Sending…") : t(`Oui, je m'inscris (+${VOIX.email} voix)`, `Yes, sign me up (+${VOIX.email} voix)`)}
         </Button>
       </form>
-    </Card>
+    </Wrap>
   );
 }

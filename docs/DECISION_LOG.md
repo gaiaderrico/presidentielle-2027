@@ -232,3 +232,12 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 | White background and cards, République blue (`#2546e0`) for actions, navy (`#0b1f5c`) for the dark blocks, red (`#e1000f`) as the accent on those blocks, a thin tricolour stripe under the top bar; link preview, app icon theme and city flags follow | Team request: the national colours |
 | Institutional tones, red kept as an accent only; camps are still shown with neutral chips and icons, never with colours | National colours rather than a party's (neutrality, A6); red is also the "wrong answer" colour, so it can't be the main button colour |
 | Replaces the orange accent of the iOS redesign | |
+
+## 2026-10-21: commitment asks as pop-ups, Instagram, partners removed (requested by the team)
+| Decision | Why |
+|---|---|
+| After a challenge, two pop-ups in a row: the email (consent box, "Plus tard" to skip), then "Suis-nous sur Instagram / Follow us on Instagram — stay updated on our journey" (@polis_app). Each shows at most once per tab and never again once answered; they wait for the level-up and share sheet to close | The result page was too busy; one clear ask at a time is easier to act on |
+| Result page reduced to: score + WhatsApp share, next step, answers (folded), feedback. The inline email box, the calendar reminder and the sticky share button left the page (the reminder stays on the daily challenge once done) | Cleaner page |
+| `/partenaires`, its API, the "Asso, BDE, promo" card and the level-4 row of `/stats` removed | The team doesn't want partnerships and has no time to follow up. No pledge had been recorded |
+| Instagram also linked in the home footer and Profil. Events `prompt_view` (pop-up shown) and `instagram_click`; `/stats` level 1 shows emails and Instagram taps with how many people saw each pop-up (conversion), the follow itself can't be verified | Measure the asks |
+| Instagram link stored without the QR-code tracking parameters (`content/site.json`) | Clean link |

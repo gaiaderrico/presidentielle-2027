@@ -157,9 +157,17 @@ export async function POST(req: Request) {
   // Commitment ladder (course, Day 3): every level with its trace.
   const tagOf = (sid: string | null) => (sid ? (bySession.get(sid)?.map((e) => p(e, "testerTag")).find((t) => t) as string | undefined) ?? null : null);
   const label = (key: string) => (key.startsWith("tag:") ? key.slice(4) : `sans tag (${key.slice(8, 16)})`);
-  const pledges = events.filter((e) => e.event === "partner_pledge");
   const ladder = {
-    l1: { emails: realEmails.map((r) => ({ at: r.created_at, email: r.email, testerTag: tagOf(r.session_id) })) },
+    l1: {
+      emails: realEmails.map((r) => ({ at: r.created_at, email: r.email, testerTag: tagOf(r.session_id) })),
+      // Taps on "Follow on Instagram" (the follow itself happens on Instagram and can't be checked here).
+      instagram: events.filter((e) => e.event === "instagram_click").map((e) => ({ at: e.created_at, person: e.session_id ? label(personOf(e.session_id)) : "", testerTag: tagOf(e.session_id), from: String(p(e, "from") ?? "") })),
+      // How many people saw each pop-up: the denominator for the email and Instagram conversion.
+      promptViews: {
+        email: people(events.filter((e) => e.event === "prompt_view" && p(e, "kind") === "email" && e.session_id).map((e) => e.session_id as string)).size,
+        instagram: people(events.filter((e) => e.event === "prompt_view" && p(e, "kind") === "instagram" && e.session_id).map((e) => e.session_id as string)).size,
+      },
+    },
     l2: {
       returning: [...daysByPerson.entries()].filter(([, d]) => d.size >= 2).map(([key, d]) => ({ person: label(key), days: d.size, dates: [...d].sort().join(" ") })),
       calendarAdds: events.filter((e) => e.event === "calendar_add").map((e) => ({ at: e.created_at, testerTag: tagOf(e.session_id) })),
@@ -168,21 +176,6 @@ export async function POST(req: Request) {
       // Level 3 counts the player who shares (share_click), not the friend who opens or plays the link.
       shares: shares.map((e) => ({ at: e.created_at, person: e.session_id ? label(personOf(e.session_id)) : "", testerTag: tagOf(e.session_id), method: String(p(e, "method") ?? ""), code: String(p(e, "challengeCode") ?? "") })),
       quotes: feedback.filter((e) => p(e, "quotable") === true).map((e) => ({ at: e.created_at, name: String(p(e, "name") ?? ""), rating: Number(p(e, "rating")), comment: String(p(e, "comment") ?? ""), testerTag: tagOf(e.session_id) })),
-    },
-    l4: {
-      pledges: pledges.map((e) => ({
-        at: e.created_at,
-        ref: String(p(e, "ref") ?? ""),
-        org: String(p(e, "org") ?? ""),
-        name: String(p(e, "name") ?? ""),
-        role: String(p(e, "role") ?? ""),
-        email: String(p(e, "email") ?? ""),
-        commitments: (Array.isArray(e.payload?.commitments) ? e.payload.commitments : []).join(", "),
-        members: p(e, "members"),
-        when: p(e, "when"),
-        note: String(p(e, "note") ?? ""),
-        testerTag: (p(e, "testerTag") as string | null) ?? tagOf(e.session_id),
-      })),
     },
   };
 

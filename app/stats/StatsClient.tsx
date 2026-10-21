@@ -39,13 +39,16 @@ type Stats = {
   engagement: { players: number; returning: number; daysPlayed: Record<string, number>; dailyStarted: number; dailyFinished: number; badges: Record<string, number> };
   feedback: { count: number; avg: number | null; ratings: Record<string, number>; comments: { at: string; rating: number; comment: string; testerTag: string | null }[] };
   ladder: {
-    l1: { emails: { at: string; email: string; testerTag: string | null }[] };
+    l1: {
+      emails: { at: string; email: string; testerTag: string | null }[];
+      instagram: { at: string; person: string; testerTag: string | null; from: string }[];
+      promptViews: { email: number; instagram: number };
+    };
     l2: { returning: { person: string; days: number; dates: string }[]; calendarAdds: { at: string; testerTag: string | null }[] };
     l3: {
       shares: { at: string; person: string; testerTag: string | null; method: string; code: string }[];
       quotes: { at: string; name: string; rating: number; comment: string; testerTag: string | null }[];
     };
-    l4: { pledges: Record<string, string | number | null>[] };
   };
   sessions: {
     sessionId: string;
@@ -96,7 +99,8 @@ function Bars({ data, label = (k: string) => k }: { data: Record<string, number>
 
 function download(name: string, rows: Record<string, unknown>[]) {
   if (!rows.length) return;
-  const head = Object.keys(rows[0]);
+  // Rows can mix types (e.g. emails and Instagram taps): the header is every key that appears.
+  const head = [...new Set(rows.flatMap((r) => Object.keys(r)))];
   const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const text = [head.join(","), ...rows.map((r) => head.map((h) => esc(r[h])).join(","))].join("\n");
   const a = document.createElement("a");
@@ -111,10 +115,16 @@ const when = (iso: string) => new Date(iso).toLocaleString("fr-FR", { day: "2-di
 function Ladder({ ladder, accounts }: { ladder: Stats["ladder"]; accounts: number }) {
   const sharers = new Set(ladder.l3.shares.map((s) => s.person)).size;
   const rows = [
-    { level: 1, title: "Un peu de temps", value: ladder.l1.emails.length, detail: `emails laissés pour les prochains défis (avec consentement) · ${accounts} comptes créés avec un email`, exportName: "emails", data: ladder.l1.emails },
+    {
+      level: 1,
+      title: "Un peu de temps",
+      value: ladder.l1.emails.length,
+      detail: `emails laissés avec consentement (pop-up vu par ${ladder.l1.promptViews.email} joueurs) · ${new Set(ladder.l1.instagram.map((i) => i.person)).size} joueurs ont touché « Suivre sur Instagram » (pop-up vu par ${ladder.l1.promptViews.instagram} ; l'abonnement réel n'est pas vérifiable) · ${accounts} comptes créés`,
+      exportName: "emails-instagram",
+      data: [...ladder.l1.emails.map((e) => ({ type: "email", ...e })), ...ladder.l1.instagram.map((i) => ({ type: "instagram", ...i }))],
+    },
     { level: 2, title: "Du temps", value: ladder.l2.returning.length, detail: `joueurs revenus un autre jour · ${ladder.l2.calendarAdds.length} fichiers agenda ouverts (l'ajout réel n'est pas vérifiable)`, exportName: "revenus", data: ladder.l2.returning },
     { level: 3, title: "Réputation", value: sharers, detail: `joueurs qui ont touché WhatsApp / Partager / Copier (${ladder.l3.shares.length} fois ; l'envoi réel n'est pas vérifiable) · ${ladder.l3.quotes.length} avis citables`, exportName: "reputation", data: [...ladder.l3.shares.map((s) => ({ type: "partage", ...s })), ...ladder.l3.quotes.map((q) => ({ type: "avis citable", ...q }))] },
-    { level: 4, title: "Engagement formel", value: ladder.l4.pledges.length, detail: "engagements signés par une organisation (/partenaires)", exportName: "engagements", data: ladder.l4.pledges },
   ];
   return (
     <Card className="flex flex-col gap-3">
@@ -136,19 +146,6 @@ function Ladder({ ladder, accounts }: { ladder: Stats["ladder"]; accounts: numbe
           </li>
         ))}
       </ul>
-      {ladder.l4.pledges.length > 0 && (
-        <ul className="flex flex-col gap-2 text-sm">
-          {ladder.l4.pledges.map((pl) => (
-            <li key={String(pl.ref)} className="rounded-xl bg-accent-soft px-3 py-2">
-              <strong>{pl.org}</strong> · {pl.name} ({pl.role}) · {pl.commitments}
-              <span className="block text-xs text-muted">
-                réf. {pl.ref} · {when(String(pl.at))}
-                {pl.when ? ` · prévu le ${pl.when}` : ""}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
       {ladder.l3.quotes.length > 0 && (
         <ul className="flex flex-col gap-2 text-sm">
           {ladder.l3.quotes.map((q) => (
