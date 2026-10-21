@@ -19,12 +19,13 @@
       "camp": "neutre",
       "topic": "election",
       "title": "S'inscrire à temps",
-      "text": "Pour voter, il faut être inscrit sur les listes électorales au plus tard le vendredi 12 mars 2027. La procuration, elle, peut se faire jusqu'à la veille.",
+      "text": "Pour voter, il faut être inscrit sur les listes électorales au plus tard le vendredi 12 mars 2027, en ligne comme en mairie. Pour une procuration, pas de date limite fixe, mais mieux vaut la faire tôt.",
       "source": {
-        "label": "info.gouv.fr",
-        "url": "https://www.info.gouv.fr/public/index.php/actualite/tout-ce-qu-il-faut-savoir-sur-l-election-presidentielle"
+        "label": "service-public.gouv.fr",
+        "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18967"
       },
-      "audience": "voter"
+      "audience": "voter",
+      "guide": "france"
     },
     {
       "id": "parrainages",
@@ -98,9 +99,10 @@
       "title": "Qui peut voter en France ?",
       "text": "Pour la présidentielle et les législatives, il faut être de nationalité française. Les citoyen·ne·s de l’UE qui vivent en France peuvent voter aux municipales et aux européennes. Les autres étranger·e·s ne votent pas aux élections politiques.",
       "source": {
-        "label": "service-public.fr",
-        "url": "https://www.service-public.fr"
-      }
+        "label": "service-public.gouv.fr",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1937"
+      },
+      "guide": "auto"
     },
     {
       "id": "presidentielle-te-concerne",
@@ -125,8 +127,9 @@
       "text": "Les élections des conseils de ton université et du CROUS sont ouvertes aux étudiant·e·s inscrit·e·s, quelle que soit leur nationalité.",
       "source": {
         "label": "etudiant.gouv.fr",
-        "url": "https://www.etudiant.gouv.fr"
-      }
+        "url": "https://www.etudiant.gouv.fr/fr/elections-des-representants-des-etudiants-au-sein-des-crous-2627"
+      },
+      "guide": "auto"
     }
   ]
 }

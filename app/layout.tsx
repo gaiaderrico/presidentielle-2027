@@ -8,10 +8,17 @@ import { LevelUp } from "@/components/LevelUp";
 import { TopBar } from "@/components/TopBar";
 import "./globals.css";
 
+const description = "polis : comprends la présidentielle 2027 en 5 minutes, fais grandir ta ville et défie tes potes. Neutre, gratuit, sans inscription. Aussi en anglais.";
+
 export const metadata: Metadata = {
+  // Absolute URLs for the link preview image (opengraph-image.tsx).
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: "polis · Présidentielle 2027",
-  description: "polis : comprends la présidentielle 2027 en 5 minutes, fais grandir ta ville et défie tes potes. Neutre, gratuit, sans inscription. Aussi en anglais.",
+  description,
   applicationName: "polis",
+  openGraph: { title: "polis · La présidentielle 2027 en 5 minutes", description, siteName: "polis", locale: "fr_FR", type: "website" },
+  twitter: { card: "summary_large_image" },
+  appleWebApp: { title: "polis", capable: true, statusBarStyle: "default" },
 };
 
 export const viewport: Viewport = {

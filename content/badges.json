@@ -1,16 +1,82 @@
 {
   "badges": [
-    { "id": "premier-defi", "emoji": "🎯", "name": "Premier défi", "how": "Termine un défi." },
-    { "id": "defi-du-jour", "emoji": "📅", "name": "Rendez-vous", "how": "Termine un défi du jour." },
-    { "id": "sans-faute", "emoji": "💯", "name": "Sans-faute", "how": "Réponds juste à toutes les questions d'un défi." },
-    { "id": "serie-3", "emoji": "🔥", "name": "3 jours de suite", "how": "Joue 3 jours d'affilée." },
-    { "id": "serie-7", "emoji": "☄️", "name": "Une semaine", "how": "Joue 7 jours d'affilée." },
-    { "id": "touche-a-tout", "emoji": "🧩", "name": "Touche-à-tout", "how": "Joue au mini-quiz, Vrai ou Faux, Qui propose ça ? et Défends l'autre camp." },
-    { "id": "tous-les-bords", "emoji": "🧭", "name": "Tous les bords", "how": "Lis une actu de la gauche, du centre, de la droite et de l'extrême droite." },
-    { "id": "oracle", "emoji": "🔮", "name": "Oracle", "how": "Fais tes pronostics." },
-    { "id": "ambassadeur", "emoji": "📣", "name": "Ambassadeur·rice", "how": "Envoie un défi à un·e ami·e." },
-    { "id": "recruteur", "emoji": "🤝", "name": "Recruteur·se", "how": "Un·e ami·e joue ton défi." },
-    { "id": "equipe", "emoji": "🏟️", "name": "Esprit d'équipe", "how": "Termine un match en équipe." },
-    { "id": "parrainages", "emoji": "🏛️", "name": "500 parrainages", "how": "Atteins 500 voix, comme les signatures qu'il faut pour être candidat·e." }
+    {
+      "id": "premier-defi",
+      "emoji": "🎯",
+      "name": "Premier défi",
+      "how": "Termine un défi."
+    },
+    {
+      "id": "defi-du-jour",
+      "emoji": "📅",
+      "name": "Rendez-vous",
+      "how": "Termine un défi du jour."
+    },
+    {
+      "id": "sans-faute",
+      "emoji": "💯",
+      "name": "Sans-faute",
+      "how": "Réponds juste à toutes les questions d'un défi."
+    },
+    {
+      "id": "serie-3",
+      "emoji": "🔥",
+      "name": "3 jours de suite",
+      "how": "Joue 3 jours d'affilée."
+    },
+    {
+      "id": "serie-7",
+      "emoji": "☄️",
+      "name": "Une semaine",
+      "how": "Joue 7 jours d'affilée."
+    },
+    {
+      "id": "touche-a-tout",
+      "emoji": "🧩",
+      "name": "Touche-à-tout",
+      "how": "Joue au mini-quiz, Vrai ou Faux, Qui propose ça ? et Défends l'autre camp."
+    },
+    {
+      "id": "tous-les-bords",
+      "emoji": "🧭",
+      "name": "Tous les bords",
+      "how": "Lis une actu de la gauche, du centre, de la droite et de l'extrême droite."
+    },
+    {
+      "id": "oracle",
+      "emoji": "🔮",
+      "name": "Oracle",
+      "how": "Fais tes pronostics."
+    },
+    {
+      "id": "ambassadeur",
+      "emoji": "📣",
+      "name": "Ambassadeur·rice",
+      "how": "Envoie un défi à un·e ami·e."
+    },
+    {
+      "id": "recruteur",
+      "emoji": "🤝",
+      "name": "Recruteur·se",
+      "how": "Un·e ami·e joue ton défi."
+    },
+    {
+      "id": "equipe",
+      "emoji": "🏟️",
+      "name": "Esprit d'équipe",
+      "how": "Termine un match en équipe."
+    },
+    {
+      "id": "pret-a-voter",
+      "emoji": "🗳️",
+      "name": "Prêt·e à voter",
+      "how": "Coche toutes les étapes du guide « Voter : mode d'emploi »."
+    },
+    {
+      "id": "parrainages",
+      "emoji": "🏛️",
+      "name": "500 parrainages",
+      "how": "Atteins 500 voix, comme les signatures qu'il faut pour être candidat·e."
+    }
   ]
 }

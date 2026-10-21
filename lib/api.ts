@@ -50,6 +50,15 @@ export function fetchFriendPlays(codes: string[]) {
   return get<{ counts: Record<string, number> }>(`/api/challenge/bonus?codes=${codes.map(encodeURIComponent).join(",")}`);
 }
 
+export type Duels = {
+  mine: { code: string; at: string; challengeType: ChallengeType; score: number | null; total: number | null }[];
+  replies: { code: string; at: string; refCode: string; firstName: string | null; score: number | null; total: number | null }[];
+};
+
+export function fetchDuels(codes: string[]) {
+  return get<Duels>(`/api/challenge/replies?codes=${codes.map(encodeURIComponent).join(",")}`);
+}
+
 export function savePredictions(sessionId: string, answers: { questionId: string; answer: string }[]) {
   return post<{ ok: boolean }>("/api/prediction", { sessionId, answers });
 }

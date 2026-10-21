@@ -1,0 +1,347 @@
+{
+  "checked": "21 octobre 2026",
+  "profiles": [
+    {
+      "id": "france",
+      "emoji": "🇫🇷",
+      "label": "Français·e en France",
+      "canVote": true,
+      "summary": "Tu dois être inscrit·e sur les listes électorales au plus tard le vendredi 12 mars 2027. Ensuite, tu votes en personne ou par procuration."
+    },
+    {
+      "id": "etranger",
+      "emoji": "✈️",
+      "label": "Français·e à l'étranger",
+      "canVote": true,
+      "summary": "Tu peux voter au consulat de ton pays de résidence, ou rester inscrit·e dans une commune en France. Dans les deux cas, inscris-toi avant le vendredi 12 mars 2027."
+    },
+    {
+      "id": "ue",
+      "emoji": "🇪🇺",
+      "label": "Citoyen·ne de l'UE en France",
+      "canVote": false,
+      "summary": "La présidentielle est réservée aux Français·es. En France, tu peux voter aux élections municipales et européennes, et aux élections étudiantes."
+    },
+    {
+      "id": "hors-ue",
+      "emoji": "🌍",
+      "label": "Étranger·ère hors UE en France",
+      "canVote": false,
+      "summary": "Les élections politiques en France sont réservées aux Français·es (et aux citoyen·ne·s de l'UE pour les municipales et les européennes). Mais tu peux voter aux élections étudiantes."
+    }
+  ],
+  "deadlines": [
+    {
+      "id": "inscription",
+      "date": "2027-03-12",
+      "label": "Date limite d'inscription",
+      "profiles": [
+        "france",
+        "etranger"
+      ]
+    },
+    {
+      "id": "tour1",
+      "date": "2027-04-18",
+      "label": "1er tour",
+      "profiles": [
+        "france",
+        "etranger",
+        "ue",
+        "hors-ue"
+      ]
+    },
+    {
+      "id": "tour2",
+      "date": "2027-05-02",
+      "label": "2nd tour",
+      "profiles": [
+        "france",
+        "etranger",
+        "ue",
+        "hors-ue"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "inscription",
+      "profiles": [
+        "france"
+      ],
+      "emoji": "📝",
+      "title": "S'inscrire sur les listes électorales",
+      "intro": "Sans inscription, pas de vote. Pour la présidentielle, la date limite est le vendredi 12 mars 2027, en ligne comme en mairie.",
+      "steps": [
+        {
+          "id": "fr-verifier",
+          "text": "Vérifie si tu es déjà inscrit·e et où tu votes. Si tu as fait ton recensement citoyen à 16 ans, tu as été inscrit·e automatiquement à 18 ans.",
+          "link": {
+            "label": "Vérifier mon inscription et mon bureau de vote",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51788"
+          }
+        },
+        {
+          "id": "fr-commune",
+          "text": "Pas inscrit·e ? Choisis ta commune : celle où tu habites, celle où tu vis depuis au moins 6 mois, ou celle où tu paies des impôts locaux depuis au moins 2 ans."
+        },
+        {
+          "id": "fr-inscrire",
+          "text": "Inscris-toi en ligne avec une pièce d'identité et un justificatif de domicile de moins de 3 mois. Ou va en mairie avec le formulaire cerfa n°12669.",
+          "link": {
+            "label": "S'inscrire en ligne (gratuit)",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R16396"
+          }
+        }
+      ],
+      "tip": "Depuis le 1er juillet 2026, la date limite est la même en ligne et en mairie : le 6e vendredi avant le scrutin.",
+      "sources": [
+        {
+          "label": "service-public.gouv.fr, Inscription sur les listes électorales",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1367"
+        },
+        {
+          "label": "service-public.gouv.fr, Une date limite unique (18 juin 2026)",
+          "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18967"
+        }
+      ]
+    },
+    {
+      "id": "etudiant",
+      "profiles": [
+        "france"
+      ],
+      "emoji": "🎓",
+      "title": "Étudiant·e loin de chez toi ?",
+      "intro": "Tu peux voter là où tu fais tes études ou rester inscrit·e chez tes parents.",
+      "steps": [
+        {
+          "id": "etu-choisir",
+          "text": "Choisis ta commune de vote : celle où tu vis pour tes études (ton domicile, ou depuis au moins 6 mois), ou celle de tes parents si tu as moins de 26 ans."
+        },
+        {
+          "id": "etu-planifier",
+          "text": "Tu restes inscrit·e loin de ton lieu d'études ? Regarde si tu pourras rentrer le 18 avril et le 2 mai 2027. Sinon, prévois une procuration (voir plus bas)."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Code électoral, article L11 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032964774"
+        },
+        {
+          "label": "service-public.gouv.fr, Inscription sur les listes électorales",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1367"
+        }
+      ]
+    },
+    {
+      "id": "jour-du-vote",
+      "profiles": [
+        "france"
+      ],
+      "emoji": "🗳️",
+      "title": "Le jour du vote",
+      "intro": "Bureaux ouverts de 8h à 19h, parfois jusqu'à 20h au maximum dans certaines villes. Tu votes en personne ou par procuration : pas de vote par internet.",
+      "steps": [
+        {
+          "id": "jv-bureau",
+          "text": "Repère ton bureau de vote : il est indiqué sur ta carte électorale et sur le service de vérification.",
+          "link": {
+            "label": "Trouver mon bureau de vote",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51788"
+          }
+        },
+        {
+          "id": "jv-identite",
+          "text": "Prends une pièce d'identité originale avec photo : carte d'identité ou passeport (valides ou périmés depuis moins de 5 ans), ou permis de conduire, carte Vitale avec photo… valides. Elle est obligatoire dans les communes de 1 000 habitants et plus. La carte étudiante, une photo ou un téléchargement sur ton téléphone ne sont pas acceptés."
+        },
+        {
+          "id": "jv-voter",
+          "text": "Prends une enveloppe et au moins 2 bulletins, passe par l'isoloir, glisse toi-même l'enveloppe dans l'urne, puis signe la liste d'émargement."
+        }
+      ],
+      "tip": "La carte électorale n'est pas obligatoire pour voter. Un vote blanc compte dans les votants, mais pas dans les suffrages exprimés.",
+      "sources": [
+        {
+          "label": "service-public.gouv.fr, Pièces d'identité pour voter",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1361"
+        },
+        {
+          "label": "service-public.gouv.fr, Déroulement du scrutin",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16828"
+        },
+        {
+          "label": "service-public.gouv.fr, Vote par internet",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11257"
+        }
+      ]
+    },
+    {
+      "id": "etranger",
+      "profiles": [
+        "etranger"
+      ],
+      "emoji": "✈️",
+      "title": "Voter depuis l'étranger",
+      "intro": "Deux options pour la présidentielle : voter au consulat (liste électorale consulaire) ou rester inscrit·e dans une commune en France. Tu ne peux pas être sur les deux listes.",
+      "steps": [
+        {
+          "id": "et-choisir",
+          "text": "Choisis ta liste. Consulaire : tu votes dans ton pays de résidence. Commune en France : tu votes en France, en personne ou par procuration (pratique pour un Erasmus ou un stage de quelques mois)."
+        },
+        {
+          "id": "et-inscrire",
+          "text": "Pour la liste consulaire, inscris-toi en ligne au Registre des Français établis hors de France, ou directement au consulat, au plus tard le 6e vendredi avant le vote (vendredi 12 mars 2027).",
+          "link": {
+            "label": "La liste électorale consulaire",
+            "url": "https://www.diplomatie.gouv.fr/fr/services-aux-francaises-et-aux-francais/vie-administrative-et-elections/elections-a-l-etranger/liste-electorale-consulaire"
+          }
+        },
+        {
+          "id": "et-voter",
+          "text": "Le jour J, vote en personne au bureau de vote de l'ambassade ou du consulat avec une pièce d'identité, ou donne procuration (voir plus bas)."
+        }
+      ],
+      "tip": "Pas de vote par internet ni par courrier pour la présidentielle : le vote par internet existe seulement pour les législatives des Français de l'étranger et les élections consulaires. Sur le continent américain, on vote en général le samedi (c'était le cas en 2022) : vérifie la date auprès de ton consulat.",
+      "sources": [
+        {
+          "label": "service-public.gouv.fr, Vote d'un Français installé à l'étranger",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16904"
+        },
+        {
+          "label": "diplomatie.gouv.fr, Liste électorale consulaire",
+          "url": "https://www.diplomatie.gouv.fr/fr/services-aux-francaises-et-aux-francais/vie-administrative-et-elections/elections-a-l-etranger/liste-electorale-consulaire"
+        },
+        {
+          "label": "diplomatie.gouv.fr, Vote par internet",
+          "url": "https://www.diplomatie.gouv.fr/fr/services-aux-francaises-et-aux-francais/vie-administrative-et-elections/elections-a-l-etranger/modalites-de-vote/vote-par-internet"
+        },
+        {
+          "label": "Conseil constitutionnel, présidentielle 2022 : voter à l'étranger",
+          "url": "https://presidentielle2022.conseil-constitutionnel.fr/le-vote/etre-electeur-et-voter/votent-francais-resident-a-letranger.html"
+        }
+      ]
+    },
+    {
+      "id": "procuration",
+      "profiles": [
+        "france",
+        "etranger"
+      ],
+      "emoji": "🤝",
+      "title": "Tu ne peux pas y aller ? La procuration",
+      "intro": "Un·e électeur·rice de ton choix vote à ta place, dans ton bureau de vote. Il ou elle peut être inscrit·e dans une autre commune.",
+      "steps": [
+        {
+          "id": "pr-numero",
+          "text": "Demande à la personne choisie sa date de naissance et son numéro national d'électeur (elle le trouve sur le service de vérification de l'inscription)."
+        },
+        {
+          "id": "pr-demande",
+          "text": "Fais ta demande en ligne sur Maprocuration, en te connectant avec FranceConnect.",
+          "link": {
+            "label": "maprocuration.gouv.fr",
+            "url": "https://www.maprocuration.gouv.fr"
+          }
+        },
+        {
+          "id": "pr-valider",
+          "text": "Va ensuite en personne au commissariat ou à la gendarmerie (au consulat ou à l'ambassade si tu es à l'étranger) avec ta pièce d'identité et la référence de ta demande. Avec une identité France Identité certifiée, tout peut se faire en ligne."
+        },
+        {
+          "id": "pr-confirmation",
+          "text": "Attends l'email de confirmation : ta procuration est alors valable. Préviens la personne choisie."
+        }
+      ],
+      "tip": "Pas de date limite fixe, mais fais-la le plus tôt possible. Tu peux la donner pour un tour, les deux tours, ou une durée jusqu'à 1 an. Une personne ne peut détenir qu'une seule procuration établie en France.",
+      "sources": [
+        {
+          "label": "service-public.gouv.fr, Vote par procuration",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1604"
+        },
+        {
+          "label": "service-public.gouv.fr, Procuration depuis l'étranger",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34852"
+        }
+      ]
+    },
+    {
+      "id": "ue",
+      "profiles": [
+        "ue"
+      ],
+      "emoji": "🇪🇺",
+      "title": "Municipales et européennes",
+      "intro": "Comme citoyen·ne d'un autre pays de l'UE qui vit en France, tu peux voter aux élections municipales et européennes.",
+      "steps": [
+        {
+          "id": "ue-inscrire",
+          "text": "Inscris-toi sur les listes électorales complémentaires de ta commune : en ligne, en mairie ou par courrier, avec ta carte d'identité, ton passeport ou ton titre de séjour, un justificatif de domicile et une déclaration écrite."
+        },
+        {
+          "id": "ue-delai",
+          "text": "Fais-le au plus tard le 6e vendredi avant le 1er tour de l'élection à laquelle tu veux voter."
+        },
+        {
+          "id": "ue-choix",
+          "text": "Pour les européennes, choisis : voter en France ou dans ton pays d'origine. Pas les deux."
+        }
+      ],
+      "tip": "Tu peux aussi être candidat·e aux municipales, mais pas devenir maire ni adjoint·e.",
+      "sources": [
+        {
+          "label": "service-public.gouv.fr, Vote d'un Européen en France",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1937"
+        },
+        {
+          "label": "Constitution, article 88-3 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006527627"
+        }
+      ]
+    },
+    {
+      "id": "hors-ue",
+      "profiles": [
+        "hors-ue",
+        "ue"
+      ],
+      "emoji": "🎓",
+      "title": "Les élections étudiantes",
+      "intro": "Quelle que soit ta nationalité, tu peux voter pour tes représentant·e·s étudiant·e·s.",
+      "steps": [
+        {
+          "id": "hue-universite",
+          "text": "Vote aux élections des conseils de ton université : les étudiant·e·s étranger·ère·s y sont électeur·rice·s et éligibles dans les mêmes conditions que les Français·es."
+        },
+        {
+          "id": "hue-crous",
+          "text": "Vote aux élections des représentant·e·s étudiant·e·s au CROUS (logement, restos U, bourses) : chaque étudiant·e est invité·e à voter.",
+          "link": {
+            "label": "Les élections au CROUS",
+            "url": "https://www.etudiant.gouv.fr/fr/elections-des-representants-des-etudiants-au-sein-des-crous-2627"
+          }
+        },
+        {
+          "id": "hue-pays",
+          "text": "Ton pays fait voter ses citoyen·ne·s qui vivent à l'étranger ? Renseigne-toi auprès de ton ambassade ou de ton consulat."
+        }
+      ],
+      "tip": "Même sans voter, la présidentielle te concerne : le gouvernement décide par exemple de la politique des visas et des titres de séjour.",
+      "sources": [
+        {
+          "label": "Code de l'éducation, article L719-2 (Légifrance)",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006525387"
+        },
+        {
+          "label": "etudiant.gouv.fr, Élections au sein des Crous",
+          "url": "https://www.etudiant.gouv.fr/fr/elections-des-representants-des-etudiants-au-sein-des-crous-2627"
+        },
+        {
+          "label": "service-public.gouv.fr, Conditions pour être électeur",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1367"
+        }
+      ]
+    }
+  ]
+}

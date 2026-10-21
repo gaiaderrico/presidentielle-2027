@@ -75,3 +75,9 @@ Seul un champ `difficulty` a été ajouté à chacun des 22 objets `quiz` (4 fac
 - **Propositions attribuées à Le Pen, Bardella, Zemmour ou Glucksmann par ÉlyséeScope ou votons-2027** (moins d'impôt pour les moins de 30 ans, retraite à 62 ans, 1 000 Md€ d'investissement européen, etc.) : sites non fiables, sans source primaire. Jamais utilisés.
 - **Retraite à 62 ans dans le contre-budget RN** : seulement dans un résumé de presse secondaire ; Public Sénat (06/10) dit que le RN n'a pas encore dévoilé sa réforme des retraites. Non utilisé.
 - **Horizons : ne pas remplacer un fonctionnaire sur trois** : cette proposition vient de L. Marcangeli, pas d'É. Philippe. Écartée de « Qui propose ça ? » pour ne pas faire d'attribution trompeuse.
+
+## 2026-10-21: procuration deadline corrected
+- "Procuration possible jusqu'à la veille" was removed from `inscription` (feed), `vf-inscription` and the matching mini-quiz explanation. The official page (service-public.gouv.fr F1604, vérifié le 02/02/2026) sets **no fixed deadline** and advises doing it "le plus tôt possible". "Jusqu'à la veille" only appeared on a secondary source.
+- Registration deadline re-checked: since 1 July 2026 (décret n° 2026-493), the deadline is the 6th Friday before the vote whatever the method, i.e. Friday 12 March 2027 (service-public.gouv.fr A18967, 18/06/2026).
+- `qui-peut-voter` and `elections-etudiantes` now cite a precise page (F1937; etudiant.gouv.fr CROUS elections) instead of a home page. University councils: Code de l'éducation art. L719-2.
+- All sources of the voting guide (`content/guide.json`) were checked on 2026-10-21; see the decision log.

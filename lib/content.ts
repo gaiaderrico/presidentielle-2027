@@ -12,6 +12,7 @@ import cityJson from "@/content/city.json";
 import actuJson from "@/content/actu.json";
 import onboardingJson from "@/content/onboarding.json";
 import badgesJson from "@/content/badges.json";
+import guideJson from "@/content/guide.json";
 import enOverlay from "@/content/en/overlay.json";
 
 export type Lang = "fr" | "en";
@@ -38,6 +39,8 @@ export type FeedCard = {
   sides?: { label: string; text: string }[];
   source: Source;
   quiz?: CardQuiz;
+  /** Profile id in content/guide.json ("auto" = from the player's profile): shows a link to the voting guide (/voter). */
+  guide?: string;
 };
 export type Topic = { id: string; label: string; emoji: string };
 export type CityBuilding = {
@@ -57,6 +60,11 @@ export type AutreCampItem = { id: string; topic: string; pour: string; contre: s
 export type PronoItem = { id: string; question: string; options: string[]; context: string };
 export type Level = { min: number; name: string; withArticle: string; opened: string; badge?: string };
 export type Badge = { id: string; emoji: string; name: string; how: string };
+export type GuideProfile = { id: string; emoji: string; label: string; canVote: boolean; summary: string };
+export type GuideStep = { id: string; text: string; link?: Source };
+export type GuideSection = { id: string; profiles: string[]; emoji: string; title: string; intro?: string; steps: GuideStep[]; tip?: string; sources: Source[] };
+export type GuideDeadline = { id: string; date: string; label: string; profiles: string[] };
+export type Guide = { checked: string; profiles: GuideProfile[]; deadlines: GuideDeadline[]; sections: GuideSection[] };
 
 export type ChallengeType = "quiz" | "vrai-faux" | "qui-propose" | "autre-camp" | "pronostics";
 export type Mode = "solo" | "friend" | "team";
@@ -83,6 +91,16 @@ function merge<T>(base: T, over: unknown): T {
 function overlayList<T extends { id: string }>(list: T[], over: unknown): T[] {
   const map = (over ?? {}) as Record<string, unknown>;
   return list.map((item) => merge(item, map[item.id]));
+}
+
+// The guide's lists are translated item by item (by id); dates, profiles and sources stay from the French file.
+function makeGuide(base: Guide, over: Dict | undefined): Guide {
+  return {
+    checked: (over?.checked as string) ?? base.checked,
+    profiles: overlayList(base.profiles, over?.profiles),
+    deadlines: overlayList(base.deadlines, over?.deadlines),
+    sections: overlayList(base.sections, over?.sections),
+  };
 }
 
 /* ---------- Bundle ---------- */
@@ -135,6 +153,7 @@ function makeContent(lang: Lang) {
     pronoItems: overlayList(pronosticsJson.items as PronoItem[], ov("pronostics")),
     levels: merge(levelsJson.levels as Level[], ov("levels")),
     badges: overlayList(badgesJson.badges as Badge[], ov("badges")),
+    guide: makeGuide(guideJson as Guide, ov("guide")),
     defis,
     site: merge(siteJson, ov("site")),
     onboarding: merge(onboardingJson as Onboarding, ov("onboarding")),
@@ -172,6 +191,7 @@ export const quiProposeItems = FR.quiProposeItems;
 export const autreCamp = FR.autreCamp;
 export const pronoItems = FR.pronoItems;
 export const levels = FR.levels;
+export const badges = FR.badges;
 export const defis = FR.defis;
 export const site = FR.site;
 export const topicOf = FR.topicOf;

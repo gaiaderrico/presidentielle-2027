@@ -41,7 +41,7 @@
       "question": "Jusqu'à quand peut-on s'inscrire sur les listes électorales pour la présidentielle ?",
       "options": ["La veille du vote", "Le 12 mars 2027", "Le 1er janvier 2027"],
       "answer": 1,
-      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027, en ligne comme en mairie. C'est la procuration qu'on peut faire jusqu'à la veille.",
+      "explanation": "Il faut être inscrit au plus tard le vendredi 12 mars 2027, en ligne comme en mairie. La procuration, elle, n'a pas de date limite fixe : mieux vaut la faire tôt.",
       "source": {
         "label": "Toute l'Europe",
         "url": "https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-calendrier-dates-inscription-candidats-vote/"

@@ -24,7 +24,9 @@ export type EventName =
   | "email_submit"
   | "onboarding_finish"
   | "city_building_open"
-  | "badge_unlock";
+  | "badge_unlock"
+  | "feedback_submit"
+  | "guide_view";
 
 /**
  * Sends one event to /api/event. Never throws.

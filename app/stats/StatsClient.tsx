@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { Button, Card } from "@/components/ui";
-import { defis, allFeedCards, allQuizItems, quiProposeItems, vraiFauxItems, autreCamp } from "@/lib/content";
+import { badges, defis, allFeedCards, allQuizItems, quiProposeItems, vraiFauxItems, autreCamp } from "@/lib/content";
 
 type Stats = {
   funnel: { landingViews: number; feedStarts: number; feedSkips: number; quizFinishes: number; challengeFinishers: number };
@@ -27,6 +27,8 @@ type Stats = {
   profile: { completed: number; levels: Record<string, number>; registered: Record<string, number>; voter: Record<string, number>; testSkipped: number; interests: Record<string, number> };
   levelsChosen: Record<string, number>;
   city: { buildingOpens: Record<string, number> };
+  engagement: { players: number; returning: number; daysPlayed: Record<string, number>; dailyStarted: number; dailyFinished: number; badges: Record<string, number> };
+  feedback: { count: number; avg: number | null; ratings: Record<string, number>; comments: { at: string; rating: number; comment: string; testerTag: string | null }[] };
   sessions: {
     sessionId: string;
     testerTag: string | null;
@@ -197,6 +199,41 @@ export function StatsClient() {
           {stats.shareRate.finishedAndShared} joueurs ont partagé sur {stats.shareRate.finished} qui ont fini au moins un défi.
         </p>
       </Card>
+
+      <div className="grid gap-3 md:grid-cols-2">
+        <Card className="flex flex-col gap-2">
+          <h2 className="font-display text-lg font-bold">Ils reviennent ?</h2>
+          <p>
+            <strong>{stats.engagement.returning}</strong> joueurs sur {stats.engagement.players} sont revenus un autre jour (
+            {pct(stats.engagement.players ? stats.engagement.returning / stats.engagement.players : null)})
+          </p>
+          <p>
+            Défi du jour : <strong>{stats.engagement.dailyStarted}</strong> commencé · <strong>{stats.engagement.dailyFinished}</strong> fini
+          </p>
+          <p className="text-sm font-semibold">Jours joués par joueur</p>
+          <Bars data={stats.engagement.daysPlayed} label={(k) => `${k} jour${k === "1" ? "" : "s"}`} />
+          <p className="text-sm font-semibold">Trophées débloqués</p>
+          <Bars data={stats.engagement.badges} label={(k) => badges.find((b) => b.id === k)?.name ?? k} />
+        </Card>
+        <Card className="flex flex-col gap-2">
+          <h2 className="font-display text-lg font-bold">Avis des joueurs</h2>
+          <p>
+            Note moyenne : <strong>{stats.feedback.avg === null ? "–" : stats.feedback.avg.toFixed(1)}</strong> / 5 ({stats.feedback.count} avis)
+          </p>
+          <Bars data={stats.feedback.ratings} />
+          <ul className="flex max-h-72 flex-col gap-2 overflow-y-auto text-sm">
+            {stats.feedback.comments.map((f) => (
+              <li key={f.at + f.comment} className="rounded-xl bg-fill px-3 py-2">
+                <span className="font-semibold">{f.rating} ★</span> {f.comment}
+                <span className="block text-xs text-muted">
+                  {new Date(f.at).toLocaleString("fr-FR")}
+                  {f.testerTag ? ` · ${f.testerTag}` : ""}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
         {[

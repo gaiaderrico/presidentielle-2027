@@ -116,6 +116,13 @@ export async function POST(req: Request) {
   for (const e of onboard) for (const t of (Array.isArray(e.payload?.interests) ? e.payload.interests : []) as string[]) interestCounts[t] = (interestCounts[t] ?? 0) + 1;
   const buildingOpens = events.filter((e) => e.event === "city_building_open");
 
+  // Engagement: players who came back on another day (Paris time), daily challenge, badges, feedback.
+  const parisDay = (iso: string) => new Date(iso).toLocaleDateString("sv-SE", { timeZone: "Europe/Paris" });
+  const activeDays = [...bySession.values()].map((list) => new Set(list.map((e) => parisDay(e.created_at))).size);
+  const dailyEvents = events.filter((e) => p(e, "origin") === "daily");
+  const feedback = events.filter((e) => e.event === "feedback_submit");
+  const ratings = feedback.map((e) => Number(p(e, "rating"))).filter((r) => r >= 1 && r <= 5);
+
   const voixValues = sessions.map((s) => s.voix);
   return Response.json({
     funnel: {
@@ -162,6 +169,23 @@ export async function POST(req: Request) {
       interests: interestCounts,
     },
     city: { buildingOpens: countBy(buildingOpens, (e) => String(p(e, "building"))) },
+    engagement: {
+      players: activeDays.length,
+      returning: activeDays.filter((n) => n >= 2).length,
+      daysPlayed: countBy(activeDays, (n) => (n >= 4 ? "4+" : String(n))),
+      dailyStarted: sessionsWith(dailyEvents, "challenge_start").size,
+      dailyFinished: sessionsWith(dailyEvents, "challenge_finish").size,
+      badges: countBy(events.filter((e) => e.event === "badge_unlock"), (e) => String(p(e, "badge"))),
+    },
+    feedback: {
+      count: ratings.length,
+      avg: ratings.length ? ratings.reduce((a, b) => a + b, 0) / ratings.length : null,
+      ratings: countBy(ratings, (r) => `${r} ★`),
+      comments: feedback
+        .filter((e) => p(e, "comment"))
+        .map((e) => ({ at: e.created_at, rating: Number(p(e, "rating")), comment: String(p(e, "comment")), testerTag: p(e, "testerTag") as string | null }))
+        .reverse(),
+    },
     sessions,
   });
 }

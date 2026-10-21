@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { DailyCard } from "@/components/DailyCard";
+import { Duels } from "@/components/Duels";
 import { Button, Page } from "@/components/ui";
 import type { ChallengeType, Mode } from "@/lib/content";
 import { LEVEL_CHOICES, isLevelChoice, levelChoiceLabel, type LevelChoice } from "@/lib/difficulty";
@@ -82,6 +84,8 @@ export function HubClient() {
         </button>
       </section>
 
+      <Duels />
+
       {/* Difficulty */}
       <section className="flex flex-col gap-2" aria-label={t("Niveau des questions", "Question level")}>
         <p className="font-semibold">{t("Niveau des questions", "Question level")}</p>
@@ -120,6 +124,16 @@ export function HubClient() {
             </li>
           ))}
       </ul>
+
+      <Link href="/voter" className="flex items-center gap-4 rounded-[22px] bg-card p-4 transition active:scale-[0.99]">
+        <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-accent-soft text-3xl" aria-hidden>
+          🗳️
+        </span>
+        <span className="flex min-w-0 flex-col gap-0.5">
+          <span className="font-display text-xl font-bold">{t("Voter : mode d'emploi", "Voting: how it works")}</span>
+          <span className="text-[15px] leading-snug text-muted">{t("S'inscrire, la procuration, le jour du vote, voter depuis l'étranger…", "Registering, proxy votes, election day, voting from abroad…")}</span>
+        </span>
+      </Link>
 
       {picked && picked.type !== "equipes" && (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/50" onClick={() => setPicked(null)}>

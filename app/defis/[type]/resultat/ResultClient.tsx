@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { daysLabel, typeEmoji, useToday } from "@/components/DailyCard";
 import { EmailCapture } from "@/components/EmailCapture";
+import { FeedbackCard } from "@/components/FeedbackCard";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Button, ButtonLink, Card, Page, SourceLink } from "@/components/ui";
 import type { ChallengeType } from "@/lib/content";
@@ -128,6 +129,8 @@ export function ResultClient() {
           {t("Voir ma ville", "See my city")}
         </ButtonLink>
       </div>
+
+      <FeedbackCard challengeType={result.type} />
 
       <EmailCapture />
 

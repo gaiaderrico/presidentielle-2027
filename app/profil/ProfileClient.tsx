@@ -104,6 +104,9 @@ export function ProfileClient() {
           ))}
         </div>
         {isInternational(p) && <p className="text-sm text-muted">🌍 {t("Mode international activé dans ton fil.", "International mode is on in your feed.")}</p>}
+        <Link href="/voter" className="font-semibold text-accent underline underline-offset-4">
+          🗳️ {t("Voter : mode d'emploi (les démarches selon ta situation)", "Voting: how it works (the steps for your situation)")} →
+        </Link>
         {p.voter === "fr" && (
           <>
             <p>

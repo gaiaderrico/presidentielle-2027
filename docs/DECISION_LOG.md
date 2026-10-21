@@ -124,3 +124,23 @@ This reverses "Not done: a daily streak" above: the team asked for features that
 | **"Et maintenant ?"** on the result page: today's challenge if not done, otherwise a challenge type not played yet | The result page was a dead end ("Essayer un autre défi"); one concrete next step reduces drop-off |
 | Camps read (for "Tous les bords") are stored locally only and never sent | Reading habits per camp could hint at political leaning (same rule as feed 👍/👎) |
 | To measure: return rate (sessions active on 2+ days, from `events.created_at`), daily challenge starts/finishes (`origin = daily`), `badge_unlock` counts | Check whether these features change behaviour before adding more |
+
+## 2026-10-21 (later): second round of improvements (requested by the team)
+| Decision | Why |
+|---|---|
+| **Link preview** (`app/opengraph-image.tsx`, generated at build time) + Open Graph / Twitter metadata | Every challenge is sent on WhatsApp/Instagram; until now the link showed no image. A clear preview should raise the share → friend-plays conversion |
+| **Installable app** (`app/manifest.ts`): "Add to home screen" opens polis full screen on the news | An icon on the home screen makes coming back (daily challenge, streak) one tap away |
+| **Mes duels** in Défis (`/api/challenge/replies`): for each challenge I shared, my score next to every friend who answered it (first name if they gave it), "Revanche" for a new round, "Renvoyer le lien" when nobody played yet | Closes the social loop: before, a friend's play only showed up as +50 voix. No schema change. Privacy page updated |
+| **"Ton avis en 10 secondes"** on the result page: 1–5 rating + optional comment (300 chars), asked once per phone, "Pas maintenant" hides it for the tab | The course grades decisions on evidence: this collects qualitative feedback from real users automatically. The server keeps only a valid rating and a cleaned comment; players are asked not to write their name or political opinion |
+| **/stats → "Ils reviennent ?" and "Avis des joueurs"**: players active on 2+ days (Paris time), days played per player, daily challenge started/finished, badges unlocked, average rating and comments | Measure whether the engagement features work. Baseline on 2026-10-21, before they went live: 1 of 70 players came back another day |
+
+## 2026-10-21 (evening): voting guide "Voter : mode d'emploi" (requested by the team)
+| Decision | Why |
+|---|---|
+| New page `/voter` with 4 situations: French in France, French abroad, EU citizen in France, non-EU in France. Each one shows what the player can vote in, the deadlines (with a countdown) and a step-by-step checklist (ticks stay on the phone) with official links | Students don't know the administrative steps (registration, procuration, ID, consular roll). Concrete next steps turn "learning about the campaign" into "being able to vote" |
+| Content in `content/guide.json` (+ English overlay), sources on every section: service-public.gouv.fr (F1367, A18967, F1361, F16828, F11257, F1604, F34852, F16904, F1937, R51788, R16396), diplomatie.gouv.fr (consular roll, internet voting), Légifrance (Code électoral L11, Constitution 88-3, Code de l'éducation L719-2), etudiant.gouv.fr (CROUS elections), Conseil constitutionnel 2022 | Every fact was checked on the official page on 2026-10-21 |
+| Wording kept cautious where no official 2027 page exists: Saturday voting in the Americas is given "as in 2022, check with your consulate"; Erasmus students are told they *can* stay on their French list and vote by procuration (no official page says this in so many words, it follows from F16904 + F1604) | No unverified fact presented as certain |
+| Entry points: Défis hub card, Profil ("Ma situation"), and a "Les démarches, pas à pas" button on the feed cards `inscription`, `qui-peut-voter`, `elections-etudiantes` | Players reach the guide from where the topic comes up |
+| New badge "Prêt·e à voter" (whole checklist ticked) and event `guide_view` (which situation was opened, no other data) | Measure use of the guide |
+| **Corrections found while checking sources**: (1) "procuration possible jusqu'à la veille" removed from 1 feed card and 2 question explanations: F1604 sets no fixed deadline and says to do it as early as possible; (2) the registration deadline is now the 6th Friday whatever the method (décret 2026-493, from 1 July 2026): 12 March 2027 stays right; (3) `qui-peut-voter` and `elections-etudiantes` cited a home page, now a precise page | Accuracy |
+| Not fixed: `presidentielle-te-concerne` still cites the Campus France home page | Out of the guide's scope; to check |

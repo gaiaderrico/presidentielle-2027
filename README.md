@@ -49,6 +49,7 @@ Everything players read lives in `content/*.json`. Edit, commit, and Vercel rede
 | `content/defis.json` | Hub cards, durations, modes, result lines. |
 | `content/site.json` | App name and the **team contact email shown on the privacy page (to fill in)**. |
 | `content/badges.json` | Badges (trophées): emoji, name and how to unlock. The unlock rules are in `lib/progress.ts`, matched by `id`. |
+| `content/guide.json` | **Voting guide** (`/voter`): situations, deadlines (ISO dates, countdown on screen), sections with checklist steps and official sources. Update `checked` when you re-verify it. |
 
 **Editorial rules:** facts only, a source for every item, as many items about the left as about the right/centre, nothing still uncertain. **Re-check every card the day before testing.**
 
@@ -59,6 +60,7 @@ Everything players read lives in `content/*.json`. Edit, commit, and Vercel rede
 - **Share rate (secondary, former Test Card v1, ≥ 40 %):** sessions with at least one `challenge_finish` **and** at least one `share_click`, ÷ sessions with at least one `challenge_finish`.
 - **Proof of a real send:** `friend_landing_view` and `friend_finish` per challenge code. A friend who plays creates a `challenges` row whose `ref_code` points to the original code.
 - `/stats` (password = `STATS_PASSWORD`) shows everything, with a CSV export of sessions.
+- **Engagement:** players active on 2+ days (Paris time), daily challenge started/finished (`origin = daily`), badges unlocked (`badge_unlock`), and player feedback (`feedback_submit`: rating 1–5 + optional comment) are in the "Ils reviennent ?" and "Avis des joueurs" blocks of `/stats`.
 
 ## Profile and personalised feed
 

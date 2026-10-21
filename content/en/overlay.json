@@ -6,7 +6,7 @@
     },
     "inscription": {
       "title": "Register in time",
-      "text": "To vote, you must be on the electoral roll by Friday 12 March 2027 at the latest. A procuration (proxy vote), however, can be arranged up to the day before."
+      "text": "To vote, you must be on the electoral roll by Friday 12 March 2027 at the latest, online or at the town hall. A procuration (proxy vote) has no fixed deadline, but it is best to do it early."
     },
     "parrainages": {
       "title": "The 500 parrainages",
@@ -423,7 +423,7 @@
         "12 March 2027",
         "1 January 2027"
       ],
-      "explanation": "You must be registered by Friday 12 March 2027 at the latest, online or at the town hall. It is the procuration (proxy vote) that can be arranged up to the day before."
+      "explanation": "You must be registered by Friday 12 March 2027 at the latest, online or at the town hall. A procuration (proxy vote), on the other hand, has no fixed deadline: best to do it early."
     },
     "q-parrainages": {
       "question": "What is the minimum number of parrainages (sponsorships from elected officials) needed to be a candidate?",
@@ -478,7 +478,7 @@
     },
     "vf-inscription": {
       "statement": "You can register on the electoral roll up to the day before the vote.",
-      "explanation": "You must be registered by Friday 12 March 2027 at the latest, the 6th Friday before the vote. It is the procuration (proxy vote) that can be arranged up to the day before."
+      "explanation": "You must be registered by Friday 12 March 2027 at the latest, the 6th Friday before the vote. A procuration (proxy vote), on the other hand, has no fixed deadline: best to do it early."
     },
     "vf-majorite": {
       "statement": "A candidate who gets more than 50% of the valid votes in the 1st round is elected without a second round.",
@@ -877,18 +877,248 @@
     }
   },
   "badges": {
-    "premier-defi": { "name": "First challenge", "how": "Finish a challenge." },
-    "defi-du-jour": { "name": "Daily date", "how": "Finish a daily challenge." },
-    "sans-faute": { "name": "Flawless", "how": "Get every question of a challenge right." },
-    "serie-3": { "name": "3 days in a row", "how": "Play 3 days in a row." },
-    "serie-7": { "name": "One week", "how": "Play 7 days in a row." },
-    "touche-a-tout": { "name": "All-rounder", "how": "Play the mini-quiz, True or False, Who proposes this? and Defend the other side." },
-    "tous-les-bords": { "name": "Every side", "how": "Read a news card from the left, the centre, the right and the far right." },
-    "oracle": { "name": "Oracle", "how": "Make your predictions." },
-    "ambassadeur": { "name": "Ambassador", "how": "Send a challenge to a friend." },
-    "recruteur": { "name": "Recruiter", "how": "A friend plays your challenge." },
-    "equipe": { "name": "Team spirit", "how": "Finish a team match." },
-    "parrainages": { "name": "500 endorsements", "how": "Reach 500 voix, the number of signatures a candidate needs." }
+    "premier-defi": {
+      "name": "First challenge",
+      "how": "Finish a challenge."
+    },
+    "defi-du-jour": {
+      "name": "Daily date",
+      "how": "Finish a daily challenge."
+    },
+    "sans-faute": {
+      "name": "Flawless",
+      "how": "Get every question of a challenge right."
+    },
+    "serie-3": {
+      "name": "3 days in a row",
+      "how": "Play 3 days in a row."
+    },
+    "serie-7": {
+      "name": "One week",
+      "how": "Play 7 days in a row."
+    },
+    "touche-a-tout": {
+      "name": "All-rounder",
+      "how": "Play the mini-quiz, True or False, Who proposes this? and Defend the other side."
+    },
+    "tous-les-bords": {
+      "name": "Every side",
+      "how": "Read a news card from the left, the centre, the right and the far right."
+    },
+    "oracle": {
+      "name": "Oracle",
+      "how": "Make your predictions."
+    },
+    "ambassadeur": {
+      "name": "Ambassador",
+      "how": "Send a challenge to a friend."
+    },
+    "recruteur": {
+      "name": "Recruiter",
+      "how": "A friend plays your challenge."
+    },
+    "equipe": {
+      "name": "Team spirit",
+      "how": "Finish a team match."
+    },
+    "pret-a-voter": {
+      "name": "Ready to vote",
+      "how": "Tick every step of the \"Voting: how it works\" guide."
+    },
+    "parrainages": {
+      "name": "500 endorsements",
+      "how": "Reach 500 voix, the number of signatures a candidate needs."
+    }
+  },
+  "guide": {
+    "checked": "21 October 2026",
+    "profiles": {
+      "france": {
+        "label": "French, living in France",
+        "summary": "You must be on the electoral roll by Friday 12 March 2027 at the latest. Then you vote in person or by proxy (procuration)."
+      },
+      "etranger": {
+        "label": "French, living abroad",
+        "summary": "You can vote at the consulate of your country of residence, or stay registered in a town in France. Either way, register before Friday 12 March 2027."
+      },
+      "ue": {
+        "label": "EU citizen in France",
+        "summary": "The presidential election is for French citizens only. In France, you can vote in municipal and European elections, and in student elections."
+      },
+      "hors-ue": {
+        "label": "Non-EU citizen in France",
+        "summary": "Political elections in France are for French citizens (and EU citizens for municipal and European elections). But you can vote in student elections."
+      }
+    },
+    "deadlines": {
+      "inscription": {
+        "label": "Registration deadline"
+      },
+      "tour1": {
+        "label": "1st round"
+      },
+      "tour2": {
+        "label": "2nd round"
+      }
+    },
+    "sections": {
+      "inscription": {
+        "title": "Register on the electoral roll",
+        "intro": "No registration, no vote. For the presidential election, the deadline is Friday 12 March 2027, online or at the town hall.",
+        "steps": [
+          {
+            "id": "fr-verifier",
+            "text": "Check whether you are already registered and where you vote. If you did your census (recensement citoyen) at 16, you were registered automatically at 18.",
+            "link": {
+              "label": "Check my registration and polling station",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51788"
+            }
+          },
+          {
+            "id": "fr-commune",
+            "text": "Not registered? Pick your town: where you live, where you have lived for at least 6 months, or where you have paid local taxes for at least 2 years."
+          },
+          {
+            "id": "fr-inscrire",
+            "text": "Register online with an ID and a proof of address less than 3 months old. Or go to the town hall (mairie) with form cerfa no. 12669.",
+            "link": {
+              "label": "Register online (free)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R16396"
+            }
+          }
+        ],
+        "tip": "Since 1 July 2026, the deadline is the same online and at the town hall: the 6th Friday before the vote."
+      },
+      "etudiant": {
+        "title": "Studying far from home?",
+        "intro": "You can vote where you study or stay registered at your parents'.",
+        "steps": [
+          {
+            "id": "etu-choisir",
+            "text": "Pick your voting town: where you live for your studies (your home, or for at least 6 months), or your parents' town if you are under 26."
+          },
+          {
+            "id": "etu-planifier",
+            "text": "Staying registered far from where you study? Check whether you can go back on 18 April and 2 May 2027. If not, plan a proxy vote (see below)."
+          }
+        ]
+      },
+      "jour-du-vote": {
+        "title": "Election day",
+        "intro": "Polling stations are open from 8am to 7pm, sometimes up to 8pm at most in some cities. You vote in person or by proxy: there is no online voting.",
+        "steps": [
+          {
+            "id": "jv-bureau",
+            "text": "Find your polling station: it is on your voter card and on the registration check service.",
+            "link": {
+              "label": "Find my polling station",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51788"
+            }
+          },
+          {
+            "id": "jv-identite",
+            "text": "Bring an original photo ID: ID card or passport (valid or expired less than 5 years ago), or a valid driving licence, carte Vitale with photo… It is required in towns of 1,000 inhabitants or more. A student card, a photo or a download on your phone are not accepted."
+          },
+          {
+            "id": "jv-voter",
+            "text": "Take an envelope and at least 2 ballots, go into the voting booth (isoloir), put the envelope in the ballot box yourself, then sign the voter list (liste d'émargement)."
+          }
+        ],
+        "tip": "Your voter card is not required to vote. A blank vote counts among voters, but not among valid votes cast (suffrages exprimés)."
+      },
+      "procuration": {
+        "title": "Can't make it? Vote by proxy",
+        "intro": "A voter of your choice votes for you, at your polling station. They can be registered in another town.",
+        "steps": [
+          {
+            "id": "pr-numero",
+            "text": "Ask the person you chose for their date of birth and their national voter number (numéro national d'électeur), which they can find on the registration check service."
+          },
+          {
+            "id": "pr-demande",
+            "text": "Make your request online on Maprocuration, logging in with FranceConnect.",
+            "link": {
+              "label": "maprocuration.gouv.fr",
+              "url": "https://www.maprocuration.gouv.fr"
+            }
+          },
+          {
+            "id": "pr-valider",
+            "text": "Then go in person to a police or gendarmerie station (a consulate or embassy if you live abroad) with your ID and your request reference. With a certified France Identité digital identity, everything can be done online."
+          },
+          {
+            "id": "pr-confirmation",
+            "text": "Wait for the confirmation email: your proxy is then valid. Tell the person you chose."
+          }
+        ],
+        "tip": "There is no fixed deadline, but do it as early as possible. You can give it for one round, both rounds, or for up to 1 year. One person can hold only one proxy made in France."
+      },
+      "etranger": {
+        "title": "Voting from abroad",
+        "intro": "Two options for the presidential election: vote at the consulate (consular electoral roll) or stay registered in a town in France. You can't be on both lists.",
+        "steps": [
+          {
+            "id": "et-choisir",
+            "text": "Choose your list. Consular: you vote in your country of residence. Town in France: you vote in France, in person or by proxy (handy for Erasmus or an internship of a few months)."
+          },
+          {
+            "id": "et-inscrire",
+            "text": "For the consular roll, register online on the Register of French citizens abroad, or at the consulate, by the 6th Friday before the vote at the latest (Friday 12 March 2027).",
+            "link": {
+              "label": "The consular electoral roll",
+              "url": "https://www.diplomatie.gouv.fr/fr/services-aux-francaises-et-aux-francais/vie-administrative-et-elections/elections-a-l-etranger/liste-electorale-consulaire"
+            }
+          },
+          {
+            "id": "et-voter",
+            "text": "On the day, vote in person at the embassy or consulate polling station with an ID, or give a proxy (see below)."
+          }
+        ],
+        "tip": "No online or postal voting for the presidential election: online voting only exists for the legislative elections of French citizens abroad and consular elections. In the Americas, voting usually takes place on the Saturday (as in 2022): check the date with your consulate."
+      },
+      "ue": {
+        "title": "Municipal and European elections",
+        "intro": "As a citizen of another EU country living in France, you can vote in municipal and European elections.",
+        "steps": [
+          {
+            "id": "ue-inscrire",
+            "text": "Register on your town's complementary electoral rolls (listes complémentaires): online, at the town hall or by post, with your ID card, passport or residence permit, a proof of address and a written declaration."
+          },
+          {
+            "id": "ue-delai",
+            "text": "Do it by the 6th Friday before the 1st round of the election you want to vote in."
+          },
+          {
+            "id": "ue-choix",
+            "text": "For European elections, choose: vote in France or in your home country. Not both."
+          }
+        ],
+        "tip": "You can also stand in municipal elections, but you can't become mayor or deputy mayor."
+      },
+      "hors-ue": {
+        "title": "Student elections",
+        "intro": "Whatever your nationality, you can vote for your student representatives.",
+        "steps": [
+          {
+            "id": "hue-universite",
+            "text": "Vote in your university council elections: international students can vote and stand on the same terms as French students."
+          },
+          {
+            "id": "hue-crous",
+            "text": "Vote for the student representatives at the CROUS (housing, university restaurants, grants): every student is invited to vote.",
+            "link": {
+              "label": "CROUS elections",
+              "url": "https://www.etudiant.gouv.fr/fr/elections-des-representants-des-etudiants-au-sein-des-crous-2627"
+            }
+          },
+          {
+            "id": "hue-pays",
+            "text": "Does your country let its citizens abroad vote? Ask your embassy or consulate."
+          }
+        ],
+        "tip": "Even if you can't vote, the presidential election affects you: the government decides, for example, visa and residence permit policy."
+      }
+    }
   },
   "site": {
     "appName": "polis",

@@ -291,6 +291,11 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
               </div>
             </details>
           )}
+          {card.guide && (
+            <Link href={card.guide === "auto" ? "/voter" : `/voter?profil=${card.guide}`} className="inline-flex min-h-11 w-fit items-center rounded-full bg-accent-soft px-4 text-[15px] font-semibold text-accent">
+              🗳️ {t("Les démarches, pas à pas", "The steps, one by one")} →
+            </Link>
+          )}
           <a href={card.source.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-8 w-fit items-center text-sm font-semibold text-accent underline underline-offset-4">
             Source : {card.source.label} ↗
           </a>
