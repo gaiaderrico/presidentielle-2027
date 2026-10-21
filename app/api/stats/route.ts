@@ -136,8 +136,8 @@ export async function POST(req: Request) {
       calendarAdds: events.filter((e) => e.event === "calendar_add").map((e) => ({ at: e.created_at, testerTag: tagOf(e.session_id) })),
     },
     l3: {
-      shares: shares.map((e) => ({ at: e.created_at, testerTag: tagOf(e.session_id), method: String(p(e, "method") ?? ""), code: String(p(e, "challengeCode") ?? "") })),
-      friendFinishes: friendFinishes.map((e) => ({ at: e.created_at, refCode: String(p(e, "refCode") ?? "") })),
+      // Level 3 counts the player who shares (share_click), not the friend who opens or plays the link.
+      shares: shares.map((e) => ({ at: e.created_at, session: (e.session_id ?? "").slice(0, 8), testerTag: tagOf(e.session_id), method: String(p(e, "method") ?? ""), code: String(p(e, "challengeCode") ?? "") })),
       quotes: feedback.filter((e) => p(e, "quotable") === true).map((e) => ({ at: e.created_at, name: String(p(e, "name") ?? ""), rating: Number(p(e, "rating")), comment: String(p(e, "comment") ?? ""), testerTag: tagOf(e.session_id) })),
     },
     l4: {

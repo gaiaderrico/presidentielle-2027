@@ -34,8 +34,7 @@ type Stats = {
     l1: { emails: { at: string; email: string; testerTag: string | null }[] };
     l2: { returning: { session: string; testerTag: string | null; days: number }[]; calendarAdds: { at: string; testerTag: string | null }[] };
     l3: {
-      shares: { at: string; testerTag: string | null; method: string; code: string }[];
-      friendFinishes: { at: string; refCode: string }[];
+      shares: { at: string; session: string; testerTag: string | null; method: string; code: string }[];
       quotes: { at: string; name: string; rating: number; comment: string; testerTag: string | null }[];
     };
     l4: { pledges: Record<string, string | number | null>[] };
@@ -102,11 +101,11 @@ const when = (iso: string) => new Date(iso).toLocaleString("fr-FR", { day: "2-di
 
 /** Day 3 of the course: the commitment ladder, with a trace for every level (exports go straight into the evidence log). */
 function Ladder({ ladder, accounts }: { ladder: Stats["ladder"]; accounts: number }) {
-  const sharers = new Set(ladder.l3.shares.map((s) => s.code)).size;
+  const sharers = new Set(ladder.l3.shares.map((s) => s.session)).size;
   const rows = [
     { level: 1, title: "Un peu de temps", value: ladder.l1.emails.length, detail: `emails laissés pour les prochains défis (avec consentement) · ${accounts} comptes créés avec un email`, exportName: "emails", data: ladder.l1.emails },
     { level: 2, title: "Du temps", value: ladder.l2.returning.length, detail: `joueurs revenus un autre jour · ${ladder.l2.calendarAdds.length} dates ajoutées à un agenda`, exportName: "revenus", data: ladder.l2.returning },
-    { level: 3, title: "Réputation", value: ladder.l3.friendFinishes.length, detail: `amis qui ont joué un défi reçu · ${sharers} défis envoyés · ${ladder.l3.quotes.length} avis citables`, exportName: "reputation", data: [...ladder.l3.shares.map((s) => ({ type: "partage", ...s })), ...ladder.l3.friendFinishes.map((f) => ({ type: "ami a joué", ...f })), ...ladder.l3.quotes.map((q) => ({ type: "avis citable", ...q }))] },
+    { level: 3, title: "Réputation", value: sharers, detail: `joueurs qui ont partagé un défi (${ladder.l3.shares.length} partages) · ${ladder.l3.quotes.length} avis citables`, exportName: "reputation", data: [...ladder.l3.shares.map((s) => ({ type: "partage", ...s })), ...ladder.l3.quotes.map((q) => ({ type: "avis citable", ...q }))] },
     { level: 4, title: "Engagement formel", value: ladder.l4.pledges.length, detail: "engagements signés par une organisation (/partenaires)", exportName: "engagements", data: ladder.l4.pledges },
   ];
   return (

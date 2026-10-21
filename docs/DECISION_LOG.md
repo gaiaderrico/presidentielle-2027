@@ -158,7 +158,7 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 |---|---|---|
 | 1 · a little time | Email for the next challenges (existing) | `/stats` → Échelle d'engagement → CSV of emails with timestamp and tester tag |
 | 2 · time | Players who come back another day (daily challenge, streak); "Ajouter ces dates à mon agenda" in the voting guide (.ics with a reminder, event `calendar_add`) | CSV of returning players (days active, tag) |
-| 3 · reputation | Challenge sent (`share_click`) and friend who played it (`friend_finish`); new: "OK pour être cité·e" in the feedback survey (optional first name) | CSV of shares, friend plays, quotable feedback |
+| 3 · reputation | Players who **share** a challenge (`share_click`: WhatsApp, copy, share sheet); new: "OK pour être cité·e" in the feedback survey (optional first name). A friend opening or playing the link is not counted at this level (team decision, 2026-10-21) | CSV of shares (time, tag, method, challenge code) and quotable feedback |
 | 4 · formal commitment | New page `/partenaires`: a student organisation (BDE, club, class) commits in writing (name, role, email, commitments: team match, "register to vote" session before 12 March 2027, relay to members, meeting), with a reference and timestamp on screen | `partner_pledge` events, list + CSV in `/stats` |
 - Stored in `events` (no schema change); contact details only with the consent box ticked; privacy page updated.
 - Baseline when this shipped (2026-10-21, ~10:45): L1 0 emails, L2 3 players came back another day, L3 2 shares and 1 friend play, L4 0.
