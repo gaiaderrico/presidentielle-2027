@@ -24,6 +24,10 @@ export type LastResult = {
   ref: RefChallenge | null;
   match: { code: string; team: "a" | "b" } | null;
   autoShare: boolean;
+  /** How the voix were earned (shown on the result page). */
+  breakdown?: { label: string; amount: number }[];
+  /** Voix total before this challenge (to animate the city's progress). */
+  voixBefore?: number;
   /** Date (YYYY-MM-DD) when this was the daily challenge. */
   daily?: string | null;
   at: number;

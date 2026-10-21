@@ -81,7 +81,8 @@ export type Defis = {
   hub: { type: ChallengeType | "equipes"; emoji: string; title: string; description: string; duration: string; modes: Mode[] }[];
   names: Record<ChallengeType, string>;
   teamChallenges: ChallengeType[];
-  resultLines: { perfect: string; high: string; mid: string; low: string };
+  /** Encouraging lines by score band, several per band (one is picked per result). */
+  resultLines: { perfect: string[]; high: string[]; mid: string[]; low: string[] };
 };
 export type Onboarding = typeof onboardingJson;
 
@@ -181,12 +182,11 @@ function makeContent(lang: Lang) {
     topicOf(id: string): Topic {
       return topics.find((t) => t.id === id) ?? { id, label: id, emoji: "📰" };
     },
-    resultLine(score: number, total: number) {
+    /** An encouraging line for a score; `seed` picks one of the variants (same seed, same line). */
+    resultLine(score: number, total: number, seed = 0) {
       const pct = total ? score / total : 0;
-      if (pct >= 1) return defis.resultLines.perfect;
-      if (pct >= 0.75) return defis.resultLines.high;
-      if (pct >= 0.5) return defis.resultLines.mid;
-      return defis.resultLines.low;
+      const band = pct >= 1 ? defis.resultLines.perfect : pct >= 0.75 ? defis.resultLines.high : pct >= 0.5 ? defis.resultLines.mid : defis.resultLines.low;
+      return band[Math.abs(seed) % band.length];
     },
   };
 }

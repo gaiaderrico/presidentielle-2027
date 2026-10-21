@@ -8,8 +8,9 @@ import { useContent, useT } from "@/lib/i18n";
 import { recordFinish } from "@/lib/progress";
 import { challengeLink, getFirstName, getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
-import { VOIX, addVoix, rememberCode } from "@/lib/voix";
+import { VOIX, accuracyBonus, addVoix, getVoixTotal, rememberCode } from "@/lib/voix";
 import { CommitPrompts } from "./CommitPrompts";
+import { ScoreRewards } from "./ScoreRewards";
 import { ShareSheet } from "./ShareSheet";
 import { Button, SourceLink } from "./ui";
 
@@ -44,7 +45,7 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [score, setScore] = useState(0);
-  const [done, setDone] = useState<{ code: string; score: number } | null>(null);
+  const [done, setDone] = useState<{ code: string; score: number; gained: number; before: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [sharing, setSharing] = useState(false);
   const started = useRef(false);
@@ -76,6 +77,9 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
     setSaving(true);
     const finalScore = score;
     addVoix(VOIX.challengeFinish, t("Défi rapide terminé", "Quick challenge done"));
+    // Bonus by share of right answers: the better the score, the faster the city grows.
+    const bonus = accuracyBonus(finalScore, items.length);
+    if (bonus.amount) addVoix(bonus.amount, `${t(bonus.fr, bonus.en)} · ${t("Défi rapide", "Quick challenge")}`);
     const code = await createChallenge({
       sessionId: getSessionId(),
       challengeType: "quiz",
@@ -87,8 +91,9 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
     });
     rememberCode(code);
     track("challenge_finish", { challengeType: "quiz", mode: "solo", score: finalScore, challengeCode: code, refCode: null, origin: "feed-inline" });
-    recordFinish({ type: "quiz", score: finalScore, total: items.length, mode: "solo" });
-    setDone({ code, score: finalScore });
+    const dayBonus = recordFinish({ type: "quiz", score: finalScore, total: items.length, mode: "solo" }).bonus;
+    const gained = finalScore * VOIX.challengeCorrect + VOIX.challengeFinish + bonus.amount + dayBonus;
+    setDone({ code, score: finalScore, gained, before: getVoixTotal() - gained });
     setSaving(false);
   };
 
@@ -98,14 +103,14 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
       `J'ai fait ${done.score}/${items.length} au défi rapide sur la présidentielle 2027. Tu fais mieux ? 👉 ${url}`,
       `I scored ${done.score}/${items.length} on the quick challenge about the 2027 French presidential election. Can you beat me? 👉 ${url}`,
     );
-    const voix = done.score * VOIX.challengeCorrect + VOIX.challengeFinish;
     return (
       <div className="pop flex flex-col gap-4 rounded-[2rem] bg-hero p-6 text-white shadow-lg">
         <p className="text-sm font-bold uppercase tracking-wider text-accent">{t("Défi rapide terminé", "Quick challenge done")}</p>
         <p className="font-display text-6xl font-extrabold tabular-nums">
           {done.score}/{items.length}
         </p>
-        <p className="font-semibold text-accent">+{voix} {t("voix pour ta ville", "voix for your city")}</p>
+        <p className="font-display text-lg font-bold leading-snug">{c.resultLine(done.score, items.length, done.code.charCodeAt(0))}</p>
+        <ScoreRewards before={done.before} gained={done.gained} onDark />
         <Button onClick={() => setSharing(true)}>
           👫 {t("Défie un·e ami·e", "Challenge a friend")} (+{VOIX.share} voix)
         </Button>

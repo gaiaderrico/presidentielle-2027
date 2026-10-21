@@ -50,6 +50,7 @@ type Stats = {
       quotes: { at: string; name: string; rating: number; comment: string; testerTag: string | null }[];
     };
   };
+  channels: Record<string, { people: number; testers: number; finished: number; emails: number; shared: number }>;
   sessions: {
     sessionId: string;
     testerTag: string | null;
@@ -296,6 +297,44 @@ export function StatsClient() {
       </Card>
 
       <Ladder ladder={stats.ladder} accounts={stats.accounts} />
+
+      <Card className="flex flex-col gap-3">
+        <h2 className="font-display text-lg font-bold">D&apos;où viennent les joueurs ?</h2>
+        <p className="-mt-2 text-sm text-muted">
+          Source de la première visite : le lien (<code>?src=instagram</code>, <code>?src=qr</code>…) ou le site d&apos;où vient la personne. « direct / inconnu » = lien sans source ou
+          visite avant ce suivi (21/10/2026). « dont testeurs » = personnes avec une étiquette ?t=.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="text-muted">
+              <tr>
+                <th className="py-1 pr-3 font-semibold">Source</th>
+                <th className="py-1 pr-3 font-semibold">Personnes</th>
+                <th className="py-1 pr-3 font-semibold">dont testeurs</th>
+                <th className="py-1 pr-3 font-semibold">Défi fini</th>
+                <th className="py-1 pr-3 font-semibold">Email</th>
+                <th className="py-1 font-semibold">Partage</th>
+              </tr>
+            </thead>
+            <tbody className="tabular-nums">
+              {Object.entries(stats.channels)
+                .sort((a, b) => b[1].people - a[1].people)
+                .map(([src, r]) => (
+                  <tr key={src} className="border-t border-line">
+                    <td className="py-1.5 pr-3 font-semibold">{src}</td>
+                    <td className="py-1.5 pr-3">{r.people}</td>
+                    <td className="py-1.5 pr-3">{r.testers}</td>
+                    <td className="py-1.5 pr-3">
+                      {r.finished} ({pct(r.people ? r.finished / r.people : null)})
+                    </td>
+                    <td className="py-1.5 pr-3">{r.emails}</td>
+                    <td className="py-1.5">{r.shared}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
 
       <div className="grid gap-3 md:grid-cols-2">
         <Card className="flex flex-col gap-2">

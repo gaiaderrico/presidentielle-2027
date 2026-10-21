@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
 type Props = {
   onClose: () => void;
@@ -52,7 +53,9 @@ export function Sheet({ onClose, labelledBy, children, className = "" }: Props) 
     else setDy(0);
   };
 
-  return (
+  // Rendered at the end of <body>: a sheet opened from inside a coloured or animated block (e.g. the quick challenge
+  // in the feed) would otherwise inherit its text colour and be positioned inside it.
+  return createPortal(
     <div className="fade-in fixed inset-0 z-40 flex items-end justify-center bg-ink/40" onClick={onClose}>
       <div
         ref={panel}
@@ -61,7 +64,7 @@ export function Sheet({ onClose, labelledBy, children, className = "" }: Props) 
         aria-modal="true"
         aria-labelledby={labelledBy}
         onClick={(e) => e.stopPropagation()}
-        className={`sheet-in max-h-[88dvh] w-full max-w-md overflow-y-auto rounded-t-[2rem] bg-card px-5 shadow-2xl outline-none ${className}`}
+        className={`sheet-in max-h-[88dvh] w-full max-w-md overflow-y-auto rounded-t-[2rem] bg-card px-5 text-left text-ink shadow-2xl outline-none ${className}`}
         style={{
           paddingBottom: "calc(2rem + env(safe-area-inset-bottom, 0px))",
           transform: dy ? `translateY(${dy}px)` : undefined,
@@ -73,6 +76,7 @@ export function Sheet({ onClose, labelledBy, children, className = "" }: Props) 
         </div>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

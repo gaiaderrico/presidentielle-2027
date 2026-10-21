@@ -179,6 +179,27 @@ export async function POST(req: Request) {
     },
   };
 
+  // Channels: where each person first came from (?src=, utm_source or the referring site). One row per source:
+  // people, people who finished a challenge, who left an email, who shared. Tester tags (in-person tests) are a separate column.
+  const sourceByPerson = new Map<string, string>();
+  for (const e of events) {
+    if (!e.session_id) continue;
+    const key = personOf(e.session_id);
+    const src = p(e, "source");
+    if (typeof src === "string" && src && !sourceByPerson.has(key)) sourceByPerson.set(key, src);
+  }
+  const emailPeople = new Set(realEmails.filter((r) => r.session_id).map((r) => personOf(r.session_id as string)));
+  const channelRows: Record<string, { people: number; testers: number; finished: number; emails: number; shared: number }> = {};
+  for (const key of allPeople) {
+    const src = sourceByPerson.get(key) ?? "direct / inconnu";
+    const row = (channelRows[src] ??= { people: 0, testers: 0, finished: 0, emails: 0, shared: 0 });
+    row.people++;
+    if (key.startsWith("tag:")) row.testers++;
+    if (finishedPeople.has(key)) row.finished++;
+    if (emailPeople.has(key)) row.emails++;
+    if (sharedPeople.has(key)) row.shared++;
+  }
+
   const voixValues = sessions.map((s) => s.voix);
   return Response.json({
     funnel: {
@@ -252,6 +273,7 @@ export async function POST(req: Request) {
         .reverse(),
     },
     ladder,
+    channels: channelRows,
     sessions,
   });
 }

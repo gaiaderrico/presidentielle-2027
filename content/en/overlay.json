@@ -870,10 +870,26 @@
       "pronostics": "Predictions"
     },
     "resultLines": {
-      "perfect": "Unbeatable. Nobody can fool you.",
-      "high": "Very solid. Your friends will struggle.",
-      "mid": "Not bad, but a few traps caught you out.",
-      "low": "The campaign is full of traps. Maybe your friends will do worse?"
+      "perfect": [
+        "Flawless! You know your stuff. Challenge a friend: they'll have to hang on.",
+        "100%: impressive. Your city thanks you.",
+        "Perfect. You're ready for the final debate."
+      ],
+      "high": [
+        "Very solid! One more push and it's a perfect score.",
+        "Great performance: you know more than many voters.",
+        "Well played! Check the answers to aim for 100% next time."
+      ],
+      "mid": [
+        "Not bad! You've got the basics, the answers will take you to the next level.",
+        "Half right: every challenge makes you sharper.",
+        "Good start! Play again tomorrow, you'll see the difference."
+      ],
+      "low": [
+        "No worries: the campaign is full of traps. Read the answers, you'll improve fast.",
+        "Every mistake teaches you something. Try another challenge, you'll do better.",
+        "You learn by playing, and your city still grows!"
+      ]
     }
   },
   "badges": {

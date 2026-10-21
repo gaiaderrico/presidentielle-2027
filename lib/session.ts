@@ -46,6 +46,33 @@ function initTesterTag() {
 
 if (typeof window !== "undefined") initTesterTag();
 
+/**
+ * Where this player first came from: `?src=instagram` (or `utm_source=`) on the link, otherwise the site that sent them
+ * (Instagram's and Facebook's in-app browsers usually say so). First touch only: kept for every later visit.
+ * Unlike the tester tag, it groups many people under one channel and never resets anything.
+ */
+function initSource() {
+  try {
+    if (readJSON<string | null>("p27.source", null)) return;
+    const params = new URLSearchParams(window.location.search);
+    let src = (params.get("src") ?? params.get("utm_source") ?? "").toLowerCase();
+    if (!src && document.referrer) {
+      const host = new URL(document.referrer).hostname;
+      if (host.endsWith(window.location.hostname)) return;
+      src = /instagram/.test(host) ? "instagram" : /facebook|fb\./.test(host) ? "facebook" : /whatsapp/.test(host) ? "whatsapp" : /google\./.test(host) ? "google" : /^t\.co$|twitter|x\.com/.test(host) ? "x" : /tiktok/.test(host) ? "tiktok" : "autre-site";
+    }
+    if (/^[a-z0-9_-]{1,24}$/.test(src)) writeJSON("p27.source", src);
+  } catch {
+    // storage blocked or bad referrer: no source
+  }
+}
+
+if (typeof window !== "undefined") initSource();
+
+export function getSource(): string | null {
+  return readJSON<string | null>("p27.source", null);
+}
+
 /** Kept for compatibility: the tag is read when this module loads. */
 export function captureTesterTag() {}
 

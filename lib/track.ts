@@ -1,4 +1,4 @@
-import { getSessionId, getTesterTag } from "./session";
+import { getSessionId, getSource, getTesterTag } from "./session";
 
 export type EventName =
   | "landing_view"
@@ -44,7 +44,7 @@ export function track(event: EventName, payload: Record<string, unknown> = {}, o
   const body = JSON.stringify(
     opts.anonymous
       ? { event, payload }
-      : { event, sessionId: getSessionId(), payload: { ...payload, testerTag: getTesterTag() } },
+      : { event, sessionId: getSessionId(), payload: { ...payload, testerTag: getTesterTag(), source: getSource() } },
   );
   try {
     fetch("/api/event", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true }).catch(() => {});

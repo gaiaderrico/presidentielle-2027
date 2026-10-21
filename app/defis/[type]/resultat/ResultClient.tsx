@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { daysLabel, typeEmoji, useToday } from "@/components/DailyCard";
 import { CommitPrompts } from "@/components/CommitPrompts";
 import { FeedbackCard } from "@/components/FeedbackCard";
+import { ScoreRewards } from "@/components/ScoreRewards";
 import { ShareSheet } from "@/components/ShareSheet";
 import { ButtonLink, Card, Page, SourceLink } from "@/components/ui";
 import type { ChallengeType } from "@/lib/content";
@@ -74,7 +75,7 @@ export function ResultClient() {
             <p className="font-display text-6xl font-extrabold tabular-nums">
               {result.score} / {result.total}
             </p>
-            <p className="font-display text-lg font-bold">{c.resultLine(result.score, result.total)}</p>
+            <p className="font-display text-xl font-bold leading-snug">{c.resultLine(result.score, result.total, result.at)}</p>
           </>
         )}
         {result.voixEarned > 0 && <p className="text-lg font-bold text-accent">+{result.voixEarned} voix</p>}
@@ -103,6 +104,8 @@ export function ResultClient() {
           </div>
         )}
       </Card>
+
+      {result.voixEarned > 0 && <ScoreRewards before={result.voixBefore ?? 0} gained={result.voixEarned} breakdown={result.breakdown} showCityLink={false} />}
 
       {result.match && (
         <ButtonLink href={`/equipes/${result.match.code}`} variant="secondary">

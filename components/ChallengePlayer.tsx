@@ -12,7 +12,7 @@ import { dayKey, recordFinish } from "@/lib/progress";
 import { saveLastResult, type LastResult, type RefChallenge, type ResultItem } from "@/lib/results";
 import { getFirstName, getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
-import { VOIX, addVoix, rememberCode } from "@/lib/voix";
+import { VOIX, accuracyBonus, addVoix, getVoixTotal, rememberCode } from "@/lib/voix";
 import { Button, Card, SourceLink } from "./ui";
 
 type AnyItem = McqItem | VraiFauxItem | AutreCampItem | PronoItem;
@@ -134,12 +134,23 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
     const isProno = type === "pronostics";
     const score = isProno ? 0 : final.filter((r) => r.correct).length;
     // Voix for right answers and streaks were already added one by one; count them again here for the result screen.
-    let gained = isProno ? 0 : score * perCorrect + streakBonus.current;
-    if (isProno) gained += addVoix(VOIX.predictions, t("Pronostics faits", "Predictions made"), "pronostics");
-    else if (context === "challenge") gained += addVoix(VOIX.challengeFinish, `${t("Défi terminé", "Challenge done")} · ${name}`);
+    // Every line of the breakdown is shown under the score, so the player sees how the score turned into voix.
+    const breakdown: { label: string; amount: number }[] = [];
+    const add = (label: string, amount: number) => {
+      if (amount > 0) breakdown.push({ label, amount });
+    };
+    if (!isProno) add(t(`${score} bonne${score > 1 ? "s" : ""} réponse${score > 1 ? "s" : ""}`, `${score} right answer${score === 1 ? "" : "s"}`), score * perCorrect);
+    add(t("Série de bonnes réponses", "Answer streak"), streakBonus.current);
+    if (isProno) add(t("Pronostics faits", "Predictions made"), addVoix(VOIX.predictions, t("Pronostics faits", "Predictions made"), "pronostics"));
+    else {
+      if (context === "challenge") add(t("Défi terminé", "Challenge done"), addVoix(VOIX.challengeFinish, `${t("Défi terminé", "Challenge done")} · ${name}`));
+      const bonus = accuracyBonus(score, final.length);
+      if (bonus.amount) add(t(bonus.fr, bonus.en), addVoix(bonus.amount, `${t(bonus.fr, bonus.en)} · ${name}`));
+    }
     // The daily bonus is given once per day, and only for today's challenge (not an old link).
-    if (daily && daily === dayKey()) gained += addVoix(VOIX.daily, t("Défi du jour", "Daily challenge"), `daily:${daily}`);
-    gained += recordFinish({ type, score, total: final.length, mode, daily }).bonus;
+    if (daily && daily === dayKey()) add(t("Défi du jour", "Daily challenge"), addVoix(VOIX.daily, t("Défi du jour", "Daily challenge"), `daily:${daily}`));
+    add(t("Série de jours", "Day streak"), recordFinish({ type, score, total: final.length, mode, daily }).bonus);
+    const gained = breakdown.reduce((sum, b) => sum + b.amount, 0);
     if (isProno) await savePredictions(getSessionId(), preds);
     const playedIds = isProno ? preds.map((p) => p.questionId) : final.map((r) => r.id);
     const code = await createChallenge({
@@ -172,6 +183,8 @@ export function ChallengePlayer({ type, mode, context = "challenge", refChalleng
       ref: refChallenge,
       match: match ? { code: match.code, team: match.team } : null,
       autoShare: mode === "friend" && !refChallenge,
+      breakdown,
+      voixBefore: getVoixTotal() - gained,
       daily,
       at: Date.now(),
     };

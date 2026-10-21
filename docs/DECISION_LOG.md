@@ -252,3 +252,26 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 ## 2026-10-21: pop-ups also after the feed's quick challenge and the mini-quiz
 - The email and Instagram pop-ups only appeared on the challenge result page; the quick challenge inside the feed and the mini-quiz after the feed have their own result screens, so most players never saw them. They now appear there too (same rules: at most once per tab, never again once answered).
 - Feed hint said "la flèche orange": now "la flèche bleue" (palette change).
+
+## 2026-10-21: pop-ups fixed and made clearer (team feedback with screenshots)
+- Bug: inside the feed, the pop-ups (and the share sheet) were drawn inside the quick challenge's navy block: they inherited its white text (title and consent text invisible), its red button rule, and were cut off at the top. Sheets are now rendered at the end of the page (`createPortal`), with their own text colour.
+- Email pop-up: bright blue header "Entre ton email / Enter your email" with a red "+20 voix" badge, "Tu recevras :" with 3 big lines (reminder before 12 March, a challenge a month, prediction results), large email field, and a button that says what's missing ("Écris ton email ↑", "Coche la case ↑") until it turns red: "Je m'inscris · +20 voix".
+- Instagram pop-up: Instagram-gradient header "Suis-nous sur Instagram / Follow us on Instagram — stay updated on our journey", what you find there (behind the scenes, new challenges first), big "Follow @polis_app →" button.
+- The team should post on @polis_app what the pop-up promises (behind the scenes, new challenges).
+
+## 2026-10-21: rewards and messages depend on the score (requested by the team)
+| Decision | Why |
+|---|---|
+| Accuracy bonus at the end of every challenge (hub, daily, mini-quiz, quick challenge in the feed): perfect score +30 voix (3 questions or more), ≥ 75 % +15, ≥ 50 % +5, below 0 | A better score makes the city grow faster; everyone still earns voix for each right answer (+10) and for finishing (+20) |
+| Result screens show the voix line by line (right answers, finished, accuracy bonus, streak, daily challenge, day streak) and the city filling up from before to after the challenge: "Encore 52 voix pour que ta ville devienne un Village", or "Village → Bourg : ta ville a grandi grâce à ce défi !" | Show how the score turned into city growth |
+| Encouraging lines by score band (perfect / ≥ 75 % / ≥ 50 % / below), 3 variants each, in `content/defis.json` (+ English overlay); low scores get encouragement and a next step ("Lis la correction, tu vas progresser vite") | Keep players who did badly playing (primary metric) |
+| Level thresholds unchanged | The bonus is small next to the 100 / 250 / 500 voix steps |
+
+## 2026-10-21: where players come from (`?src=`)
+| Decision | Why |
+|---|---|
+| Links can carry a source: `?src=instagram` (link in the Instagram bio), `?src=qr`, `?src=whatsapp`… (`utm_source` works too). Without one, the referring site is used when the browser gives it (Instagram's in-app browser usually does). First visit only, kept on the phone and sent with every event | Instagram visitors have no tester tag: without a source they were mixed with every other untagged visitor |
+| Never use `?t=` for a public channel | `t` identifies one tester: a whole channel would count as one person, and it resets local data |
+| `/stats` → "D'où viennent les joueurs ?": per source, people, how many are testers, finished a challenge, left an email, shared | Report Instagram as a separate channel in the evidence log; the Test Card metric stays on in-person testers (`?t=`) |
+| Privacy page mentions the source | Transparency |
+- Link for the Instagram bio: `https://polis-2027.vercel.app/?src=instagram`

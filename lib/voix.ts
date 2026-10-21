@@ -96,6 +96,15 @@ export function creditFriendPlays(counts: Record<string, number>): number {
   return newPlays;
 }
 
+/** Bonus at the end of a challenge, by share of right answers: the better the score, the faster the city grows. */
+export function accuracyBonus(score: number, total: number): { amount: number; fr: string; en: string } {
+  const pct = total ? score / total : 0;
+  if (total >= 3 && pct >= 1) return { amount: 30, fr: "Bonus sans-faute", en: "Perfect-score bonus" };
+  if (pct >= 0.75) return { amount: 15, fr: "Bonus précision", en: "Accuracy bonus" };
+  if (pct >= 0.5) return { amount: 5, fr: "Bonus précision", en: "Accuracy bonus" };
+  return { amount: 0, fr: "", en: "" };
+}
+
 export function getVoixTotal() {
   return load().total;
 }

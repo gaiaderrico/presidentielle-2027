@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ChallengePlayer } from "@/components/ChallengePlayer";
 import { CommitPrompts } from "@/components/CommitPrompts";
+import { ScoreRewards } from "@/components/ScoreRewards";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import type { Content, McqItem } from "@/lib/content";
@@ -52,9 +53,10 @@ export function QuizClient() {
         <p className="font-display text-6xl font-extrabold tabular-nums">
           {result.score}/{result.total}
         </p>
-        <p className="font-display text-xl font-bold">{t("Prêt·e pour les défis ?", "Ready for the challenges?")}</p>
-        {result.voixEarned > 0 && <p className="font-semibold text-accent">+{result.voixEarned} voix</p>}
+        <p className="font-display text-xl font-bold leading-snug">{c.resultLine(result.score, result.total, result.at)}</p>
+        {result.voixEarned > 0 && <p className="text-lg font-bold text-accent">+{result.voixEarned} voix</p>}
       </Card>
+      {result.voixEarned > 0 && <ScoreRewards before={result.voixBefore ?? 0} gained={result.voixEarned} breakdown={result.breakdown} />}
       <ButtonLink href="/defis">{t("Voir les défis", "See the challenges")}</ButtonLink>
       <Button variant="secondary" onClick={() => setSharing(true)} disabled={!result.code}>
         👫 {t("Défie un·e ami·e sur ce quiz", "Challenge a friend on this quiz")}

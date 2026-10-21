@@ -29,7 +29,11 @@ export async function POST(req: Request) {
   }
   // Feed reactions are stored without any identifier, so they cannot be linked to a player.
   const anonymous = body.event === "feed_reaction";
-  if (anonymous) delete payload.testerTag;
+  if (anonymous) {
+    delete payload.testerTag;
+    delete payload.source;
+  }
+  if (payload.source != null && !(typeof payload.source === "string" && /^[a-z0-9_-]{1,24}$/.test(payload.source))) delete payload.source;
 
   const sb = db();
   if (!sb) return Response.json({ ok: true, stored: false });

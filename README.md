@@ -56,6 +56,7 @@ Everything players read lives in `content/*.json`. Edit, commit, and Vercel rede
 ## How each test-card metric is measured
 
 - `?t=T03` on any link tags the session for an in-person test.
+- `?src=instagram` (or `qr`, `whatsapp`…) on a public link records where people came from (first visit, never resets anything). Use it for the Instagram bio link: `https://polis-2027.vercel.app/?src=instagram`. Results in `/stats` → "D'où viennent les joueurs ?". Never use `?t=` for a public channel.
 - **Completion rate (primary, Test Card v2, pass ≥ 40 %):** sessions with at least one `challenge_finish` (the mini-quiz after the feed counts) ÷ sessions that opened the app. When some sessions have a `?t=` tag, `/stats` computes it on tagged testers only and also shows the rate for everyone.
 - **Share rate (secondary, former Test Card v1, ≥ 40 %):** sessions with at least one `challenge_finish` **and** at least one `share_click`, ÷ sessions with at least one `challenge_finish`.
 - **Proof of a real send:** `friend_landing_view` and `friend_finish` per challenge code. A friend who plays creates a `challenges` row whose `ref_code` points to the original code.

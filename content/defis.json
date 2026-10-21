@@ -70,9 +70,25 @@
     "autre-camp"
   ],
   "resultLines": {
-    "perfect": "Imbattable. Personne ne te la fait à l'envers.",
-    "high": "Très solide. Tes amis vont galérer.",
-    "mid": "Pas mal, mais quelques pièges t'ont eu.",
-    "low": "La campagne est pleine de pièges. Tes amis feront peut-être pire ?"
+    "perfect": [
+      "Sans-faute ! Tu maîtrises le sujet. Défie un·e ami·e : il va devoir s'accrocher.",
+      "100 % : impressionnant. Ta ville te dit merci.",
+      "Parfait. Tu es prêt·e pour le débat de l'entre-deux-tours."
+    ],
+    "high": [
+      "Très solide ! Encore un petit effort et c'est le sans-faute.",
+      "Belle performance : tu en sais plus que beaucoup d'électeurs.",
+      "Bien joué ! Jette un œil à la correction pour viser 100 % la prochaine fois."
+    ],
+    "mid": [
+      "Pas mal ! Tu as les bases, la correction va te faire passer un cap.",
+      "La moitié dans le mille : chaque défi te rend plus calé·e.",
+      "Bon début ! Rejoue demain, tu vas voir la différence."
+    ],
+    "low": [
+      "Pas grave : la campagne est pleine de pièges. Lis la correction, tu vas progresser vite.",
+      "Chaque erreur t'apprend quelque chose. Retente un défi, tu feras mieux.",
+      "C'est en jouant qu'on apprend, et ta ville grandit quand même !"
+    ]
   }
 }

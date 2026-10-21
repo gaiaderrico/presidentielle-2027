@@ -56,8 +56,8 @@ export function CommitPrompts({ paused = false }: { paused?: boolean }) {
     return (
       <Sheet onClose={() => setStep(nextAfter("email"))} labelledBy="email-title">
         <div data-commit-prompt className="flex flex-col gap-3">
-          <EmailCapture bare onDone={() => setTimeout(() => setStep(nextAfter("email")), 1200)} />
-          <button onClick={() => setStep(nextAfter("email"))} className="min-h-11 text-[15px] font-semibold text-muted">
+          <EmailCapture onDone={() => setTimeout(() => setStep(nextAfter("email")), 1400)} />
+          <button onClick={() => setStep(nextAfter("email"))} className="min-h-11 text-[15px] font-semibold text-muted underline underline-offset-4">
             {t("Plus tard", "Maybe later")}
           </button>
         </div>
@@ -74,24 +74,39 @@ export function CommitPrompts({ paused = false }: { paused?: boolean }) {
     };
     return (
       <Sheet onClose={() => setStep("done")} labelledBy="insta-title">
-        <div data-commit-prompt className="flex flex-col items-center gap-3 text-center">
-          <span className="grid h-16 w-16 place-items-center rounded-[20px] bg-[linear-gradient(45deg,#f9a825,#e1306c,#833ab4)] text-3xl text-white shadow-md" aria-hidden>
-            <InstagramGlyph />
-          </span>
-          <h2 id="insta-title" className="font-display text-2xl font-extrabold">
-            {t("Suis-nous sur Instagram", "Follow us on Instagram")}
-          </h2>
-          <p className="text-[17px] leading-snug text-muted">{t("Suis notre aventure au fil de la campagne.", "Stay updated on our journey.")}</p>
+        <div data-commit-prompt className="flex flex-col gap-4">
+          <div className="flex flex-col items-center gap-3 rounded-[1.5rem] bg-[linear-gradient(135deg,#f9a825_0%,#e1306c_50%,#833ab4_100%)] p-6 text-center text-white shadow-lg">
+            <span className="grid h-16 w-16 place-items-center rounded-[20px] bg-white/20" aria-hidden>
+              <InstagramGlyph size={36} />
+            </span>
+            <h2 id="insta-title" className="font-display text-[2rem] font-extrabold leading-[1.05]">
+              {t("Suis-nous sur Instagram", "Follow us on Instagram")}
+            </h2>
+            <p className="text-lg font-semibold leading-snug">{t("et suis notre aventure jusqu'au vote.", "and stay updated on our journey.")}</p>
+          </div>
+          <ul className="flex flex-col gap-2">
+            {[
+              { icon: "📸", text: t("Les coulisses du projet", "Behind the scenes of the project") },
+              { icon: "⚡", text: t("Les nouveaux défis en avant-première", "New challenges first") },
+            ].map((p) => (
+              <li key={p.icon} className="flex items-center gap-3 rounded-2xl bg-fill px-3 py-2.5">
+                <span className="text-2xl" aria-hidden>
+                  {p.icon}
+                </span>
+                <span className="text-[17px] font-semibold">{p.text}</span>
+              </li>
+            ))}
+          </ul>
           <a
             href={c.site.instagram}
             target="_blank"
             rel="noopener noreferrer"
             onClick={follow}
-            className="mt-1 inline-flex min-h-[54px] w-full items-center justify-center gap-2 rounded-[14px] bg-[linear-gradient(45deg,#f9a825,#e1306c,#833ab4)] px-5 text-[17px] font-bold text-white shadow-md transition active:opacity-80"
+            className="inline-flex min-h-[58px] w-full items-center justify-center gap-2 rounded-[16px] bg-[linear-gradient(135deg,#f9a825_0%,#e1306c_50%,#833ab4_100%)] px-5 text-[19px] font-extrabold text-white shadow-lg transition active:scale-[0.98]"
           >
-            {t("Suivre @polis_app", "Follow @polis_app")}
+            <InstagramGlyph size={22} /> {t("Suivre @polis_app →", "Follow @polis_app →")}
           </a>
-          <button onClick={() => setStep("done")} className="min-h-11 text-[15px] font-semibold text-muted">
+          <button onClick={() => setStep("done")} className="min-h-11 text-[15px] font-semibold text-muted underline underline-offset-4">
             {t("Plus tard", "Maybe later")}
           </button>
         </div>

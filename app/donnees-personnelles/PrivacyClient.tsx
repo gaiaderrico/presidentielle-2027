@@ -18,7 +18,7 @@ export function PrivacyClient() {
         </p>
         <h2 className="font-display text-lg font-bold">{t("Ce qu'on collecte", "What we collect")}</h2>
         <ul className="list-disc space-y-1 pl-5">
-          <li>{t("Des événements d'usage anonymes (pages vues, défis joués, scores, partages), liés à un identifiant aléatoire stocké sur ton téléphone.", "Anonymous usage events (pages viewed, challenges played, scores, shares), linked to a random ID stored on your phone.")}</li>
+          <li>{t("Des événements d'usage anonymes (pages vues, défis joués, scores, partages), liés à un identifiant aléatoire stocké sur ton téléphone, et d'où tu es arrivé·e la première fois (par exemple Instagram ou un QR code).", "Anonymous usage events (pages viewed, challenges played, scores, shares), linked to a random ID stored on your phone, and where you first came from (for example Instagram or a QR code).")}</li>
           <li>{t("Ton prénom, seulement si tu le donnes, pour que tes amis sachent qui les défie.", "Your first name, only if you give it, so your friends know who challenged them.")}</li>
           <li>{t("Ton email, seulement si tu crées un compte (facultatif). On ne t'écrit pas sans ton accord.", "Your email, only if you create an account (optional). We never write to you without your consent.")}</li>
           <li>{t("Ton accord pour recevoir les prochains défis par email, seulement si tu coches la case de consentement.", "Your agreement to receive the next challenges by email, only if you tick the consent box.")}</li>
