@@ -309,7 +309,7 @@ function CardView({ card, reaction, onReact, first }: { card: FeedCard; reaction
           <span className="animate-bounce" aria-hidden>
             ↓
           </span>
-          {t("Fais glisser vers le haut, ou touche la flèche orange", "Swipe up, or tap the orange arrow")}
+          {t("Fais glisser vers le haut, ou touche la flèche bleue", "Swipe up, or tap the blue arrow")}
         </p>
       )}
     </div>

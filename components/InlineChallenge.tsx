@@ -9,6 +9,7 @@ import { recordFinish } from "@/lib/progress";
 import { challengeLink, getFirstName, getSessionId } from "@/lib/session";
 import { track } from "@/lib/track";
 import { VOIX, addVoix, rememberCode } from "@/lib/voix";
+import { CommitPrompts } from "./CommitPrompts";
 import { ShareSheet } from "./ShareSheet";
 import { Button, SourceLink } from "./ui";
 
@@ -112,6 +113,7 @@ export function InlineChallenge({ readCards, used, onContinue }: { readCards: Fe
           {t("Continuer à lire ↓", "Keep reading ↓")}
         </button>
         <ShareSheet open={sharing} onClose={() => setSharing(false)} message={message} url={url} challengeType="quiz" code={done.code} />
+        <CommitPrompts paused={sharing} />
       </div>
     );
   }

@@ -248,3 +248,7 @@ The course grades commitments by level (deck slides 40–42), each with a trace 
 | Accueil is shown to anyone who has already used polis on this phone (onboarding done, at least 1 voix, or a challenge played), not only after the onboarding | Players who skipped the onboarding ("Voir l'actu directement", "Continuer sans profil") kept seeing the welcome page |
 | The app installed on the home screen always starts on Accueil (first page load of a launch in standalone mode) | iPhone otherwise reopens the last page or the page the app was added from |
 | First-time visitors and friend links (`/?c=`) still get the welcome page | Unchanged first impression and friend flow |
+
+## 2026-10-21: pop-ups also after the feed's quick challenge and the mini-quiz
+- The email and Instagram pop-ups only appeared on the challenge result page; the quick challenge inside the feed and the mini-quiz after the feed have their own result screens, so most players never saw them. They now appear there too (same rules: at most once per tab, never again once answered).
+- Feed hint said "la flèche orange": now "la flèche bleue" (palette change).

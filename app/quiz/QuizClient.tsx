@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ChallengePlayer } from "@/components/ChallengePlayer";
+import { CommitPrompts } from "@/components/CommitPrompts";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Button, ButtonLink, Card, Page } from "@/components/ui";
 import type { Content, McqItem } from "@/lib/content";
@@ -62,6 +63,7 @@ export function QuizClient() {
         {t("Retour aux actus", "Back to the news")}
       </ButtonLink>
       <ShareSheet open={sharing} onClose={() => setSharing(false)} message={message} url={url} challengeType="quiz" code={result.code} />
+      <CommitPrompts paused={sharing} />
     </Page>
   );
 }
